@@ -56,11 +56,11 @@
 		447F53782475805D00F706F1 /* DJHelper */ = {
 			isa = PBXGroup;
 			children = (
-				447F53792475805E00F706F1 /* AppDelegate.swift */,
-				447F537B2475805E00F706F1 /* SceneDelegate.swift */,
 				447F537D2475805E00F706F1 /* ViewController.swift */,
 				447F537F2475805E00F706F1 /* Main.storyboard */,
 				447F53822475805E00F706F1 /* Assets.xcassets */,
+				447F537B2475805E00F706F1 /* SceneDelegate.swift */,
+				447F53792475805E00F706F1 /* AppDelegate.swift */,
 				447F53842475805E00F706F1 /* LaunchScreen.storyboard */,
 				447F53872475805E00F706F1 /* Info.plist */,
 			);
@@ -77,6 +77,7 @@
 				447F53722475805D00F706F1 /* Sources */,
 				447F53732475805D00F706F1 /* Frameworks */,
 				447F53742475805D00F706F1 /* Resources */,
+				447F53B724762DEC00F706F1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -132,6 +133,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		447F53B724762DEC00F706F1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		447F53722475805D00F706F1 /* Sources */ = {
