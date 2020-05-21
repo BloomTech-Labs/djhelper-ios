@@ -14,6 +14,7 @@
 		447F53832475805E00F706F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 447F53822475805E00F706F1 /* Assets.xcassets */; };
 		447F53862475805E00F706F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 447F53842475805E00F706F1 /* LaunchScreen.storyboard */; };
 		447F53C12476315200F706F1 /* DJHelper.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 447F53BF2476315200F706F1 /* DJHelper.xcdatamodeld */; };
+		447F53C3247634EE00F706F1 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F53C2247634EE00F706F1 /* CoreDataStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		447F53852475805E00F706F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		447F53872475805E00F706F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		447F53C02476315200F706F1 /* DJHelper.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DJHelper.xcdatamodel; sourceTree = "<group>"; };
+		447F53C2247634EE00F706F1 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,8 +60,9 @@
 		447F53782475805D00F706F1 /* DJHelper */ = {
 			isa = PBXGroup;
 			children = (
-				447F537D2475805E00F706F1 /* ViewController.swift */,
 				447F53BF2476315200F706F1 /* DJHelper.xcdatamodeld */,
+				447F53C2247634EE00F706F1 /* CoreDataStack.swift */,
+				447F537D2475805E00F706F1 /* ViewController.swift */,
 				447F537F2475805E00F706F1 /* Main.storyboard */,
 				447F53822475805E00F706F1 /* Assets.xcassets */,
 				447F537B2475805E00F706F1 /* SceneDelegate.swift */,
@@ -162,6 +165,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				447F53C3247634EE00F706F1 /* CoreDataStack.swift in Sources */,
 				447F537E2475805E00F706F1 /* ViewController.swift in Sources */,
 				447F537A2475805E00F706F1 /* AppDelegate.swift in Sources */,
 				447F537C2475805E00F706F1 /* SceneDelegate.swift in Sources */,
