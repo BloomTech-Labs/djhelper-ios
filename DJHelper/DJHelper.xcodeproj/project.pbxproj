@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4446F799247638D4005ACE10 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F798247638D4005ACE10 /* HTTPMethod.swift */; };
+		4446F79B247638F9005ACE10 /* NetworkDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F79A247638F9005ACE10 /* NetworkDataLoader.swift */; };
+		4446F79D24763935005ACE10 /* URLSessionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F79C24763935005ACE10 /* URLSessionExtension.swift */; };
 		447F537A2475805E00F706F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F53792475805E00F706F1 /* AppDelegate.swift */; };
 		447F537C2475805E00F706F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F537B2475805E00F706F1 /* SceneDelegate.swift */; };
 		447F537E2475805E00F706F1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F537D2475805E00F706F1 /* ViewController.swift */; };
@@ -18,6 +21,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4446F798247638D4005ACE10 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		4446F79A247638F9005ACE10 /* NetworkDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataLoader.swift; sourceTree = "<group>"; };
+		4446F79C24763935005ACE10 /* URLSessionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionExtension.swift; sourceTree = "<group>"; };
 		447F53762475805D00F706F1 /* DJHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		447F53792475805E00F706F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		447F537B2475805E00F706F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +47,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4446F79E24763959005ACE10 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				4446F798247638D4005ACE10 /* HTTPMethod.swift */,
+				4446F79A247638F9005ACE10 /* NetworkDataLoader.swift */,
+				4446F79C24763935005ACE10 /* URLSessionExtension.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		4446F79F24763969005ACE10 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				447F53BF2476315200F706F1 /* DJHelper.xcdatamodeld */,
+				447F53C2247634EE00F706F1 /* CoreDataStack.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4446F7A02476397B005ACE10 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				447F537D2475805E00F706F1 /* ViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
 		447F536D2475805D00F706F1 = {
 			isa = PBXGroup;
 			children = (
@@ -60,9 +93,9 @@
 		447F53782475805D00F706F1 /* DJHelper */ = {
 			isa = PBXGroup;
 			children = (
-				447F53BF2476315200F706F1 /* DJHelper.xcdatamodeld */,
-				447F53C2247634EE00F706F1 /* CoreDataStack.swift */,
-				447F537D2475805E00F706F1 /* ViewController.swift */,
+				4446F79F24763969005ACE10 /* Model */,
+				4446F79E24763959005ACE10 /* Networking */,
+				4446F7A02476397B005ACE10 /* View Controllers */,
 				447F537F2475805E00F706F1 /* Main.storyboard */,
 				447F53822475805E00F706F1 /* Assets.xcassets */,
 				447F537B2475805E00F706F1 /* SceneDelegate.swift */,
@@ -165,10 +198,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4446F79D24763935005ACE10 /* URLSessionExtension.swift in Sources */,
 				447F53C3247634EE00F706F1 /* CoreDataStack.swift in Sources */,
 				447F537E2475805E00F706F1 /* ViewController.swift in Sources */,
+				4446F799247638D4005ACE10 /* HTTPMethod.swift in Sources */,
 				447F537A2475805E00F706F1 /* AppDelegate.swift in Sources */,
 				447F537C2475805E00F706F1 /* SceneDelegate.swift in Sources */,
+				4446F79B247638F9005ACE10 /* NetworkDataLoader.swift in Sources */,
 				447F53C12476315200F706F1 /* DJHelper.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
