@@ -13,6 +13,7 @@
 		447F53812475805E00F706F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 447F537F2475805E00F706F1 /* Main.storyboard */; };
 		447F53832475805E00F706F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 447F53822475805E00F706F1 /* Assets.xcassets */; };
 		447F53862475805E00F706F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 447F53842475805E00F706F1 /* LaunchScreen.storyboard */; };
+		447F53C12476315200F706F1 /* DJHelper.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 447F53BF2476315200F706F1 /* DJHelper.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		447F53822475805E00F706F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		447F53852475805E00F706F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		447F53872475805E00F706F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		447F53C02476315200F706F1 /* DJHelper.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DJHelper.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				447F537D2475805E00F706F1 /* ViewController.swift */,
+				447F53BF2476315200F706F1 /* DJHelper.xcdatamodeld */,
 				447F537F2475805E00F706F1 /* Main.storyboard */,
 				447F53822475805E00F706F1 /* Assets.xcassets */,
 				447F537B2475805E00F706F1 /* SceneDelegate.swift */,
@@ -162,6 +165,7 @@
 				447F537E2475805E00F706F1 /* ViewController.swift in Sources */,
 				447F537A2475805E00F706F1 /* AppDelegate.swift in Sources */,
 				447F537C2475805E00F706F1 /* SceneDelegate.swift in Sources */,
+				447F53C12476315200F706F1 /* DJHelper.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,6 +363,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		447F53BF2476315200F706F1 /* DJHelper.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				447F53C02476315200F706F1 /* DJHelper.xcdatamodel */,
+			);
+			currentVersion = 447F53C02476315200F706F1 /* DJHelper.xcdatamodel */;
+			path = DJHelper.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 447F536E2475805D00F706F1 /* Project object */;
 }
