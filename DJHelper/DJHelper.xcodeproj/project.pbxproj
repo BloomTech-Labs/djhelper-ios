@@ -74,6 +74,18 @@
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
+		4446F7A124763A80005ACE10 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				447F53842475805E00F706F1 /* LaunchScreen.storyboard */,
+				447F53822475805E00F706F1 /* Assets.xcassets */,
+				447F537B2475805E00F706F1 /* SceneDelegate.swift */,
+				447F53792475805E00F706F1 /* AppDelegate.swift */,
+				447F53872475805E00F706F1 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		447F536D2475805D00F706F1 = {
 			isa = PBXGroup;
 			children = (
@@ -97,11 +109,7 @@
 				4446F79E24763959005ACE10 /* Networking */,
 				4446F7A02476397B005ACE10 /* View Controllers */,
 				447F537F2475805E00F706F1 /* Main.storyboard */,
-				447F53822475805E00F706F1 /* Assets.xcassets */,
-				447F537B2475805E00F706F1 /* SceneDelegate.swift */,
-				447F53792475805E00F706F1 /* AppDelegate.swift */,
-				447F53842475805E00F706F1 /* LaunchScreen.storyboard */,
-				447F53872475805E00F706F1 /* Info.plist */,
+				4446F7A124763A80005ACE10 /* Resources */,
 			);
 			path = DJHelper;
 			sourceTree = "<group>";
