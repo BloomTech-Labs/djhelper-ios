@@ -4,9 +4,9 @@
 
 🚫 Each student has a required minimum number of meaningful PRs each week per the rubric.  Contributing to docs does NOT count as a PR to meet your weekly requirements.
 
-# Title of project goes here
+# DJ Helper
 
-1️⃣ You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
+1️⃣ You can find the deployed project at https://www.dj-helper.com.
 
 ## 4️⃣ Contributors
 
