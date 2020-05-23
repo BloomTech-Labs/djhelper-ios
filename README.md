@@ -39,7 +39,6 @@ You can find the deployed project at https://www.dj-helper.com.
 
 [UX Design files](https://www.figma.com/file/bPLYBTlfbbrfz9TnXYkRGA/DJ-Helper-Notes?node-id=40%3A225)
 
-🚫 One to two paragraph statement about your product and what it does.
 
 DJ Helper is a tool used for planning the music playlist at an event. Whether it's a gettogether with a few friends, a party with many guests, or a large gathering such as a wedding, DJ Helper makes the music selection a fun and social process for all involved.
 
