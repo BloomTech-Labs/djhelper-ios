@@ -10,6 +10,10 @@
 		4446F799247638D4005ACE10 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F798247638D4005ACE10 /* HTTPMethod.swift */; };
 		4446F79B247638F9005ACE10 /* NetworkDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F79A247638F9005ACE10 /* NetworkDataLoader.swift */; };
 		4446F79D24763935005ACE10 /* URLSessionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F79C24763935005ACE10 /* URLSessionExtension.swift */; };
+		4446F7D4247DC3BB005ACE10 /* Event+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F7D3247DC3BB005ACE10 /* Event+Convenience.swift */; };
+		4446F7D6247DC51F005ACE10 /* Host+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F7D5247DC51F005ACE10 /* Host+Convenience.swift */; };
+		4446F7D8247DC67E005ACE10 /* HostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F7D7247DC67E005ACE10 /* HostController.swift */; };
+		4446F7DA247DCAD8005ACE10 /* Bearer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F7D9247DCAD8005ACE10 /* Bearer.swift */; };
 		447F537A2475805E00F706F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F53792475805E00F706F1 /* AppDelegate.swift */; };
 		447F537C2475805E00F706F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F537B2475805E00F706F1 /* SceneDelegate.swift */; };
 		447F537E2475805E00F706F1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F537D2475805E00F706F1 /* ViewController.swift */; };
@@ -24,6 +28,10 @@
 		4446F798247638D4005ACE10 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		4446F79A247638F9005ACE10 /* NetworkDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataLoader.swift; sourceTree = "<group>"; };
 		4446F79C24763935005ACE10 /* URLSessionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionExtension.swift; sourceTree = "<group>"; };
+		4446F7D3247DC3BB005ACE10 /* Event+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+Convenience.swift"; sourceTree = "<group>"; };
+		4446F7D5247DC51F005ACE10 /* Host+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Host+Convenience.swift"; sourceTree = "<group>"; };
+		4446F7D7247DC67E005ACE10 /* HostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostController.swift; sourceTree = "<group>"; };
+		4446F7D9247DCAD8005ACE10 /* Bearer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bearer.swift; sourceTree = "<group>"; };
 		447F53762475805D00F706F1 /* DJHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		447F53792475805E00F706F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		447F537B2475805E00F706F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,7 +69,11 @@
 			isa = PBXGroup;
 			children = (
 				447F53BF2476315200F706F1 /* DJHelper.xcdatamodeld */,
+				4446F7D3247DC3BB005ACE10 /* Event+Convenience.swift */,
+				4446F7D5247DC51F005ACE10 /* Host+Convenience.swift */,
 				447F53C2247634EE00F706F1 /* CoreDataStack.swift */,
+				4446F7D9247DCAD8005ACE10 /* Bearer.swift */,
+				4446F7D7247DC67E005ACE10 /* HostController.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -209,9 +221,13 @@
 				4446F79D24763935005ACE10 /* URLSessionExtension.swift in Sources */,
 				447F53C3247634EE00F706F1 /* CoreDataStack.swift in Sources */,
 				447F537E2475805E00F706F1 /* ViewController.swift in Sources */,
+				4446F7D8247DC67E005ACE10 /* HostController.swift in Sources */,
+				4446F7D4247DC3BB005ACE10 /* Event+Convenience.swift in Sources */,
 				4446F799247638D4005ACE10 /* HTTPMethod.swift in Sources */,
 				447F537A2475805E00F706F1 /* AppDelegate.swift in Sources */,
 				447F537C2475805E00F706F1 /* SceneDelegate.swift in Sources */,
+				4446F7DA247DCAD8005ACE10 /* Bearer.swift in Sources */,
+				4446F7D6247DC51F005ACE10 /* Host+Convenience.swift in Sources */,
 				4446F79B247638F9005ACE10 /* NetworkDataLoader.swift in Sources */,
 				447F53C12476315200F706F1 /* DJHelper.xcdatamodeld in Sources */,
 			);
