@@ -37,16 +37,16 @@
             </objects>
             <point key="canvasLocation" x="-283" y="96"/>
         </scene>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="Z9v-WB-yCC">
             <objects>
-                <viewController id="bwM-iG-43S" sceneMemberID="viewController">
+                <viewController id="bwM-iG-43S" customClass="DJLoginViewController" customModule="DJHelper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WuN-F6-0nF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nam-sl-PXF">
-                                <rect key="frame" x="40" y="104" width="114" height="29"/>
+                                <rect key="frame" x="40" y="84" width="114" height="29"/>
                                 <attributedString key="attributedText">
                                     <fragment content="DJ Helper">
                                         <attributes>
@@ -59,7 +59,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ODt-JB-Wj3">
-                                <rect key="frame" x="40" y="173" width="106" height="29"/>
+                                <rect key="frame" x="40" y="153" width="106" height="29"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Welcome">
                                         <attributes>
@@ -71,7 +71,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jPr-dR-Isi">
-                                <rect key="frame" x="40" y="208" width="192.5" height="28"/>
+                                <rect key="frame" x="40" y="188" width="192.5" height="28"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Sign in to continue">
                                         <attributes>
@@ -83,17 +83,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-Mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TJa-gP-sPD">
-                                <rect key="frame" x="40" y="286" width="334" height="34"/>
+                                <rect key="frame" x="40" y="256" width="334" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fqv-ne-53O">
-                                <rect key="frame" x="40" y="360" width="334" height="34"/>
+                                <rect key="frame" x="40" y="320" width="334" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ns1-sx-iRy">
-                                <rect key="frame" x="40" y="434" width="150" height="50"/>
+                                <rect key="frame" x="40" y="384" width="150" height="50"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="LhF-6J-9O9"/>
@@ -147,21 +147,26 @@
                             <constraint firstItem="ODt-JB-Wj3" firstAttribute="top" secondItem="Nam-sl-PXF" secondAttribute="bottom" constant="40" id="EZc-bD-njU"/>
                             <constraint firstItem="ODt-JB-Wj3" firstAttribute="leading" secondItem="jkS-vw-ODC" secondAttribute="leading" constant="40" id="Fpe-FG-jsa"/>
                             <constraint firstItem="fqv-ne-53O" firstAttribute="leading" secondItem="jkS-vw-ODC" secondAttribute="leading" constant="40" id="Geb-vV-zYo"/>
-                            <constraint firstItem="Nam-sl-PXF" firstAttribute="top" secondItem="jkS-vw-ODC" secondAttribute="top" constant="60" id="HVE-Uv-87h"/>
+                            <constraint firstItem="Nam-sl-PXF" firstAttribute="top" secondItem="jkS-vw-ODC" secondAttribute="top" constant="40" id="HVE-Uv-87h"/>
                             <constraint firstItem="16Y-5P-mdD" firstAttribute="leading" secondItem="jkS-vw-ODC" secondAttribute="leading" constant="40" id="MCA-VI-5wG"/>
                             <constraint firstItem="A3p-Z9-8TZ" firstAttribute="top" secondItem="16Y-5P-mdD" secondAttribute="bottom" constant="20" id="UCg-cZ-m7X"/>
                             <constraint firstItem="jkS-vw-ODC" firstAttribute="trailing" secondItem="fqv-ne-53O" secondAttribute="trailing" constant="40" id="eZZ-0v-IjK"/>
                             <constraint firstItem="TJa-gP-sPD" firstAttribute="leading" secondItem="jkS-vw-ODC" secondAttribute="leading" constant="40" id="f4g-H2-0iR"/>
                             <constraint firstItem="jkS-vw-ODC" firstAttribute="bottom" secondItem="A3p-Z9-8TZ" secondAttribute="bottom" constant="40" id="hdQ-DU-uiO"/>
-                            <constraint firstItem="TJa-gP-sPD" firstAttribute="top" secondItem="jPr-dR-Isi" secondAttribute="bottom" constant="50" id="jis-jP-cNn"/>
+                            <constraint firstItem="TJa-gP-sPD" firstAttribute="top" secondItem="jPr-dR-Isi" secondAttribute="bottom" constant="40" id="jis-jP-cNn"/>
                             <constraint firstItem="jkS-vw-ODC" firstAttribute="trailing" secondItem="TJa-gP-sPD" secondAttribute="trailing" constant="40" id="lBA-w1-Pb2"/>
                             <constraint firstItem="Nam-sl-PXF" firstAttribute="leading" secondItem="jkS-vw-ODC" secondAttribute="leading" constant="40" id="mhA-wl-0ku"/>
                             <constraint firstItem="jPr-dR-Isi" firstAttribute="top" secondItem="ODt-JB-Wj3" secondAttribute="bottom" constant="6" id="nRG-zn-fKh"/>
-                            <constraint firstItem="Ns1-sx-iRy" firstAttribute="top" secondItem="fqv-ne-53O" secondAttribute="bottom" constant="40" id="qX8-2R-6z2"/>
-                            <constraint firstItem="fqv-ne-53O" firstAttribute="top" secondItem="TJa-gP-sPD" secondAttribute="bottom" constant="40" id="xII-cP-IXN"/>
+                            <constraint firstItem="Ns1-sx-iRy" firstAttribute="top" secondItem="fqv-ne-53O" secondAttribute="bottom" constant="30" id="qX8-2R-6z2"/>
+                            <constraint firstItem="fqv-ne-53O" firstAttribute="top" secondItem="TJa-gP-sPD" secondAttribute="bottom" constant="30" id="xII-cP-IXN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jkS-vw-ODC"/>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="TJa-gP-sPD" id="yed-VI-QTD"/>
+                        <outlet property="passwordTextField" destination="fqv-ne-53O" id="NGn-7P-C9E"/>
+                        <outlet property="signInButton" destination="Ns1-sx-iRy" id="HyV-eZ-q9d"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZGA-J8-ai2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
