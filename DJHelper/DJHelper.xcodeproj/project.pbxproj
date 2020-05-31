@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B323D3A248422210065D94C /* HostRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B323D39248422210065D94C /* HostRepresentation.swift */; };
 		4446F799247638D4005ACE10 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F798247638D4005ACE10 /* HTTPMethod.swift */; };
 		4446F79B247638F9005ACE10 /* NetworkDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F79A247638F9005ACE10 /* NetworkDataLoader.swift */; };
 		4446F79D24763935005ACE10 /* URLSessionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F79C24763935005ACE10 /* URLSessionExtension.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1B323D39248422210065D94C /* HostRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRepresentation.swift; sourceTree = "<group>"; };
 		4446F798247638D4005ACE10 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		4446F79A247638F9005ACE10 /* NetworkDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataLoader.swift; sourceTree = "<group>"; };
 		4446F79C24763935005ACE10 /* URLSessionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionExtension.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				447F53C2247634EE00F706F1 /* CoreDataStack.swift */,
 				4446F7D9247DCAD8005ACE10 /* Bearer.swift */,
 				4446F7D7247DC67E005ACE10 /* HostController.swift */,
+				1B323D39248422210065D94C /* HostRepresentation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 			files = (
 				4446F79D24763935005ACE10 /* URLSessionExtension.swift in Sources */,
 				447F53C3247634EE00F706F1 /* CoreDataStack.swift in Sources */,
+				1B323D3A248422210065D94C /* HostRepresentation.swift in Sources */,
 				447F537E2475805E00F706F1 /* ViewController.swift in Sources */,
 				4446F7D8247DC67E005ACE10 /* HostController.swift in Sources */,
 				4446F7D4247DC3BB005ACE10 /* Event+Convenience.swift in Sources */,
