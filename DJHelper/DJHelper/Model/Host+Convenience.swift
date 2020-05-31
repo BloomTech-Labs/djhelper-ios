@@ -36,4 +36,22 @@ extension Host {
         self.website = website
     }
     
+    //HostRepresentation -> Host
+    convenience init?(hostRepresnetation: HostRepresentation, context: NSManagedObjectContext = CoreDataStack.shared.mainContext){
+        self.init(name: hostRepresnetation.name, username: hostRepresnetation.username, email: hostRepresnetation.email, password: hostRepresnetation.password, bio: hostRepresnetation.bio, identifier: hostRepresnetation.identifier, phone: hostRepresnetation.phone, profilePic: hostRepresnetation.profilePic, website: hostRepresnetation.website)
+    }
+  
+    //Host -> HostRepresentation
+    var hostToHostRep: HostRepresentation? {
+        guard let name = self.name,
+            let username = self.username,
+            let password = self.password,
+            let email = self.email,
+            let phone = self.phone,
+            let website = self.website,
+            let bio = self.bio,
+            let pic = self.profilePic else { return nil }
+        
+        return HostRepresentation(name: name, username: username, password: password, email: email, phone: phone, website: website, bio: bio, profilePic: pic, identifier: self.identifier)
+    }
 }
