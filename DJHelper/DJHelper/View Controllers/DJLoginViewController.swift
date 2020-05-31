@@ -10,13 +10,16 @@ import UIKit
 
 class DJLoginViewController: UIViewController, UITextFieldDelegate {
 
+    // MARK: - Properties
     var hostController = HostController()
     var currentHost: Host?
     
+    // MARK: - Outlets
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signInButton: UIButton!
 
+    // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,6 +27,11 @@ class DJLoginViewController: UIViewController, UITextFieldDelegate {
         
         let tapToDismiss = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tapToDismiss)
+    }
+    
+    // MARK: - Actions
+    @IBAction func hostLogIn(_ sender: UIButton) {
+        
     }
     
     // MARK: - Navigation
