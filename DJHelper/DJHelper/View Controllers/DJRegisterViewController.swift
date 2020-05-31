@@ -8,7 +8,10 @@
 
 import UIKit
 
-class DJRegisterViewController: UIViewController {
+class DJRegisterViewController: UIViewController, UITextFieldDelegate {
+    
+    var hostController: HostController!
+    var currentHost: Host?
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -20,17 +23,23 @@ class DJRegisterViewController: UIViewController {
         super.viewDidLoad()
         
         createAccountButton.layer.cornerRadius = 25
+        
+        let tapToDismiss = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tapToDismiss)
     }
     
-
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "LogInSegue" {
+            if let logInVC = segue.destination as? DJLoginViewController {
+                logInVC.currentHost = currentHost
+                logInVC.hostController = hostController
+            }
+        }
     }
-    */
-
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
 }
