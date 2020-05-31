@@ -23,6 +23,10 @@ extension Host {
         case identifier = "id"
     }
     
+    //MARK: - CODABLE INITAILIZERS
+    
+    
+    //MARK: - CONVENIENCE INITIALIZERS
     convenience init (name: String, username: String, email: String, password: String, bio: String, identifier: Int32, phone: String, profilePic: URL, website: URL, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         self.init(context: context)
         self.name = name
