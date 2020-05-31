@@ -16,6 +16,6 @@ struct HostRepresentation: Codable {
     var phone: String
     var website: URL
     var bio: String
-    var profilePic: String
-    let identifier: String
+    var profilePic: URL
+    let identifier: Int32
 }
