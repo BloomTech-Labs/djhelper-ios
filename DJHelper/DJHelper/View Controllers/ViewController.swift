@@ -12,6 +12,14 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        let hc = HostController()
+        let host = Host(name: "test1", username: "test1", email: "test", password: "test1", bio: "test1", identifier: 1, phone: "test1", profilePic: URL(string: "string")!, website: URL(string: "string")!)
+        hc.registerHost(with: host) { (result) in
+            switch result {
+            case .success(let host): print("successful host: \(String(describing: host.name))")
+            case .failure(let error):  print("Error: \(error)")
+            }
+        }
     }
 }
