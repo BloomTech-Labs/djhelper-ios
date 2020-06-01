@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1B323D3A248422210065D94C /* HostRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B323D39248422210065D94C /* HostRepresentation.swift */; };
+		1BA4A8B4248577B1002A67E2 /* HostLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA4A8B3248577B1002A67E2 /* HostLogin.swift */; };
+		1BA4A8B6248577F4002A67E2 /* HostLoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA4A8B5248577F4002A67E2 /* HostLoginResponse.swift */; };
 		1BDBE284248508FC006DE77E /* HostRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDBE283248508FC006DE77E /* HostRegistration.swift */; };
 		1BDBE28624850CF3006DE77E /* HostRegistrationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDBE28524850CF3006DE77E /* HostRegistrationResponse.swift */; };
 		4446F799247638D4005ACE10 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F798247638D4005ACE10 /* HTTPMethod.swift */; };
@@ -31,6 +33,8 @@
 
 /* Begin PBXFileReference section */
 		1B323D39248422210065D94C /* HostRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRepresentation.swift; sourceTree = "<group>"; };
+		1BA4A8B3248577B1002A67E2 /* HostLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostLogin.swift; sourceTree = "<group>"; };
+		1BA4A8B5248577F4002A67E2 /* HostLoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostLoginResponse.swift; sourceTree = "<group>"; };
 		1BDBE283248508FC006DE77E /* HostRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRegistration.swift; sourceTree = "<group>"; };
 		1BDBE28524850CF3006DE77E /* HostRegistrationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRegistrationResponse.swift; sourceTree = "<group>"; };
 		4446F798247638D4005ACE10 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -86,6 +90,8 @@
 				4446F7D7247DC67E005ACE10 /* HostController.swift */,
 				1B323D39248422210065D94C /* HostRepresentation.swift */,
 				1BDBE283248508FC006DE77E /* HostRegistration.swift */,
+				1BA4A8B3248577B1002A67E2 /* HostLogin.swift */,
+				1BA4A8B5248577F4002A67E2 /* HostLoginResponse.swift */,
 				1BDBE28524850CF3006DE77E /* HostRegistrationResponse.swift */,
 			);
 			path = Model;
@@ -237,9 +243,11 @@
 				447F53C3247634EE00F706F1 /* CoreDataStack.swift in Sources */,
 				1B323D3A248422210065D94C /* HostRepresentation.swift in Sources */,
 				447F537E2475805E00F706F1 /* ViewController.swift in Sources */,
+				1BA4A8B6248577F4002A67E2 /* HostLoginResponse.swift in Sources */,
 				1BDBE28624850CF3006DE77E /* HostRegistrationResponse.swift in Sources */,
 				4446F7D8247DC67E005ACE10 /* HostController.swift in Sources */,
 				4446F7D4247DC3BB005ACE10 /* Event+Convenience.swift in Sources */,
+				1BA4A8B4248577B1002A67E2 /* HostLogin.swift in Sources */,
 				4446F8252480CD32005ACE10 /* DJLoginViewController.swift in Sources */,
 				4446F799247638D4005ACE10 /* HTTPMethod.swift in Sources */,
 				447F537A2475805E00F706F1 /* AppDelegate.swift in Sources */,
