@@ -15,7 +15,7 @@ class DJLoginViewController: UIViewController, UITextFieldDelegate {
     var currentHost: Host?
     
     // MARK: - Outlets
-    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signInButton: UIButton!
 
@@ -27,11 +27,20 @@ class DJLoginViewController: UIViewController, UITextFieldDelegate {
         
         let tapToDismiss = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tapToDismiss)
+        
+        updateViews()
     }
     
     // MARK: - Actions
     @IBAction func hostLogIn(_ sender: UIButton) {
+        guard let username = usernameTextField.text,
+            !username.isEmpty,
+            let password = passwordTextField.text,
+            !password.isEmpty else { return }
         
+        // call hostLogIn network function
+        // handle possible error
+        // transition to primary view controller
     }
     
     // MARK: - Navigation
@@ -41,6 +50,14 @@ class DJLoginViewController: UIViewController, UITextFieldDelegate {
                 djRegisterVC.hostController = hostController
             }
         }
+    }
+    
+    func updateViews() {
+        guard isViewLoaded else { return }
+        guard let host = currentHost else { return }
+        
+        usernameTextField.text = host.username
+        passwordTextField.text = host.password
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
