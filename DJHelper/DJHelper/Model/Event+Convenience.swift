@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 extension Event {
-    
+//    convenience init(name: String, )
   
 }
