@@ -73,6 +73,77 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1BA4A8B92485B004002A67E2 /* Host Model */ = {
+			isa = PBXGroup;
+			children = (
+				1BDBE283248508FC006DE77E /* HostRegistration.swift */,
+				1BA4A8B3248577B1002A67E2 /* HostLogin.swift */,
+				1BA4A8BB2485B1D7002A67E2 /* Host Model Controller */,
+				1BA4A8BC2485B1E3002A67E2 /* Host Convenience */,
+				1BA4A8BA2485B190002A67E2 /* Host Responses */,
+			);
+			path = "Host Model";
+			sourceTree = "<group>";
+		};
+		1BA4A8BA2485B190002A67E2 /* Host Responses */ = {
+			isa = PBXGroup;
+			children = (
+				1B323D39248422210065D94C /* HostRepresentation.swift */,
+				1BA4A8B5248577F4002A67E2 /* HostLoginResponse.swift */,
+				1BDBE28524850CF3006DE77E /* HostRegistrationResponse.swift */,
+			);
+			path = "Host Responses";
+			sourceTree = "<group>";
+		};
+		1BA4A8BB2485B1D7002A67E2 /* Host Model Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4446F7D7247DC67E005ACE10 /* HostController.swift */,
+			);
+			path = "Host Model Controller";
+			sourceTree = "<group>";
+		};
+		1BA4A8BC2485B1E3002A67E2 /* Host Convenience */ = {
+			isa = PBXGroup;
+			children = (
+				4446F7D5247DC51F005ACE10 /* Host+Convenience.swift */,
+			);
+			path = "Host Convenience";
+			sourceTree = "<group>";
+		};
+		1BA4A8BD2485B956002A67E2 /* Event Model */ = {
+			isa = PBXGroup;
+			children = (
+				1BA4A8C02485B9A4002A67E2 /* Event Controller */,
+				1BA4A8BE2485B960002A67E2 /* Event Convienience */,
+				1BA4A8BF2485B987002A67E2 /* Event Responses */,
+			);
+			path = "Event Model";
+			sourceTree = "<group>";
+		};
+		1BA4A8BE2485B960002A67E2 /* Event Convienience */ = {
+			isa = PBXGroup;
+			children = (
+				4446F7D3247DC3BB005ACE10 /* Event+Convenience.swift */,
+			);
+			path = "Event Convienience";
+			sourceTree = "<group>";
+		};
+		1BA4A8BF2485B987002A67E2 /* Event Responses */ = {
+			isa = PBXGroup;
+			children = (
+				1BA4A8B7248586B9002A67E2 /* EventRepresentation.swift */,
+			);
+			path = "Event Responses";
+			sourceTree = "<group>";
+		};
+		1BA4A8C02485B9A4002A67E2 /* Event Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Event Controller";
+			sourceTree = "<group>";
+		};
 		4446F79E24763959005ACE10 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -87,17 +158,10 @@
 			isa = PBXGroup;
 			children = (
 				447F53BF2476315200F706F1 /* DJHelper.xcdatamodeld */,
-				4446F7D3247DC3BB005ACE10 /* Event+Convenience.swift */,
-				1BA4A8B7248586B9002A67E2 /* EventRepresentation.swift */,
-				4446F7D5247DC51F005ACE10 /* Host+Convenience.swift */,
 				447F53C2247634EE00F706F1 /* CoreDataStack.swift */,
 				4446F7D9247DCAD8005ACE10 /* Bearer.swift */,
-				4446F7D7247DC67E005ACE10 /* HostController.swift */,
-				1B323D39248422210065D94C /* HostRepresentation.swift */,
-				1BDBE283248508FC006DE77E /* HostRegistration.swift */,
-				1BA4A8B3248577B1002A67E2 /* HostLogin.swift */,
-				1BA4A8B5248577F4002A67E2 /* HostLoginResponse.swift */,
-				1BDBE28524850CF3006DE77E /* HostRegistrationResponse.swift */,
+				1BA4A8BD2485B956002A67E2 /* Event Model */,
+				1BA4A8B92485B004002A67E2 /* Host Model */,
 			);
 			path = Model;
 			sourceTree = "<group>";
