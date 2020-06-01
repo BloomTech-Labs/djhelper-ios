@@ -37,4 +37,14 @@ extension Event {
         
         self.init(name: eventRepresentation.name, eventType: eventRepresentation.eventType, eventDescription: eventRepresentation.eventDescription, eventDate: eventRepresentation.eventDate, hostID: eventRepresentation.hostID, locationID: eventRepresentation.locationID, startTime: startTime, endTime: endTime, imageURL: imageURL, notes: notes, eventID: eventID)
     }
+    
+    //Event -> EventRepresentation
+    var eventToRepresentation: EventRepresentation? {
+        guard let name = self.name,
+            let eventType = self.eventType,
+            let description = self.eventDescription,
+            let eventDate = self.eventDate else { return nil }
+        
+        return EventRepresentation(name: name, eventType: eventType, eventDescription: description, eventDate: eventDate, hostID: self.hostID, locationID: self.locationID)
+    }
 }
