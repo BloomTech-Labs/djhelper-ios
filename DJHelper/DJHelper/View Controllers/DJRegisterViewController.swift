@@ -65,9 +65,17 @@ class DJRegisterViewController: UIViewController, UITextFieldDelegate {
         hostController.registerHost(with: host) { (result) in
             switch result {
             case .success(_):
-                <#code#>
-            case .failure(_):
-                <#code#>
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "LogInSegue", sender: self)
+                }
+            case let .failure(error):
+                DispatchQueue.main.async {
+                    let alertController = UIAlertController(title: "LogIn Error", message: "There was an error logging in with message: \(error). Please verify and try again.", preferredStyle: .alert)
+                    let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alertController.addAction(alertAction)
+                    self.present(alertController, animated: true)
+                }
+                return
             }
         }
     }
