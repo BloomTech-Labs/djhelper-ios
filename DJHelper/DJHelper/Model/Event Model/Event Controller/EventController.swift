@@ -15,4 +15,9 @@ class EventController {
         self.dataLoader = dataLoader
     }
     
+    //MARK: - AUTHORIZE AN EVENT
+    ///The server returns an object with the event data
+    func authorize(event: Event, completion: @escaping (EventRepresentation, Error) -> Void){
+        
+    }
 }

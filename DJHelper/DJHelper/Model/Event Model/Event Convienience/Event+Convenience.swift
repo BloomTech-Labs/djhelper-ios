@@ -10,6 +10,21 @@ import Foundation
 import CoreData
 
 extension Event {
-//    convenience init(name: String, )
-  
+
+    @discardableResult
+    convenience init(name: String, eventType: String, eventDescription: String, eventDate: Date, hostID: Int32, locationID: Int32, startTime: Date, endTime: Date, imageURL: URL, notes: String, eventID: Int32, context: NSManagedObjectContext = CoreDataStack.shared.mainContext){
+        self.init(context: context)
+        self.name = name
+        self.eventType = eventType
+        self.eventDescription = eventDescription
+        self.eventDate = eventDate
+        self.hostID = hostID
+        self.locationID = locationID
+        self.startTime = startTime
+        self.endTime = endTime
+        self.imageURL = imageURL
+        self.notes = notes
+        self.eventID = eventID
+        
+    }
 }
