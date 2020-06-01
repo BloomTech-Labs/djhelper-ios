@@ -17,7 +17,7 @@ extension URLSession: NetworkDataLoader {
             }
 
             if let response = possibleResponse as? HTTPURLResponse,
-                response.statusCode != 201 {
+                response.statusCode != 200 {
                 print("This is the status code: \(response.statusCode)")
                 completion(nil, response, nil)
             } 

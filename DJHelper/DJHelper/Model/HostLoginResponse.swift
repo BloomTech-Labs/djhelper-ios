@@ -11,7 +11,6 @@ import Foundation
 struct HostLoginResponse: Codable {
     var name: String
     var username: String
-    var password: String?
     var email: String
     var phone: String?
     var website: URL?
@@ -23,7 +22,6 @@ struct HostLoginResponse: Codable {
     enum HostLoginResponseCodingKeys: String, CodingKey {
         case username
         case name
-        case password
         case email
         case phone
         case website
@@ -33,12 +31,11 @@ struct HostLoginResponse: Codable {
         case token
     }
     
-    init(name: String, username: String, email: String, password: String? = nil, phone: String? = nil, website: URL? = nil, bio: String? = nil, profilePic: URL? = nil, identifier: Int32, token: String){
+    init(name: String, username: String, email: String, phone: String? = nil, website: URL? = nil, bio: String? = nil, profilePic: URL? = nil, identifier: Int32, token: String){
         self.name = name
         self.username = username
         self.email = email
         self.identifier =  identifier
-        self.password = password
         self.token = token
     }
     
@@ -47,7 +44,6 @@ struct HostLoginResponse: Codable {
         let container = try decoder.container(keyedBy: HostLoginResponseCodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
         username = try container.decode(String.self, forKey: .username)
-        password = try container.decode(String?.self, forKey: .password)
         email = try container.decode(String.self, forKey: .email)
         phone = try container.decode(String?.self, forKey: .phone)
         website = try container.decode(URL?.self, forKey: .website)
@@ -61,7 +57,6 @@ struct HostLoginResponse: Codable {
         var container = encoder.container(keyedBy: HostLoginResponseCodingKeys.self)
         try container.encode(name, forKey: .name)
         try container.encode(username, forKey: .username)
-        try container.encode(password, forKey: .password)
         try container.encode(email, forKey: .email)
         try container.encode(phone, forKey: .phone)
         try container.encode(website, forKey: .website)

@@ -84,11 +84,11 @@ class HostController {
     // MARK: - Log In Existing Host
     // the server returns the host properties along with the generated bearer token
     func logIn(with host: Host, completion: @escaping (Result<HostLoginResponse, HostErrors>) -> Void) {
-        //take the host and turn in into a hr
-        guard let hostRegistration = host.hostRepRegistration else { return }
+        //take the host and turn in into a host login
+        guard let hostLogin = host.hostLogin else { return }
         
         //create url
-        let registrationURL = baseURL.appendingPathComponent("register").appendingPathComponent("dj")
+        let registrationURL = baseURL.appendingPathComponent("login").appendingPathComponent("dj")
         
         //create url request method
         var urlRequest = URLRequest(url: registrationURL)
@@ -96,9 +96,9 @@ class HostController {
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         //pass data into httpBody
         do {
-            urlRequest.httpBody = try JSONEncoder().encode(hostRegistration)
+            urlRequest.httpBody = try JSONEncoder().encode(hostLogin)
         } catch  {
-            print("Error encoding HostRepresentation on line: \(#line) in function: \(#function)\n Readable error: \(error.localizedDescription)\n Technical error: \(error)")
+            print("Error encoding HostLogin on line: \(#line) in function: \(#function)\n Readable error: \(error.localizedDescription)\n Technical error: \(error)")
         }
         
         print("This is the url for posting: \(registrationURL.absoluteString)")
@@ -112,7 +112,7 @@ class HostController {
             
             if let error = error {
                 print("Error: \(error.localizedDescription) on line \(#line) in function: \(#function)\n Technical error: \(error)")
-                completion(.failure(.registrationError(error)))
+                completion(.failure(.loginError(error)))
             }
             //
             guard let data = data else {
@@ -122,10 +122,10 @@ class HostController {
             }
             
             do {
-                let hostRegistrationResponse = try JSONDecoder().decode(HostRegistrationResponse.self, from: data)
+                let hostLoginResponse = try JSONDecoder().decode(HostLoginResponse.self, from: data)
                 //we cannot initalize a host because the response doesn't bring back a password, which we need for the host, unless we make a password optional, which I don't think makes sense. There should be a password. So we have to complete with the response
                 
-                completion(.success(hostRegistrationResponse))
+                completion(.success(hostLoginResponse))
             } catch {
                 print("Error on line: \(#line) in function: \(#function)\n Readable error: \(error.localizedDescription)\n Technical error: \(error)")
                 completion(.failure(.unknownError(error)))
