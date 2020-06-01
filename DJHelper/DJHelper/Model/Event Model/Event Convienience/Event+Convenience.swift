@@ -25,6 +25,16 @@ extension Event {
         self.imageURL = imageURL
         self.notes = notes
         self.eventID = eventID
+    }
+    
+    //EventRepresentation -> Event
+    convenience init?(eventRepresentation: EventRepresentation, context: NSManagedObjectContext = CoreDataStack.shared.mainContext){
+        guard let startTime = eventRepresentation.startTime,
+            let endTime = eventRepresentation.endTime,
+            let imageURL = eventRepresentation.imageURL,
+            let notes = eventRepresentation.notes,
+            let eventID = eventRepresentation.eventID else { return nil }
         
+        self.init(name: eventRepresentation.name, eventType: eventRepresentation.eventType, eventDescription: eventRepresentation.eventDescription, eventDate: eventRepresentation.eventDate, hostID: eventRepresentation.hostID, locationID: eventRepresentation.locationID, startTime: startTime, endTime: endTime, imageURL: imageURL, notes: notes, eventID: eventID)
     }
 }

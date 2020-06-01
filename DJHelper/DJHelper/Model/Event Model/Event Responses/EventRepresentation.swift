@@ -50,13 +50,13 @@ struct EventRepresentation: Codable {
         eventType = try container.decode(String.self, forKey: .eventType)
         eventDescription = try container.decode(String.self, forKey: .eventDescription)
         eventDate = try container.decode(Date.self, forKey: .eventDate)
-        hostID = try container.decode(String.self, forKey: .hostID)
-        locationID = try container.decode(String.self, forKey: .locationID)
+        hostID = try container.decode(Int32.self, forKey: .hostID)
+        locationID = try container.decode(Int32.self, forKey: .locationID)
         startTime = try container.decode(Date?.self, forKey: .startTime)
         endTime = try container.decode(Date?.self, forKey: .endTime)
         imageURL = try container.decode(URL?.self, forKey: .imageURL)
         notes = try container.decode(String?.self, forKey: .notes)
-        eventID = try container.decode(String.self, forKey: .eventID)
+        eventID = try container.decode(Int32.self, forKey: .eventID)
     }
     
     func encode(with encoder: Encoder) throws {
