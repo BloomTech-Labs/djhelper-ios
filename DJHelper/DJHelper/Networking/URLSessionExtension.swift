@@ -17,10 +17,11 @@ extension URLSession: NetworkDataLoader {
             }
 
             if let response = possibleResponse as? HTTPURLResponse,
-                response.statusCode != 200 {
+                response.statusCode != 201 {
+                print("This is the status code: \(response.statusCode)")
                 completion(nil, response, nil)
-            }
-
+            } 
+            
             guard let data = possibleData else {
                 completion(nil, nil, possibleError)
                 return
