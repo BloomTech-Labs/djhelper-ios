@@ -39,6 +39,11 @@ extension Host {
         self.init(name: hostRepresnetation.name, username: hostRepresnetation.username, email: hostRepresnetation.email, password: hostRepresnetation.password, bio: bio, identifier: identifier, phone: phone, profilePic: pic, website: website)
     }
     
+    var hostLogin: HostLogin? {
+        guard let username = self.username,
+            let password = self.password else { return nil }
+        return HostLogin(username: username, password: password)
+    }
     var hostRegistration: HostRegistration? {
         guard let name = self.name,
             let username = self.username,
