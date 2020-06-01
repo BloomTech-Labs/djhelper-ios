@@ -114,7 +114,7 @@ class HostController {
                 print("Error: \(error.localizedDescription) on line \(#line) in function: \(#function)\n Technical error: \(error)")
                 completion(.failure(.loginError(error)))
             }
-            //
+            
             guard let data = data else {
                 print("Error on line: \(#line) in function: \(#function)")
                 completion(.failure(.noDataError))
@@ -125,6 +125,8 @@ class HostController {
                 let hostLoginResponse = try JSONDecoder().decode(HostLoginResponse.self, from: data)
                 //we cannot initalize a host because the response doesn't bring back a password, which we need for the host, unless we make a password optional, which I don't think makes sense. There should be a password. So we have to complete with the response
                 
+                //assign the bearer or token
+                self.bearer?.token = hostLoginResponse.token
                 completion(.success(hostLoginResponse))
             } catch {
                 print("Error on line: \(#line) in function: \(#function)\n Readable error: \(error.localizedDescription)\n Technical error: \(error)")
