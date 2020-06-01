@@ -12,13 +12,13 @@ struct EventRepresentation: Codable {
     let eventType: String
     let eventDescription: String
     let eventDate: Date
-    let hostID: String
-    let locationID: String
+    let hostID: Int32
+    let locationID: Int32
     var startTime: Date?
     var endTime: Date?
     var imageURL: URL?
     var notes: String?
-    var eventID: String?
+    var eventID: Int32?
     
     enum EventRepresentationCodingKeys: String, CodingKey {
         case name
@@ -34,7 +34,7 @@ struct EventRepresentation: Codable {
         case eventID = "id"
     }
     
-    init(name: String, eventType: String, eventDescription: String, eventDate: Date, hostID: String, locationID: String, startTime: Date? = nil, endTime: Date? = nil, imageURL: URL? = nil, notes: String? = nil, eventID: String? = nil){
+    init(name: String, eventType: String, eventDescription: String, eventDate: Date, hostID: Int32, locationID: Int32, startTime: Date? = nil, endTime: Date? = nil, imageURL: URL? = nil, notes: String? = nil, eventID: String? = nil){
         self.name = name
         self.eventType = eventType
         self.eventDescription = eventDescription
