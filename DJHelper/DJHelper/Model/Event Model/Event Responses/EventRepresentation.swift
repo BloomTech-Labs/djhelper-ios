@@ -34,7 +34,7 @@ struct EventRepresentation: Codable {
         case eventID = "id"
     }
     
-    init(name: String, eventType: String, eventDescription: String, eventDate: Date, hostID: Int32, locationID: Int32, startTime: Date? = nil, endTime: Date? = nil, imageURL: URL? = nil, notes: String? = nil, eventID: String? = nil){
+    init(name: String, eventType: String, eventDescription: String, eventDate: Date, hostID: Int32, locationID: Int32, startTime: Date? = nil, endTime: Date? = nil, imageURL: URL? = nil, notes: String? = nil, eventID: Int32? = nil){
         self.name = name
         self.eventType = eventType
         self.eventDescription = eventDescription

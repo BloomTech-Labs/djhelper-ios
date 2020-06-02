@@ -39,12 +39,21 @@ extension Event {
     }
     
     //Event -> EventRepresentation
-    var eventToRepresentation: EventRepresentation? {
+    var eventAuthorizationRep: EventRepresentation? {
         guard let name = self.name,
             let eventType = self.eventType,
             let description = self.eventDescription,
             let eventDate = self.eventDate else { return nil }
         
-        return EventRepresentation(name: name, eventType: eventType, eventDescription: description, eventDate: eventDate, hostID: self.hostID, locationID: self.locationID)
+        return EventRepresentation(name: name, eventType: eventType, eventDescription: description, eventDate: eventDate, hostID: self.hostID, locationID: self.locationID, eventID: self.eventID)
+    }
+    
+    var eventRepresentation: EventRepresentation? {
+        guard let name = self.name,
+        let eventType = self.eventType,
+        let description = self.eventDescription,
+        let eventDate = self.eventDate else { return nil }
+        
+        return EventRepresentation(name: name, eventType: eventType, eventDescription: description, eventDate: eventDate, hostID: self.hostID, locationID: self.locationID, startTime: self.startTime, endTime: self.endTime, imageURL: self.imageURL, notes: self.notes, eventID: self.eventID)
     }
 }
