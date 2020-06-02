@@ -11,7 +11,8 @@ import CoreData
 
 class HostEventsTableViewController: UIViewController {
 
-    var host: Host?
+    var hostController: HostController?
+    var currentHost: Host?
     
     // My plan is to do a fetch request to see if the Host identifier exists in core data.
     // If it does not exist, we will create a host object and add it to core data.
