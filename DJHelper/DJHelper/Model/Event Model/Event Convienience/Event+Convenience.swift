@@ -33,9 +33,10 @@ extension Event {
             let endTime = eventRepresentation.endTime,
             let imageURL = eventRepresentation.imageURL,
             let notes = eventRepresentation.notes,
+            let convertedDate = eventRepresentation.eventDate.dateFromString(),
             let eventID = eventRepresentation.eventID else { return nil }
         
-        self.init(name: eventRepresentation.name, eventType: eventRepresentation.eventType, eventDescription: eventRepresentation.eventDescription, eventDate: eventRepresentation.eventDate, hostID: eventRepresentation.hostID, locationID: eventRepresentation.locationID, startTime: startTime, endTime: endTime, imageURL: imageURL, notes: notes, eventID: eventID)
+        self.init(name: eventRepresentation.name, eventType: eventRepresentation.eventType, eventDescription: eventRepresentation.eventDescription, eventDate: convertedDate, hostID: eventRepresentation.hostID, locationID: eventRepresentation.locationID, startTime: startTime, endTime: endTime, imageURL: imageURL, notes: notes, eventID: eventID)
     }
     
     //Event -> EventRepresentation
@@ -45,15 +46,16 @@ extension Event {
             let description = self.eventDescription,
             let eventDate = self.eventDate else { return nil }
         
-        return EventRepresentation(name: name, eventType: eventType, eventDescription: description, eventDate: eventDate, hostID: self.hostID, locationID: self.locationID, eventID: self.eventID)
+        return EventRepresentation(name: name, eventType: eventType, eventDescription: description, eventDate: eventDate.stringFromDate(), hostID: self.hostID, locationID: self.locationID, eventID: self.eventID)
     }
     
-    var eventRepresentation: EventRepresentation? {
+    //Event -> EventAuthRequest
+    var eventAuthRequest: EventAuthRequest? {
         guard let name = self.name,
-        let eventType = self.eventType,
-        let description = self.eventDescription,
-        let eventDate = self.eventDate else { return nil }
+             let eventType = self.eventType,
+             let description = self.eventDescription,
+             let eventDate = self.eventDate else { return nil }
         
-        return EventRepresentation(name: name, eventType: eventType, eventDescription: description, eventDate: eventDate, hostID: self.hostID, locationID: self.locationID, startTime: self.startTime, endTime: self.endTime, imageURL: self.imageURL, notes: self.notes, eventID: self.eventID)
+        return EventAuthRequest(name: name, eventType: eventType, description: description, date: eventDate, djId: self.hostID, locationId: self.locationID)
     }
 }
