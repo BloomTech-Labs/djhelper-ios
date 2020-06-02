@@ -94,8 +94,8 @@
 			isa = PBXGroup;
 			children = (
 				1B323D39248422210065D94C /* HostRepresentation.swift */,
-				1BA4A8B5248577F4002A67E2 /* HostLoginResponse.swift */,
 				1BDBE28524850CF3006DE77E /* HostRegistrationResponse.swift */,
+				1BA4A8B5248577F4002A67E2 /* HostLoginResponse.swift */,
 			);
 			path = "Host Responses";
 			sourceTree = "<group>";
