@@ -25,8 +25,6 @@ extension Host {
         self.website = website
     }
     
-    
-    
     //HostRepresentation -> Host
     @discardableResult
     convenience init?(hostRepresnetation: HostRepresentation, context: NSManagedObjectContext = CoreDataStack.shared.mainContext){
@@ -44,6 +42,7 @@ extension Host {
             let password = self.password else { return nil }
         return HostLogin(username: username, password: password)
     }
+    
     var hostRegistration: HostRegistration? {
         guard let name = self.name,
             let username = self.username,
@@ -51,16 +50,6 @@ extension Host {
             let password = self.password else { return nil }
         
         return HostRegistration(name: name, username: username, email: email, password: password)
-    }
-    
-    //registration computed property
-    var hostRepRegistration: HostRepresentation? {
-        guard let name = self.name,
-            let username = self.username,
-            let password = self.password,
-            let email = self.email else { return nil }
-        
-        return HostRepresentation(name: name, username: username, email: email, password: password)
     }
     
     //Host -> HostRepresentation
