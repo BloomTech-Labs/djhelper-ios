@@ -57,7 +57,7 @@ class DJRegisterViewController: UIViewController, UITextFieldDelegate {
         }
 
         // create new host object -- I need to convenience initializer to do this
-        
+        let newHost = HostRegistration(name: "", username: username, email: email, password: password)
 
         // call network register method
         // handle possible error
