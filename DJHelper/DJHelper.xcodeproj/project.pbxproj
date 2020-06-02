@@ -34,7 +34,18 @@
 		447F53C12476315200F706F1 /* DJHelper.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 447F53BF2476315200F706F1 /* DJHelper.xcdatamodeld */; };
 		447F53C3247634EE00F706F1 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F53C2247634EE00F706F1 /* CoreDataStack.swift */; };
 		449380522485A15D004C96F7 /* HostEventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449380512485A15D004C96F7 /* HostEventsTableViewController.swift */; };
+		449380682486F255004C96F7 /* DJHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449380672486F255004C96F7 /* DJHelperTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4493806A2486F255004C96F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 447F536E2475805D00F706F1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 447F53752475805D00F706F1;
+			remoteInfo = DJHelper;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1B323D39248422210065D94C /* HostRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRepresentation.swift; sourceTree = "<group>"; };
@@ -66,10 +77,20 @@
 		447F53C02476315200F706F1 /* DJHelper.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DJHelper.xcdatamodel; sourceTree = "<group>"; };
 		447F53C2247634EE00F706F1 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		449380512485A15D004C96F7 /* HostEventsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostEventsTableViewController.swift; sourceTree = "<group>"; };
+		449380652486F255004C96F7 /* DJHelperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DJHelperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		449380672486F255004C96F7 /* DJHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJHelperTests.swift; sourceTree = "<group>"; };
+		449380692486F255004C96F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		447F53732475805D00F706F1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		449380622486F255004C96F7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -218,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				447F53782475805D00F706F1 /* DJHelper */,
+				449380662486F255004C96F7 /* DJHelperTests */,
 				447F53772475805D00F706F1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -226,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				447F53762475805D00F706F1 /* DJHelper.app */,
+				449380652486F255004C96F7 /* DJHelperTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -240,6 +263,15 @@
 				4446F7A124763A80005ACE10 /* Resources */,
 			);
 			path = DJHelper;
+			sourceTree = "<group>";
+		};
+		449380662486F255004C96F7 /* DJHelperTests */ = {
+			isa = PBXGroup;
+			children = (
+				449380672486F255004C96F7 /* DJHelperTests.swift */,
+				449380692486F255004C96F7 /* Info.plist */,
+			);
+			path = DJHelperTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,18 +295,40 @@
 			productReference = 447F53762475805D00F706F1 /* DJHelper.app */;
 			productType = "com.apple.product-type.application";
 		};
+		449380642486F255004C96F7 /* DJHelperTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4493806E2486F255004C96F7 /* Build configuration list for PBXNativeTarget "DJHelperTests" */;
+			buildPhases = (
+				449380612486F255004C96F7 /* Sources */,
+				449380622486F255004C96F7 /* Frameworks */,
+				449380632486F255004C96F7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4493806B2486F255004C96F7 /* PBXTargetDependency */,
+			);
+			name = DJHelperTests;
+			productName = DJHelperTests;
+			productReference = 449380652486F255004C96F7 /* DJHelperTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		447F536E2475805D00F706F1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1140;
+				LastSwiftUpdateCheck = 1150;
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = craigswanson;
 				TargetAttributes = {
 					447F53752475805D00F706F1 = {
 						CreatedOnToolsVersion = 11.4.1;
+					};
+					449380642486F255004C96F7 = {
+						CreatedOnToolsVersion = 11.5;
+						TestTargetID = 447F53752475805D00F706F1;
 					};
 				};
 			};
@@ -292,6 +346,7 @@
 			projectRoot = "";
 			targets = (
 				447F53752475805D00F706F1 /* DJHelper */,
+				449380642486F255004C96F7 /* DJHelperTests */,
 			);
 		};
 /* End PBXProject section */
@@ -304,6 +359,13 @@
 				447F53862475805E00F706F1 /* LaunchScreen.storyboard in Resources */,
 				447F53832475805E00F706F1 /* Assets.xcassets in Resources */,
 				447F53812475805E00F706F1 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		449380632486F255004C96F7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,7 +423,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		449380612486F255004C96F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				449380682486F255004C96F7 /* DJHelperTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4493806B2486F255004C96F7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 447F53752475805D00F706F1 /* DJHelper */;
+			targetProxy = 4493806A2486F255004C96F7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		447F537F2475805E00F706F1 /* Main.storyboard */ = {
@@ -533,6 +611,48 @@
 			};
 			name = Release;
 		};
+		4493806C2486F255004C96F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2MZREBG7BM;
+				INFOPLIST_FILE = DJHelperTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.craigswanson.DJHelperTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DJHelper.app/DJHelper";
+			};
+			name = Debug;
+		};
+		4493806D2486F255004C96F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2MZREBG7BM;
+				INFOPLIST_FILE = DJHelperTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.craigswanson.DJHelperTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DJHelper.app/DJHelper";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -550,6 +670,15 @@
 			buildConfigurations = (
 				447F538B2475805E00F706F1 /* Debug */,
 				447F538C2475805E00F706F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4493806E2486F255004C96F7 /* Build configuration list for PBXNativeTarget "DJHelperTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4493806C2486F255004C96F7 /* Debug */,
+				4493806D2486F255004C96F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
