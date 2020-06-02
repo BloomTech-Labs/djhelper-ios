@@ -30,7 +30,7 @@ class ViewController: UIViewController {
         let ec = EventController()
         let date = Date()
         
-        let event = Event(name: "e2", eventType: "e2", eventDescription:"e2" , eventDate: date, hostID: 1, locationID: 1, startTime: date, endTime: Date().advanced(by: 888904), imageURL: URL(string: "e2")!, notes: "e2", eventID: 1)
+        let event = Event(name: "e4", eventType: "e4", eventDescription:"e4" , eventDate: date, hostID: 1, locationID: 1, startTime: date, endTime: Date(), imageURL: URL(string: "e4")!, notes: "e4", eventID: 1)
         
         ec.authorize(event: event) { (results) in
             switch results {

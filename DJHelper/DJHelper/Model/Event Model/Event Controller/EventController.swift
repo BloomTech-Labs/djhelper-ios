@@ -25,8 +25,8 @@ class EventController {
     //MARK: - AUTHORIZE AN EVENT
     ///The server returns an object with the event data
     func authorize(event: Event, completion: @escaping (Result<EventRepresentation, EventErrors>) -> Void){
-//        guard let eventToAuthorize = event.eventAuthorizationRep else { return }
-        guard let eventRep = event.eventRepresentation else { return }
+        guard let eventToAuthorize = event.eventAuthorizationRep else { return }
+//        guard let eventAuthRequest = event.eventAuthRequest else { return }
         
         var urlRequest = URLRequest(url: baseURL)
         urlRequest.httpMethod = HTTPMethod.post.rawValue
@@ -34,9 +34,10 @@ class EventController {
         
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
+//        encoder.keyEncodingStrategy = .convertToSnakeCase
         
         do {
-            urlRequest.httpBody = try encoder.encode(eventRep)
+            urlRequest.httpBody = try encoder.encode(eventToAuthorize)
         } catch  {
             print("Error on line: \(#line) in function: \(#function)\n Readable error: \(error.localizedDescription)\n Technical error: \(error)")
             completion(.failure(.encodeError(error)))
@@ -66,14 +67,15 @@ class EventController {
             
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
+            
             do {
                 let eventRep = try decoder.decode(EventRepresentation.self, from: data)
+                print("date from eventRep: \(eventRep.eventDate)")
                 completion(.success(eventRep))
             }  catch {
                  print("Error on line: \(#line) in function: \(#function)\n Readable error: \(error.localizedDescription)\n Technical error: \(error)")
                 completion(.failure(.decodeError(error)))
             }
-            
         }
     }
 }

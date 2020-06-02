@@ -11,7 +11,7 @@ struct EventRepresentation: Codable {
     let name: String
     let eventType: String
     let eventDescription: String
-    let eventDate: Date
+    let eventDate: String
     let hostID: Int32
     let locationID: Int32
     var startTime: Date?
@@ -20,7 +20,7 @@ struct EventRepresentation: Codable {
     var notes: String?
     var eventID: Int32?
     
-    enum EventRepresentationCodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case name
         case eventType = "event_type"
         case eventDescription = "description"
@@ -34,7 +34,7 @@ struct EventRepresentation: Codable {
         case eventID = "id"
     }
     
-    init(name: String, eventType: String, eventDescription: String, eventDate: Date, hostID: Int32, locationID: Int32, startTime: Date? = nil, endTime: Date? = nil, imageURL: URL? = nil, notes: String? = nil, eventID: Int32? = nil){
+    init(name: String, eventType: String, eventDescription: String, eventDate: String, hostID: Int32, locationID: Int32, startTime: Date? = nil, endTime: Date? = nil, imageURL: URL? = nil, notes: String? = nil, eventID: Int32? = nil){
         self.name = name
         self.eventType = eventType
         self.eventDescription = eventDescription
@@ -45,22 +45,22 @@ struct EventRepresentation: Codable {
     
     //MARK: - CODABLE INITAILIZERS
     init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: EventRepresentationCodingKeys.self)
+        let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
         eventType = try container.decode(String.self, forKey: .eventType)
         eventDescription = try container.decode(String.self, forKey: .eventDescription)
-        eventDate = try container.decode(Date.self, forKey: .eventDate)
+        eventDate = try container.decode(String.self, forKey: .eventDate)
         hostID = try container.decode(Int32.self, forKey: .hostID)
         locationID = try container.decode(Int32.self, forKey: .locationID)
         startTime = try container.decode(Date?.self, forKey: .startTime)
         endTime = try container.decode(Date?.self, forKey: .endTime)
         imageURL = try container.decode(URL?.self, forKey: .imageURL)
         notes = try container.decode(String?.self, forKey: .notes)
-        eventID = try container.decode(Int32.self, forKey: .eventID)
+        eventID = try container.decode(Int32?.self, forKey: .eventID)
     }
     
     func encode(with encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: EventRepresentationCodingKeys.self)
+        var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
         try container.encode(eventType, forKey: .eventType)
         try container.encode(eventDescription, forKey: .eventDescription)
