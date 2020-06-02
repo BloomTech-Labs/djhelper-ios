@@ -48,7 +48,9 @@ class DJRegisterViewController: UIViewController, UITextFieldDelegate {
 
             // present alert if they are not the same
             DispatchQueue.main.async {
-                let alertController = UIAlertController(title: "Password Error", message: "Your password and your confirmation password do not match. Please verify and try again.", preferredStyle: .alert)
+                let alertController = UIAlertController(title: "Password Error",
+                                                        message: "Your password and your confirmation password do not match. Please verify and try again.",
+                                                        preferredStyle: .alert)
                 let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alertController.addAction(alertAction)
                 self.present(alertController, animated: true)
@@ -72,7 +74,9 @@ class DJRegisterViewController: UIViewController, UITextFieldDelegate {
                 // if unsuccessful, present alert with failure notice and return to screen
                 
                 DispatchQueue.main.async {
-                    let alertController = UIAlertController(title: "Successful Registration", message: "Congratulations! Your account has been created. Press Sign In to continue to your Events list, or cancel to retun.", preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "Successful Registration",
+                                                            message: "Congratulations! Your account has been created. Press Sign In to continue to your Events list, or cancel to retun.",
+                                                            preferredStyle: .alert)
                     let alertAction = UIAlertAction(title: "Sign In", style: .default) { (signIn) in
                         self.hostController.logIn(with: host) { (result) in
                             switch result {
@@ -82,7 +86,9 @@ class DJRegisterViewController: UIViewController, UITextFieldDelegate {
                                 }
                             case let .failure(error):
                                 DispatchQueue.main.async {
-                                    let alertController = UIAlertController(title: "LogIn Error", message: "There was an error signing in with message: \(error). Please verify and try again.", preferredStyle: .alert)
+                                    let alertController = UIAlertController(title: "LogIn Error",
+                                                                            message: "There was an error signing in with message: \(error). Please verify and try again.",
+                                                                            preferredStyle: .alert)
                                     let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                                     alertController.addAction(alertAction)
                                     self.present(alertController, animated: true)
@@ -98,7 +104,9 @@ class DJRegisterViewController: UIViewController, UITextFieldDelegate {
 
             case let .failure(error):
                 DispatchQueue.main.async {
-                    let alertController = UIAlertController(title: "Registration Error", message: "There was an error registering with message: \(error). Please verify and try again.", preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "Registration Error",
+                                                            message: "There was an error registering with message: \(error). Please verify and try again.",
+                                                            preferredStyle: .alert)
                     let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                     alertController.addAction(alertAction)
                     self.present(alertController, animated: true)

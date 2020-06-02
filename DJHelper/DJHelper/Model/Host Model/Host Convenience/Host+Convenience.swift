@@ -10,9 +10,18 @@ import Foundation
 import CoreData
 
 extension Host {
-    
-    //MARK: - CONVENIENCE INITIALIZERS
-    convenience init (name: String, username: String, email: String, password: String, bio: String, identifier: Int32, phone: String, profilePic: URL, website: URL, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+
+    // MARK: - CONVENIENCE INITIALIZERS
+    convenience init (name: String,
+                      username: String,
+                      email: String,
+                      password: String,
+                      bio: String,
+                      identifier: Int32,
+                      phone: String,
+                      profilePic: URL,
+                      website: URL,
+                      context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         self.init(context: context)
         self.name = name
         self.username = username
@@ -27,14 +36,23 @@ extension Host {
     
     //HostRepresentation -> Host
     @discardableResult
-    convenience init?(hostRepresnetation: HostRepresentation, context: NSManagedObjectContext = CoreDataStack.shared.mainContext){
+    convenience init?(hostRepresnetation: HostRepresentation,
+                      context: NSManagedObjectContext = CoreDataStack.shared.mainContext){
         guard let bio = hostRepresnetation.bio,
             let identifier = hostRepresnetation.identifier,
             let phone = hostRepresnetation.phone,
             let pic = hostRepresnetation.profilePic,
             let website = hostRepresnetation.website else { return nil }
-        
-        self.init(name: hostRepresnetation.name, username: hostRepresnetation.username, email: hostRepresnetation.email, password: hostRepresnetation.password, bio: bio, identifier: identifier, phone: phone, profilePic: pic, website: website)
+
+        self.init(name: hostRepresnetation.name,
+                  username: hostRepresnetation.username,
+                  email: hostRepresnetation.email,
+                  password: hostRepresnetation.password,
+                  bio: bio,
+                  identifier: identifier,
+                  phone: phone,
+                  profilePic: pic,
+                  website: website)
     }
     
     var hostLogin: HostLogin? {
@@ -62,7 +80,15 @@ extension Host {
             let website = self.website,
             let bio = self.bio,
             let pic = self.profilePic else { return nil }
-        
-        return HostRepresentation(name: name, username: username, email: email, password: password, phone: phone, website: website, bio: bio, profilePic: pic, identifier: self.identifier)
+
+        return HostRepresentation(name: name,
+                                  username: username,
+                                  email: email,
+                                  password: password,
+                                  phone: phone,
+                                  website: website,
+                                  bio: bio,
+                                  profilePic: pic,
+                                  identifier: self.identifier)
     }
 }
