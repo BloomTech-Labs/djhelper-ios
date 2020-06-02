@@ -20,8 +20,7 @@ extension URLSession: NetworkDataLoader {
             response.statusCode <= 199 || response.statusCode >= 300 {
                 print("This is the status code: \(response.statusCode)")
                 completion(nil, response, nil)
-            } 
-            
+            }
             guard let data = possibleData else {
                 completion(nil, nil, possibleError)
                 return

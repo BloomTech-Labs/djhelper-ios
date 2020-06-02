@@ -21,7 +21,17 @@ struct EventAuthRequest: Codable {
     var notes: String?
     var eventId: Int32?
     
-    init(name: String, eventType: String, description: String, date: Date, djId: Int32, locationId: Int32, startTime: Date? = nil, endTime: Date? = nil, imageUrl: URL? = nil, notes: String? = nil, eventId: Int32? = nil) {
+    init(name: String,
+         eventType: String,
+         description: String,
+         date: Date,
+         djId: Int32,
+         locationId: Int32,
+         startTime: Date? = nil,
+         endTime: Date? = nil,
+         imageUrl: URL? = nil,
+         notes: String? = nil,
+         eventId: Int32? = nil) {
         self.name = name
         self.eventType = eventType
         self.description = description

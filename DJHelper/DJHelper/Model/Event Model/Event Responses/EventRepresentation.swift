@@ -34,7 +34,17 @@ struct EventRepresentation: Codable {
         case eventID = "id"
     }
     
-    init(name: String, eventType: String, eventDescription: String, eventDate: String, hostID: Int32, locationID: Int32, startTime: Date? = nil, endTime: Date? = nil, imageURL: URL? = nil, notes: String? = nil, eventID: Int32? = nil){
+    init(name: String,
+         eventType: String,
+         eventDescription: String,
+         eventDate: String,
+         hostID: Int32,
+         locationID: Int32,
+         startTime: Date? = nil,
+         endTime: Date? = nil,
+         imageURL: URL? = nil,
+         notes: String? = nil,
+         eventID: Int32? = nil) {
         self.name = name
         self.eventType = eventType
         self.eventDescription = eventDescription
@@ -43,7 +53,7 @@ struct EventRepresentation: Codable {
         self.locationID = locationID
     }
     
-    //MARK: - CODABLE INITAILIZERS
+    // MARK: - CODABLE INITAILIZERS
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
@@ -58,7 +68,7 @@ struct EventRepresentation: Codable {
         notes = try container.decode(String?.self, forKey: .notes)
         eventID = try container.decode(Int32?.self, forKey: .eventID)
     }
-    
+
     func encode(with encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
