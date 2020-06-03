@@ -82,38 +82,22 @@
             endingLineNumber = "34"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "B9492461-2E5C-42A2-A687-07D76D20E896 - 1101747c38c0845a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "DJHelper.ViewController.viewDidLoad() -&gt; ()"
-                  moduleName = "DJHelper"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mrflowers22/Desktop/Lambda/Lambda%203/Lab/djhelper-ios/DJHelper/DJHelper/View%20Controllers/ViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "35"
-                  endingLineNumber = "35"
-                  offsetFromSymbolStart = "1137">
-               </Location>
-               <Location
-                  uuid = "B9492461-2E5C-42A2-A687-07D76D20E896 - dda22186c2a87697"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;DJHelper.EventRepresentation, DJHelper.EventController.EventErrors&gt;) -&gt; () in DJHelper.ViewController.viewDidLoad() -&gt; ()"
-                  moduleName = "DJHelper"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mrflowers22/Desktop/Lambda/Lambda%203/Lab/djhelper-ios/DJHelper/DJHelper/View%20Controllers/ViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "36"
-                  endingLineNumber = "36"
-                  offsetFromSymbolStart = "153">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "63128B25-79CD-44C8-AA76-1044DB1C60DE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DJHelper/View Controllers/CreateEventViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "tempButton(_:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
