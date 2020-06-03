@@ -32,11 +32,13 @@ class HostEventsTableViewController: UIViewController {
         fetchResultsController = nsfrc
         
         do {
+            fetchResultsController.delegate = self
             try fetchResultsController.performFetch()
             print("performed nsfrc fetch on Event")
         } catch {
              print("Error on line: \(#line) in function: \(#function)\n Readable error: \(error.localizedDescription)\n Technical error: \(error)")
         }
+        
         return fetchResultsController
     }()
     // My plan is to do a fetch request to see if the Host identifier exists in core data.
@@ -88,3 +90,53 @@ extension HostEventsTableViewController: UITableViewDataSource {
         }
     }
 }
+
+extension HostEventsTableViewController: NSFetchedResultsControllerDelegate {
+    //will tell the tableViewController get ready to do something.
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            //there was a new entry so now we need to make a new cell.
+            guard let newIndexPath = newIndexPath else {return}
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        case .delete:
+            guard let indexPath = indexPath else {return}
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        case .move:
+            guard let indexPath = indexPath, let newIndexpath = newIndexPath else {return}
+            tableView.moveRow(at: indexPath, to: newIndexpath)
+        case .update:
+            guard let indexPath = indexPath else {return}
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        @unknown default:
+            fatalError()
+        }
+        
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .insert:
+            let indexSet = IndexSet(integer: sectionIndex)
+            tableView.insertSections(indexSet, with: .automatic)
+        case .delete:
+            let indexSSet = IndexSet(integer: sectionIndex)
+            tableView.deleteSections(indexSSet, with: .automatic)
+        default:
+            break
+        }
+    }
+}
+
