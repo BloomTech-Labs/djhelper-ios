@@ -7,17 +7,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0416FBD2-15F7-4347-9BC7-4878170EA7AE"
+            uuid = "E2FC5BDE-55AE-4233-8C59-22B8C7686D14"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DJHelper/View Controllers/DJRegisterViewController.swift"
+            filePath = "DJHelper/Model/Host Model/Host Controller/HostController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "hostRegister(_:)"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "logIn(with:completion:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E2FC5BDE-55AE-4233-8C59-22B8C7686D14 - a824e5725d7602b4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DJHelper.HostController.logIn(with: DJHelper.Host, completion: (Swift.Result&lt;DJHelper.HostLoginResponse, DJHelper.HostController.HostErrors&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "DJHelper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/craig/Development/Labs/djhelper-ios/DJHelper/DJHelper/Model/Host%20Model/Host%20Controller/HostController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "103"
+                  endingLineNumber = "103"
+                  offsetFromSymbolStart = "1949">
+               </Location>
+               <Location
+                  uuid = "E2FC5BDE-55AE-4233-8C59-22B8C7686D14 - 277cfbf78ffd26d6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in DJHelper.HostController.logIn(with: DJHelper.Host, completion: (Swift.Result&lt;DJHelper.HostLoginResponse, DJHelper.HostController.HostErrors&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "DJHelper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/craig/Development/Labs/djhelper-ios/DJHelper/DJHelper/Model/Host%20Model/Host%20Controller/HostController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "104"
+                  endingLineNumber = "104"
+                  offsetFromSymbolStart = "415">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

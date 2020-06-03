@@ -283,7 +283,6 @@
                                 </state>
                                 <connections>
                                     <action selector="hostLogIn:" destination="bwM-iG-43S" eventType="touchUpInside" id="O28-EL-ha5"/>
-                                    <segue destination="zd1-WG-7mb" kind="show" identifier="SignInSegue" id="nkz-hg-6Mh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A3p-Z9-8TZ">
@@ -345,6 +344,7 @@
                         <outlet property="passwordTextField" destination="fqv-ne-53O" id="NGn-7P-C9E"/>
                         <outlet property="signInButton" destination="Ns1-sx-iRy" id="HyV-eZ-q9d"/>
                         <outlet property="usernameTextField" destination="TJa-gP-sPD" id="PmN-zw-0ba"/>
+                        <segue destination="zd1-WG-7mb" kind="show" identifier="SignInSegue" id="UtX-VA-g8O"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZGA-J8-ai2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -389,7 +389,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="nkz-hg-6Mh"/>
+        <segue reference="UtX-VA-g8O"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="star.fill" catalog="system" width="128" height="116"/>

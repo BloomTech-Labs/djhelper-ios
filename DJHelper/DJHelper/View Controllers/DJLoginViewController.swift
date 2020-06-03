@@ -43,7 +43,7 @@ class DJLoginViewController: UIViewController, UITextFieldDelegate {
         // if username is found, set the currentHost variable to the Host fetched from the fetchRequest.
         // if not found, present an alert and prompt to the registration scene.
         let fetchRequest: NSFetchRequest<Host> = Host.fetchRequest()
-        let predicate = NSPredicate(format: "\(#keyPath(Host.username)) == \(username)")
+        let predicate = NSPredicate(format: "username == %@", username)
         fetchRequest.predicate = predicate
         var fetchedHosts: [Host]?
         
@@ -61,7 +61,7 @@ class DJLoginViewController: UIViewController, UITextFieldDelegate {
             switch result {
             case .success:
                 DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "LogInSegue", sender: self)
+                    self.performSegue(withIdentifier: "SignInSegue", sender: self)
                 }
             case let .failure(error):
                 DispatchQueue.main.async {
