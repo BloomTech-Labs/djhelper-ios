@@ -82,10 +82,20 @@ class DJLoginViewController: UIViewController, UITextFieldDelegate {
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "djRegisterSegue" {
+        switch segue.identifier {
+        case "djRegisterSegue":
             if let djRegisterVC = segue.destination as? DJRegisterViewController {
                 djRegisterVC.hostController = hostController
             }
+        case "SignInSegue":
+            if let barViewControllers = segue.destination as? UITabBarController {
+                if let logInVC = barViewControllers.viewControllers![0] as? HostEventsTableViewController {
+                    logInVC.currentHost = currentHost
+                    logInVC.hostController = hostController
+                }
+            }
+        default:
+            return
         }
     }
     
