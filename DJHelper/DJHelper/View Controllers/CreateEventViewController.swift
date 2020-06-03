@@ -10,6 +10,17 @@ import UIKit
 
 class CreateEventViewController: UIViewController {
 
+    //MARK: - IBOutlets
+    @IBOutlet weak var eventNameTextField: UITextField!
+    @IBOutlet weak var eventDateTextField: UITextField!
+    @IBOutlet weak var descriptionTextField: UITextField!
+    @IBOutlet weak var startTimetextField: UITextField!
+    @IBOutlet weak var endTimeTextField: UITextField!
+    @IBOutlet weak var typeTextField: UITextField!
+    @IBOutlet weak var notesTextField: UITextField!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

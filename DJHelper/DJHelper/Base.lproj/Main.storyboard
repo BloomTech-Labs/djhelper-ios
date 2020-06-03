@@ -196,10 +196,10 @@
             </objects>
             <point key="canvasLocation" x="2263.768115942029" y="318.75"/>
         </scene>
-        <!--View Controller-->
+        <!--Create Event View Controller-->
         <scene sceneID="9np-5s-OAK">
             <objects>
-                <viewController id="fbD-kp-YIW" sceneMemberID="viewController">
+                <viewController id="fbD-kp-YIW" customClass="CreateEventViewController" customModule="DJHelper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BfY-sZ-rRI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -256,6 +256,15 @@
                     <navigationItem key="navigationItem" id="5dU-s6-cAd">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="70M-CT-PUM"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="descriptionTextField" destination="NSv-3O-M45" id="z0i-n7-zwB"/>
+                        <outlet property="endTimeTextField" destination="ydm-1z-lg0" id="bLS-en-5AE"/>
+                        <outlet property="eventDateTextField" destination="BaD-SR-fQG" id="Sfi-hz-ftz"/>
+                        <outlet property="eventNameTextField" destination="gWg-GV-JMQ" id="zg0-Kh-lrX"/>
+                        <outlet property="notesTextField" destination="q97-Ec-eA3" id="cml-8G-pIu"/>
+                        <outlet property="startTimetextField" destination="ffU-ne-HpG" id="AND-Co-jWO"/>
+                        <outlet property="typeTextField" destination="0Wd-hU-MSi" id="H62-mg-wBk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YgQ-wv-773" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
