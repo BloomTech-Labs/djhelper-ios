@@ -22,7 +22,7 @@ class HostEventsTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         print("current host username: \(currentHost?.username)")
         print("token: \(hostController?.bearer?.token)")
 
