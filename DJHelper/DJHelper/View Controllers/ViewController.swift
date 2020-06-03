@@ -14,7 +14,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
 //        let hc = HostController()
-//        let host = Host(name: "test20 ", username: "test20", email: "test20", password: "test20", bio: "test20", identifier: 1, phone: "test20", profilePic: URL(string: "test20")!, website: URL(string: "test20")!)
+//        let host = Host(name: "test20 ", username: "test20",
+//                        email: "test20", password: "test20", bio: "test20",
+//                        identifier: 1, phone: "test20", profilePic: URL(string: "test20")!,
+//                        website: URL(string: "test20")!)
 //                hc.registerHost(with: host) { (result) in
 //                    switch result {
 //                    case .success(let host): print("successful host: \(String(describing: host.name))")
@@ -30,7 +33,11 @@ class ViewController: UIViewController {
         let ec = EventController()
         let date = Date()
 
-        let event = Event(name: "e5", eventType: "e5", eventDescription:"e5" , eventDate: date, hostID: 1, locationID: 1, startTime: date, endTime: Date(), imageURL: URL(string: "e5")!, notes: "e5", eventID: 1)
+        let event = Event(name: "e5", eventType: "e5",
+                          eventDescription:"e5" , eventDate: date,
+                          hostID: 1, locationID: 1, startTime: date,
+                          endTime: Date(), imageURL: URL(string: "e5")!,
+                          notes: "e5", eventID: 1)
 
         ec.authorize(event: event) { (results) in
             switch results {
