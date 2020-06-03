@@ -184,7 +184,7 @@
                     <navigationItem key="navigationItem" id="c7g-Yp-Gzc">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="84H-1f-D8l">
                             <connections>
-                                <segue destination="fbD-kp-YIW" kind="show" id="9Nh-BT-9XY"/>
+                                <segue destination="fbD-kp-YIW" kind="show" identifier="createEventSegue" id="9Nh-BT-9XY"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -203,10 +203,59 @@
                     <view key="view" contentMode="scaleToFill" id="BfY-sZ-rRI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="UZx-FJ-ymN">
+                                <rect key="frame" x="16" y="104" width="382" height="364"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gWg-GV-JMQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BaD-SR-fQG">
+                                        <rect key="frame" x="0.0" y="55" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NSv-3O-M45">
+                                        <rect key="frame" x="0.0" y="110" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Start Time" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ffU-ne-HpG">
+                                        <rect key="frame" x="0.0" y="165" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event End Time" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ydm-1z-lg0">
+                                        <rect key="frame" x="0.0" y="220" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Type" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Wd-hU-MSi">
+                                        <rect key="frame" x="0.0" y="275" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Notes" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q97-Ec-eA3">
+                                        <rect key="frame" x="0.0" y="330" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="UZx-FJ-ymN" firstAttribute="top" secondItem="nBj-aI-ZjO" secondAttribute="top" constant="16" id="1sp-Bo-dan"/>
+                            <constraint firstItem="UZx-FJ-ymN" firstAttribute="leading" secondItem="nBj-aI-ZjO" secondAttribute="leading" constant="16" id="hof-Ex-Zlv"/>
+                            <constraint firstItem="nBj-aI-ZjO" firstAttribute="trailing" secondItem="UZx-FJ-ymN" secondAttribute="trailing" constant="16" id="r8X-9D-gSV"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="nBj-aI-ZjO"/>
                     </view>
-                    <navigationItem key="navigationItem" id="5dU-s6-cAd"/>
+                    <navigationItem key="navigationItem" id="5dU-s6-cAd">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="70M-CT-PUM"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YgQ-wv-773" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
