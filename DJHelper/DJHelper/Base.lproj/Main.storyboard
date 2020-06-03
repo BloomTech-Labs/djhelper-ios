@@ -93,7 +93,7 @@
                                     </attributedString>
                                 </state>
                                 <connections>
-                                    <segue destination="zd1-WG-7mb" kind="show" identifier="LogInSegue" id="bRH-tk-fKf"/>
+                                    <action selector="hostRegister:" destination="lsu-IV-jHp" eventType="touchUpInside" id="iyj-Ut-9lV"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -129,6 +129,7 @@
                         <outlet property="emailTextField" destination="YwL-S3-mlk" id="Hv4-sa-z0g"/>
                         <outlet property="passwordTextField" destination="Qbh-9g-OFn" id="3Y5-i2-LbN"/>
                         <outlet property="usernameTextField" destination="WqQ-cK-SeN" id="hMh-tZ-pH2"/>
+                        <segue destination="zd1-WG-7mb" kind="show" identifier="LogInSegue" id="vSp-NC-SYN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e47-Dt-ZB0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -250,7 +251,7 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-Mail" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TJa-gP-sPD">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TJa-gP-sPD">
                                 <rect key="frame" x="40" y="256" width="334" height="34"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
@@ -281,6 +282,7 @@
                                     </attributedString>
                                 </state>
                                 <connections>
+                                    <action selector="hostLogIn:" destination="bwM-iG-43S" eventType="touchUpInside" id="O28-EL-ha5"/>
                                     <segue destination="zd1-WG-7mb" kind="show" identifier="SignInSegue" id="nkz-hg-6Mh"/>
                                 </connections>
                             </button>
@@ -340,9 +342,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="BOh-Ff-nyj"/>
                     <connections>
-                        <outlet property="emailTextField" destination="TJa-gP-sPD" id="yed-VI-QTD"/>
                         <outlet property="passwordTextField" destination="fqv-ne-53O" id="NGn-7P-C9E"/>
                         <outlet property="signInButton" destination="Ns1-sx-iRy" id="HyV-eZ-q9d"/>
+                        <outlet property="usernameTextField" destination="TJa-gP-sPD" id="PmN-zw-0ba"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZGA-J8-ai2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -373,6 +375,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="tYS-5k-KXW"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6Mq-se-h6L">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -386,7 +389,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="bRH-tk-fKf"/>
+        <segue reference="vSp-NC-SYN"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="star.fill" catalog="system" width="128" height="116"/>

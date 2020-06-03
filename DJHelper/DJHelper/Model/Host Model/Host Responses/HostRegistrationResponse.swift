@@ -17,7 +17,7 @@ struct HostRegistrationResponse: Codable {
     var bio: String?
     var profilePic: URL?
     var identifier: Int32
-    
+
     enum HostRegistrationResponseCodingKeys: String, CodingKey {
         case username
         case name
@@ -28,15 +28,15 @@ struct HostRegistrationResponse: Codable {
         case profilePic = "profile_pic_url"
         case identifier = "id"
     }
-    
+
     init(name: String, username: String, email: String, phone: String? = nil, website: URL? = nil, bio: String? = nil, profilePic: URL? = nil, identifier: Int32){
         self.name = name
         self.username = username
         self.email = email
         self.identifier =  identifier
     }
-    
-//    MARK: - CODABLE INITAILIZERS
+
+    // MARK: - CODABLE INITAILIZERS
      init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: HostRegistrationResponseCodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
@@ -48,7 +48,7 @@ struct HostRegistrationResponse: Codable {
         profilePic = try container.decode(URL?.self, forKey: .profilePic)
         identifier = try container.decode(Int32.self, forKey: .identifier)
     }
-    
+
     func encode(with encoder: Encoder) throws {
         var container = encoder.container(keyedBy: HostRegistrationResponseCodingKeys.self)
         try container.encode(name, forKey: .name)
