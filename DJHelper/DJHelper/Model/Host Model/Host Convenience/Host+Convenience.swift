@@ -12,15 +12,15 @@ import CoreData
 extension Host {
 
     // MARK: - CONVENIENCE INITIALIZERS
-    convenience init (name: String,
+    convenience init (name: String? = "temp",
                       username: String,
                       email: String,
                       password: String,
-                      bio: String,
-                      identifier: Int32,
-                      phone: String,
-                      profilePic: URL,
-                      website: URL,
+                      bio: String? = "",
+                      identifier: Int32?,
+                      phone: String? = "",
+                      profilePic: URL? = nil,
+                      website: URL? = nil,
                       context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         self.init(context: context)
         self.name = name
@@ -28,16 +28,16 @@ extension Host {
         self.email = email
         self.password = password
         self.bio = bio
-        self.identifier = identifier
+        self.identifier = identifier ?? 0
         self.phone = phone
         self.profilePic = profilePic
         self.website = website
     }
-    
+
     //HostRepresentation -> Host
     @discardableResult
     convenience init?(hostRepresnetation: HostRepresentation,
-                      context: NSManagedObjectContext = CoreDataStack.shared.mainContext){
+                      context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         guard let bio = hostRepresnetation.bio,
             let identifier = hostRepresnetation.identifier,
             let phone = hostRepresnetation.phone,
@@ -54,22 +54,22 @@ extension Host {
                   profilePic: pic,
                   website: website)
     }
-    
+
     var hostLogin: HostLogin? {
         guard let username = self.username,
             let password = self.password else { return nil }
         return HostLogin(username: username, password: password)
     }
-    
+
     var hostRegistration: HostRegistration? {
         guard let name = self.name,
             let username = self.username,
             let email = self.email,
             let password = self.password else { return nil }
-        
+
         return HostRegistration(name: name, username: username, email: email, password: password)
     }
-    
+
     //Host -> HostRepresentation
     var hostToHostRep: HostRepresentation? {
         guard let name = self.name,

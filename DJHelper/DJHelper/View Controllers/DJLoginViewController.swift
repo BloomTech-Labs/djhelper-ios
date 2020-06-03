@@ -13,7 +13,7 @@ class DJLoginViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Properties
     var hostController = HostController()
     var currentHost: Host?
-    
+
     // MARK: - Outlets
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -24,10 +24,10 @@ class DJLoginViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         signInButton.layer.cornerRadius = 25
-        
+
         let tapToDismiss = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tapToDismiss)
-        
+
         updateViews()
     }
     
@@ -42,10 +42,10 @@ class DJLoginViewController: UIViewController, UITextFieldDelegate {
         // handle possible error
         // transition to primary view controller
     }
-    
+
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "DJRegisterSegue" {
+        if segue.identifier == "djRegisterSegue" {
             if let djRegisterVC = segue.destination as? DJRegisterViewController {
                 djRegisterVC.hostController = hostController
             }
@@ -55,11 +55,11 @@ class DJLoginViewController: UIViewController, UITextFieldDelegate {
     func updateViews() {
         guard isViewLoaded else { return }
         guard let host = currentHost else { return }
-        
+
         usernameTextField.text = host.username
         passwordTextField.text = host.password
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
