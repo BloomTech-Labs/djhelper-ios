@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import CoreData
+
 class EventController {
     enum EventErrors: Error {
         case authorizationError(Error)
