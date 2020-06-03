@@ -72,6 +72,8 @@ class DJRegisterViewController: UIViewController, UITextFieldDelegate {
 
                 self.currentHost?.identifier = newHost.identifier
 
+                try? CoreDataStack.shared.mainContext.save()
+
                 // if registration is successful, present alert with "login" button and "cancel" button
                 // if login is successful, transition to hostEventsTableViewController
                 // if unsuccessful, present alert with failure notice and return to screen
@@ -91,7 +93,7 @@ class DJRegisterViewController: UIViewController, UITextFieldDelegate {
                                 DispatchQueue.main.async {
                                     let alertController = UIAlertController(title: "LogIn Error",
                                                                             message: "There was an error signing in with message: \(error). Please verify and try again.",
-                                                                            preferredStyle: .alert)
+                                        preferredStyle: .alert)
                                     let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                                     alertController.addAction(alertAction)
                                     self.present(alertController, animated: true)

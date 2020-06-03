@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class DJLoginViewController: UIViewController, UITextFieldDelegate {
 
@@ -38,9 +39,45 @@ class DJLoginViewController: UIViewController, UITextFieldDelegate {
             let password = passwordTextField.text,
             !password.isEmpty else { return }
         
+        // create fetchRequest to look for a Host object with this username from CoreData.
+        // if username is found, set the currentHost variable to the Host fetched from the fetchRequest.
+        // if not found, present an alert and prompt to the registration scene.
+        let fetchRequest: NSFetchRequest<Host> = Host.fetchRequest()
+        let predicate = NSPredicate(format: "\(#keyPath(Host.username)) == \(username)")
+        fetchRequest.predicate = predicate
+        var fetchedHosts: [Host]?
+        
+        let moc = CoreDataStack.shared.mainContext
+        moc.performAndWait {
+            fetchedHosts = try? fetchRequest.execute()
+        }
+        if let host = fetchedHosts?.first {
+
+            self.currentHost = host
         // call hostLogIn network function
         // handle possible error
         // transition to primary view controller
+        hostController.logIn(with: host) { (result) in
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "LogInSegue", sender: self)
+                }
+            case let .failure(error):
+                DispatchQueue.main.async {
+                    let alertController = UIAlertController(title: "LogIn Error",
+                                                            message: "There was an error signing in with message: \(error). Please verify and try again.",
+                        preferredStyle: .alert)
+                    let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alertController.addAction(alertAction)
+                    self.present(alertController, animated: true)
+                }
+                return
+            }
+        }
+        } else {
+            // alert saying that no such username was found.
+        }
     }
 
     // MARK: - Navigation
