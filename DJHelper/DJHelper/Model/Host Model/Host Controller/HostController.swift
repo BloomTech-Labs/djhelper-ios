@@ -118,9 +118,10 @@ class HostController {
 
             do {
                 let hostLoginResponse = try JSONDecoder().decode(HostLoginResponse.self, from: data)
+                self.bearer = try JSONDecoder().decode(Bearer.self, from: data)
 
                 //assign the bearer or token
-                self.bearer?.token = hostLoginResponse.token
+//                self.bearer?.token = hostLoginResponse.token
                 print("Token recieved after login from HostController: \(self.bearer?.token)")
 
                 completion(.success(hostLoginResponse))
