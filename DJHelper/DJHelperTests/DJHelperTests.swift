@@ -20,8 +20,8 @@ class DJHelperTests: XCTestCase {
     // TRANSFER TO UI TEST Register with different password fields should return nothing (UI alert controller appears)
     // DONE Register with an existing username should return an error: 409 response
     // TRANSFER TO UI TEST Register with empty text field should return nothing
-    // Register with a unique username and matching passwords should not return an error
-    // ...and continuing to sign in should not return an error.
+    // DONE Register with a unique username and matching passwords should not return an error
+    // TRANSFER TO UI TEST ...and continuing to sign in should not return an error.
 
     func testNetworkCallValidLogIn() {
         let hostController = HostController()
@@ -83,27 +83,48 @@ class DJHelperTests: XCTestCase {
         }
         wait(for: [duplicateRegistrationExpectation], timeout: 3)
     }
+
+    func testRegisterValidNewUser() {
+        let hostController = HostController()
+
+        let testHost = Host(username: "BMac1", email: "bmac@funkybunch.com", password: "ciao", identifier: 999)
+
+        let validRegistrationExpectation = expectation(description: "Wait for registration response")
+
+        hostController.registerHost(with: testHost) { (result) in
+            validRegistrationExpectation.fulfill()
+
+            switch result {
+            case let .success(response):
+                XCTAssertNotNil(response)
+                XCTAssertEqual(response.email, "bmac@funkybunch.com")
+                XCTAssert(response.identifier < Int32(999))
+            case let .failure(error):
+                XCTAssertNil(error)
+            }
+        }
+        wait(for: [validRegistrationExpectation], timeout: 3)
+    }
 }
 
 class MockLoader: NetworkDataLoader {
-    
+
     var data: Data?
     var error: Error?
     var response: URLResponse?
-    
+
     func loadData(from request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
         DispatchQueue.global().async {
             completion(self.data, self.response, self.error)
         }
     }
-    
+
     func loadData(from url: URL, completion: @escaping (Data?, Error?) -> Void) {
         DispatchQueue.global().async {
             completion(self.data, self.error)
         }
     }
 }
-
 
 // MARK: - Mock Data
 /*
@@ -122,7 +143,6 @@ let validNewHostRegistrationResponse = """
   "profile_pic_url": null
 }
 """.data(using: .utf8)!
-
 
 /*
  INPUT BMac ciao
