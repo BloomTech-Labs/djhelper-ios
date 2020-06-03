@@ -15,11 +15,11 @@ class DJHelperTests: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
 
-    // Log in with a known existing host should not return error
-    // Log in with a non-existing host should return an error: 401 response
-    // Register with different password fields should return and error
-    // Register with an existing username should return an error: 409 response
-    // Register with empty text field should return nothing
+    // DONE Log in with a known existing host should not return error
+    // DONE Log in with a non-existing host should return an error: 401 response
+    // TRANSFER TO UI TEST Register with different password fields should return nothing (UI alert controller appears)
+    // DONE Register with an existing username should return an error: 409 response
+    // TRANSFER TO UI TEST Register with empty text field should return nothing
     // Register with a unique username and matching passwords should not return an error
     // ...and continuing to sign in should not return an error.
 
@@ -34,14 +34,54 @@ class DJHelperTests: XCTestCase {
             hostLoginExpectation.fulfill()
 
             switch result {
-            case let .success(response):
-                XCTAssertNotNil(response)
-                XCTAssertEqual(response.username, "BMac")
+            case let .success(hostRegistrationResponse):
+                XCTAssertNotNil(hostRegistrationResponse)
+                XCTAssertEqual(hostRegistrationResponse.username, "BMac")
             case let .failure(error):
                 XCTAssertNil(error)
             }
         }
         wait(for: [hostLoginExpectation], timeout: 3)
+    }
+
+    func testNetworkCallInvalidLogIn() {
+        let hostController = HostController()
+
+        let testHost = Host(username: "BMaco", email: "bmac@funkybunch.com", password: "ciao", identifier: 64)
+
+        let hostLoginExpectation = expectation(description: "Wait for log in to complete")
+
+        hostController.logIn(with: testHost) { (result) in
+            hostLoginExpectation.fulfill()
+
+            switch result {
+            case let .success(response):
+                XCTAssertNil(response)
+            case let .failure(error):
+                XCTAssertNotNil(error)
+            }
+        }
+        wait(for: [hostLoginExpectation], timeout: 3)
+    }
+
+    func testRegisterWithExistingUsername() {
+        let hostController = HostController()
+        
+        let testHost = Host(username: "BMac", email: "bmac@funkybunch.com", password: "ciao", identifier: 64)
+
+        let duplicateRegistrationExpectation = expectation(description: "Wait for registration response")
+
+        hostController.registerHost(with: testHost) { (result) in
+            duplicateRegistrationExpectation.fulfill()
+
+            switch result {
+            case let .success(response):
+                XCTAssertNil(response)
+            case let .failure(error):
+                XCTAssertNotNil(error)
+            }
+        }
+        wait(for: [duplicateRegistrationExpectation], timeout: 3)
     }
 }
 
