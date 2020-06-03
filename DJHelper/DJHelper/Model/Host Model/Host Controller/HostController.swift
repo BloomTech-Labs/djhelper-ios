@@ -97,8 +97,6 @@ class HostController {
             print("Error encoding HostLogin on line: \(#line) in function: \(#function)\n Readable error: \(error.localizedDescription)\n Technical error: \(error)")
         }
 
-        print("This is the url for posting: \(registrationURL.absoluteString)")
-
         //urlsession.shared.dataTask
         dataLoader.loadData(from: urlRequest) { (data, response, error) in
             if let response = response as? HTTPURLResponse {
