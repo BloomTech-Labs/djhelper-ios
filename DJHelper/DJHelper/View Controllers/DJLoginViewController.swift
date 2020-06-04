@@ -89,9 +89,11 @@ class DJLoginViewController: UIViewController, UITextFieldDelegate {
             }
         case "SignInSegue":
             if let barViewControllers = segue.destination as? UITabBarController {
-                if let logInVC = barViewControllers.viewControllers![0] as? HostEventsTableViewController {
-                    logInVC.currentHost = currentHost
-                    logInVC.hostController = hostController
+                if let logInNC = barViewControllers.viewControllers![0] as? UINavigationController {
+                    if let logInVC = logInNC.viewControllers.first as? HostEventsTableViewController {
+                        logInVC.currentHost = currentHost
+                        logInVC.hostController = hostController
+                    }
                 }
             }
         default:
