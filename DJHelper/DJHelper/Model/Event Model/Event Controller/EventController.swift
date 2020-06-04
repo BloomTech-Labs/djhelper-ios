@@ -17,11 +17,17 @@ class EventController {
         case decodeError(Error)
         case otherError(Error)
     }
-    private let baseURL = URL(string: "https://api.dj-helper.com/api/auth/event/")!
+    
+    private let baseURL = URL(string: "https://api.dj-helper.com/api/")!
     let dataLoader: NetworkDataLoader
     
     init(dataLoader: NetworkDataLoader = URLSession.shared) {
         self.dataLoader = dataLoader
+    }
+    
+    //MARK: - FETCH ALL EVENTS
+    func fetchAllEventsFromServer(completion: @escaping(Result<[Event], Error>) -> Void){
+//        let url = base
     }
     
     // MARK: - AUTHORIZE AN EVENT
@@ -29,7 +35,7 @@ class EventController {
     func authorize(event: Event, completion: @escaping (Result<EventRepresentation, EventErrors>) -> Void) {
         guard let eventToAuthorize = event.eventAuthorizationRep else { return }
 //        guard let eventAuthRequest = event.eventAuthRequest else { return }
-        
+        let url = baseURL.appendingPathComponent("auth").appendingPathComponent("event")
         var urlRequest = URLRequest(url: baseURL)
         urlRequest.httpMethod = HTTPMethod.post.rawValue
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
