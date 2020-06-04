@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 class DJRegisterViewController: UIViewController, UITextFieldDelegate {
-    
+
     // MARK: - Properties
     var hostController: HostController!
     var currentHost: Host?

@@ -30,7 +30,7 @@ class CreateEventViewController: UIViewController {
     @IBAction func saveEvent(_ sender: UIBarButtonItem) {
         //        let text = unwrapAllTextFields()
     }
-    
+
     @IBAction func tempButton(_ sender: UIButton) {
         print("button pressed: \(sender)")
 
@@ -86,7 +86,7 @@ class CreateEventViewController: UIViewController {
             }
         }
     }
-    
+
     /*
      // MARK: - Navigation
      

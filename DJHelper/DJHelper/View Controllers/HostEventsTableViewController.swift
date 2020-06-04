@@ -10,24 +10,24 @@ import UIKit
 import CoreData
 
 class HostEventsTableViewController: UIViewController {
-    
+
     var hostController: HostController?
     var currentHost: Host?
-    
+
     @IBOutlet var tableView: UITableView!
 
     // MARK: - NSFETCHEDRESULTSCONTROLLER CONFIGURATION
     lazy var fetchedResultsController: NSFetchedResultsController<Event> = {
-        
+
         var fetchResultsController: NSFetchedResultsController<Event>
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
-        
+
         //TODO: - FIX LATER
         let fetchRequestPredicate = NSPredicate(format: "hostID == %@", 1)
         let dateSortDescriptor = NSSortDescriptor(key: "eventDate", ascending: true)
         fetchRequest.predicate = fetchRequestPredicate
         fetchRequest.sortDescriptors = [dateSortDescriptor]
-        
+
         //create nsfrc
         let nsfrc = NSFetchedResultsController(fetchRequest: fetchRequest,
                     managedObjectContext: CoreDataStack.shared.mainContext,
@@ -46,17 +46,17 @@ class HostEventsTableViewController: UIViewController {
                 Readable error: \(error.localizedDescription)\n Technical error: \(error)
                 """)
         }
-    
+
         return fetchResultsController
     }()
     // My plan is to do a fetch request to see if the Host identifier exists in core data.
     // If it does not exist, we will create a host object and add it to core data.
     // We will then create a fetched results controller to get the results for the table view data source.
-    
+
     /// <#Description#>
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
 //
 //        let host = Host(name: "test20", username: "test20",
 //                        email: "test20", password: "test20", bio: "test20",

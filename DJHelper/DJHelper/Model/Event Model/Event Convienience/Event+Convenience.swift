@@ -37,7 +37,7 @@ extension Event {
         self.notes = notes
         self.eventID = eventID
     }
-    
+
     //EventRepresentation -> Event
     convenience init?(eventRepresentation: EventRepresentation,
                       context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
@@ -47,7 +47,7 @@ extension Event {
             let notes = eventRepresentation.notes,
             let convertedDate = eventRepresentation.eventDate.dateFromString(),
             let eventID = eventRepresentation.eventID else { return nil }
-        
+
         self.init(name: eventRepresentation.name,
                   eventType: eventRepresentation.eventType,
                   eventDescription: eventRepresentation.eventDescription,
@@ -60,7 +60,7 @@ extension Event {
                   notes: notes,
                   eventID: eventID)
     }
-    
+
     //Event -> EventRepresentation
     var eventAuthorizationRep: EventRepresentation? {
         guard let name = self.name,

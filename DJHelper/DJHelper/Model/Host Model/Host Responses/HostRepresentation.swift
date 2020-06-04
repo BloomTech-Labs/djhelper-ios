@@ -45,7 +45,7 @@ struct HostRepresentation: Codable {
         self.email = email
         self.password = password
     }
-    
+
     // MARK: - CODABLE INITAILIZERS
      init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: HostCodingKeys.self)
@@ -59,7 +59,7 @@ struct HostRepresentation: Codable {
         profilePic = try container.decode(URL?.self, forKey: .profilePic)
         identifier = try container.decode(Int32.self, forKey: .identifier)
     }
-    
+
     func encode(with encoder: Encoder) throws {
         var container = encoder.container(keyedBy: HostCodingKeys.self)
         try container.encode(name, forKey: .name)

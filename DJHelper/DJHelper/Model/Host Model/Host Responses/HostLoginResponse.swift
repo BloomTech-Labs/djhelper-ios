@@ -46,7 +46,7 @@ struct HostLoginResponse: Codable {
         self.identifier =  identifier
         self.token = token
     }
-    
+
     // MARK: - CODABLE INITAILIZERS
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: HostLoginResponseCodingKeys.self)

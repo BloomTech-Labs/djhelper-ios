@@ -33,7 +33,7 @@ struct EventRepresentation: Codable {
         case notes
         case eventID = "id"
     }
-    
+
     init(name: String,
          eventType: String,
          eventDescription: String,
@@ -52,7 +52,7 @@ struct EventRepresentation: Codable {
         self.hostID = hostID
         self.locationID = locationID
     }
-    
+
     // MARK: - CODABLE INITAILIZERS
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
