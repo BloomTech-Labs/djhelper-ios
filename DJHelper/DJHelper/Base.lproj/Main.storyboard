@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9du-3N-F1H">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8zz-93-Oy1">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -136,7 +136,7 @@
             </objects>
             <point key="canvasLocation" x="-252" y="856"/>
         </scene>
-        <!--Events-->
+        <!--Host Events Table View Controller-->
         <scene sceneID="rky-ID-7MU">
             <objects>
                 <viewController id="v01-Ne-NHb" customClass="HostEventsTableViewController" customModule="DJHelper" customModuleProvider="target" sceneMemberID="viewController">
@@ -145,7 +145,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ejy-vK-cKC">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EventCell" textLabel="Ubi-TV-b6a" style="IBUITableViewCellStyleDefault" id="WLv-8s-4Yt">
@@ -181,15 +181,105 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Yko-ze-pUB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Events" image="star.fill" catalog="system" id="b4g-8X-MvP" userLabel="Events"/>
-                    <navigationItem key="navigationItem" id="c7g-Yp-Gzc"/>
+                    <navigationItem key="navigationItem" id="c7g-Yp-Gzc">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="84H-1f-D8l">
+                            <connections>
+                                <segue destination="fbD-kp-YIW" kind="show" identifier="createEventSegue" id="9Nh-BT-9XY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="ejy-vK-cKC" id="uHK-FM-0vX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GEw-NK-IoI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1354" y="319"/>
+            <point key="canvasLocation" x="2263.768115942029" y="318.75"/>
+        </scene>
+        <!--Create Event View Controller-->
+        <scene sceneID="9np-5s-OAK">
+            <objects>
+                <viewController id="fbD-kp-YIW" customClass="CreateEventViewController" customModule="DJHelper" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BfY-sZ-rRI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="UZx-FJ-ymN">
+                                <rect key="frame" x="16" y="104" width="382" height="415"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gWg-GV-JMQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BaD-SR-fQG">
+                                        <rect key="frame" x="0.0" y="55" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NSv-3O-M45">
+                                        <rect key="frame" x="0.0" y="110" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Start Time" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ffU-ne-HpG">
+                                        <rect key="frame" x="0.0" y="165" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event End Time" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ydm-1z-lg0">
+                                        <rect key="frame" x="0.0" y="220" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Type" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Wd-hU-MSi">
+                                        <rect key="frame" x="0.0" y="275" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Notes" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q97-Ec-eA3">
+                                        <rect key="frame" x="0.0" y="330" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AmJ-AX-PIK">
+                                        <rect key="frame" x="0.0" y="385" width="382" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="tempButton:" destination="fbD-kp-YIW" eventType="touchUpInside" id="u5d-nJ-het"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="UZx-FJ-ymN" firstAttribute="top" secondItem="nBj-aI-ZjO" secondAttribute="top" constant="16" id="1sp-Bo-dan"/>
+                            <constraint firstItem="UZx-FJ-ymN" firstAttribute="leading" secondItem="nBj-aI-ZjO" secondAttribute="leading" constant="16" id="hof-Ex-Zlv"/>
+                            <constraint firstItem="nBj-aI-ZjO" firstAttribute="trailing" secondItem="UZx-FJ-ymN" secondAttribute="trailing" constant="16" id="r8X-9D-gSV"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="nBj-aI-ZjO"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="5dU-s6-cAd">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="70M-CT-PUM">
+                            <connections>
+                                <action selector="saveEvent:" destination="fbD-kp-YIW" id="5PM-jZ-CZ6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="descriptionTextField" destination="NSv-3O-M45" id="z0i-n7-zwB"/>
+                        <outlet property="endTimeTextField" destination="ydm-1z-lg0" id="bLS-en-5AE"/>
+                        <outlet property="eventDateTextField" destination="BaD-SR-fQG" id="Sfi-hz-ftz"/>
+                        <outlet property="eventNameTextField" destination="gWg-GV-JMQ" id="zg0-Kh-lrX"/>
+                        <outlet property="notesTextField" destination="q97-Ec-eA3" id="cml-8G-pIu"/>
+                        <outlet property="startTimetextField" destination="ffU-ne-HpG" id="AND-Co-jWO"/>
+                        <outlet property="typeTextField" destination="0Wd-hU-MSi" id="H62-mg-wBk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YgQ-wv-773" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3123" y="319"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -204,7 +294,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="626.08695652173913" y="95.758928571428569"/>
+            <point key="canvasLocation" x="-3019" y="96"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="Z9v-WB-yCC">
@@ -380,12 +470,31 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="v01-Ne-NHb" kind="relationship" relationship="viewControllers" id="Ug6-C5-i4T"/>
+                        <segue destination="8zz-93-Oy1" kind="relationship" relationship="viewControllers" id="Ug6-C5-i4T"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gN5-dD-GuV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="573.91304347826087" y="799.55357142857144"/>
+            <point key="canvasLocation" x="517" y="856"/>
+        </scene>
+        <!--Events-->
+        <scene sceneID="9Pn-27-zPp">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8zz-93-Oy1" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Events" image="star.fill" catalog="system" id="b4g-8X-MvP" userLabel="Events"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hn9-Bk-mRp">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="v01-Ne-NHb" kind="relationship" relationship="rootViewController" id="gKh-un-a1t"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y9V-lC-KcB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1353.6231884057972" y="318.75"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

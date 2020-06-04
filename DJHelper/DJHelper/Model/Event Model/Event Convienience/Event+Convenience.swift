@@ -17,12 +17,12 @@ extension Event {
                      eventDescription: String,
                      eventDate: Date,
                      hostID: Int32,
-                     locationID: Int32,
+                     locationID: Int32?,
                      startTime: Date,
                      endTime: Date,
-                     imageURL: URL,
+                     imageURL: URL?,
                      notes: String,
-                     eventID: Int32,
+                     eventID: Int32?,
                      context: NSManagedObjectContext = CoreDataStack.shared.mainContext){
         self.init(context: context)
         self.name = name
