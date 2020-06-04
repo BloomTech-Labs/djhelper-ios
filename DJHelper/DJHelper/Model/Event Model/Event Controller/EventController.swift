@@ -25,9 +25,9 @@ class EventController {
     init(dataLoader: NetworkDataLoader = URLSession.shared) {
         self.dataLoader = dataLoader
     }
-    
-    //MARK: - FETCH ALL EVENTS
-    func fetchAllEventsFromServer(completion: @escaping(Result<[Event], EventErrors>) -> Void){
+
+    // MARK: - FETCH ALL EVENTS
+    func fetchAllEventsFromServer(completion: @escaping(Result<[Event], EventErrors>) -> Void) {
         let url = baseURL.appendingPathComponent("events")
         let urlRequest = URLRequest(url: url)
         
@@ -37,10 +37,13 @@ class EventController {
             }
             
             if let error = error {
-                print("Error: \(error.localizedDescription) on line \(#line) in function: \(#function)\n Technical error: \(error)")
+                print("""
+                    Error: \(error.localizedDescription) on line \(#line)
+                    in function: \(#function)\n Technical error: \(error)
+                    """)
                 completion(.failure(.otherError(error)))
             }
-           
+
             guard let data = data else {
                 print("Error on line: \(#line) in function: \(#function)")
                 completion(.failure(.noDataError))
@@ -60,40 +63,49 @@ class EventController {
                      print("Error- no cd or server events on line: \(#line) in function: \(#function)\n")
                     completion(.failure(.noEventsInServerOrCoreData))
                 }
-                
+
             } catch {
-                 print("Error on line: \(#line) in function: \(#function)\n Readable error: \(error.localizedDescription)\n Technical error: \(error)")
+                 print("""
+                    Error on line: \(#line) in function: \(#function)\n
+                    Readable error: \(error.localizedDescription)\n Technical error: \(error)
+                    """)
                 completion(.failure(.decodeError(error)))
             }
         }
     }
-    
+
     func compareServerEvents(_ eventRepresentationArray: [EventRepresentation]) -> [Event]? {
-        //TODO: - FIX LATER
+        // TODO: - FIX LATER
         let eventsWithCurrentHostIDs = eventRepresentationArray.filter { $0.hostID == 1 }
-        
+
         //check core data
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
-        
-         //TODO: - FIX LATER
+
+         // TODO: - FIX LATER
         let predicate = NSPredicate(format: "hostID == %@", 1)
         fetchRequest.predicate = predicate
-        
+
         var placeHolderArray: [Event] = []
         
         do {
             let eventsInCoreData = try CoreDataStack.shared.mainContext.fetch(fetchRequest)
             print("events in coreDataArray's count: \(eventsInCoreData.count)")
-            
+
             //loop
             for event in eventsInCoreData {
-                placeHolderArray = eventsWithCurrentHostIDs.filter { $0.name != event.name }.compactMap { Event(eventRepresentation: $0) }
+            placeHolderArray = eventsWithCurrentHostIDs.filter {
+                $0.name != event.name }.compactMap {
+                Event(eventRepresentation: $0)
+                }
             }
-            
+
             return placeHolderArray
-            
-        } catch  {
-             print("Error on line: \(#line) in function: \(#function)\n Readable error: \(error.localizedDescription)\n Technical error: \(error)")
+
+        } catch {
+            print("""
+                Error on line: \(#line) in function: \(#function)\n
+                Readable error: \(error.localizedDescription)\n Technical error: \(error)
+                """)
             return []
         }
     }
@@ -103,7 +115,7 @@ class EventController {
     func authorize(event: Event, completion: @escaping (Result<EventRepresentation, EventErrors>) -> Void) {
         guard let eventToAuthorize = event.eventAuthorizationRep else { return }
 //        guard let eventAuthRequest = event.eventAuthRequest else { return }
-        
+
         let url = baseURL.appendingPathComponent("auth").appendingPathComponent("event")
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = HTTPMethod.post.rawValue
@@ -112,11 +124,11 @@ class EventController {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
 //        encoder.keyEncodingStrategy = .convertToSnakeCase
-        
+
         do {
             urlRequest.httpBody = try encoder.encode(eventToAuthorize)
         } catch {
-            print("Error on line: \(#line) in function: \(#function)\n Readable error: \(error.localizedDescription)\n Technical error: \(error)")
+            print("Error in func: \(#function)\n error: \(error.localizedDescription)\n Technical error: \(error)")
             completion(.failure(.encodeError(error)))
             return
         }
@@ -128,11 +140,11 @@ class EventController {
             }
 
             if let error = error {
-                print("Error: \(error.localizedDescription) on line \(#line) in function: \(#function)\n Technical error: \(error)")
+               print("Error in func: \(#function)\n error: \(error.localizedDescription)\n Technical error: \(error)")
                 completion(.failure(.otherError(error)))
                 return
             }
-        
+
             guard let data = data else {
                 print("Error on line: \(#line) in function: \(#function)")
                 completion(.failure(.noDataError))
@@ -147,7 +159,7 @@ class EventController {
                 print("date from eventRep: \(eventRep.eventDate)")
                 completion(.success(eventRep))
             } catch {
-                 print("Error on line: \(#line) in function: \(#function)\n Readable error: \(error.localizedDescription)\n Technical error: \(error)")
+                print("Error in func: \(#function)\n error: \(error.localizedDescription)\n Technical error: \(error)")
                 completion(.failure(.decodeError(error)))
             }
         }

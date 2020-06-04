@@ -18,7 +18,7 @@ struct HostRepresentation: Codable {
     var bio: String?
     var profilePic: URL?
     var identifier: Int32?
-    
+
     enum HostCodingKeys: String, CodingKey {
         case username
         case name
@@ -30,15 +30,23 @@ struct HostRepresentation: Codable {
         case profilePic = "profile_pic_url"
         case identifier = "id"
     }
-    
-    init(name: String, username: String, email: String, password: String, phone: String? = nil, website: URL? = nil, bio: String? = nil, profilePic: URL? = nil, identifier: Int32? = nil){
+
+    init(name: String,
+         username: String,
+         email: String,
+         password: String,
+         phone: String? = nil,
+         website: URL? = nil,
+         bio: String? = nil,
+         profilePic: URL? = nil,
+         identifier: Int32? = nil) {
         self.name = name
         self.username = username
         self.email = email
         self.password = password
     }
     
-//    MARK: - CODABLE INITAILIZERS
+    // MARK: - CODABLE INITAILIZERS
      init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: HostCodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
@@ -65,6 +73,3 @@ struct HostRepresentation: Codable {
         try container.encode(identifier, forKey: .identifier)
     }
 }
-
-
-

@@ -23,7 +23,7 @@ extension Event {
                      imageURL: URL,
                      notes: String,
                      eventID: Int32,
-                     context: NSManagedObjectContext = CoreDataStack.shared.mainContext){
+                     context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         self.init(context: context)
         self.name = name
         self.eventType = eventType
@@ -39,7 +39,8 @@ extension Event {
     }
     
     //EventRepresentation -> Event
-    convenience init?(eventRepresentation: EventRepresentation, context: NSManagedObjectContext = CoreDataStack.shared.mainContext){
+    convenience init?(eventRepresentation: EventRepresentation,
+                      context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         guard let startTime = eventRepresentation.startTime,
             let endTime = eventRepresentation.endTime,
             let imageURL = eventRepresentation.imageURL,
@@ -66,7 +67,7 @@ extension Event {
             let eventType = self.eventType,
             let description = self.eventDescription,
             let eventDate = self.eventDate else { return nil }
-        
+
         return EventRepresentation(name: name,
                                    eventType: eventType,
                                    eventDescription: description,
@@ -75,14 +76,19 @@ extension Event {
                                    locationID: self.locationID,
                                    eventID: self.eventID)
     }
-    
+
     //Event -> EventAuthRequest
     var eventAuthRequest: EventAuthRequest? {
         guard let name = self.name,
              let eventType = self.eventType,
              let description = self.eventDescription,
              let eventDate = self.eventDate else { return nil }
-        
-        return EventAuthRequest(name: name, eventType: eventType, description: description, date: eventDate, djId: self.hostID, locationId: self.locationID)
+
+        return EventAuthRequest(name: name,
+                                eventType: eventType,
+                                description: description,
+                                date: eventDate,
+                                djId: self.hostID,
+                                locationId: self.locationID)
     }
 }

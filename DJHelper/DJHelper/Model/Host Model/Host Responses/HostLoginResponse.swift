@@ -18,7 +18,7 @@ struct HostLoginResponse: Codable {
     var profilePic: URL?
     var identifier: Int32
     var token: String
-    
+
     enum HostLoginResponseCodingKeys: String, CodingKey {
         case username
         case name
@@ -30,8 +30,16 @@ struct HostLoginResponse: Codable {
         case identifier = "id"
         case token
     }
-    
-    init(name: String, username: String, email: String, phone: String? = nil, website: URL? = nil, bio: String? = nil, profilePic: URL? = nil, identifier: Int32, token: String){
+
+    init(name: String,
+         username: String,
+         email: String,
+         phone: String? = nil,
+         website: URL? = nil,
+         bio: String? = nil,
+         profilePic: URL? = nil,
+         identifier: Int32,
+         token: String) {
         self.name = name
         self.username = username
         self.email = email
@@ -39,7 +47,7 @@ struct HostLoginResponse: Codable {
         self.token = token
     }
     
-    //    MARK: - CODABLE INITAILIZERS
+    // MARK: - CODABLE INITAILIZERS
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: HostLoginResponseCodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
@@ -52,7 +60,7 @@ struct HostLoginResponse: Codable {
         identifier = try container.decode(Int32.self, forKey: .identifier)
         token = try container.decode(String.self, forKey: .token)
     }
-    
+
     func encode(with encoder: Encoder) throws {
         var container = encoder.container(keyedBy: HostLoginResponseCodingKeys.self)
         try container.encode(name, forKey: .name)

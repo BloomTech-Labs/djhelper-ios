@@ -19,7 +19,7 @@ struct EventRepresentation: Codable {
     var imageURL: URL?
     var notes: String?
     var eventID: Int32?
-    
+
     enum CodingKeys: String, CodingKey {
         case name
         case eventType = "event_type"

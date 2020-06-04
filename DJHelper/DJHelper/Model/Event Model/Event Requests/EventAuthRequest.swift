@@ -20,7 +20,7 @@ struct EventAuthRequest: Codable {
     var imageUrl: URL?
     var notes: String?
     var eventId: Int32?
-    
+
     init(name: String,
          eventType: String,
          description: String,

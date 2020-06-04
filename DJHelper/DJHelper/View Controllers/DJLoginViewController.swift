@@ -31,14 +31,14 @@ class DJLoginViewController: UIViewController, UITextFieldDelegate {
 
         updateViews()
     }
-    
+
     // MARK: - Actions
     @IBAction func hostLogIn(_ sender: UIButton) {
         guard let username = usernameTextField.text,
             !username.isEmpty,
             let password = passwordTextField.text,
             !password.isEmpty else { return }
-        
+
         // create fetchRequest to look for a Host object with this username from CoreData.
         // if username is found, set the currentHost variable to the Host fetched from the fetchRequest.
         // if not found, present an alert and prompt to the registration scene.
@@ -46,7 +46,7 @@ class DJLoginViewController: UIViewController, UITextFieldDelegate {
         let predicate = NSPredicate(format: "username == %@", username)
         fetchRequest.predicate = predicate
         var fetchedHosts: [Host]?
-        
+
         let moc = CoreDataStack.shared.mainContext
         moc.performAndWait {
             fetchedHosts = try? fetchRequest.execute()
@@ -66,7 +66,7 @@ class DJLoginViewController: UIViewController, UITextFieldDelegate {
             case let .failure(error):
                 DispatchQueue.main.async {
                     let alertController = UIAlertController(title: "LogIn Error",
-                                                            message: "There was an error signing in with message: \(error). Please verify and try again.",
+                        message: "There was an error signing in with message: \(error). Please verify and try again.",
                         preferredStyle: .alert)
                     let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                     alertController.addAction(alertAction)
@@ -98,7 +98,7 @@ class DJLoginViewController: UIViewController, UITextFieldDelegate {
             return
         }
     }
-    
+
     func updateViews() {
         guard isViewLoaded else { return }
         guard let host = currentHost else { return }
