@@ -21,8 +21,9 @@ class HostEventsTableViewController: UIViewController {
         
         var fetchResultsController: NSFetchedResultsController<Event>
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
+        
         //TODO: - FIX LATER
-        let fetchRequestPredicate = NSPredicate(format: "hostID == %@", currentHost!.identifier)
+        let fetchRequestPredicate = NSPredicate(format: "hostID == %@", 1)
         let dateSortDescriptor = NSSortDescriptor(key: "eventDate", ascending: true)
         fetchRequest.predicate = fetchRequestPredicate
         fetchRequest.sortDescriptors = [dateSortDescriptor]
@@ -36,7 +37,7 @@ class HostEventsTableViewController: UIViewController {
             try fetchResultsController.performFetch()
             print("performed nsfrc fetch on Event")
         } catch {
-             print("Error on line: \(#line) in function: \(#function)\n Readable error: \(error.localizedDescription)\n Technical error: \(error)")
+            print("Error on line: \(#line) in function: \(#function)\n Readable error: \(error.localizedDescription)\n Technical error: \(error)")
         }
         
         return fetchResultsController
@@ -45,8 +46,16 @@ class HostEventsTableViewController: UIViewController {
     // If it does not exist, we will create a host object and add it to core data.
     // We will then create a fetched results controller to get the results for the table view data source.
     
+    /// <#Description#>
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//
+//        let host = Host(name: "test20", username: "test20",
+//                        email: "test20", password: "test20", bio: "test20",
+//                        identifier: 1, phone: "test20", profilePic: URL(string: "test20")!,
+//                        website: URL(string: "test20")!)
+//
         
         print("current host username: \(currentHost?.username)")
         print("token: \(hostController?.bearer?.token)")
@@ -67,7 +76,7 @@ class HostEventsTableViewController: UIViewController {
 
 extension HostEventsTableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         // TODO: update code
+        // TODO: update code
         fetchedResultsController.sections?[section].numberOfObjects ?? 1
     }
     
