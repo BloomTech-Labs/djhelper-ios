@@ -7,10 +7,6 @@
 //
 
 import XCTest
-<<<<<<< HEAD
-=======
-@testable import DJHelper
->>>>>>> 84e12bce0098e42bbafb93fa09cb0263b3bbaebe
 
 class DJHelperTests: XCTestCase {
 
@@ -18,7 +14,6 @@ class DJHelperTests: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
 
-<<<<<<< HEAD
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
@@ -36,7 +31,6 @@ class DJHelperTests: XCTestCase {
     }
 
 }
-=======
     // DONE Log in with a known existing host should not return error
     // DONE Log in with a non-existing host should return an error: 401 response
     // TRANSFER TO UI TEST Register with different password fields should return nothing (UI alert controller appears)
@@ -183,4 +177,3 @@ let validUserLogInResponse = """
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjY0LCJ1c2VybmFtZSI6IkJNYWMiLCJpYXQiOjE1OTEyMTU2OTYsImV4cCI6MTU5MTMwMjA5Nn0.QBWBHHljvp9Ky86hSsuPMAQmHKOWTZoZ-8wEIp8UuN8"
 }
 """.data(using: .utf8)
->>>>>>> 84e12bce0098e42bbafb93fa09cb0263b3bbaebe

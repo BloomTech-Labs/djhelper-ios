@@ -10,28 +10,7 @@ import UIKit
 import CoreData
 
 class HostEventsTableViewController: UIViewController {
-<<<<<<< HEAD
 
-    var hostController: HostController?
-    var currentHost: Host?
-
-    @IBOutlet var tableView: UITableView!
-
-    // My plan is to do a fetch request to see if the Host identifier exists in core data.
-    // If it does not exist, we will create a host object and add it to core data.
-    // We will then create a fetched results controller to get the results for the table view data source.
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        print("current host username: \(currentHost?.username)")
-        print("token: \(hostController?.bearer?.token)")
-
-        // Do any additional setup after loading the view.
-    }
-
-=======
-    
     var hostController: HostController?
     var currentHost: Host?
     
@@ -84,7 +63,7 @@ class HostEventsTableViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
->>>>>>> 84e12bce0098e42bbafb93fa09cb0263b3bbaebe
+
     /*
      // MARK: - Navigation
      
@@ -98,15 +77,7 @@ class HostEventsTableViewController: UIViewController {
 
 extension HostEventsTableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-<<<<<<< HEAD
-        1 // TODO: update code
-    }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell() // TODO: update code
-    }
-
-=======
         // TODO: update code
         fetchedResultsController.sections?[section].numberOfObjects ?? 1
     }
@@ -121,7 +92,6 @@ extension HostEventsTableViewController: UITableViewDataSource {
         return cell
     }
     
->>>>>>> 84e12bce0098e42bbafb93fa09cb0263b3bbaebe
     // Swipe to delete
     func tableView(_ tableView: UITableView,
                    commit editingStyle: UITableViewCell.EditingStyle,
@@ -131,8 +101,6 @@ extension HostEventsTableViewController: UITableViewDataSource {
         }
     }
 }
-<<<<<<< HEAD
-=======
 
 extension HostEventsTableViewController: NSFetchedResultsControllerDelegate {
     //will tell the tableViewController get ready to do something.
@@ -182,5 +150,3 @@ extension HostEventsTableViewController: NSFetchedResultsControllerDelegate {
         }
     }
 }
-
->>>>>>> 84e12bce0098e42bbafb93fa09cb0263b3bbaebe

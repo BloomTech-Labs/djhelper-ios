@@ -125,17 +125,12 @@ class DJRegisterViewController: UIViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "LogInSegue" {
             if let barViewControllers = segue.destination as? UITabBarController {
-<<<<<<< HEAD
-                if let logInVC = barViewControllers.viewControllers![0] as? HostEventsTableViewController {
-                logInVC.currentHost = currentHost
-                logInVC.hostController = hostController
-=======
+
                 if let logInNC = barViewControllers.viewControllers![0] as? UINavigationController {
                     if let logInVC = logInNC.viewControllers.first as? HostEventsTableViewController {
                         logInVC.currentHost = currentHost
                         logInVC.hostController = hostController
                     }
->>>>>>> 84e12bce0098e42bbafb93fa09cb0263b3bbaebe
                 }
             }
         }
