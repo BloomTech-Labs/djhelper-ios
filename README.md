@@ -4,9 +4,9 @@
 
 🚫 Each student has a required minimum number of meaningful PRs each week per the rubric.  Contributing to docs does NOT count as a PR to meet your weekly requirements.
 
-# Title of project goes here
+# DJ Helper
 
-1️⃣ You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
+You can find the deployed project at https://www.dj-helper.com.
 
 ## 4️⃣ Contributors
 
@@ -31,19 +31,18 @@
 
 ## Project Overview
 
-1️⃣ You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
+You can find the deployed project at https://www.dj-helper.com.
 
-1️⃣ [Trello Board](https://trello.com/b/udZnuhhk/dj-helper)
+[Trello Board](https://trello.com/b/udZnuhhk/dj-helper)
 
-1️⃣ [Product Canvas](https://www.notion.so/DJ-Helper-6b9f7ca95fec4c6ea8655c1d0c3c47b0)
+[Product Canvas](https://www.notion.so/DJ-Helper-6b9f7ca95fec4c6ea8655c1d0c3c47b0)
 
-1️⃣ [UX Design files](https://www.figma.com/file/bPLYBTlfbbrfz9TnXYkRGA/DJ-Helper-Notes?node-id=40%3A225)
+[UX Design files](https://www.figma.com/file/bPLYBTlfbbrfz9TnXYkRGA/DJ-Helper-Notes?node-id=40%3A225)
 
-🚫 One to two paragraph statement about your product and what it does.
 
-Quis hendrerit dolor magna eget. Pretium quam vulputate dignissim suspendisse. Ut aliquam purus sit amet luctus venenatis lectus magna fringilla. Orci dapibus ultrices in iaculis nunc sed augue. Euismod in pellentesque massa placerat duis ultricies. Bibendum at varius vel pharetra vel turpis nunc eget lorem. Lectus quam id leo in vitae. Purus sit amet luctus venenatis lectus magna fringilla urna porttitor.
+DJ Helper is a tool used for planning the music playlist at an event. Whether it's a gettogether with a few friends, a party with many guests, or a large gathering such as a wedding, DJ Helper makes the music selection a fun and social process for all involved.
 
-Pharetra vel turpis nunc eget lorem dolor sed viverra ipsum. Donec et odio pellentesque diam volutpat. Id diam maecenas ultricies mi eget mauris. Est pellentesque elit ullamcorper dignissim. Orci dapibus ultrices in iaculis nunc.
+The person orgaining the playlist can get things started by putting a few songs on a playlist and then sending a link to guests to get additional song requests.  Guests can see the playlist, request songs of their own, and see requests submitted by other guests. If the guest sees a song they like on the request list, they can click to upvote that song. Sorting by upvotes, the playlist organizer can easily see which songs would be most enjoyed by their guests.  Based on songs requested, DJ Helper can also recommend similar songs to give the host an even better chance on making a playlist that will delight their guests.
 
 ![](header.png)
 

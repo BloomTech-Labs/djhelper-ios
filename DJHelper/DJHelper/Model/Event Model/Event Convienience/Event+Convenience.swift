@@ -24,6 +24,7 @@ extension Event {
                      notes: String,
                      eventID: Int32,
                      context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+
         self.init(context: context)
         self.name = name
         self.eventType = eventType

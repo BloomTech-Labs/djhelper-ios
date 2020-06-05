@@ -83,6 +83,7 @@ class HostEventsTableViewController: UIViewController {
 
 extension HostEventsTableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
         // TODO: update code
         fetchedResultsController.sections?[section].numberOfObjects ?? 1
     }
