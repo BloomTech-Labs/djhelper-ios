@@ -46,8 +46,8 @@
             filePath = "DJHelper/Model/Event Model/Event Controller/EventController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "authorize(event:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,8 +62,8 @@
             filePath = "DJHelper/Model/Event Model/Event Controller/EventController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
             landmarkName = "authorize(event:completion:)"
             landmarkType = "7">
          </BreakpointContent>
