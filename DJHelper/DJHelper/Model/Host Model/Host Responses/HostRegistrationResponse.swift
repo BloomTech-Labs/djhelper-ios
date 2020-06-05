@@ -29,7 +29,14 @@ struct HostRegistrationResponse: Codable {
         case identifier = "id"
     }
 
-    init(name: String, username: String, email: String, phone: String? = nil, website: URL? = nil, bio: String? = nil, profilePic: URL? = nil, identifier: Int32){
+    init(name: String,
+         username: String,
+         email: String,
+         phone: String? = nil,
+         website: URL? = nil,
+         bio: String? = nil,
+         profilePic: URL? = nil,
+         identifier: Int32) {
         self.name = name
         self.username = username
         self.email = email

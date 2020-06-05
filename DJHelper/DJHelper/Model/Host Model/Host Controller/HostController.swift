@@ -46,7 +46,7 @@ class HostController {
         do {
             urlRequest.httpBody = try JSONEncoder().encode(hostRegistration)
         } catch {
-            print("Error encoding HostRepresentation on line: \(#line) in function: \(#function)\n Readable error: \(error.localizedDescription)\n Technical error: \(error)")
+            print("Error in function: \(#function)\n error: \(error.localizedDescription)\n Technical error: \(error)")
         }
 
         //urlsession.shared.dataTask
@@ -58,7 +58,7 @@ class HostController {
             }
 
             if let error = error {
-                print("Error: \(error.localizedDescription) on line \(#line) in function: \(#function)\n Technical error: \(error)")
+                print("Error: \(error.localizedDescription) in function: \(#function)\n Technical error: \(error)")
                 completion(.failure(.registrationError(error)))
             }
 
@@ -72,7 +72,7 @@ class HostController {
                 let hostRegistrationResponse = try JSONDecoder().decode(HostRegistrationResponse.self, from: data)
                 completion(.success(hostRegistrationResponse))
             } catch {
-                print("Error on line: \(#line) in function: \(#function)\n Readable error: \(error.localizedDescription)\n Technical error: \(error)")
+                print("Error in func: \(#function)\n error: \(error.localizedDescription)\n Technical error: \(error)")
                 completion(.failure(.unknownError(error)))
             }
         }
@@ -94,7 +94,7 @@ class HostController {
         do {
             urlRequest.httpBody = try JSONEncoder().encode(hostLogin)
         } catch {
-            print("Error encoding HostLogin on line: \(#line) in function: \(#function)\n Readable error: \(error.localizedDescription)\n Technical error: \(error)")
+            print("Error encoding HostLogin:\n error: \(error.localizedDescription)\n Technical error: \(error)")
         }
 
         //urlsession.shared.dataTask
@@ -104,7 +104,7 @@ class HostController {
             }
 
             if let error = error {
-                print("Error: \(error.localizedDescription) on line \(#line) in function: \(#function)\n Technical error: \(error)")
+                print("Error: \(error.localizedDescription) in func: \(#function)\n Technical error: \(error)")
                 completion(.failure(.loginError(error)))
             }
 
@@ -120,11 +120,11 @@ class HostController {
 
                 //assign the bearer or token
 //                self.bearer?.token = hostLoginResponse.token
-                print("Token recieved after login from HostController: \(self.bearer?.token)")
+                print("Token recieved after login from HostController: \(String(describing: self.bearer?.token))")
 
                 completion(.success(hostLoginResponse))
             } catch {
-                print("Error on line: \(#line) in function: \(#function)\n Readable error: \(error.localizedDescription)\n Technical error: \(error)")
+                print("Error in func: \(#function)\n error: \(error.localizedDescription)\n Technical error: \(error)")
                 completion(.failure(.unknownError(error)))
             }
         }
