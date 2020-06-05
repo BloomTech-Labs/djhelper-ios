@@ -110,10 +110,11 @@ class DJHelperUITests: XCTestCase {
     func testValidRegistrationAndSignIn() {
 
         app.staticTexts["Register"].tap()
+        let fakeUser = String("\(Date())")
 
         let usernameTextField = app.textFields["HostRegistration.UsernameTextField"]
         usernameTextField.tap()
-        usernameTextField.typeText("FakePlastic")
+        usernameTextField.typeText(fakeUser)
 
         let emailTextField = app.textFields["HostRegistration.EmailTextField"]
         emailTextField.tap()
@@ -139,6 +140,8 @@ class DJHelperUITests: XCTestCase {
             }
             return true
         }
+
+        app.tap()
 
         let addNewEvent = app.navigationBars.buttons["Add"]
         XCTAssertTrue(addNewEvent.exists)
