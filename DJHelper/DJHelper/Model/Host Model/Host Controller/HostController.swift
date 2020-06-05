@@ -20,7 +20,7 @@ class HostController {
 
     typealias HostHandler = (Result<Host, HostErrors>) -> Void
 
-    private let baseURL = URL(string: "https://api.dj-helper.com/api")!
+    private let baseURL = URL(string: "https://dj-helper-be.herokuapp.com/api")!
     var bearer: Bearer?
 
     let dataLoader: NetworkDataLoader
