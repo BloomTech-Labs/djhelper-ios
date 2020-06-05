@@ -46,8 +46,13 @@
             filePath = "DJHelper/Model/Event Model/Event Controller/EventController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+<<<<<<< HEAD
             startingLineNumber = "49"
             endingLineNumber = "49"
+=======
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+>>>>>>> 84e12bce0098e42bbafb93fa09cb0263b3bbaebe
             landmarkName = "authorize(event:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,8 +67,13 @@
             filePath = "DJHelper/Model/Event Model/Event Controller/EventController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
+<<<<<<< HEAD
             startingLineNumber = "31"
             endingLineNumber = "31"
+=======
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+>>>>>>> 84e12bce0098e42bbafb93fa09cb0263b3bbaebe
             landmarkName = "authorize(event:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -82,6 +92,7 @@
             endingLineNumber = "34"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
+<<<<<<< HEAD
             <Locations>
                <Location
                   uuid = "B9492461-2E5C-42A2-A687-07D76D20E896 - 1101747c38c0845a"
@@ -114,6 +125,24 @@
                   offsetFromSymbolStart = "153">
                </Location>
             </Locations>
+=======
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "63128B25-79CD-44C8-AA76-1044DB1C60DE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DJHelper/View Controllers/CreateEventViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "tempButton(_:)"
+            landmarkType = "7">
+>>>>>>> 84e12bce0098e42bbafb93fa09cb0263b3bbaebe
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

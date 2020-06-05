@@ -7,6 +7,11 @@
 //
 
 import Foundation
+<<<<<<< HEAD
+=======
+import CoreData
+
+>>>>>>> 84e12bce0098e42bbafb93fa09cb0263b3bbaebe
 class EventController {
     enum EventErrors: Error {
         case authorizationError(Error)
