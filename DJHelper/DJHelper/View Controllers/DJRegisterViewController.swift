@@ -80,7 +80,7 @@ class DJRegisterViewController: UIViewController, UITextFieldDelegate {
 
                 DispatchQueue.main.async {
                     let alertController = UIAlertController(title: "Successful Registration",
-                        message: "Congratulations! Your account has been created. Press Sign In to continue to your Events list, or cancel to return.",
+                        message: "Congratulations! Your account has been created. Tap Sign In to continue to your Events list, or cancel to return.",
                             preferredStyle: .alert)
                     let alertAction = UIAlertAction(title: "Sign In", style: .default) { (_) in
                         self.hostController.logIn(with: host) { (result) in

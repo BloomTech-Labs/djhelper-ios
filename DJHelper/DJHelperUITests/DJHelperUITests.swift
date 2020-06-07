@@ -44,7 +44,7 @@ class DJHelperUITests: XCTestCase {
                 XCTAssertTrue(alert.exists)
                 alert.buttons["OK"].tap()
             } else {
-                XCTFail()  // Want it to fail if it reaches this case
+                XCTFail("Programmed failure due to unanticipated events at Host Login")  // Want it to fail if it reaches this case
             }
             return true
         }
@@ -100,7 +100,7 @@ class DJHelperUITests: XCTestCase {
                 XCTAssertTrue(alert.exists)
                 alert.buttons["OK"].tap()
             } else {
-                XCTFail()  // Want it to fail if it reaches this case
+                XCTFail("Programmed fail due to unanticipated password matching alert")  // Want it to fail if it reaches this case
             }
             return true
         }
@@ -136,7 +136,7 @@ class DJHelperUITests: XCTestCase {
                 XCTAssertTrue(alert.exists)
                 alert.buttons["Sign In"].tap()
             } else {
-                XCTFail()  // Want it to fail if it reaches this case
+                XCTFail("Programmed fail due to unanticipated registration/sign in alert")  // Want it to fail if it reaches this case
             }
             return true
         }

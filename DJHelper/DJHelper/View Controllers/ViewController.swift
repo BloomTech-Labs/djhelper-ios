@@ -21,7 +21,8 @@ class ViewController: UIViewController {
         //                hc.registerHost(with: host) { (result) in
         //                    switch result {
         //                    case .success(let host): print("successful host: \(String(describing: host.name))")
-        //                    case .failure(let error): print("Error on line: \(#line) in function: \(#function)\n Readable error: \(error.localizedDescription)\n Technical error: \(error)")
+        //                    case .failure(let error):
+//                                  print("Error on line: \(#line) in function: \(#function)\n Readable error: \(error.localizedDescription)\n Technical error: \(error)")
         //                    }
         //                }
         //        hc.logIn(with: host) { (result) in

@@ -42,7 +42,10 @@ class CreateEventViewController: UIViewController {
             let type = typeTextField.text, !type.isEmpty,
             let notes = notesTextField.text, !notes.isEmpty else { unwrapTextFields() ; return }
 
-//        guard let dateFromString = date.dateFromString(), let startTimeDate = start.dateFromString(), let endTimeDate = end.dateFromString(), let hostId = currentHost?.identifier else { return }
+//        guard let dateFromString = date.dateFromString(),
+//            let startTimeDate = start.dateFromString(),
+//            let endTimeDate = end.dateFromString(),
+//            let hostId = currentHost?.identifier else { return }
 
         let event = Event(name: name,
                           eventType: type,
