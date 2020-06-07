@@ -19,14 +19,16 @@ class HostEventsTableViewController: UIViewController {
     // MARK: - NSFETCHEDRESULTSCONTROLLER CONFIGURATION
     lazy var fetchedResultsController: NSFetchedResultsController<Event> = {
 
-        var fetchResultsController: NSFetchedResultsController<Event>
+//        var fetchResultsController: NSFetchedResultsController<Event>
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
+        let dateSortDescriptor = NSSortDescriptor(key: "eventDate", ascending: true)
+        fetchRequest.sortDescriptors = [dateSortDescriptor]
 
         //TODO: - FIX LATER
-        let fetchRequestPredicate = NSPredicate(format: "hostID == %@", 1)
-        let dateSortDescriptor = NSSortDescriptor(key: "eventDate", ascending: true)
-        fetchRequest.predicate = fetchRequestPredicate
-        fetchRequest.sortDescriptors = [dateSortDescriptor]
+        if self.currentHost != nil {
+            let fetchRequestPredicate = NSPredicate(format: "host.username == %@", self.currentHost!.username!)
+            fetchRequest.predicate = fetchRequestPredicate
+        }
 
         //create nsfrc
         let nsfrc = NSFetchedResultsController(fetchRequest: fetchRequest,
@@ -34,11 +36,11 @@ class HostEventsTableViewController: UIViewController {
                     sectionNameKeyPath: "eventDate",
                     cacheName: nil)
 
-        fetchResultsController = nsfrc
+//        fetchResultsController = nsfrc
 
         do {
-            fetchResultsController.delegate = self
-            try fetchResultsController.performFetch()
+            nsfrc.delegate = self
+            try nsfrc.performFetch()
             print("performed nsfrc fetch on Event")
         } catch {
             print("""
@@ -47,7 +49,7 @@ class HostEventsTableViewController: UIViewController {
                 """)
         }
 
-        return fetchResultsController
+        return nsfrc
     }()
     // My plan is to do a fetch request to see if the Host identifier exists in core data.
     // If it does not exist, we will create a host object and add it to core data.

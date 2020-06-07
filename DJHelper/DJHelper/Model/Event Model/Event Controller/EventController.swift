@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 class EventController {
     enum EventErrors: Error {
@@ -18,7 +19,7 @@ class EventController {
         case noEventsInServerOrCoreData
     }
 
-    private let baseURL = URL(string: "https://api.dj-helper.com/api/")!
+    private let baseURL = URL(string: "https://dj-helper-be.herokuapp.com/api")!
     let dataLoader: NetworkDataLoader
 
     init(dataLoader: NetworkDataLoader = URLSession.shared) {
