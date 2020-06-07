@@ -18,25 +18,19 @@ class HostEventsTableViewController: UIViewController {
 
     // MARK: - NSFETCHEDRESULTSCONTROLLER CONFIGURATION
     lazy var fetchedResultsController: NSFetchedResultsController<Event> = {
-
-//        var fetchResultsController: NSFetchedResultsController<Event>
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
         let dateSortDescriptor = NSSortDescriptor(key: "eventDate", ascending: true)
         fetchRequest.sortDescriptors = [dateSortDescriptor]
 
-        //TODO: - FIX LATER
         if self.currentHost != nil {
             let fetchRequestPredicate = NSPredicate(format: "host.username == %@", self.currentHost!.username!)
             fetchRequest.predicate = fetchRequestPredicate
         }
 
-        //create nsfrc
         let nsfrc = NSFetchedResultsController(fetchRequest: fetchRequest,
                     managedObjectContext: CoreDataStack.shared.mainContext,
                     sectionNameKeyPath: "eventDate",
                     cacheName: nil)
-
-//        fetchResultsController = nsfrc
 
         do {
             nsfrc.delegate = self
@@ -84,10 +78,13 @@ class HostEventsTableViewController: UIViewController {
 }
 
 extension HostEventsTableViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        // TODO: update code
-        fetchedResultsController.sections?[section].numberOfObjects ?? 1
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return fetchedResultsController.sections?.count ?? 0
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
