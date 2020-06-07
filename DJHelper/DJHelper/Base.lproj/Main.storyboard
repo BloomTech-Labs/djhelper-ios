@@ -55,30 +55,35 @@
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WqQ-cK-SeN">
                                 <rect key="frame" x="40" y="256.5" width="334" height="34"/>
+                                <accessibility key="accessibilityConfiguration" identifier="HostRegistration.UsernameTextField"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-Mail" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YwL-S3-mlk">
                                 <rect key="frame" x="40" y="315.5" width="334" height="34"/>
+                                <accessibility key="accessibilityConfiguration" identifier="HostRegistration.EmailTextField"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qbh-9g-OFn">
                                 <rect key="frame" x="40" y="374.5" width="334" height="34"/>
+                                <accessibility key="accessibilityConfiguration" identifier="HostRegistration.PasswordTextField"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2p6-9g-X2f">
                                 <rect key="frame" x="40" y="433.5" width="334" height="34"/>
+                                <accessibility key="accessibilityConfiguration" identifier="HostRegistration.ConfirmTextField"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="05B-6T-IOE">
                                 <rect key="frame" x="40" y="497.5" width="230" height="50"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration" identifier="HostRegistration.CreateAccountButton"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="230" id="D6v-gv-4Bi"/>
                                     <constraint firstAttribute="height" constant="50" id="Q6A-5y-w5V"/>
@@ -138,7 +143,7 @@
             </objects>
             <point key="canvasLocation" x="-252" y="856"/>
         </scene>
-        <!--Events-->
+        <!--Host Events Table View Controller-->
         <scene sceneID="rky-ID-7MU">
             <objects>
                 <viewController id="v01-Ne-NHb" customClass="HostEventsTableViewController" customModule="DJHelper" customModuleProvider="target" sceneMemberID="viewController">
@@ -183,15 +188,105 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Yko-ze-pUB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Events" image="star.fill" catalog="system" id="b4g-8X-MvP" userLabel="Events"/>
-                    <navigationItem key="navigationItem" id="c7g-Yp-Gzc"/>
+                    <navigationItem key="navigationItem" id="c7g-Yp-Gzc">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="84H-1f-D8l">
+                            <connections>
+                                <segue destination="fbD-kp-YIW" kind="show" identifier="createEventSegue" id="9Nh-BT-9XY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="ejy-vK-cKC" id="uHK-FM-0vX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GEw-NK-IoI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1354" y="319"/>
+            <point key="canvasLocation" x="2263.768115942029" y="318.75"/>
+        </scene>
+        <!--Create Event View Controller-->
+        <scene sceneID="9np-5s-OAK">
+            <objects>
+                <viewController id="fbD-kp-YIW" customClass="CreateEventViewController" customModule="DJHelper" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BfY-sZ-rRI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="UZx-FJ-ymN">
+                                <rect key="frame" x="16" y="104" width="382" height="415"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gWg-GV-JMQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BaD-SR-fQG">
+                                        <rect key="frame" x="0.0" y="55" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NSv-3O-M45">
+                                        <rect key="frame" x="0.0" y="110" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Start Time" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ffU-ne-HpG">
+                                        <rect key="frame" x="0.0" y="165" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event End Time" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ydm-1z-lg0">
+                                        <rect key="frame" x="0.0" y="220" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Type" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Wd-hU-MSi">
+                                        <rect key="frame" x="0.0" y="275" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Notes" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q97-Ec-eA3">
+                                        <rect key="frame" x="0.0" y="330" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AmJ-AX-PIK">
+                                        <rect key="frame" x="0.0" y="385" width="382" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="tempButton:" destination="fbD-kp-YIW" eventType="touchUpInside" id="u5d-nJ-het"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="UZx-FJ-ymN" firstAttribute="top" secondItem="nBj-aI-ZjO" secondAttribute="top" constant="16" id="1sp-Bo-dan"/>
+                            <constraint firstItem="UZx-FJ-ymN" firstAttribute="leading" secondItem="nBj-aI-ZjO" secondAttribute="leading" constant="16" id="hof-Ex-Zlv"/>
+                            <constraint firstItem="nBj-aI-ZjO" firstAttribute="trailing" secondItem="UZx-FJ-ymN" secondAttribute="trailing" constant="16" id="r8X-9D-gSV"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="nBj-aI-ZjO"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="5dU-s6-cAd">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="70M-CT-PUM">
+                            <connections>
+                                <action selector="saveEvent:" destination="fbD-kp-YIW" id="5PM-jZ-CZ6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="descriptionTextField" destination="NSv-3O-M45" id="z0i-n7-zwB"/>
+                        <outlet property="endTimeTextField" destination="ydm-1z-lg0" id="bLS-en-5AE"/>
+                        <outlet property="eventDateTextField" destination="BaD-SR-fQG" id="Sfi-hz-ftz"/>
+                        <outlet property="eventNameTextField" destination="gWg-GV-JMQ" id="zg0-Kh-lrX"/>
+                        <outlet property="notesTextField" destination="q97-Ec-eA3" id="cml-8G-pIu"/>
+                        <outlet property="startTimetextField" destination="ffU-ne-HpG" id="AND-Co-jWO"/>
+                        <outlet property="typeTextField" destination="0Wd-hU-MSi" id="H62-mg-wBk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YgQ-wv-773" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3123" y="319"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -206,7 +301,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="626.08695652173913" y="95.758928571428569"/>
+            <point key="canvasLocation" x="-3019" y="96"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="Z9v-WB-yCC">
@@ -255,12 +350,14 @@
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TJa-gP-sPD">
                                 <rect key="frame" x="40" y="256" width="334" height="34"/>
+                                <accessibility key="accessibilityConfiguration" identifier="HostSignIn.UsernameTextField"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fqv-ne-53O">
                                 <rect key="frame" x="40" y="320" width="334" height="34"/>
+                                <accessibility key="accessibilityConfiguration" identifier="HostSignIn.PasswordTextField"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
