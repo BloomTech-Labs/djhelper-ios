@@ -11,8 +11,9 @@ import CoreData
 
 class HostEventsTableViewController: UIViewController {
 
+    var eventController = EventController()
     var hostController: HostController?
-    var currentHost: Host?
+    var currentHost: Host!
 
     @IBOutlet var tableView: UITableView!
 
@@ -23,7 +24,7 @@ class HostEventsTableViewController: UIViewController {
         fetchRequest.sortDescriptors = [dateSortDescriptor]
 
         if self.currentHost != nil {
-            let fetchRequestPredicate = NSPredicate(format: "host.username == %@", self.currentHost!.username!)
+            let fetchRequestPredicate = NSPredicate(format: "host.identifier == %i", self.currentHost!.identifier)
             fetchRequest.predicate = fetchRequestPredicate
         }
 
@@ -60,21 +61,31 @@ class HostEventsTableViewController: UIViewController {
 //                        website: URL(string: "test20")!)
 //
 
-        print("current host username: \(String(describing: currentHost?.username))")
-        print("token: \(String(describing: hostController?.bearer?.token))")
-
-        // Do any additional setup after loading the view.
+        eventController.fetchAllEventsFromServer(for: self.currentHost) { (results) in
+            switch results {
+            case .success(_):
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            case .failure(_):
+                return
+            }
+        }
     }
 
-    /*
      // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
+        switch segue.identifier {
+        case "createEventSegue":
+            if let newEventVC = segue.destination as? CreateEventViewController {
+                newEventVC.hostController = hostController
+                newEventVC.currentHost = currentHost
+                newEventVC.eventController = eventController
+            }
+        default:
+            return
+        }
      }
-     */
 }
 
 extension HostEventsTableViewController: UITableViewDataSource {

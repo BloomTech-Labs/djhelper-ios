@@ -11,7 +11,8 @@ import UIKit
 class CreateEventViewController: UIViewController {
 
     var currentHost: Host?
-    let eventController = EventController()
+    var eventController: EventController!
+    var hostController: HostController!
 
     // MARK: - IBOutlets
     @IBOutlet weak var eventNameTextField: UITextField!
@@ -58,11 +59,16 @@ class CreateEventViewController: UIViewController {
                           notes: notes,
                           eventID: 1)
 
+        event.host = currentHost
+
         eventController.authorize(event: event) { (results) in
             switch results {
-            case .success(let eventRep):
+            case let .success(eventRep):
                 print("successful attempt to create event in vc: \(eventRep.name)")
-            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            case let .failure(error):
                 print("""
                     Error on line: \(#line) in function: \(#function)\n
                     Readable error: \(error.localizedDescription)\n Technical error: \(error)

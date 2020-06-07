@@ -27,7 +27,7 @@ class EventController {
     }
 
     // MARK: - FETCH ALL EVENTS
-    func fetchAllEventsFromServer(completion: @escaping(Result<[Event], EventErrors>) -> Void) {
+    func fetchAllEventsFromServer(for host: Host, completion: @escaping(Result<[Event], EventErrors>) -> Void) {
         let url = baseURL.appendingPathComponent("events")
         let urlRequest = URLRequest(url: url)
 
@@ -57,7 +57,7 @@ class EventController {
                 let eventRepArray = try decoder.decode([EventRepresentation].self, from: data)
                 print("eventRepArray's count: \(eventRepArray.count)")
 
-                if let cdAndServerEvents = self.compareServerEvents(eventRepArray) {
+                if let cdAndServerEvents = self.compareServerEvents(host: host, eventRepArray) {
                     completion(.success(cdAndServerEvents))
                 } else {
                      print("Error- no cd or server events on line: \(#line) in function: \(#function)\n")
@@ -74,15 +74,15 @@ class EventController {
         }
     }
 
-    func compareServerEvents(_ eventRepresentationArray: [EventRepresentation]) -> [Event]? {
+    func compareServerEvents(host: Host, _ eventRepresentationArray: [EventRepresentation]) -> [Event]? {
         // TODO: - FIX LATER
-        let eventsWithCurrentHostIDs = eventRepresentationArray.filter { $0.hostID == 1 }
+        let eventsWithCurrentHostIDs = eventRepresentationArray.filter { $0.hostID == host.identifier }
 
         //check core data
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
 
          // TODO: - FIX LATER
-        let predicate = NSPredicate(format: "hostID == %@", 1)
+        let predicate = NSPredicate(format: "hostID == %i", host.identifier)
         fetchRequest.predicate = predicate
 
         var placeHolderArray: [Event] = []
@@ -126,6 +126,7 @@ class EventController {
 //        encoder.keyEncodingStrategy = .convertToSnakeCase
 
         do {
+            try CoreDataStack.shared.save()
             urlRequest.httpBody = try encoder.encode(eventToAuthorize)
         } catch {
             print("Error in func: \(#function)\n error: \(error.localizedDescription)\n Technical error: \(error)")
