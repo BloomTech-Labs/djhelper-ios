@@ -57,15 +57,15 @@ class EventController {
         return event
     }
 
-    func saveUpdateEvent(_ event: Event, forHost hostID: Host, completion: @escaping (Result<(),EventErrors>) -> Void) {
-        guard let eventRep = event.eventAuthorizationRep else {
+    func saveUpdateEvent(_ event: Event, completion: @escaping (Result<(),EventErrors>) -> Void) {
+        guard let eventRep = event.eventAuthorizationRep, let eventId = eventRep.eventID else {
             print("Error on line: \(#line) in function: \(#function)\n")
             return
         }
 
         let authURL = baseURL.appendingPathComponent("auth")
         let eventURL = authURL.appendingPathComponent("event")
-        let finalURL = eventURL.appendingPathComponent("\(hostID.identifier)")
+        let finalURL = eventURL.appendingPathComponent("\(eventId)")
 
         var urlRequest = URLRequest(url: finalURL)
         urlRequest.httpMethod = HTTPMethod.put.rawValue
