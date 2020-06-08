@@ -68,7 +68,7 @@ class CreateEventViewController: UIViewController {
                 type: type,
                 notes: notes)
 
-            putUpdateEvent(with: updatedEvent, fromHost: currentHost, andEventController: eventController)
+            putUpdateEvent(with: updatedEvent, andEventController: eventController)
         } else {
             let event = Event(name: name,
                               eventType: type,
@@ -146,8 +146,8 @@ extension CreateEventViewController {
         }
     }
     
-    private func putUpdateEvent(with event: Event, fromHost host: Host, andEventController eventContrller: EventController) {
-        eventController.saveUpdateEvent(event, forHost: host) { (results) in
+    private func putUpdateEvent(with event: Event, andEventController eventContrller: EventController) {
+        eventController.saveUpdateEvent(event) { (results) in
             switch results {
             case .success:
                 print("successfully called the put function to update event on server")
