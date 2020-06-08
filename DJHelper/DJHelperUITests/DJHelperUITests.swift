@@ -45,6 +45,7 @@ class DJHelperUITests: XCTestCase {
                 alert.buttons["OK"].tap()
             } else {
                 XCTFail("Programmed failure due to unanticipated events at Host Login")  // Want it to fail if it reaches this case
+
             }
             return true
         }
