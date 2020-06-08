@@ -100,7 +100,7 @@ extension HostEventsTableViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // TODO: update code
-        let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell", for: indexPath)
         let event = fetchedResultsController.object(at: indexPath)
         cell.textLabel?.text = event.name
         cell.detailTextLabel?.text = event.eventDate?.stringFromDate()

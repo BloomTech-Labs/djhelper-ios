@@ -133,7 +133,6 @@ class EventController {
             completion(.failure(.encodeError(error)))
             return
         }
-        print("this is the url: \(baseURL.absoluteString)")
 
         dataLoader.loadData(from: urlRequest) { (data, response, error) in
             if let response = response as? HTTPURLResponse {
