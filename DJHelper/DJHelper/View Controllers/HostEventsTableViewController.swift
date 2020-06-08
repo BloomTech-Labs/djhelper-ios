@@ -11,34 +11,31 @@ import CoreData
 
 class HostEventsTableViewController: UIViewController {
 
-    var hostController: HostController?
-    var currentHost: Host?
+    var eventController = EventController()
+    var hostController: HostController!
+    var currentHost: Host!
 
     @IBOutlet var tableView: UITableView!
 
     // MARK: - NSFETCHEDRESULTSCONTROLLER CONFIGURATION
     lazy var fetchedResultsController: NSFetchedResultsController<Event> = {
-
-        var fetchResultsController: NSFetchedResultsController<Event>
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
-
-        //TODO: - FIX LATER
-        let fetchRequestPredicate = NSPredicate(format: "hostID == %@", 1)
         let dateSortDescriptor = NSSortDescriptor(key: "eventDate", ascending: true)
-        fetchRequest.predicate = fetchRequestPredicate
         fetchRequest.sortDescriptors = [dateSortDescriptor]
 
-        //create nsfrc
+        if self.currentHost != nil {
+            let fetchRequestPredicate = NSPredicate(format: "host.identifier == %i", self.currentHost!.identifier)
+            fetchRequest.predicate = fetchRequestPredicate
+        }
+
         let nsfrc = NSFetchedResultsController(fetchRequest: fetchRequest,
                     managedObjectContext: CoreDataStack.shared.mainContext,
                     sectionNameKeyPath: "eventDate",
                     cacheName: nil)
 
-        fetchResultsController = nsfrc
-
         do {
-            fetchResultsController.delegate = self
-            try fetchResultsController.performFetch()
+            nsfrc.delegate = self
+            try nsfrc.performFetch()
             print("performed nsfrc fetch on Event")
         } catch {
             print("""
@@ -47,50 +44,54 @@ class HostEventsTableViewController: UIViewController {
                 """)
         }
 
-        return fetchResultsController
+        return nsfrc
     }()
     // My plan is to do a fetch request to see if the Host identifier exists in core data.
     // If it does not exist, we will create a host object and add it to core data.
     // We will then create a fetched results controller to get the results for the table view data source.
 
-    /// <#Description#>
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//
-//        let host = Host(name: "test20", username: "test20",
-//                        email: "test20", password: "test20", bio: "test20",
-//                        identifier: 1, phone: "test20", profilePic: URL(string: "test20")!,
-//                        website: URL(string: "test20")!)
-//
-
-        print("current host username: \(String(describing: currentHost?.username))")
-        print("token: \(String(describing: hostController?.bearer?.token))")
-
-        // Do any additional setup after loading the view.
+        eventController.fetchAllEventsFromServer(for: self.currentHost) { (results) in
+            switch results {
+            case .success:
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            case .failure:
+                return
+            }
+        }
     }
 
-    /*
      // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
+        switch segue.identifier {
+        case "createEventSegue":
+            if let newEventVC = segue.destination as? CreateEventViewController {
+                newEventVC.hostController = hostController
+                newEventVC.currentHost = currentHost
+                newEventVC.eventController = eventController
+            }
+        default:
+            return
+        }
      }
-     */
 }
 
 extension HostEventsTableViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        // TODO: update code
-        fetchedResultsController.sections?[section].numberOfObjects ?? 1
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return fetchedResultsController.sections?.count ?? 0
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        fetchedResultsController.sections?[section].numberOfObjects ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // TODO: update code
-        let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell", for: indexPath)
         let event = fetchedResultsController.object(at: indexPath)
         cell.textLabel?.text = event.name
         cell.detailTextLabel?.text = event.eventDate?.stringFromDate()

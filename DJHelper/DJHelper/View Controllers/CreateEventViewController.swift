@@ -11,7 +11,8 @@ import UIKit
 class CreateEventViewController: UIViewController {
 
     var currentHost: Host?
-    let eventController = EventController()
+    var eventController: EventController!
+    var hostController: HostController!
 
     // MARK: - IBOutlets
     @IBOutlet weak var eventNameTextField: UITextField!
@@ -42,7 +43,10 @@ class CreateEventViewController: UIViewController {
             let type = typeTextField.text, !type.isEmpty,
             let notes = notesTextField.text, !notes.isEmpty else { unwrapTextFields() ; return }
 
-//        guard let dateFromString = date.dateFromString(), let startTimeDate = start.dateFromString(), let endTimeDate = end.dateFromString(), let hostId = currentHost?.identifier else { return }
+//        guard let dateFromString = date.dateFromString(),
+//            let startTimeDate = start.dateFromString(),
+//            let endTimeDate = end.dateFromString(),
+//            let hostId = currentHost?.identifier else { return }
 
         let event = Event(name: name,
                           eventType: type,
@@ -55,11 +59,17 @@ class CreateEventViewController: UIViewController {
                           notes: notes,
                           eventID: 1)
 
+        // NOTE: This next line is what causes the event to be linked with the current host in Core Data
+        event.host = currentHost
+
         eventController.authorize(event: event) { (results) in
             switch results {
-            case .success(let eventRep):
+            case let .success(eventRep):
                 print("successful attempt to create event in vc: \(eventRep.name)")
-            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            case let .failure(error):
                 print("""
                     Error on line: \(#line) in function: \(#function)\n
                     Readable error: \(error.localizedDescription)\n Technical error: \(error)

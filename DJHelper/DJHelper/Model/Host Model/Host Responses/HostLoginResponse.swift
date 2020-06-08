@@ -20,8 +20,8 @@ struct HostLoginResponse: Codable {
     var token: String
 
     enum HostLoginResponseCodingKeys: String, CodingKey {
-        case username
         case name
+        case username
         case email
         case phone
         case website
@@ -50,7 +50,7 @@ struct HostLoginResponse: Codable {
     // MARK: - CODABLE INITAILIZERS
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: HostLoginResponseCodingKeys.self)
-        name = try container.decode(String.self, forKey: .name)
+        self.name = try container.decode(String.self, forKey: .name)
         username = try container.decode(String.self, forKey: .username)
         email = try container.decode(String.self, forKey: .email)
         phone = try container.decode(String?.self, forKey: .phone)

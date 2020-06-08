@@ -7,30 +7,11 @@
 //
 
 import XCTest
+import CoreData
+@testable import DJHelper
 
 class DJHelperTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
-}
     // DONE Log in with a known existing host should not return error
     // DONE Log in with a non-existing host should return an error: 401 response
     // TRANSFER TO UI TEST Register with different password fields should return nothing (UI alert controller appears)
@@ -82,7 +63,7 @@ class DJHelperTests: XCTestCase {
 
     func testRegisterWithExistingUsername() {
         let hostController = HostController()
-        
+
         let testHost = Host(username: "BMac", email: "bmac@funkybunch.com", password: "ciao", identifier: 64)
 
         let duplicateRegistrationExpectation = expectation(description: "Wait for registration response")
@@ -103,7 +84,7 @@ class DJHelperTests: XCTestCase {
     func testRegisterValidNewUser() {
         let hostController = HostController()
 
-        let testHost = Host(username: "BMac1", email: "bmac@funkybunch.com", password: "ciao", identifier: 999)
+        let testHost = Host(username: "BMac2", email: "bmac@funkybunch.com", password: "ciao", identifier: 999)
 
         let validRegistrationExpectation = expectation(description: "Wait for registration response")
 
