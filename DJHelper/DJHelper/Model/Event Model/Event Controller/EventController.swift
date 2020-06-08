@@ -69,13 +69,31 @@ class EventController {
         return event
     }
     
-    func saveUpdateEvent(_ event: Event, forHost hostID: Host, completion: @escaping (Results<Bool,Error>) -> Void){
+    func saveUpdateEvent(_ event: Event, forHost hostID: Host, completion: @escaping (Result<Bool,Error>) -> Void){
+        guard let eventRep = event.eventAuthorizationRep else {
+            print("Error on line: \(#line) in function: \(#function)\n")
+            return
+        }
+        
         let authURL = baseURL.appendingPathComponent("auth")
         let eventURL = authURL.appendingPathComponent("event")
         let finalURL = eventURL.appendingPathComponent("\(hostID.identifier)")
         
         var urlRequest = URLRequest(url: finalURL)
-    
+        urlRequest.httpMethod = HTTPMethod.put.rawValue
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        
+        do {
+            urlRequest.httpBody =  try encoder.encode(eventRep)
+        } catch  {
+            print("""
+                Error on line: \(#line) in function: \(#function)\n
+                Readable error: \(error.localizedDescription)\n Technical error: \(error)
+                """)
+        }
     }
     
     // MARK: - FETCH ALL EVENTS
