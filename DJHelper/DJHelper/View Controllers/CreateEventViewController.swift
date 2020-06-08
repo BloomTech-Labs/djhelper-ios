@@ -13,6 +13,11 @@ class CreateEventViewController: UIViewController {
     var currentHost: Host?
     var eventController: EventController!
     var hostController: HostController!
+    var event: Event? {
+        didSet {
+            updateViewsWithEvent()
+        }
+    }
 
     // MARK: - IBOutlets
     @IBOutlet weak var eventNameTextField: UITextField!
@@ -29,13 +34,15 @@ class CreateEventViewController: UIViewController {
 
     // MARK: - IBActions
     @IBAction func saveEvent(_ sender: UIBarButtonItem) {
-        //        let text = unwrapAllTextFields()
+        print("Paste what's in the tempButton's body")
     }
 
     @IBAction func tempButton(_ sender: UIButton) {
         print("button pressed: \(sender)")
 
-        guard let name = eventNameTextField.text, !name.isEmpty,
+        guard let currentHost = currentHost,
+            let eventController = eventController,
+            let name = eventNameTextField.text, !name.isEmpty,
             let date = eventDateTextField.text, !date.isEmpty,
             let description = descriptionTextField.text, !description.isEmpty,
             let start = startTimetextField.text, !start.isEmpty,
@@ -43,22 +50,83 @@ class CreateEventViewController: UIViewController {
             let type = typeTextField.text, !type.isEmpty,
             let notes = notesTextField.text, !notes.isEmpty else { unwrapTextFields() ; return }
 
-//        guard let dateFromString = date.dateFromString(),
-//            let startTimeDate = start.dateFromString(),
-//            let endTimeDate = end.dateFromString(),
-//            let hostId = currentHost?.identifier else { return }
+        print("date from string: \(String(describing: date.dateFromString()))")
 
-        let event = Event(name: name,
-                          eventType: type,
-                          eventDescription: description,
-                          eventDate: Date() /*dateFromString*/,
-                          hostID: 1, locationID: 1,
-                          startTime: Date() /*startTimeDate*/,
-                          endTime: Date() /*endTimeDate*/,
-                          imageURL: URL(string: "tewtststtt.com")!,
-                          notes: notes,
-                          eventID: 1)
+        guard let dateFromString = date.dateFromString() /*,
+             let startTimeDate = start.dateFromString(),
+             let endTimeDate = end.dateFromString()*/ else {
+                print("Error on line: \(#line) in function: \(#function)\n")
+                return }
 
+        if let passedInEvent = event {
+            let updatedEvent = eventController.updateEvent(event: passedInEvent,
+                                                           eventName: name,
+                                                           eventDate: dateFromString,
+                                                           description: description,
+                                                           startTime: Date() /*startTimeDate*/,
+                endTime: Date().addingTimeInterval(8878788787) /*endTimeDate*/,
+                type: type,
+                notes: notes)
+
+            putUpdateEvent(with: updatedEvent, fromHost: currentHost, andEventController: eventController)
+        } else {
+            let event = Event(name: name,
+                              eventType: type,
+                              eventDescription: description,
+                              eventDate: Date() /*dateFromString*/,
+                hostID: 1 /*currentHost.identifier*/, locationID: 1,
+                startTime: Date() /*startTimeDate*/,
+                endTime: Date() /*endTimeDate*/,
+                imageURL: URL(string: "tewtststtt.com")!,
+                notes: notes,
+                eventID: 1)
+
+            authorizeEvent(event, withHost: currentHost, andEventController: eventController)
+        }
+    }
+
+    private func unwrapTextFields() {
+        print("this was hit")
+        var textFieldArray = [UITextField]()
+
+        textFieldArray.append(contentsOf: [eventNameTextField,
+                                           eventDateTextField,
+                                           descriptionTextField,
+                                           startTimetextField,
+                                           endTimeTextField,
+                                           typeTextField,
+                                           notesTextField])
+
+        for tField in textFieldArray {
+            if tField.text == "" && tField.placeholder != nil {
+                tField.shake()
+                print("textfield: \(tField)")
+                print("textField placeHolder: \(String(describing: tField.placeholder))")
+            }
+        }
+    }
+} // END OF CLASS
+
+extension CreateEventViewController {
+
+    // MARK: - PRIVATE FUNCTIONS
+    private func updateViewsWithEvent() {
+        guard let passedInEvent = event, isViewLoaded else {
+            print("Error on line: \(#line) in function: \(#function)\n")
+            return
+        }
+        self.title = passedInEvent.name
+        eventNameTextField.text = passedInEvent.name
+        eventDateTextField.text = passedInEvent.eventDate?.stringFromDate()
+        descriptionTextField.text = passedInEvent.description
+        startTimetextField.text = passedInEvent.startTime?.stringFromDate()
+        endTimeTextField.text = passedInEvent.endTime?.stringFromDate()
+        typeTextField.text = passedInEvent.eventType
+        notesTextField.text = passedInEvent.notes
+    }
+
+    // Had to add the following functions because SwiftLint was warning that the SaveEvent button function was longer than 40 lines
+    private func authorizeEvent(_ event: Event, withHost currentHost: Host, andEventController eventController: EventController) {
         // NOTE: This next line is what causes the event to be linked with the current host in Core Data
         event.host = currentHost
 
@@ -77,33 +145,16 @@ class CreateEventViewController: UIViewController {
             }
         }
     }
-
-    private func unwrapTextFields() {
-        var textFieldArray = [UITextField]()
-
-        textFieldArray.append(contentsOf: [eventNameTextField,
-                                           eventDateTextField,
-                                           descriptionTextField,
-                                           startTimetextField,
-                                           endTimeTextField,
-                                           typeTextField,
-                                           notesTextField])
-
-        for tField in textFieldArray {
-            if tField.text == "" && tField.placeholder != nil {
-                print("textfield: \(tField)")
-                print("textField placeHolder: \(String(describing: tField.placeholder))")
+    
+    private func putUpdateEvent(with event: Event, fromHost host: Host, andEventController eventContrller: EventController) {
+        eventController.saveUpdateEvent(event, forHost: host) { (results) in
+            switch results {
+            case .success:
+                print("successfully called the put function to update event on server")
+                self.navigationController?.popViewController(animated: true)
+            case .failure:
+                print("Error on line: \(#line) in function: \(#function)\n")
             }
         }
     }
-
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
 }
