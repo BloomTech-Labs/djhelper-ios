@@ -79,6 +79,9 @@ class HostEventsTableViewController: UIViewController {
                 print("Error on line: \(#line) in function: \(#function)\n")
                 return
                     }
+
+            let event = fetchedResultsController.object(at: index)
+            newEventVC.event = event
             newEventVC.hostController = hostController
             newEventVC.currentHost = currentHost
             newEventVC.eventController = eventController
