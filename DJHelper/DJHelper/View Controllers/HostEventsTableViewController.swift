@@ -74,6 +74,14 @@ class HostEventsTableViewController: UIViewController {
                 newEventVC.currentHost = currentHost
                 newEventVC.eventController = eventController
             }
+        case "updateEventSegue":
+            guard let newEventVC = segue.destination as? CreateEventViewController, let index = tableView.indexPathForSelectedRow else {
+                print("Error on line: \(#line) in function: \(#function)\n")
+                return
+                    }
+            newEventVC.hostController = hostController
+            newEventVC.currentHost = currentHost
+            newEventVC.eventController = eventController
         default:
             return
         }

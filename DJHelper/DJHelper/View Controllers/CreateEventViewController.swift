@@ -13,7 +13,8 @@ class CreateEventViewController: UIViewController {
     var currentHost: Host?
     var eventController: EventController!
     var hostController: HostController!
-
+    var event: Event?
+    
     // MARK: - IBOutlets
     @IBOutlet weak var eventNameTextField: UITextField!
     @IBOutlet weak var eventDateTextField: UITextField!
