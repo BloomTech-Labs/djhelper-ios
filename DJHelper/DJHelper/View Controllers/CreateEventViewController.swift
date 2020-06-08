@@ -13,7 +13,11 @@ class CreateEventViewController: UIViewController {
     var currentHost: Host?
     var eventController: EventController!
     var hostController: HostController!
-    var event: Event?
+    var event: Event? {
+        didSet {
+            updateViewsWithEvent()
+        }
+    }
     
     // MARK: - IBOutlets
     @IBOutlet weak var eventNameTextField: UITextField!
@@ -26,6 +30,22 @@ class CreateEventViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    // MARK: - PRIVATE FUNCTIONS
+    private func updateViewsWithEvent(){
+        guard let passedInEvent = event, isViewLoaded else {
+            print("Error on line: \(#line) in function: \(#function)\n")
+            return
+        }
+        self.title = passedInEvent.name
+        eventNameTextField.text = passedInEvent.name
+        eventDateTextField.text = passedInEvent.eventDate?.stringFromDate()
+        descriptionTextField.text = passedInEvent.description
+        startTimetextField.text = passedInEvent.startTime?.stringFromDate()
+        endTimeTextField.text = passedInEvent.endTime?.stringFromDate()
+        typeTextField.text = passedInEvent.eventType
+        notesTextField.text = passedInEvent.notes
     }
 
     // MARK: - IBActions
