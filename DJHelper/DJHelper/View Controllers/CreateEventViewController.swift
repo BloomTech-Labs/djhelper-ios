@@ -47,6 +47,8 @@ class CreateEventViewController: UIViewController {
         typeTextField.text = passedInEvent.eventType
         notesTextField.text = passedInEvent.notes
     }
+    
+    
 
     // MARK: - IBActions
     @IBAction func saveEvent(_ sender: UIBarButtonItem) {

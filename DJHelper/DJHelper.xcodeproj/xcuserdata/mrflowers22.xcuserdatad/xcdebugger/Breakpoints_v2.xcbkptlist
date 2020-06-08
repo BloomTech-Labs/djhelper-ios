@@ -47,9 +47,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "0"
-            endingLineNumber = "0"
-            landmarkName = "authorize(event:completion:)"
-            landmarkType = "7">
+            endingLineNumber = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -63,9 +61,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "0"
-            endingLineNumber = "0"
-            landmarkName = "authorize(event:completion:)"
-            landmarkType = "7">
+            endingLineNumber = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -94,8 +90,8 @@
             filePath = "DJHelper/View Controllers/CreateEventViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "tempButton(_:)"
             landmarkType = "7">
          </BreakpointContent>

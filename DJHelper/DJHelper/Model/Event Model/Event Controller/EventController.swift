@@ -25,7 +25,59 @@ class EventController {
     init(dataLoader: NetworkDataLoader = URLSession.shared) {
         self.dataLoader = dataLoader
     }
-
+    
+    // MARK: - UPDATE EVENT
+    
+    func updateEvent(event: Event, eventName: String?, eventDate: String?, description: String?, startTime: String?, endTime: String?, type: String?, notes: String?) -> Event {
+        if eventName != nil {
+            event.name = eventName
+        }
+        
+        if eventDate != nil {
+            event.eventDate = eventDate?.dateFromString()
+        }
+        
+        if description != nil {
+            event.eventDescription = description
+        }
+        
+        if startTime != nil {
+            event.startTime = startTime?.dateFromString()
+        }
+        
+        if endTime != nil {
+            event.endTime = endTime?.dateFromString()
+        }
+        
+        if type != nil {
+            event.eventType = type
+        }
+        
+        if notes != nil {
+            event.notes = notes
+        }
+        
+        //and save to core data
+        do {
+            try CoreDataStack.shared.save()
+        } catch {
+            print("""
+                Error on line: \(#line) in function: \(#function)\n
+                Readable error: \(error.localizedDescription)\n Technical error: \(error)
+                """)
+        }
+        return event
+    }
+    
+    func saveUpdateEvent(_ event: Event, forHost hostID: Host, completion: @escaping (Results<Bool,Error>) -> Void){
+        let authURL = baseURL.appendingPathComponent("auth")
+        let eventURL = authURL.appendingPathComponent("event")
+        let finalURL = eventURL.appendingPathComponent("\(hostID.identifier)")
+        
+        var urlRequest = URLRequest(url: finalURL)
+    
+    }
+    
     // MARK: - FETCH ALL EVENTS
     func fetchAllEventsFromServer(for host: Host, completion: @escaping(Result<[Event], EventErrors>) -> Void) {
         let url = baseURL.appendingPathComponent("events")
