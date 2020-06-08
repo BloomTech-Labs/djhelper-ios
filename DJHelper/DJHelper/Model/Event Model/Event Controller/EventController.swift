@@ -15,6 +15,7 @@ class EventController {
         case noDataError
         case encodeError(Error)
         case decodeError(Error)
+        case errorUpdatingEventOnServer(Error)
         case otherError(Error)
         case noEventsInServerOrCoreData
     }
@@ -25,38 +26,25 @@ class EventController {
     init(dataLoader: NetworkDataLoader = URLSession.shared) {
         self.dataLoader = dataLoader
     }
-    
+
     // MARK: - UPDATE EVENT
-    
-    func updateEvent(event: Event, eventName: String?, eventDate: String?, description: String?, startTime: String?, endTime: String?, type: String?, notes: String?) -> Event {
-        if eventName != nil {
+
+    func updateEvent(event: Event,
+                     eventName: String,
+                     eventDate: Date,
+                     description: String,
+                     startTime: Date,
+                     endTime: Date,
+                     type: String,
+                     notes: String) -> Event {
             event.name = eventName
-        }
-        
-        if eventDate != nil {
-            event.eventDate = eventDate?.dateFromString()
-        }
-        
-        if description != nil {
+            event.eventDate = eventDate
             event.eventDescription = description
-        }
-        
-        if startTime != nil {
-            event.startTime = startTime?.dateFromString()
-        }
-        
-        if endTime != nil {
-            event.endTime = endTime?.dateFromString()
-        }
-        
-        if type != nil {
+            event.startTime = startTime
+            event.endTime = endTime
             event.eventType = type
-        }
-        
-        if notes != nil {
             event.notes = notes
-        }
-        
+
         //and save to core data
         do {
             try CoreDataStack.shared.save()
@@ -68,50 +56,54 @@ class EventController {
         }
         return event
     }
-    
-    func saveUpdateEvent(_ event: Event, forHost hostID: Host, completion: @escaping (Result<Bool,Error>) -> Void){
+
+    func saveUpdateEvent(_ event: Event, forHost hostID: Host, completion: @escaping (Result<(),EventErrors>) -> Void) {
         guard let eventRep = event.eventAuthorizationRep else {
             print("Error on line: \(#line) in function: \(#function)\n")
             return
         }
-        
+
         let authURL = baseURL.appendingPathComponent("auth")
         let eventURL = authURL.appendingPathComponent("event")
         let finalURL = eventURL.appendingPathComponent("\(hostID.identifier)")
-        
+
         var urlRequest = URLRequest(url: finalURL)
         urlRequest.httpMethod = HTTPMethod.put.rawValue
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
+
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
-        
+
         do {
             urlRequest.httpBody =  try encoder.encode(eventRep)
-        } catch  {
+        } catch {
             print("""
                 Error on line: \(#line) in function: \(#function)\n
                 Readable error: \(error.localizedDescription)\n Technical error: \(error)
                 """)
         }
-        
+
         dataLoader.loadData(from: urlRequest) { (_, response, error) in
             if let response = response as? HTTPURLResponse {
                 print("HTTPResponse: \(response.statusCode) in function: \(#function)")
             }
-            
+
             if let error = error {
                 print("""
                     Error: \(error.localizedDescription) on line \(#line)
                     in function: \(#function)\n Technical error: \(error)
                     """)
-                completion(.failure(error))
+                DispatchQueue.main.async {
+                    completion(.failure(.noEventsInServerOrCoreData))
+                }
             }
-            
-            completion(.success(true))
+            DispatchQueue.main.async {
+                print("success")
+                completion(.success(()))
+            }
         }
     }
-    
+
     // MARK: - FETCH ALL EVENTS
     func fetchAllEventsFromServer(for host: Host, completion: @escaping(Result<[Event], EventErrors>) -> Void) {
         let url = baseURL.appendingPathComponent("events")

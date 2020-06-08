@@ -20,8 +20,7 @@ extension Date {
 extension String {
     func dateFromString() -> Date? {
         let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .medium
+        formatter.dateStyle = .short
         return formatter.date(from: self)
     }
 }
