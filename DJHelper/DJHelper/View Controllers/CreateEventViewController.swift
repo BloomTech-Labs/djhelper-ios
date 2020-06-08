@@ -59,6 +59,7 @@ class CreateEventViewController: UIViewController {
                           notes: notes,
                           eventID: 1)
 
+        // NOTE: This next line is what causes the event to be linked with the current host in Core Data
         event.host = currentHost
 
         eventController.authorize(event: event) { (results) in

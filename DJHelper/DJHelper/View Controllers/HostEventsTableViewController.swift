@@ -12,7 +12,7 @@ import CoreData
 class HostEventsTableViewController: UIViewController {
 
     var eventController = EventController()
-    var hostController: HostController?
+    var hostController: HostController!
     var currentHost: Host!
 
     @IBOutlet var tableView: UITableView!
@@ -50,24 +50,16 @@ class HostEventsTableViewController: UIViewController {
     // If it does not exist, we will create a host object and add it to core data.
     // We will then create a fetched results controller to get the results for the table view data source.
 
-    /// <#Description#>
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//
-//        let host = Host(name: "test20", username: "test20",
-//                        email: "test20", password: "test20", bio: "test20",
-//                        identifier: 1, phone: "test20", profilePic: URL(string: "test20")!,
-//                        website: URL(string: "test20")!)
-//
-
         eventController.fetchAllEventsFromServer(for: self.currentHost) { (results) in
             switch results {
-            case .success(_):
+            case .success:
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
-            case .failure(_):
+            case .failure:
                 return
             }
         }
@@ -99,7 +91,6 @@ extension HostEventsTableViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // TODO: update code
         let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell", for: indexPath)
         let event = fetchedResultsController.object(at: indexPath)
         cell.textLabel?.text = event.name

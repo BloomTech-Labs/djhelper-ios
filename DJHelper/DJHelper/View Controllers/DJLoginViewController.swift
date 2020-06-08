@@ -76,7 +76,12 @@ class DJLoginViewController: UIViewController, UITextFieldDelegate {
             }
         }
         } else {
-            // alert saying that no such username was found.
+            let alertController = UIAlertController(title: "Username Not Found",
+                                                    message: "The username \(username) was not found on this device. Please verify and try again, or tap Register to create a new account.",
+                preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(alertAction)
+            self.present(alertController, animated: true)
         }
     }
 
