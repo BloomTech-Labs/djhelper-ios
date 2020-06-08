@@ -94,6 +94,22 @@ class EventController {
                 Readable error: \(error.localizedDescription)\n Technical error: \(error)
                 """)
         }
+        
+        dataLoader.loadData(from: urlRequest) { (_, response, error) in
+            if let response = response as? HTTPURLResponse {
+                print("HTTPResponse: \(response.statusCode) in function: \(#function)")
+            }
+            
+            if let error = error {
+                print("""
+                    Error: \(error.localizedDescription) on line \(#line)
+                    in function: \(#function)\n Technical error: \(error)
+                    """)
+                completion(.failure(error))
+            }
+            
+            completion(.success(true))
+        }
     }
     
     // MARK: - FETCH ALL EVENTS
