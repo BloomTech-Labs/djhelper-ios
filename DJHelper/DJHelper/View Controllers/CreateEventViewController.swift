@@ -99,6 +99,7 @@ class CreateEventViewController: UIViewController {
 
         for tField in textFieldArray {
             if tField.text == "" && tField.placeholder != nil {
+                tField.shake()
                 print("textfield: \(tField)")
                 print("textField placeHolder: \(String(describing: tField.placeholder))")
             }
