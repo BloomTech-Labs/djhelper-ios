@@ -11,8 +11,7 @@ import UIKit
 extension Date {
     func stringFromDate() -> String {
         let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .medium
+        formatter.dateFormat = "M/d/yyyy h:mm a"
         return formatter.string(from: self)
     }
 }
@@ -20,7 +19,7 @@ extension Date {
 extension String {
     func dateFromString() -> Date? {
         let formatter = DateFormatter()
-        formatter.dateStyle = .medium
+        formatter.dateFormat = "M/d/yyyy h:mm a"
         return formatter.date(from: self)
     }
 }

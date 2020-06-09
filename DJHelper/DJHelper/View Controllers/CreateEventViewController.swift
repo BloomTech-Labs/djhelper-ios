@@ -34,6 +34,8 @@ class CreateEventViewController: UIViewController {
 
         updateViewsWithEvent()
 
+        // a date picker is displayed when the user taps in either of the two date text fields
+        // the date value of the picker then populates that text field
         startTimeDatePicker = UIDatePicker()
         startTimeDatePicker?.datePickerMode = .dateAndTime
         startTimeDatePicker?.minuteInterval = 15
@@ -49,6 +51,7 @@ class CreateEventViewController: UIViewController {
 
         endTimeTextField.inputView = endTimeDatePicker
 
+        // tap anywhere on the screen to dismiss the date picker
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.viewTapped(gestureRecognizer:)))
         view.addGestureRecognizer(tapGesture)
     }
@@ -111,13 +114,13 @@ class CreateEventViewController: UIViewController {
                               eventType: type,
                               eventDescription: description,
                               eventDate: start,
-                hostID: currentHost.identifier,
-                locationID: 1,
-                startTime: start,
-                endTime: end,
-                imageURL: URL(string: "tewtststtt.com")!,
-                notes: notes,
-                eventID: 1)
+                              hostID: currentHost.identifier,
+                              locationID: 1,
+                              startTime: start,
+                              endTime: end,
+                              imageURL: URL(string: "tewtststtt.com")!,
+                              notes: notes,
+                              eventID: nil)
 
             authorizeEvent(event, withHost: currentHost, andEventController: eventController)
         }
@@ -148,13 +151,11 @@ extension CreateEventViewController {
 
     // MARK: - PRIVATE FUNCTIONS
     private func updateViewsWithEvent() {
-        guard let passedInEvent = event, isViewLoaded else {
-            print("Error on line: \(#line) in function: \(#function)\n")
-            return
-        }
+        guard let passedInEvent = event, isViewLoaded else { return }
+
         self.title = passedInEvent.name
         eventNameTextField.text = passedInEvent.name
-        descriptionTextField.text = passedInEvent.description
+        descriptionTextField.text = passedInEvent.eventDescription
         startTimetextField.text = passedInEvent.startTime?.stringFromDate()
         endTimeTextField.text = passedInEvent.endTime?.stringFromDate()
         typeTextField.text = passedInEvent.eventType
@@ -169,6 +170,11 @@ extension CreateEventViewController {
         eventController.authorize(event: event) { (results) in
             switch results {
             case let .success(eventRep):
+
+                // save the eventID that is returned to the newly created event object.
+                self.event?.eventID = eventRep.eventID ?? 999
+                try? CoreDataStack.shared.mainContext.save()
+
                 print("successful attempt to create event in vc: \(eventRep.name)")
                 DispatchQueue.main.async {
                     self.navigationController?.popViewController(animated: true)
