@@ -18,38 +18,6 @@
             endingLineNumber = "97"
             landmarkName = "testRegisterUnmatchedPasswords()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A14AB4AE-7728-4510-8FAB-124A85E87CE8 - c08e3dc4fd42758b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "DJHelperUITests.DJHelperUITests.testRegisterUnmatchedPasswords() -&gt; ()"
-                  moduleName = "DJHelperUITests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/craig/Development/Labs/djhelper-ios/DJHelper/DJHelperUITests/DJHelperUITests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "97"
-                  endingLineNumber = "97"
-                  offsetFromSymbolStart = "1804">
-               </Location>
-               <Location
-                  uuid = "A14AB4AE-7728-4510-8FAB-124A85E87CE8 - caea2e09d9d1becc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.XCUIElement) -&gt; Swift.Bool in DJHelperUITests.DJHelperUITests.testRegisterUnmatchedPasswords() -&gt; ()"
-                  moduleName = "DJHelperUITests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/craig/Development/Labs/djhelper-ios/DJHelper/DJHelperUITests/DJHelperUITests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "98"
-                  endingLineNumber = "98"
-                  offsetFromSymbolStart = "69">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

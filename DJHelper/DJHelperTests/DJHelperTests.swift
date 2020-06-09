@@ -23,7 +23,7 @@ class DJHelperTests: XCTestCase {
     func testNetworkCallValidLogIn() {
         let hostController = HostController()
 
-        let testHost = Host(username: "BMac", email: "bmac@funkybunch.com", password: "ciao", identifier: 64)
+        let testHost = Host(username: "BMac3", email: "bmac@funkybunch.com", password: "ciao", identifier: 64)
 
         let hostLoginExpectation = expectation(description: "Wait for log in to complete")
 
@@ -33,7 +33,7 @@ class DJHelperTests: XCTestCase {
             switch result {
             case let .success(hostRegistrationResponse):
                 XCTAssertNotNil(hostRegistrationResponse)
-                XCTAssertEqual(hostRegistrationResponse.username, "BMac")
+                XCTAssertEqual(hostRegistrationResponse.username, "BMac3")
             case let .failure(error):
                 XCTAssertNil(error)
             }

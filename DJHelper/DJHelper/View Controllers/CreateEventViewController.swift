@@ -30,6 +30,8 @@ class CreateEventViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        updateViewsWithEvent()
     }
 
     // MARK: - IBActions
@@ -38,7 +40,6 @@ class CreateEventViewController: UIViewController {
     }
 
     @IBAction func tempButton(_ sender: UIButton) {
-        print("button pressed: \(sender)")
 
         guard let currentHost = currentHost,
             let eventController = eventController,
@@ -59,6 +60,8 @@ class CreateEventViewController: UIViewController {
                 return }
 
         if let passedInEvent = event {
+
+            // here possibly only pass the data that actually changed?
             let updatedEvent = eventController.updateEvent(event: passedInEvent,
                                                            eventName: name,
                                                            eventDate: dateFromString,
@@ -74,7 +77,8 @@ class CreateEventViewController: UIViewController {
                               eventType: type,
                               eventDescription: description,
                               eventDate: Date() /*dateFromString*/,
-                hostID: 1 /*currentHost.identifier*/, locationID: 1,
+                hostID: currentHost.identifier,
+                locationID: 1,
                 startTime: Date() /*startTimeDate*/,
                 endTime: Date() /*endTimeDate*/,
                 imageURL: URL(string: "tewtststtt.com")!,

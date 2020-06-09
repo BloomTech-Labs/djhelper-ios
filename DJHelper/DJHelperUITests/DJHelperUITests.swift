@@ -10,13 +10,8 @@ import XCTest
 
 class DJHelperUITests: XCTestCase {
 
-    // Login with invalid credentials should present alert
-    // Login with valid credentials should transition to trable view controller
-    // Tapping Register on Sign In scene should transition to Register scene
-    // Register with different password fields should present password alert
+
     // Register with empty text field should return nothing
-    // Register with a unique username and matching passwords should present success alert
-    // ...and continuing to sign in should transition to table view controller.
 
     let app = XCUIApplication()
     override func setUp() {
@@ -24,10 +19,8 @@ class DJHelperUITests: XCTestCase {
         app.launch()
     }
 
+    // Login with invalid credentials should present alert
     func testInvalidLogIn() {
-
-        // TODO: This test helped me to find an error!
-        // We need to add an alert if the fetch request does not find the username in core data.
 
         let usernameTextField = app.textFields["HostSignIn.UsernameTextField"]
             usernameTextField.tap()
@@ -39,7 +32,7 @@ class DJHelperUITests: XCTestCase {
         app.staticTexts["Sign in"].tap()
 
         addUIInterruptionMonitor(withDescription: "System Dialog") { (alert) -> Bool in
-            let invalidSignInText = "LogIn Error"
+            let invalidSignInText = "Username Not Found"
             if alert.label.contains(invalidSignInText) {
                 XCTAssertTrue(alert.exists)
                 alert.buttons["OK"].tap()
@@ -52,11 +45,12 @@ class DJHelperUITests: XCTestCase {
         app.tap()
     }
 
+    // Login with valid credentials should transition to trable view controller
     func testValidHostLogIn() {
 
         let usernameTextField = app.textFields["HostSignIn.UsernameTextField"]
         usernameTextField.tap()
-        usernameTextField.typeText("BMac")
+        usernameTextField.typeText("BMac3")
 
         let hostsigninPasswordtextfieldTextField = app.textFields["HostSignIn.PasswordTextField"]
         hostsigninPasswordtextfieldTextField.tap()
@@ -67,12 +61,14 @@ class DJHelperUITests: XCTestCase {
         XCTAssertTrue(addNewEvent.exists)
     }
 
+    // Tapping Register on Sign In scene should transition to Register scene
     func testShowRegisterScene() {
 
         app.staticTexts["Register"].tap()
         XCTAssertTrue(app.staticTexts["Create your Account"].exists)
     }
 
+    // Register with different password fields should present password alert
     func testRegisterUnmatchedPasswords() {
 
         app.staticTexts["Register"].tap()
@@ -108,6 +104,8 @@ class DJHelperUITests: XCTestCase {
         app.tap()
     }
 
+    // Register with a unique username and matching passwords should present success alert
+    // ...and continuing to sign in should transition to table view controller.
     func testValidRegistrationAndSignIn() {
 
         app.staticTexts["Register"].tap()
