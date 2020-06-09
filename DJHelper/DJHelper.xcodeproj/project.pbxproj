@@ -18,6 +18,8 @@
 		1BDBE28624850CF3006DE77E /* HostRegistrationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDBE28524850CF3006DE77E /* HostRegistrationResponse.swift */; };
 		44214DE5248D6FF500D63B6A /* DJHelperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DE3248D676600D63B6A /* DJHelperUITests.swift */; };
 		44214DE7248D81AA00D63B6A /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DE6248D81AA00D63B6A /* CreateEventViewController.swift */; };
+		44214DE9248F2C6300D63B6A /* HostProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DE8248F2C6300D63B6A /* HostProfileViewController.swift */; };
+		44214DEB248F2CA000D63B6A /* EventPlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DEA248F2CA000D63B6A /* EventPlaylistViewController.swift */; };
 		4446F799247638D4005ACE10 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F798247638D4005ACE10 /* HTTPMethod.swift */; };
 		4446F79B247638F9005ACE10 /* NetworkDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F79A247638F9005ACE10 /* NetworkDataLoader.swift */; };
 		4446F79D24763935005ACE10 /* URLSessionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F79C24763935005ACE10 /* URLSessionExtension.swift */; };
@@ -70,6 +72,8 @@
 		44214DE3248D676600D63B6A /* DJHelperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DJHelperUITests.swift; path = "../../Development/Labs/djhelper-ios/DJHelper/DJHelperUITests/DJHelperUITests.swift"; sourceTree = "<group>"; };
 		44214DE4248D676600D63B6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "../../Development/Labs/djhelper-ios/DJHelper/DJHelperUITests/Info.plist"; sourceTree = "<group>"; };
 		44214DE6248D81AA00D63B6A /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
+		44214DE8248F2C6300D63B6A /* HostProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostProfileViewController.swift; sourceTree = "<group>"; };
+		44214DEA248F2CA000D63B6A /* EventPlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPlaylistViewController.swift; sourceTree = "<group>"; };
 		4446F798247638D4005ACE10 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		4446F79A247638F9005ACE10 /* NetworkDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataLoader.swift; sourceTree = "<group>"; };
 		4446F79C24763935005ACE10 /* URLSessionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionExtension.swift; sourceTree = "<group>"; };
@@ -246,6 +250,8 @@
 			isa = PBXGroup;
 			children = (
 				447F537D2475805E00F706F1 /* ViewController.swift */,
+				44214DEA248F2CA000D63B6A /* EventPlaylistViewController.swift */,
+				44214DE8248F2C6300D63B6A /* HostProfileViewController.swift */,
 				44214DE6248D81AA00D63B6A /* CreateEventViewController.swift */,
 				4446F8242480CD32005ACE10 /* DJLoginViewController.swift */,
 				4446F8262480D792005ACE10 /* DJRegisterViewController.swift */,
@@ -471,6 +477,7 @@
 				1BA4A8C82486858D002A67E2 /* HelperExtensions.swift in Sources */,
 				447F53C3247634EE00F706F1 /* CoreDataStack.swift in Sources */,
 				1B323D3A248422210065D94C /* HostRepresentation.swift in Sources */,
+				44214DE9248F2C6300D63B6A /* HostProfileViewController.swift in Sources */,
 				447F537E2475805E00F706F1 /* ViewController.swift in Sources */,
 				1BA4A8B6248577F4002A67E2 /* HostLoginResponse.swift in Sources */,
 				1BA4A8B8248586B9002A67E2 /* EventRepresentation.swift in Sources */,
@@ -486,6 +493,7 @@
 				1BA4A8C42485F27A002A67E2 /* EventAuthRequest.swift in Sources */,
 				447F537A2475805E00F706F1 /* AppDelegate.swift in Sources */,
 				447F537C2475805E00F706F1 /* SceneDelegate.swift in Sources */,
+				44214DEB248F2CA000D63B6A /* EventPlaylistViewController.swift in Sources */,
 				1BDBE284248508FC006DE77E /* HostRegistration.swift in Sources */,
 				4446F7DA247DCAD8005ACE10 /* Bearer.swift in Sources */,
 				4446F7D6247DC51F005ACE10 /* Host+Convenience.swift in Sources */,
