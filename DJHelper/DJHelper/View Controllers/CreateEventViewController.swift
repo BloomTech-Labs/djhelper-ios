@@ -23,7 +23,6 @@ class CreateEventViewController: UIViewController {
 
     // MARK: - IBOutlets
     @IBOutlet weak var eventNameTextField: UITextField!
-    @IBOutlet weak var eventDateTextField: UITextField!
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var startTimetextField: UITextField!
     @IBOutlet weak var endTimeTextField: UITextField!
@@ -40,13 +39,14 @@ class CreateEventViewController: UIViewController {
         startTimeDatePicker?.minuteInterval = 15
         startTimeDatePicker?.addTarget(self, action: #selector(self.eventDateChanged(datePicker:)), for: .valueChanged)
 
+        startTimetextField.inputView = startTimeDatePicker
+
         endTimeDatePicker = UIDatePicker()
         endTimeDatePicker?.datePickerMode = .dateAndTime
         endTimeDatePicker?.minuteInterval = 15
         endTimeDatePicker?.date = startTimeDatePicker?.date ?? Date()  // unfortunately this doesn't default the picker to the start time
         endTimeDatePicker?.addTarget(self, action: #selector(self.endTimeChanged(datePicker:)), for: .valueChanged)
 
-        eventDateTextField.inputView = startTimeDatePicker
         endTimeTextField.inputView = endTimeDatePicker
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.viewTapped(gestureRecognizer:)))
@@ -88,6 +88,7 @@ class CreateEventViewController: UIViewController {
 
         if let passedInEvent = event {
 
+            // TODO: Need to make sure the date pickers are set to the curent values of the start time and end time
             // TODO: instead of this guard let, if the end is empty, that is fine because it is optional
             guard let start = startTime.dateFromString(),
                 let end = endTime.dateFromString() else { return }
@@ -127,7 +128,6 @@ class CreateEventViewController: UIViewController {
         var textFieldArray = [UITextField]()
 
         textFieldArray.append(contentsOf: [eventNameTextField,
-                                           eventDateTextField,
                                            descriptionTextField,
                                            startTimetextField,
                                            endTimeTextField,
@@ -154,7 +154,6 @@ extension CreateEventViewController {
         }
         self.title = passedInEvent.name
         eventNameTextField.text = passedInEvent.name
-        eventDateTextField.text = passedInEvent.eventDate?.stringFromDate()
         descriptionTextField.text = passedInEvent.description
         startTimetextField.text = passedInEvent.startTime?.stringFromDate()
         endTimeTextField.text = passedInEvent.endTime?.stringFromDate()
