@@ -55,16 +55,13 @@ class CreateEventViewController: UIViewController {
 
     @objc func eventDateChanged(datePicker: UIDatePicker) {
         let dateFormatter = DateFormatter()
-        let timeFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy"
-        timeFormatter.dateFormat = "h:mm a"
-        eventDateTextField.text = dateFormatter.string(from: datePicker.date)
-        startTimetextField.text = timeFormatter.string(from: datePicker.date)
+        dateFormatter.dateFormat = "M/d/yyyy h:mm a"
+        startTimetextField.text = dateFormatter.string(from: datePicker.date)
     }
 
     @objc func endTimeChanged(datePicker: UIDatePicker) {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy h:mm a"
+        dateFormatter.dateFormat = "M/d/yyyy h:mm a"
         endTimeTextField.text = dateFormatter.string(from: datePicker.date)
     }
 
@@ -82,43 +79,41 @@ class CreateEventViewController: UIViewController {
         guard let currentHost = currentHost,
             let eventController = eventController,
             let name = eventNameTextField.text, !name.isEmpty,
-            let date = eventDateTextField.text, !date.isEmpty,
+//            let date = eventDateTextField.text, !date.isEmpty,
             let description = descriptionTextField.text, !description.isEmpty,
-            let start = startTimetextField.text, !start.isEmpty,
-            let end = endTimeTextField.text, !end.isEmpty,
+            let startTime = startTimetextField.text, !startTime.isEmpty,
+            let endTime = endTimeTextField.text, !endTime.isEmpty,
             let type = typeTextField.text, !type.isEmpty,
             let notes = notesTextField.text, !notes.isEmpty else { unwrapTextFields() ; return }
 
-        print("date from string: \(String(describing: date.dateFromString()))")
-
-        guard let dateFromString = date.dateFromString() /*,
-             let startTimeDate = start.dateFromString(),
-             let endTimeDate = end.dateFromString()*/ else {
-                print("Error on line: \(#line) in function: \(#function)\n")
-                return }
-
         if let passedInEvent = event {
+
+            // TODO: instead of this guard let, if the end is empty, that is fine because it is optional
+            guard let start = startTime.dateFromString(),
+                let end = endTime.dateFromString() else { return }
 
             // here possibly only pass the data that actually changed?
             let updatedEvent = eventController.updateEvent(event: passedInEvent,
                                                            eventName: name,
-                                                           eventDate: dateFromString,
+                                                           eventDate: start,
                                                            description: description,
-                                                           startTime: Date() /*startTimeDate*/,
-                endTime: Date().addingTimeInterval(8878788787) /*endTimeDate*/,
-                type: type,
-                notes: notes)
+                                                           startTime: start,
+                                                           endTime: end,
+                                                           type: type,
+                                                           notes: notes)
 
             putUpdateEvent(with: updatedEvent, andEventController: eventController)
         } else {
+            guard let start = startTimeDatePicker?.date else { return }
+            guard let end = endTimeDatePicker?.date else { return }
             let event = Event(name: name,
                               eventType: type,
                               eventDescription: description,
-                              eventDate: Date() /*dateFromString*/,
+                              eventDate: start,
                 hostID: currentHost.identifier,
                 locationID: 1,
-                startTime: Date() /*startTimeDate*/,
-                endTime: Date() /*endTimeDate*/,
+                startTime: start,
+                endTime: end,
                 imageURL: URL(string: "tewtststtt.com")!,
                 notes: notes,
                 eventID: 1)
