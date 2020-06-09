@@ -18,6 +18,8 @@ class CreateEventViewController: UIViewController {
             updateViewsWithEvent()
         }
     }
+    private var startTimeDatePicker: UIDatePicker?
+    private var endTimeDatePicker: UIDatePicker?
 
     // MARK: - IBOutlets
     @IBOutlet weak var eventNameTextField: UITextField!
@@ -32,6 +34,42 @@ class CreateEventViewController: UIViewController {
         super.viewDidLoad()
 
         updateViewsWithEvent()
+
+        startTimeDatePicker = UIDatePicker()
+        startTimeDatePicker?.datePickerMode = .dateAndTime
+        startTimeDatePicker?.minuteInterval = 15
+        startTimeDatePicker?.addTarget(self, action: #selector(self.eventDateChanged(datePicker:)), for: .valueChanged)
+
+        endTimeDatePicker = UIDatePicker()
+        endTimeDatePicker?.datePickerMode = .dateAndTime
+        endTimeDatePicker?.minuteInterval = 15
+        endTimeDatePicker?.date = startTimeDatePicker?.date ?? Date()  // unfortunately this doesn't default the picker to the start time
+        endTimeDatePicker?.addTarget(self, action: #selector(self.endTimeChanged(datePicker:)), for: .valueChanged)
+
+        eventDateTextField.inputView = startTimeDatePicker
+        endTimeTextField.inputView = endTimeDatePicker
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.viewTapped(gestureRecognizer:)))
+        view.addGestureRecognizer(tapGesture)
+    }
+
+    @objc func eventDateChanged(datePicker: UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        let timeFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        timeFormatter.dateFormat = "h:mm a"
+        eventDateTextField.text = dateFormatter.string(from: datePicker.date)
+        startTimetextField.text = timeFormatter.string(from: datePicker.date)
+    }
+
+    @objc func endTimeChanged(datePicker: UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy h:mm a"
+        endTimeTextField.text = dateFormatter.string(from: datePicker.date)
+    }
+
+    @objc func viewTapped(gestureRecognizer: UITapGestureRecognizer) {
+        view.endEditing(true)
     }
 
     // MARK: - IBActions
