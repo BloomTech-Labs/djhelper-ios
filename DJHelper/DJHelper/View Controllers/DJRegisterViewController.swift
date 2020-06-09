@@ -27,9 +27,34 @@ class DJRegisterViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         createAccountButton.layer.cornerRadius = 25
+        setUpSubviews()
 
         let tapToDismiss = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tapToDismiss)
+    }
+
+    // Programmatically setting up the Sign In button in the view.
+    func setUpSubviews() {
+        let backToSignIn = UIButton(type: .system)
+        backToSignIn.translatesAutoresizingMaskIntoConstraints = false
+        backToSignIn.setTitle("Sign In", for: .normal)
+        backToSignIn.addTarget(self, action: #selector(self.backToSignIn), for: .touchUpInside)
+
+        let customButtonTitle = NSMutableAttributedString(string: "Sign In", attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 18),
+            NSAttributedString.Key.foregroundColor: UIColor.black
+        ])
+
+        backToSignIn.setAttributedTitle(customButtonTitle, for: .normal)
+
+        view.addSubview(backToSignIn)
+
+        backToSignIn.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -40).isActive = true
+        backToSignIn.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40).isActive = true
+    }
+
+    @objc private func backToSignIn() {
+        navigationController?.popViewController(animated: true)
     }
 
     // MARK: - Actions
