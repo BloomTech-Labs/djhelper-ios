@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HostProfileViewController: UIViewController {
+class HostProfileViewController: ShiftableViewController {
 
     var currentHost: Host? {
         didSet {
@@ -63,7 +63,10 @@ class HostProfileViewController: UIViewController {
             case let .failure(error):
                 DispatchQueue.main.async {
                     let alertController = UIAlertController(title: "Update Error",
-                                                            message: "There was an error updating your profile, with message: \(error). Please verify and try again.",
+                                                            message:
+                        """
+                        There was an error updating your profile, with message: \(error). Please verify and try again.
+                        """,
                         preferredStyle: .alert)
                     let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                     alertController.addAction(alertAction)

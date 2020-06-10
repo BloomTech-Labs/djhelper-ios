@@ -142,8 +142,6 @@ class HostController {
             let encoder = JSONEncoder()
             encoder.keyEncodingStrategy = .convertToSnakeCase
             urlRequest.httpBody = try encoder.encode(hostRepresentation)
-            let jsonString = String(data: urlRequest.httpBody!, encoding: .utf8)
-            print(jsonString)
         } catch {
             print("Error encoding HostUpdate:\n error: \(error.localizedDescription)\n Technical error: \(error)")
         }
@@ -165,8 +163,6 @@ class HostController {
             }
 
             do {
-                let printableDate = String(data: data, encoding: .utf8)
-                print(printableDate)
                 let updateHostResponse = try JSONDecoder().decode(HostUpdate.self, from: data)
                 try CoreDataStack.shared.mainContext.save()
                 completion(.success(updateHostResponse))

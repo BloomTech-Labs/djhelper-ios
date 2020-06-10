@@ -75,7 +75,13 @@ extension Host {
             let username = self.username,
             let email = self.email else { return nil }
 
-        return HostUpdate(name: name, username: username, email: email, phone: self.phone, bio: self.bio, website: self.website?.absoluteString, profilePicUrl: self.profilePic?.absoluteString)
+        return HostUpdate(name: name,
+                          username: username,
+                          email: email,
+                          phone: self.phone,
+                          bio: self.bio,
+                          website: self.website?.absoluteString,
+                          profilePicUrl: self.profilePic?.absoluteString)
     }
 
     //Host -> HostRepresentation
