@@ -49,7 +49,29 @@ class HostProfileViewController: UIViewController {
         }
         host.bio = bioTextView.text
 
-        // call hostController.updateHost
+        hostController.updateHost(with: host) { (result) in
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    let alertController = UIAlertController(title: "Profile Updated",
+                                                            message: "Nice! Your profile has been updated!",
+                        preferredStyle: .alert)
+                    let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alertController.addAction(alertAction)
+                    self.present(alertController, animated: true)
+                }
+            case let .failure(error):
+                DispatchQueue.main.async {
+                    let alertController = UIAlertController(title: "Update Error",
+                                                            message: "There was an error updating your profile, with message: \(error). Please verify and try again.",
+                        preferredStyle: .alert)
+                    let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alertController.addAction(alertAction)
+                    self.present(alertController, animated: true)
+                }
+                return
+            }
+        }
         // successful result should present alert controller
         // failed result should also present alert controller
     }

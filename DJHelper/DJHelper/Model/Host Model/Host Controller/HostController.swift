@@ -118,10 +118,6 @@ class HostController {
                 let hostLoginResponse = try JSONDecoder().decode(HostLoginResponse.self, from: data)
                 self.bearer = try JSONDecoder().decode(Bearer.self, from: data)
 
-                //assign the bearer or token
-//                self.bearer?.token = hostLoginResponse.token
-                print("Token recieved after login from HostController: \(String(describing: self.bearer?.token))")
-
                 completion(.success(hostLoginResponse))
             } catch {
                 print("Error in func: \(#function)\n error: \(error.localizedDescription)\n Technical error: \(error)")
@@ -133,6 +129,46 @@ class HostController {
     // MARK: - Update Existing Host
     func updateHost(with host: Host, completion: @escaping (Result<HostRepresentation, HostErrors>) -> Void) {
         guard let hostRepresentation = host.hostToHostRep else { return }
+
+        let requestURL = baseURL.appendingPathComponent("auth")
+            .appendingPathComponent("dj")
+            .appendingPathComponent("\(hostRepresentation.identifier!)")
+
+        var urlRequest = URLRequest(url: requestURL)
+        urlRequest.httpMethod = HTTPMethod.put.rawValue
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        do {
+            urlRequest.httpBody = try JSONEncoder().encode(hostRepresentation)
+        } catch {
+            print("Error encoding HostUpdate:\n error: \(error.localizedDescription)\n Technical error: \(error)")
+        }
+
+        dataLoader.loadData(from: urlRequest) { (data, response, error) in
+            if let response = response as? HTTPURLResponse {
+                print("HTTPResponse: \(response.statusCode) in function: \(#function)")
+            }
+
+            if let error = error {
+                print("Error: \(error.localizedDescription) in func: \(#function)\n Technical error: \(error)")
+                completion(.failure(.loginError(error)))
+            }
+
+            guard let data = data else {
+                print("Error on line: \(#line) in function: \(#function)")
+                completion(.failure(.noDataError))
+                return
+            }
+
+            do {
+                let updateHostResponse = try JSONDecoder().decode(HostRepresentation.self, from: data)
+                try CoreDataStack.shared.mainContext.save()
+                completion(.success(updateHostResponse))
+            } catch {
+                print("Error in func: \(#function)\n error: \(error.localizedDescription)\n Technical error: \(error)")
+                completion(.failure(.unknownError(error)))
+            }
+        }
     }
 
     // MARK: - Delete Host
