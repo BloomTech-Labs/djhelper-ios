@@ -18,6 +18,7 @@ class EventController {
         case errorUpdatingEventOnServer(Error)
         case otherError(Error)
         case noEventsInServerOrCoreData
+        case couldNotInitializeAnEvent
     }
 
     private let baseURL = URL(string: "https://dj-helper-be.herokuapp.com/api")!
@@ -48,7 +49,7 @@ class EventController {
         return event
     }
 
-    func saveUpdateEvent(_ event: Event, completion: @escaping (Result<(EventRepresentation),EventErrors>) -> Void) {
+    func saveUpdateEvent(_ event: Event, completion: @escaping (Result<(), EventErrors>) -> Void) {
         guard let eventRep = event.eventAuthorizationRep, let eventId = eventRep.eventID else {
             print("Error on line: \(#line) in function: \(#function)\n")
             return
@@ -88,12 +89,59 @@ class EventController {
                     completion(.failure(.noEventsInServerOrCoreData))
                 }
             }
-            
-            
-            DispatchQueue.main.async {
-                print("success")
-                completion(.success(()))
+
+            guard let data = data else {
+                print("Error on line: \(#line) in function: \(#function)\n")
+                DispatchQueue.main.async {
+                    completion(.failure(.noDataError))
+                }
+                return
             }
+
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+
+            do {
+                let eventRep = try decoder.decode(EventRepresentation.self, from: data)
+                DispatchQueue.main.async {
+                    if self.didConvertEventRepToEvent(eventRep) {
+                        print("success")
+                        completion(.success(()))
+                    } else {
+                        print("Error on line: \(#line) in function: \(#function)\n")
+                        DispatchQueue.main.async {
+                            completion(.failure(.couldNotInitializeAnEvent))
+                        }
+                    }
+                }
+            } catch {
+                print("""
+                    Error on line: \(#line) in function: \(#function)\n
+                    Readable error: \(error.localizedDescription)\n Technical error: \(error)
+                    """)
+                DispatchQueue.main.async {
+                    completion(.failure(.decodeError(error)))
+                }
+            }
+        }
+    }
+
+    func didConvertEventRepToEvent(_ eventRep: EventRepresentation) -> Bool {
+        guard let event = Event(eventRepresentation: eventRep) else {
+            return false
+        }
+
+        print("event's name: \(String(describing: event.name))")
+
+        do {
+            try CoreDataStack.shared.save()
+            return true
+        } catch {
+            print("""
+                Error on line: \(#line) in function: \(#function)\n
+                Readable error: \(error.localizedDescription)\n Technical error: \(error)
+                """)
+            return false
         }
     }
 
