@@ -45,19 +45,10 @@ class EventController {
             event.eventType = type
             event.notes = notes
 
-        //and save to core data
-        do {
-            try CoreDataStack.shared.save()
-        } catch {
-            print("""
-                Error on line: \(#line) in function: \(#function)\n
-                Readable error: \(error.localizedDescription)\n Technical error: \(error)
-                """)
-        }
         return event
     }
 
-    func saveUpdateEvent(_ event: Event, completion: @escaping (Result<(),EventErrors>) -> Void) {
+    func saveUpdateEvent(_ event: Event, completion: @escaping (Result<(EventRepresentation),EventErrors>) -> Void) {
         guard let eventRep = event.eventAuthorizationRep, let eventId = eventRep.eventID else {
             print("Error on line: \(#line) in function: \(#function)\n")
             return
@@ -83,7 +74,7 @@ class EventController {
                 """)
         }
 
-        dataLoader.loadData(from: urlRequest) { (_, response, error) in
+        dataLoader.loadData(from: urlRequest) { (data, response, error) in
             if let response = response as? HTTPURLResponse {
                 print("HTTPResponse: \(response.statusCode) in function: \(#function)")
             }
@@ -97,6 +88,8 @@ class EventController {
                     completion(.failure(.noEventsInServerOrCoreData))
                 }
             }
+            
+            
             DispatchQueue.main.async {
                 print("success")
                 completion(.success(()))
