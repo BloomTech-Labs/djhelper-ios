@@ -20,6 +20,7 @@
 		44214DE7248D81AA00D63B6A /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DE6248D81AA00D63B6A /* CreateEventViewController.swift */; };
 		44214DE9248F2C6300D63B6A /* HostProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DE8248F2C6300D63B6A /* HostProfileViewController.swift */; };
 		44214DEB248F2CA000D63B6A /* EventPlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DEA248F2CA000D63B6A /* EventPlaylistViewController.swift */; };
+		44214DED2490698F00D63B6A /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DEC2490698F00D63B6A /* TabBarViewController.swift */; };
 		4446F799247638D4005ACE10 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F798247638D4005ACE10 /* HTTPMethod.swift */; };
 		4446F79B247638F9005ACE10 /* NetworkDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F79A247638F9005ACE10 /* NetworkDataLoader.swift */; };
 		4446F79D24763935005ACE10 /* URLSessionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F79C24763935005ACE10 /* URLSessionExtension.swift */; };
@@ -74,6 +75,7 @@
 		44214DE6248D81AA00D63B6A /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		44214DE8248F2C6300D63B6A /* HostProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostProfileViewController.swift; sourceTree = "<group>"; };
 		44214DEA248F2CA000D63B6A /* EventPlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPlaylistViewController.swift; sourceTree = "<group>"; };
+		44214DEC2490698F00D63B6A /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		4446F798247638D4005ACE10 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		4446F79A247638F9005ACE10 /* NetworkDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataLoader.swift; sourceTree = "<group>"; };
 		4446F79C24763935005ACE10 /* URLSessionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionExtension.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				447F537D2475805E00F706F1 /* ViewController.swift */,
+				44214DEC2490698F00D63B6A /* TabBarViewController.swift */,
 				44214DEA248F2CA000D63B6A /* EventPlaylistViewController.swift */,
 				44214DE8248F2C6300D63B6A /* HostProfileViewController.swift */,
 				44214DE6248D81AA00D63B6A /* CreateEventViewController.swift */,
@@ -477,6 +480,7 @@
 				1BA4A8C82486858D002A67E2 /* HelperExtensions.swift in Sources */,
 				447F53C3247634EE00F706F1 /* CoreDataStack.swift in Sources */,
 				1B323D3A248422210065D94C /* HostRepresentation.swift in Sources */,
+				44214DED2490698F00D63B6A /* TabBarViewController.swift in Sources */,
 				44214DE9248F2C6300D63B6A /* HostProfileViewController.swift in Sources */,
 				447F537E2475805E00F706F1 /* ViewController.swift in Sources */,
 				1BA4A8B6248577F4002A67E2 /* HostLoginResponse.swift in Sources */,

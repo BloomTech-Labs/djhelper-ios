@@ -14,8 +14,8 @@ struct EventRepresentation: Codable {
     let eventDate: String
     let hostID: Int32
     let locationID: Int32
-    var startTime: Date?
-    var endTime: Date?
+    var startTime: String?
+    var endTime: String?
     var imageURL: URL?
     var notes: String?
     var eventID: Int32?
@@ -40,17 +40,22 @@ struct EventRepresentation: Codable {
          eventDate: String,
          hostID: Int32,
          locationID: Int32,
-         startTime: Date? = nil,
-         endTime: Date? = nil,
+         startTime: String? = nil,
+         endTime: String? = nil,
          imageURL: URL? = nil,
          notes: String? = nil,
-         eventID: Int32? = nil) {
+         eventID: Int32?) {
         self.name = name
         self.eventType = eventType
         self.eventDescription = eventDescription
         self.eventDate = eventDate
         self.hostID = hostID
         self.locationID = locationID
+        self.startTime = startTime
+        self.endTime = endTime
+        self.imageURL = imageURL
+        self.notes = notes
+        self.eventID = eventID
     }
 
     // MARK: - CODABLE INITAILIZERS
@@ -62,8 +67,8 @@ struct EventRepresentation: Codable {
         eventDate = try container.decode(String.self, forKey: .eventDate)
         hostID = try container.decode(Int32.self, forKey: .hostID)
         locationID = try container.decode(Int32.self, forKey: .locationID)
-        startTime = try container.decode(Date?.self, forKey: .startTime)
-        endTime = try container.decode(Date?.self, forKey: .endTime)
+        startTime = try container.decode(String?.self, forKey: .startTime)
+        endTime = try container.decode(String?.self, forKey: .endTime)
         imageURL = try container.decode(URL?.self, forKey: .imageURL)
         notes = try container.decode(String?.self, forKey: .notes)
         eventID = try container.decode(Int32?.self, forKey: .eventID)

@@ -20,9 +20,9 @@ extension Event {
                      locationID: Int32,
                      startTime: Date,
                      endTime: Date,
-                     imageURL: URL,
-                     notes: String,
-                     eventID: Int32,
+                     imageURL: URL? = nil,
+                     notes: String? = nil,
+                     eventID: Int32?,
                      context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
 
         self.init(context: context)
@@ -36,30 +36,32 @@ extension Event {
         self.endTime = endTime
         self.imageURL = imageURL
         self.notes = notes
-        self.eventID = eventID
+        if let unwrappedEventID = eventID {
+            self.eventID = unwrappedEventID
+        }
     }
 
     //EventRepresentation -> Event
     convenience init?(eventRepresentation: EventRepresentation,
                       context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         guard let startTime = eventRepresentation.startTime,
+            let eventDateFromString = eventRepresentation.eventDate.dateFromString(),
             let endTime = eventRepresentation.endTime,
             let imageURL = eventRepresentation.imageURL,
-            let notes = eventRepresentation.notes,
-            let convertedDate = eventRepresentation.eventDate.dateFromString(),
-            let eventID = eventRepresentation.eventID else { return nil }
+            let notes = eventRepresentation.notes else { return nil }
+//            let eventID = eventRepresentation.eventID else { return nil }
 
         self.init(name: eventRepresentation.name,
                   eventType: eventRepresentation.eventType,
                   eventDescription: eventRepresentation.eventDescription,
-                  eventDate: convertedDate,
+                  eventDate: eventDateFromString,
                   hostID: eventRepresentation.hostID,
                   locationID: eventRepresentation.locationID,
-                  startTime: startTime,
-                  endTime: endTime,
+                  startTime: startTime.dateFromString()!,
+                  endTime: endTime.dateFromString()!,
                   imageURL: imageURL,
                   notes: notes,
-                  eventID: eventID)
+                  eventID: eventRepresentation.eventID)
     }
 
     //Event -> EventRepresentation
@@ -75,6 +77,10 @@ extension Event {
                                    eventDate: eventDate.stringFromDate(),
                                    hostID: self.hostID,
                                    locationID: self.locationID,
+                                   startTime: self.startTime?.stringFromDate(),
+                                   endTime: self.endTime?.stringFromDate(),
+                                   imageURL: self.imageURL,
+                                   notes: self.notes,
                                    eventID: self.eventID)
     }
 
@@ -87,9 +93,13 @@ extension Event {
 
         return EventAuthRequest(name: name,
                                 eventType: eventType,
-                                description: description,
-                                date: eventDate,
-                                djId: self.hostID,
-                                locationId: self.locationID)
+                                eventDescription: description,
+                                eventDate: eventDate,
+                                hostID: self.hostID,
+                                locationID: self.locationID,
+                                startTime: self.startTime?.stringFromDate(),
+                                endTime: self.endTime?.stringFromDate(),
+                                imageURL: self.imageURL,
+                                notes: self.notes)
     }
 }
