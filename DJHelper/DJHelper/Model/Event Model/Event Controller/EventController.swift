@@ -191,7 +191,7 @@ class EventController {
     // MARK: - AUTHORIZE AN EVENT
     ///The server returns an object with the event data
     func authorize(event: Event, completion: @escaping (Result<EventRepresentation, EventErrors>) -> Void) {
-        guard let eventToAuthorize = event.eventAuthorizationRep else { return }
+        guard let eventToAuthorize = event.eventAuthRequest else { return }
 //        guard let eventAuthRequest = event.eventAuthRequest else { return }
 
         let url = baseURL.appendingPathComponent("auth").appendingPathComponent("event")
