@@ -53,6 +53,12 @@ class HostEventsTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let barViewControllers = self.tabBarController?.viewControllers
+        print(barViewControllers)
+        guard let profileVC = barViewControllers?[1] as? HostProfileViewController else { return }
+        profileVC.currentHost = self.currentHost
+        profileVC.hostController = self.hostController
+
         eventController.fetchAllEventsFromServer(for: self.currentHost) { (results) in
             switch results {
             case .success:

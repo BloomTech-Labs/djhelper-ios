@@ -10,7 +10,11 @@ import UIKit
 
 class HostProfileViewController: UIViewController {
 
-    var currentHost: Host?
+    var currentHost: Host? {
+        didSet {
+            updateViews()
+        }
+    }
     var hostController: HostController?
 
     @IBOutlet var usernameTextField: UITextField!
@@ -24,13 +28,20 @@ class HostProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        updateViews()
         // Do any additional setup after loading the view.
     }
 
     @IBAction func saveChanges(_ sender: UIBarButtonItem) {
         
     }
-    
+
+    private func updateViews() {
+        guard let host = currentHost else { return }
+        guard isViewLoaded else { return }
+
+        usernameTextField.text = host.username
+    }
 
     /*
     // MARK: - Navigation
