@@ -70,16 +70,24 @@ extension Host {
         return HostRegistration(name: name, username: username, email: email, password: password)
     }
 
+    var hostUpdate: HostUpdate? {
+        guard let name = self.name,
+            let username = self.username,
+            let email = self.email else { return nil }
+
+        return HostUpdate(name: name, username: username, email: email, phone: self.phone, bio: self.bio, website: self.website?.absoluteString, profilePicUrl: self.profilePic?.absoluteString)
+    }
+
     //Host -> HostRepresentation
     var hostToHostRep: HostRepresentation? {
         guard let name = self.name,
             let username = self.username,
             let password = self.password,
-            let email = self.email,
-            let phone = self.phone,
-            let website = self.website,
-            let bio = self.bio,
-            let pic = self.profilePic else { return nil }
+            let email = self.email else { return nil }
+//            let phone = self.phone,
+//            let website = self.website,
+//            let bio = self.bio,
+//            let pic = self.profilePic else { return nil }
 
         return HostRepresentation(name: name,
                                   username: username,
@@ -88,7 +96,7 @@ extension Host {
                                   phone: phone,
                                   website: website,
                                   bio: bio,
-                                  profilePic: pic,
+                                  profilePic: self.profilePic,
                                   identifier: self.identifier)
     }
 }

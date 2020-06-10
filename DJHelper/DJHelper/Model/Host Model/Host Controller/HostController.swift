@@ -127,19 +127,23 @@ class HostController {
     }
 
     // MARK: - Update Existing Host
-    func updateHost(with host: Host, completion: @escaping (Result<HostRepresentation, HostErrors>) -> Void) {
-        guard let hostRepresentation = host.hostToHostRep else { return }
+    func updateHost(with host: Host, completion: @escaping (Result<HostUpdate, HostErrors>) -> Void) {
+        guard let hostRepresentation = host.hostUpdate else { return }
 
         let requestURL = baseURL.appendingPathComponent("auth")
             .appendingPathComponent("dj")
-            .appendingPathComponent("\(hostRepresentation.identifier!)")
+            .appendingPathComponent("\(host.identifier)")
 
         var urlRequest = URLRequest(url: requestURL)
         urlRequest.httpMethod = HTTPMethod.put.rawValue
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         do {
-            urlRequest.httpBody = try JSONEncoder().encode(hostRepresentation)
+            let encoder = JSONEncoder()
+            encoder.keyEncodingStrategy = .convertToSnakeCase
+            urlRequest.httpBody = try encoder.encode(hostRepresentation)
+            let jsonString = String(data: urlRequest.httpBody!, encoding: .utf8)
+            print(jsonString)
         } catch {
             print("Error encoding HostUpdate:\n error: \(error.localizedDescription)\n Technical error: \(error)")
         }
@@ -161,7 +165,9 @@ class HostController {
             }
 
             do {
-                let updateHostResponse = try JSONDecoder().decode(HostRepresentation.self, from: data)
+                let printableDate = String(data: data, encoding: .utf8)
+                print(printableDate)
+                let updateHostResponse = try JSONDecoder().decode(HostUpdate.self, from: data)
                 try CoreDataStack.shared.mainContext.save()
                 completion(.success(updateHostResponse))
             } catch {

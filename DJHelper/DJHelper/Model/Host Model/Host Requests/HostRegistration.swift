@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 struct HostRegistration: Codable {
     let name: String
     let username: String
