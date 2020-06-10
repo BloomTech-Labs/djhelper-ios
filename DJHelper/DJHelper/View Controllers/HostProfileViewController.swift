@@ -24,7 +24,7 @@ class HostProfileViewController: UIViewController {
     @IBOutlet var websiteTextField: UITextField!
     @IBOutlet var profilePicTextField: UITextField!
     @IBOutlet var bioTextView: UITextView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,7 +33,25 @@ class HostProfileViewController: UIViewController {
     }
 
     @IBAction func saveChanges(_ sender: UIBarButtonItem) {
-        
+
+        guard let host = currentHost,
+         let hostController = hostController else { return }
+
+        host.username = usernameTextField.text
+        host.name = nameTextField.text
+        host.email = emailTextField.text
+        host.phone = phoneTextField.text
+        if let websiteURLString = websiteTextField.text {
+            host.website = URL(string: websiteURLString)
+        }
+        if let profilePicURLString = profilePicTextField.text {
+            host.profilePic = URL(string: profilePicURLString)
+        }
+        host.bio = bioTextView.text
+
+        // call hostController.updateHost
+        // successful result should present alert controller
+        // failed result should also present alert controller
     }
 
     private func updateViews() {
@@ -41,6 +59,12 @@ class HostProfileViewController: UIViewController {
         guard isViewLoaded else { return }
 
         usernameTextField.text = host.username
+        nameTextField.text = host.name
+        emailTextField.text = host.email
+        phoneTextField.text = host.phone
+        websiteTextField.text = host.website?.absoluteString
+        profilePicTextField.text = host.profilePic?.absoluteString
+        bioTextView.text = host.bio
     }
 
     /*

@@ -131,7 +131,9 @@ class HostController {
     }
 
     // MARK: - Update Existing Host
-    // server does not presently have a PUT update for host(DJ)
+    func updateHost(with host: Host, completion: @escaping (Result<HostRepresentation, HostErrors>) -> Void) {
+        guard let hostRepresentation = host.hostToHostRep else { return }
+    }
 
     // MARK: - Delete Host
     // server does not presently have a DEL for host(DJ)
