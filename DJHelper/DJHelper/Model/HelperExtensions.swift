@@ -54,6 +54,11 @@ extension UIViewController {
         alert.addAction(okAction)
         present(alert, animated: true)
     }
+    
+    func activityIndicator(shouldStart: Bool){
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        shouldStart == true ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
+    }
 }
 
 
