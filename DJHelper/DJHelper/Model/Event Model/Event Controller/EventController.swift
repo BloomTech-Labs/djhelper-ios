@@ -144,6 +144,27 @@ class EventController {
             return false
         }
     }
+    
+    func update(event: Event, withEventRep eventRep: EventRepresentation){
+        event.name = eventRep.name
+        event.eventType = eventRep.eventType
+        event.eventDescription = eventRep.eventDescription
+        event.eventDate = eventRep.eventDate.dateFromString()
+        event.hostID = eventRep.hostID
+        event.locationID = eventRep.locationID
+        event.startTime = eventRep.startTime?.dateFromString()
+        event.endTime = eventRep.endTime?.dateFromString()
+        event.eventID = eventRep.eventID ?? 0
+        
+        do {
+            try CoreDataStack.shared.save()
+        } catch  {
+            print("""
+                Error on line: \(#line) in function: \(#function)\n
+                Readable error: \(error.localizedDescription)\n Technical error: \(error)
+                """)
+        }
+    }
 
     // MARK: - FETCH ALL EVENTS
     func fetchAllEventsFromServer(for host: Host, completion: @escaping(Result<[Event], EventErrors>) -> Void) {
