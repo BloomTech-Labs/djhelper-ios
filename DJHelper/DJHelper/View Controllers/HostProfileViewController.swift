@@ -10,10 +10,25 @@ import UIKit
 
 class HostProfileViewController: UIViewController {
 
+    var currentHost: Host?
+    var hostController: HostController?
+
+    @IBOutlet var usernameTextField: UITextField!
+    @IBOutlet var nameTextField: UITextField!
+    @IBOutlet var emailTextField: UITextField!
+    @IBOutlet var phoneTextField: UITextField!
+    @IBOutlet var websiteTextField: UITextField!
+    @IBOutlet var profilePicTextField: UITextField!
+    @IBOutlet var bioTextView: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+
+    @IBAction func saveChanges(_ sender: UIBarButtonItem) {
+        
     }
     
 
