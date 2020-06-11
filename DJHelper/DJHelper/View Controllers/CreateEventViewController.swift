@@ -78,7 +78,7 @@ class CreateEventViewController: UIViewController {
                                                            description: description,
                                                            type: type,
                                                            notes: notes)
-
+            self.activityIndicator(shouldStart: true)
             putUpdateEvent(with: updatedEvent, andEventController: eventController)
         } else {
             guard let dateFromString = dateString.dateFromString() else {
@@ -94,9 +94,10 @@ class CreateEventViewController: UIViewController {
                               imageURL: URL(string: "tewtststtt.com")!,
                               notes: notes,
                               eventID: nil)
-
+            self.activityIndicator(shouldStart: true)
             authorizeEvent(event, withHost: currentHost, andEventController: eventController)
         }
+//        self.activityIndicator(shouldStart: false)
     }
 
     private func unwrapTextFields() {
@@ -145,7 +146,7 @@ extension CreateEventViewController {
                 print("successful attempt to create event in vc: \(eventRep.name)")
                 DispatchQueue.main.async {
                     self.navigationController?.popViewController(animated: true)
-
+                    self.activityIndicator(shouldStart: false)
                 }
             case let .failure(error):
                 print("""
@@ -159,10 +160,12 @@ extension CreateEventViewController {
     private func putUpdateEvent(with event: Event, andEventController eventContrller: EventController) {
         eventController.saveUpdateEvent(event) { (results) in
             switch results {
+
             case .success:
                 print("successfully called the put function to update event on server")
                 DispatchQueue.main.async {
                     self.navigationController?.popViewController(animated: true)
+                    self.activityIndicator(shouldStart: false)
                 }
             case .failure:
                 print("Error on line: \(#line) in function: \(#function)\n")
