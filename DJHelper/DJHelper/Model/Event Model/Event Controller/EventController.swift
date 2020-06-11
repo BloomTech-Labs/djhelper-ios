@@ -58,6 +58,7 @@ class EventController {
         let authURL = baseURL.appendingPathComponent("auth")
         let eventURL = authURL.appendingPathComponent("event")
         let finalURL = eventURL.appendingPathComponent("\(eventId)")
+        print("finalURL: \(finalURL.absoluteURL)")
 
         var urlRequest = URLRequest(url: finalURL)
         urlRequest.httpMethod = HTTPMethod.put.rawValue
@@ -65,9 +66,12 @@ class EventController {
 
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
+        encoder.outputFormatting = .prettyPrinted
 
         do {
             urlRequest.httpBody =  try encoder.encode(eventRep)
+            let httpbody = try encoder.encode(eventRep)
+            print("httpbody: \(String(describing: String(data: httpbody, encoding: .utf8)))")
         } catch {
             print("""
                 Error on line: \(#line) in function: \(#function)\n
@@ -98,22 +102,14 @@ class EventController {
                 return
             }
 
+            print("data for decoding EVENT REP: \(String(describing: String(data: data, encoding: .utf8)))")
+
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
 
             do {
                 let eventRep = try decoder.decode(EventRepresentation.self, from: data)
-                DispatchQueue.main.async {
-                    if self.didConvertEventRepToEvent(eventRep) {
-                        print("success")
-                        completion(.success(()))
-                    } else {
-                        print("Error on line: \(#line) in function: \(#function)\n")
-                        DispatchQueue.main.async {
-                            completion(.failure(.couldNotInitializeAnEvent))
-                        }
-                    }
-                }
+                    self.update(event: event, withEventRep: eventRep)
             } catch {
                 print("""
                     Error on line: \(#line) in function: \(#function)\n
@@ -126,39 +122,35 @@ class EventController {
         }
     }
 
-    func didConvertEventRepToEvent(_ eventRep: EventRepresentation) -> Bool {
-        guard let event = Event(eventRepresentation: eventRep) else {
-            return false
-        }
-
-        print("event's name: \(String(describing: event.name))")
-
-        do {
-            try CoreDataStack.shared.save()
-            return true
-        } catch {
-            print("""
-                Error on line: \(#line) in function: \(#function)\n
-                Readable error: \(error.localizedDescription)\n Technical error: \(error)
-                """)
-            return false
-        }
-    }
-    
-    func update(event: Event, withEventRep eventRep: EventRepresentation){
+    func update(event: Event, withEventRep eventRep: EventRepresentation) {
         event.name = eventRep.name
         event.eventType = eventRep.eventType
         event.eventDescription = eventRep.eventDescription
         event.eventDate = eventRep.eventDate.dateFromString()
         event.hostID = eventRep.hostID
         event.locationID = eventRep.locationID
-        event.startTime = eventRep.startTime?.dateFromString()
-        event.endTime = eventRep.endTime?.dateFromString()
-        event.eventID = eventRep.eventID ?? 0
-        
+
+        if let startTime = eventRep.startTime?.dateFromString() {
+            event.startTime = startTime
+        } else {
+            print("Error NO startTime FROM EVENTREP on line: \(#line) in function: \(#function)\n")
+        }
+
+        if let endTime = eventRep.endTime?.dateFromString() {
+            event.endTime = endTime
+        } else {
+            print("Error NO endTime FROM EVENTREP on line: \(#line) in function: \(#function)\n")
+        }
+
+        if let eventID =  eventRep.eventID {
+            event.eventID = eventID
+        } else {
+            print("Error NO EVENTID FROM EVENTREP on line: \(#line) in function: \(#function)\n")
+        }
+
         do {
             try CoreDataStack.shared.save()
-        } catch  {
+        } catch {
             print("""
                 Error on line: \(#line) in function: \(#function)\n
                 Readable error: \(error.localizedDescription)\n Technical error: \(error)
@@ -254,7 +246,6 @@ class EventController {
     ///The server returns an object with the event data
     func authorize(event: Event, completion: @escaping (Result<EventRepresentation, EventErrors>) -> Void) {
         guard let eventToAuthorize = event.eventAuthRequest else { return }
-//        guard let eventAuthRequest = event.eventAuthRequest else { return }
 
         let url = baseURL.appendingPathComponent("auth").appendingPathComponent("event")
         var urlRequest = URLRequest(url: url)
@@ -263,7 +254,6 @@ class EventController {
 
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
-//        encoder.keyEncodingStrategy = .convertToSnakeCase
 
         do {
             try CoreDataStack.shared.save()
@@ -297,11 +287,28 @@ class EventController {
             do {
                 let eventRep = try decoder.decode(EventRepresentation.self, from: data)
                 print("date from eventRep: \(eventRep.eventDate)")
+                self.updateEventID(for: event, with: eventRep)
                 completion(.success(eventRep))
             } catch {
                 print("Error in func: \(#function)\n error: \(error.localizedDescription)\n Technical error: \(error)")
                 completion(.failure(.decodeError(error)))
             }
+        }
+    }
+
+    func updateEventID(for event: Event, with eventRep: EventRepresentation) {
+        guard let eventID = eventRep.eventID else {
+            print("Error on line: \(#line) in function: \(#function)\n")
+            return
+        }
+        event.eventID = eventID
+        do {
+            try CoreDataStack.shared.save()
+        } catch {
+            print("""
+                Error on line: \(#line) in function: \(#function)\n
+                Readable error: \(error.localizedDescription)\n Technical error: \(error)
+                """)
         }
     }
 

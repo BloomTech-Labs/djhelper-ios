@@ -152,6 +152,7 @@ extension CreateEventViewController {
     // MARK: - PRIVATE FUNCTIONS
     private func updateViewsWithEvent() {
         guard let passedInEvent = event, isViewLoaded else { return }
+        print("This is the event's id: \(passedInEvent.eventID)")
 
         self.title = passedInEvent.name
         eventNameTextField.text = passedInEvent.name
@@ -174,10 +175,11 @@ extension CreateEventViewController {
                 // save the eventID that is returned to the newly created event object.
                 self.event?.eventID = eventRep.eventID ?? 999
                 try? CoreDataStack.shared.mainContext.save()
-
+                print("did save eventID on line: \(#line): \(self.event?.eventID)")
                 print("successful attempt to create event in vc: \(eventRep.name)")
                 DispatchQueue.main.async {
                     self.navigationController?.popViewController(animated: true)
+                    
                 }
             case let .failure(error):
                 print("""
@@ -187,7 +189,7 @@ extension CreateEventViewController {
             }
         }
     }
-    
+
     private func putUpdateEvent(with event: Event, andEventController eventContrller: EventController) {
         eventController.saveUpdateEvent(event) { (results) in
             switch results {
