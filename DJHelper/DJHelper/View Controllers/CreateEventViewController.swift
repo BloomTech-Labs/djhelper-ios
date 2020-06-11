@@ -85,7 +85,7 @@ class CreateEventViewController: UIViewController {
                 print("Error on line: \(#line) in function: \(#function)\n")
                 return
             }
-            
+
             let event = Event(name: name,
                               eventType: type,
                               eventDescription: description,
@@ -142,11 +142,10 @@ extension CreateEventViewController {
         eventController.authorize(event: event) { (results) in
             switch results {
             case let .success(eventRep):
-                print("did save eventID on line: \(#line): \(self.event?.eventID)")
                 print("successful attempt to create event in vc: \(eventRep.name)")
                 DispatchQueue.main.async {
                     self.navigationController?.popViewController(animated: true)
-                    
+
                 }
             case let .failure(error):
                 print("""
