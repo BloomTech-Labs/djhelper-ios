@@ -36,8 +36,7 @@ class ViewController: UIViewController {
 
         let event = Event(name: "e5", eventType: "e5",
                           eventDescription: "e5", eventDate: date,
-                          hostID: 1, locationID: 1, startTime: date,
-                          endTime: Date(), imageURL: URL(string: "e5")!,
+                          hostID: 1, imageURL: URL(string: "e5")!,
                           notes: "e5", eventID: 1)
 
         eventController.authorize(event: event) { (results) in

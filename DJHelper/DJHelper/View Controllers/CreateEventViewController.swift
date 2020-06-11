@@ -57,7 +57,7 @@ class CreateEventViewController: UIViewController {
         guard let currentHost = currentHost,
             let eventController = eventController,
             let name = eventNameTextField.text, !name.isEmpty,
-            let dateString = eventDateTextField.text, !date.isEmpty,
+            let dateString = eventDateTextField.text, !dateString.isEmpty,
             let description = descriptionTextField.text, !description.isEmpty,
             let type = typeTextField.text, !type.isEmpty,
             let notes = notesTextField.text, !notes.isEmpty else { unwrapTextFields() ; return }
