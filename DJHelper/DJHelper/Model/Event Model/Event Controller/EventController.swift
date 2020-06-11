@@ -107,6 +107,9 @@ class EventController {
             do {
                 let eventRep = try decoder.decode(EventRepresentation.self, from: data)
                     self.update(event: event, withEventRep: eventRep)
+                DispatchQueue.main.async {
+                    completion(.success(()))
+                }
             } catch {
                 print("""
                     Error on line: \(#line) in function: \(#function)\n

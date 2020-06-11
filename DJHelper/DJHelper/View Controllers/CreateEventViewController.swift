@@ -161,7 +161,9 @@ extension CreateEventViewController {
             switch results {
             case .success:
                 print("successfully called the put function to update event on server")
-                self.navigationController?.popViewController(animated: true)
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                }
             case .failure:
                 print("Error on line: \(#line) in function: \(#function)\n")
             }
