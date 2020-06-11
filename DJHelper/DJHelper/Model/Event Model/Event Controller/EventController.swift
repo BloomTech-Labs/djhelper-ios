@@ -49,7 +49,8 @@ class EventController {
         return event
     }
 
-    func saveUpdateEvent(_ event: Event, completion: @escaping (Result<(), EventErrors>) -> Void) {
+    func saveUpdateEvent(_ event: Event,
+                         completion: @escaping (Result<(), EventErrors>) -> Void) {
         guard let eventRep = event.eventAuthorizationRep, let eventId = eventRep.eventID else {
             print("Error on line: \(#line) in function: \(#function)\n")
             return
