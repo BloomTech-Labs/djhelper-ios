@@ -54,14 +54,11 @@ extension UIViewController {
         alert.addAction(okAction)
         present(alert, animated: true)
     }
-<<<<<<< HEAD
-    
+
     func activityIndicator(shouldStart: Bool) {
         let activityIndicator = UIActivityIndicatorView(style: .large)
         shouldStart == true ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
     }
-=======
->>>>>>> added a UIViewController extension to include a generic UIAlertController for error handling.
 }
 
 
