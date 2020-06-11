@@ -120,7 +120,8 @@ extension HostEventsTableViewController: UITableViewDataSource {
                    commit editingStyle: UITableViewCell.EditingStyle,
                    forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // TODO: code to delete from core data and the server
+            let event = fetchedResultsController.object(at: indexPath)
+            eventController.deleteEvent(for: event)
         }
     }
 }
