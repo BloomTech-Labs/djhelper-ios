@@ -34,15 +34,11 @@ class EventController {
                      eventName: String,
                      eventDate: Date,
                      description: String,
-                     startTime: Date,
-                     endTime: Date,
                      type: String,
                      notes: String) -> Event {
             event.name = eventName
             event.eventDate = eventDate
             event.eventDescription = description
-            event.startTime = startTime
-            event.endTime = endTime
             event.eventType = type
             event.notes = notes
 
@@ -129,20 +125,6 @@ class EventController {
         event.eventDescription = eventRep.eventDescription
         event.eventDate = eventRep.eventDate.dateFromString()
         event.hostID = eventRep.hostID
-        event.locationID = eventRep.locationID
-
-        if let startTime = eventRep.startTime?.dateFromString() {
-            event.startTime = startTime
-        } else {
-            print("Error NO startTime FROM EVENTREP on line: \(#line) in function: \(#function)\n")
-        }
-
-        if let endTime = eventRep.endTime?.dateFromString() {
-            event.endTime = endTime
-        } else {
-            print("Error NO endTime FROM EVENTREP on line: \(#line) in function: \(#function)\n")
-        }
-
         if let eventID =  eventRep.eventID {
             event.eventID = eventID
         } else {
