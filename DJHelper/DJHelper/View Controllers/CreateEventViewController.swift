@@ -23,9 +23,8 @@ class CreateEventViewController: UIViewController {
 
     // MARK: - IBOutlets
     @IBOutlet weak var eventNameTextField: UITextField!
+    @IBOutlet weak var eventDateTextField: UITextField!
     @IBOutlet weak var descriptionTextField: UITextField!
-    @IBOutlet weak var startTimetextField: UITextField!
-    @IBOutlet weak var endTimeTextField: UITextField!
     @IBOutlet weak var typeTextField: UITextField!
     @IBOutlet weak var notesTextField: UITextField!
 
@@ -33,23 +32,6 @@ class CreateEventViewController: UIViewController {
         super.viewDidLoad()
 
         updateViewsWithEvent()
-
-        // a date picker is displayed when the user taps in either of the two date text fields
-        // the date value of the picker then populates that text field
-        startTimeDatePicker = UIDatePicker()
-        startTimeDatePicker?.datePickerMode = .dateAndTime
-        startTimeDatePicker?.minuteInterval = 15
-        startTimeDatePicker?.addTarget(self, action: #selector(self.eventDateChanged(datePicker:)), for: .valueChanged)
-
-        startTimetextField.inputView = startTimeDatePicker
-
-        endTimeDatePicker = UIDatePicker()
-        endTimeDatePicker?.datePickerMode = .dateAndTime
-        endTimeDatePicker?.minuteInterval = 15
-        endTimeDatePicker?.date = startTimeDatePicker?.date ?? Date()  // unfortunately this doesn't default the picker to the start time
-        endTimeDatePicker?.addTarget(self, action: #selector(self.endTimeChanged(datePicker:)), for: .valueChanged)
-
-        endTimeTextField.inputView = endTimeDatePicker
 
         // tap anywhere on the screen to dismiss the date picker
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.viewTapped(gestureRecognizer:)))
@@ -59,13 +41,6 @@ class CreateEventViewController: UIViewController {
     @objc func eventDateChanged(datePicker: UIDatePicker) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "M/d/yyyy h:mm a"
-        startTimetextField.text = dateFormatter.string(from: datePicker.date)
-    }
-
-    @objc func endTimeChanged(datePicker: UIDatePicker) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "M/d/yyyy h:mm a"
-        endTimeTextField.text = dateFormatter.string(from: datePicker.date)
     }
 
     @objc func viewTapped(gestureRecognizer: UITapGestureRecognizer) {
@@ -82,10 +57,8 @@ class CreateEventViewController: UIViewController {
         guard let currentHost = currentHost,
             let eventController = eventController,
             let name = eventNameTextField.text, !name.isEmpty,
-//            let date = eventDateTextField.text, !date.isEmpty,
+            let dateString = eventDateTextField.text, !date.isEmpty,
             let description = descriptionTextField.text, !description.isEmpty,
-            let startTime = startTimetextField.text, !startTime.isEmpty,
-            let endTime = endTimeTextField.text, !endTime.isEmpty,
             let type = typeTextField.text, !type.isEmpty,
             let notes = notesTextField.text, !notes.isEmpty else { unwrapTextFields() ; return }
 
@@ -93,31 +66,31 @@ class CreateEventViewController: UIViewController {
 
             // TODO: Need to make sure the date pickers are set to the curent values of the start time and end time
             // TODO: instead of this guard let, if the end is empty, that is fine because it is optional
-            guard let start = startTime.dateFromString(),
-                let end = endTime.dateFromString() else { return }
+            guard let dateFromString = dateString.dateFromString() else {
+                print("Error on line: \(#line) in function: \(#function)\n")
+                return
+            }
 
             // here possibly only pass the data that actually changed?
             let updatedEvent = eventController.updateEvent(event: passedInEvent,
                                                            eventName: name,
-                                                           eventDate: start,
+                                                           eventDate: dateFromString,
                                                            description: description,
-                                                           startTime: start,
-                                                           endTime: end,
                                                            type: type,
                                                            notes: notes)
 
             putUpdateEvent(with: updatedEvent, andEventController: eventController)
         } else {
-            guard let start = startTimeDatePicker?.date else { return }
-            guard let end = endTimeDatePicker?.date else { return }
+            guard let dateFromString = dateString.dateFromString() else {
+                print("Error on line: \(#line) in function: \(#function)\n")
+                return
+            }
+            
             let event = Event(name: name,
                               eventType: type,
                               eventDescription: description,
-                              eventDate: start,
+                              eventDate: dateFromString,
                               hostID: currentHost.identifier,
-                              locationID: 1,
-                              startTime: start,
-                              endTime: end,
                               imageURL: URL(string: "tewtststtt.com")!,
                               notes: notes,
                               eventID: nil)
@@ -132,8 +105,7 @@ class CreateEventViewController: UIViewController {
 
         textFieldArray.append(contentsOf: [eventNameTextField,
                                            descriptionTextField,
-                                           startTimetextField,
-                                           endTimeTextField,
+                                           eventDateTextField,
                                            typeTextField,
                                            notesTextField])
 
@@ -157,8 +129,7 @@ extension CreateEventViewController {
         self.title = passedInEvent.name
         eventNameTextField.text = passedInEvent.name
         descriptionTextField.text = passedInEvent.eventDescription
-        startTimetextField.text = passedInEvent.startTime?.stringFromDate()
-        endTimeTextField.text = passedInEvent.endTime?.stringFromDate()
+        eventDateTextField.text = passedInEvent.eventDate?.stringFromDate()
         typeTextField.text = passedInEvent.eventType
         notesTextField.text = passedInEvent.notes
     }
@@ -171,10 +142,6 @@ extension CreateEventViewController {
         eventController.authorize(event: event) { (results) in
             switch results {
             case let .success(eventRep):
-
-                // save the eventID that is returned to the newly created event object.
-                self.event?.eventID = eventRep.eventID ?? 999
-                try? CoreDataStack.shared.mainContext.save()
                 print("did save eventID on line: \(#line): \(self.event?.eventID)")
                 print("successful attempt to create event in vc: \(eventRep.name)")
                 DispatchQueue.main.async {
