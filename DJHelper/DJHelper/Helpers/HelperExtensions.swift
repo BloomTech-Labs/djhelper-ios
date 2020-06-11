@@ -49,6 +49,20 @@ extension UIView {
     }
 }
 
+extension UIViewController {
+    func alertController(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
+
+    func activityIndicator(shouldStart: Bool) {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        shouldStart == true ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
+    }
+}
+
 extension EventController {
     func deleteEvent(for event: Event) {
         let moc = CoreDataStack.shared.mainContext
