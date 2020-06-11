@@ -17,9 +17,6 @@ extension Event {
                      eventDescription: String,
                      eventDate: Date,
                      hostID: Int32,
-                     locationID: Int32,
-                     startTime: Date,
-                     endTime: Date,
                      imageURL: URL? = nil,
                      notes: String? = nil,
                      eventID: Int32?,
@@ -31,9 +28,6 @@ extension Event {
         self.eventDescription = eventDescription
         self.eventDate = eventDate
         self.hostID = hostID
-        self.locationID = locationID
-        self.startTime = startTime
-        self.endTime = endTime
         self.imageURL = imageURL
         self.notes = notes
         if let unwrappedEventID = eventID {
@@ -56,9 +50,6 @@ extension Event {
                   eventDescription: eventRepresentation.eventDescription,
                   eventDate: eventDateFromString,
                   hostID: eventRepresentation.hostID,
-                  locationID: eventRepresentation.locationID,
-                  startTime: startTime.dateFromString()!,
-                  endTime: endTime.dateFromString()!,
                   imageURL: imageURL,
                   notes: notes,
                   eventID: eventRepresentation.eventID)
@@ -76,9 +67,6 @@ extension Event {
                                    eventDescription: description,
                                    eventDate: eventDate.stringFromDate(),
                                    hostID: self.hostID,
-                                   locationID: self.locationID,
-                                   startTime: self.startTime?.stringFromDate(),
-                                   endTime: self.endTime?.stringFromDate(),
                                    imageURL: self.imageURL,
                                    notes: self.notes,
                                    eventID: self.eventID)
@@ -96,9 +84,6 @@ extension Event {
                                 eventDescription: description,
                                 eventDate: eventDate,
                                 hostID: self.hostID,
-                                locationID: self.locationID,
-                                startTime: self.startTime?.stringFromDate(),
-                                endTime: self.endTime?.stringFromDate(),
                                 imageURL: self.imageURL,
                                 notes: self.notes)
     }
