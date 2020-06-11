@@ -53,6 +53,11 @@ class HostEventsTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let barViewControllers = self.tabBarController?.viewControllers
+        guard let profileVC = barViewControllers?[1] as? HostProfileViewController else { return }
+        profileVC.currentHost = self.currentHost
+        profileVC.hostController = self.hostController
+
         eventController.fetchAllEventsFromServer(for: self.currentHost) { (results) in
             switch results {
             case .success:
@@ -115,7 +120,8 @@ extension HostEventsTableViewController: UITableViewDataSource {
                    commit editingStyle: UITableViewCell.EditingStyle,
                    forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // TODO: code to delete from core data and the server
+            let event = fetchedResultsController.object(at: indexPath)
+            eventController.deleteEvent(for: event)
         }
     }
 }

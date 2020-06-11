@@ -44,6 +44,12 @@ struct HostRepresentation: Codable {
         self.username = username
         self.email = email
         self.password = password
+        // adding the rest
+        self.phone = phone
+        self.website = website
+        self.bio = bio
+        self.profilePic = profilePic
+        self.identifier = identifier
     }
 
     // MARK: - CODABLE INITAILIZERS

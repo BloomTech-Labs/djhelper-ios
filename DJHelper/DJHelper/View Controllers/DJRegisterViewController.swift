@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class DJRegisterViewController: UIViewController, UITextFieldDelegate {
+class DJRegisterViewController: ShiftableViewController {
 
     // MARK: - Properties
     var hostController: HostController!
@@ -28,6 +28,7 @@ class DJRegisterViewController: UIViewController, UITextFieldDelegate {
 
         createAccountButton.layer.cornerRadius = 25
         setUpSubviews()
+        confirmTextField.delegate = self
 
         let tapToDismiss = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tapToDismiss)
@@ -41,7 +42,7 @@ class DJRegisterViewController: UIViewController, UITextFieldDelegate {
         backToSignIn.addTarget(self, action: #selector(self.backToSignIn), for: .touchUpInside)
 
         let customButtonTitle = NSMutableAttributedString(string: "Sign In", attributes: [
-            NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 18),
+            NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 18)!,
             NSAttributedString.Key.foregroundColor: UIColor.black
         ])
 

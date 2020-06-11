@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class DJLoginViewController: UIViewController, UITextFieldDelegate {
+class DJLoginViewController: ShiftableViewController {
 
     // MARK: - Properties
     var hostController = HostController()
@@ -77,7 +77,9 @@ class DJLoginViewController: UIViewController, UITextFieldDelegate {
         }
         } else {
             let alertController = UIAlertController(title: "Username Not Found",
-                                                    message: "The username \(username) was not found on this device. Please verify and try again, or tap Register to create a new account.",
+                                                    message: """
+                The username \(username) was not found on this device. Please verify and try again, or tap Register to create a new account.
+                """,
                 preferredStyle: .alert)
             let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(alertAction)

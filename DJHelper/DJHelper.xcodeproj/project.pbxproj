@@ -21,6 +21,8 @@
 		44214DE9248F2C6300D63B6A /* HostProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DE8248F2C6300D63B6A /* HostProfileViewController.swift */; };
 		44214DEB248F2CA000D63B6A /* EventPlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DEA248F2CA000D63B6A /* EventPlaylistViewController.swift */; };
 		44214DED2490698F00D63B6A /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DEC2490698F00D63B6A /* TabBarViewController.swift */; };
+		44214DEF249125BF00D63B6A /* HostUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DEE249125BF00D63B6A /* HostUpdate.swift */; };
+		44214DF12491952100D63B6A /* ShiftableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DF02491952100D63B6A /* ShiftableViewController.swift */; };
 		4446F799247638D4005ACE10 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F798247638D4005ACE10 /* HTTPMethod.swift */; };
 		4446F79B247638F9005ACE10 /* NetworkDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F79A247638F9005ACE10 /* NetworkDataLoader.swift */; };
 		4446F79D24763935005ACE10 /* URLSessionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F79C24763935005ACE10 /* URLSessionExtension.swift */; };
@@ -76,6 +78,8 @@
 		44214DE8248F2C6300D63B6A /* HostProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostProfileViewController.swift; sourceTree = "<group>"; };
 		44214DEA248F2CA000D63B6A /* EventPlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPlaylistViewController.swift; sourceTree = "<group>"; };
 		44214DEC2490698F00D63B6A /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		44214DEE249125BF00D63B6A /* HostUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostUpdate.swift; sourceTree = "<group>"; };
+		44214DF02491952100D63B6A /* ShiftableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShiftableViewController.swift; path = DJHelper/Helpers/ShiftableViewController.swift; sourceTree = SOURCE_ROOT; };
 		4446F798247638D4005ACE10 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		4446F79A247638F9005ACE10 /* NetworkDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataLoader.swift; sourceTree = "<group>"; };
 		4446F79C24763935005ACE10 /* URLSessionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionExtension.swift; sourceTree = "<group>"; };
@@ -203,6 +207,7 @@
 			children = (
 				1BDBE283248508FC006DE77E /* HostRegistration.swift */,
 				1BA4A8B3248577B1002A67E2 /* HostLogin.swift */,
+				44214DEE249125BF00D63B6A /* HostUpdate.swift */,
 			);
 			path = "Host Requests";
 			sourceTree = "<group>";
@@ -225,6 +230,15 @@
 			path = ../../../../Desktop/DJHelperUITests;
 			sourceTree = "<group>";
 		};
+		44214DF22491953C00D63B6A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				1BA4A8C72486858D002A67E2 /* HelperExtensions.swift */,
+				44214DF02491952100D63B6A /* ShiftableViewController.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		4446F79E24763959005ACE10 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -243,7 +257,6 @@
 				4446F7D9247DCAD8005ACE10 /* Bearer.swift */,
 				1BA4A8BD2485B956002A67E2 /* Event Model */,
 				1BA4A8B92485B004002A67E2 /* Host Model */,
-				1BA4A8C72486858D002A67E2 /* HelperExtensions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -301,6 +314,7 @@
 				4446F79F24763969005ACE10 /* Model */,
 				4446F79E24763959005ACE10 /* Networking */,
 				4446F7A02476397B005ACE10 /* View Controllers */,
+				44214DF22491953C00D63B6A /* Helpers */,
 				447F537F2475805E00F706F1 /* Main.storyboard */,
 				4446F7A124763A80005ACE10 /* Resources */,
 			);
@@ -477,6 +491,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4446F79D24763935005ACE10 /* URLSessionExtension.swift in Sources */,
+				44214DF12491952100D63B6A /* ShiftableViewController.swift in Sources */,
 				1BA4A8C82486858D002A67E2 /* HelperExtensions.swift in Sources */,
 				447F53C3247634EE00F706F1 /* CoreDataStack.swift in Sources */,
 				1B323D3A248422210065D94C /* HostRepresentation.swift in Sources */,
@@ -496,6 +511,7 @@
 				4446F799247638D4005ACE10 /* HTTPMethod.swift in Sources */,
 				1BA4A8C42485F27A002A67E2 /* EventAuthRequest.swift in Sources */,
 				447F537A2475805E00F706F1 /* AppDelegate.swift in Sources */,
+				44214DEF249125BF00D63B6A /* HostUpdate.swift in Sources */,
 				447F537C2475805E00F706F1 /* SceneDelegate.swift in Sources */,
 				44214DEB248F2CA000D63B6A /* EventPlaylistViewController.swift in Sources */,
 				1BDBE284248508FC006DE77E /* HostRegistration.swift in Sources */,
