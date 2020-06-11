@@ -61,6 +61,7 @@ extension UIViewController {
 
     func activityIndicator(shouldStart: Bool) {
         let activityIndicator = UIActivityIndicatorView(style: .large)
+        self.view.addSubview(activityIndicator)
         shouldStart == true ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
     }
 }
