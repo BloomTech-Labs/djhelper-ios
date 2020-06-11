@@ -36,18 +36,17 @@ extension String {
 
 extension UIView {
     func shake() {
-        let view = self
-        let propertyAnimator = UIViewPropertyAnimator(duration: 0.4, dampingRatio: 0.2) {
-            view.layer.borderColor = UIColor.red.cgColor
-            //move it left by 8 pix
-            view.transform = CGAffineTransform(translationX: -8, y: 0)
+        UIView.animate(withDuration: 0.3, delay: 0.0,
+                       usingSpringWithDamping: 0.2,
+                       initialSpringVelocity: 0.3,
+                       options: [.curveEaseInOut], animations: {
+            self.center.x += 8
+            self.layer.borderWidth = 2
+            self.layer.borderColor = UIColor.red.cgColor
+        }) { _ in
+            self.center.x -= 8
+            self.layer.borderWidth = 0
         }
-        propertyAnimator.addAnimations({
-            //return it back to its original position
-            view.transform = CGAffineTransform(translationX: 3, y: 0)
-            view.layer.borderColor = UIColor.green.cgColor
-        }, delayFactor: 0.4)
-        propertyAnimator.startAnimation()
     }
 }
 
