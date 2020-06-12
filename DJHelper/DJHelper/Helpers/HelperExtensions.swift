@@ -50,8 +50,18 @@ extension UIView {
     }
 }
 
+extension UIButton {
+     func selectedTheme(){
+        let button = self
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .darkGray
+        button.layer.masksToBounds = true
+        button.layer.cornerRadius = self.frame.size.height / 2
+    }
+}
+
 extension UIViewController {
- 
+
     func alertController(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default)
