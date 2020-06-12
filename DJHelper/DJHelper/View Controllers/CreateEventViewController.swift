@@ -123,6 +123,12 @@ class CreateEventViewController: UIViewController {
 extension CreateEventViewController {
 
     // MARK: - PRIVATE FUNCTIONS
+    
+    ///this dismisses the custom alert controller
+    @objc func dissmiss() {
+         myAlert.dismissAlert()
+       }
+    
     private func updateViewsWithEvent() {
         guard let passedInEvent = event, isViewLoaded else { return }
         print("This is the event's id: \(passedInEvent.eventID)")
