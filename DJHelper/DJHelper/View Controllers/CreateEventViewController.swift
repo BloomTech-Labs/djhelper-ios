@@ -9,7 +9,7 @@
 import UIKit
 
 class CreateEventViewController: UIViewController {
-
+    let myAlert = CustomAlert()
     var currentHost: Host?
     var eventController: EventController!
     var hostController: HostController!
@@ -149,6 +149,8 @@ extension CreateEventViewController {
                     self.activityIndicator(shouldStart: false)
                 }
             case let .failure(error):
+                self.activityIndicator(shouldStart: false)
+                self.myAlert.showAlert(with: "Error Creating an Event", message: "\(error.localizedDescription)", on: self)
                 print("""
                     Error on line: \(#line) in function: \(#function)\n
                     Readable error: \(error.localizedDescription)\n Technical error: \(error)
@@ -167,8 +169,13 @@ extension CreateEventViewController {
                     self.navigationController?.popViewController(animated: true)
                     self.activityIndicator(shouldStart: false)
                 }
-            case .failure:
+
+            case .failure(.errorUpdatingEventOnServer(let error)):
+                self.activityIndicator(shouldStart: false)
+                self.myAlert.showAlert(with: "Error Creating an Event", message: "\(error.localizedDescription)", on: self)
                 print("Error on line: \(#line) in function: \(#function)\n")
+            default:
+                break
             }
         }
     }
