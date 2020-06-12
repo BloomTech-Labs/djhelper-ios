@@ -51,7 +51,7 @@ extension UIView {
 }
 
 extension UIButton {
-     func selectedTheme(){
+     func colorTheme() {
         let button = self
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .darkGray
