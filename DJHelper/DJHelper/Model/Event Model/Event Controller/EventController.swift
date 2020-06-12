@@ -18,6 +18,7 @@ class EventController {
         case errorUpdatingEventOnServer(Error)
         case otherError(Error)
         case noEventsInServerOrCoreData
+        case couldNotInitializeAnEvent
     }
 
     private let baseURL = URL(string: "https://dj-helper-be.herokuapp.com/api")!
@@ -33,31 +34,19 @@ class EventController {
                      eventName: String,
                      eventDate: Date,
                      description: String,
-                     startTime: Date,
-                     endTime: Date,
                      type: String,
                      notes: String) -> Event {
             event.name = eventName
             event.eventDate = eventDate
             event.eventDescription = description
-            event.startTime = startTime
-            event.endTime = endTime
             event.eventType = type
             event.notes = notes
 
-        //and save to core data
-        do {
-            try CoreDataStack.shared.save()
-        } catch {
-            print("""
-                Error on line: \(#line) in function: \(#function)\n
-                Readable error: \(error.localizedDescription)\n Technical error: \(error)
-                """)
-        }
         return event
     }
 
-    func saveUpdateEvent(_ event: Event, completion: @escaping (Result<(),EventErrors>) -> Void) {
+    func saveUpdateEvent(_ event: Event,
+                         completion: @escaping (Result<(), EventErrors>) -> Void) {
         guard let eventRep = event.eventAuthorizationRep, let eventId = eventRep.eventID else {
             print("Error on line: \(#line) in function: \(#function)\n")
             return
@@ -66,6 +55,7 @@ class EventController {
         let authURL = baseURL.appendingPathComponent("auth")
         let eventURL = authURL.appendingPathComponent("event")
         let finalURL = eventURL.appendingPathComponent("\(eventId)")
+        print("finalURL: \(finalURL.absoluteURL)")
 
         var urlRequest = URLRequest(url: finalURL)
         urlRequest.httpMethod = HTTPMethod.put.rawValue
@@ -73,9 +63,12 @@ class EventController {
 
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
+        encoder.outputFormatting = .prettyPrinted
 
         do {
             urlRequest.httpBody =  try encoder.encode(eventRep)
+            let httpbody = try encoder.encode(eventRep)
+            print("httpbody: \(String(describing: String(data: httpbody, encoding: .utf8)))")
         } catch {
             print("""
                 Error on line: \(#line) in function: \(#function)\n
@@ -83,7 +76,7 @@ class EventController {
                 """)
         }
 
-        dataLoader.loadData(from: urlRequest) { (_, response, error) in
+        dataLoader.loadData(from: urlRequest) { (data, response, error) in
             if let response = response as? HTTPURLResponse {
                 print("HTTPResponse: \(response.statusCode) in function: \(#function)")
             }
@@ -97,10 +90,57 @@ class EventController {
                     completion(.failure(.noEventsInServerOrCoreData))
                 }
             }
-            DispatchQueue.main.async {
-                print("success")
-                completion(.success(()))
+
+            guard let data = data else {
+                print("Error on line: \(#line) in function: \(#function)\n")
+                DispatchQueue.main.async {
+                    completion(.failure(.noDataError))
+                }
+                return
             }
+
+            print("data for decoding EVENT REP: \(String(describing: String(data: data, encoding: .utf8)))")
+
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+
+            do {
+                let eventRep = try decoder.decode(EventRepresentation.self, from: data)
+                    self.update(event: event, withEventRep: eventRep)
+                DispatchQueue.main.async {
+                    completion(.success(()))
+                }
+            } catch {
+                print("""
+                    Error on line: \(#line) in function: \(#function)\n
+                    Readable error: \(error.localizedDescription)\n Technical error: \(error)
+                    """)
+                DispatchQueue.main.async {
+                    completion(.failure(.decodeError(error)))
+                }
+            }
+        }
+    }
+
+    func update(event: Event, withEventRep eventRep: EventRepresentation) {
+        event.name = eventRep.name
+        event.eventType = eventRep.eventType
+        event.eventDescription = eventRep.eventDescription
+        event.eventDate = eventRep.eventDate.dateFromString()
+        event.hostID = eventRep.hostID
+        if let eventID =  eventRep.eventID {
+            event.eventID = eventID
+        } else {
+            print("Error NO EVENTID FROM EVENTREP on line: \(#line) in function: \(#function)\n")
+        }
+
+        do {
+            try CoreDataStack.shared.save()
+        } catch {
+            print("""
+                Error on line: \(#line) in function: \(#function)\n
+                Readable error: \(error.localizedDescription)\n Technical error: \(error)
+                """)
         }
     }
 
@@ -192,7 +232,6 @@ class EventController {
     ///The server returns an object with the event data
     func authorize(event: Event, completion: @escaping (Result<EventRepresentation, EventErrors>) -> Void) {
         guard let eventToAuthorize = event.eventAuthRequest else { return }
-//        guard let eventAuthRequest = event.eventAuthRequest else { return }
 
         let url = baseURL.appendingPathComponent("auth").appendingPathComponent("event")
         var urlRequest = URLRequest(url: url)
@@ -201,7 +240,6 @@ class EventController {
 
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
-//        encoder.keyEncodingStrategy = .convertToSnakeCase
 
         do {
             try CoreDataStack.shared.save()
@@ -235,11 +273,28 @@ class EventController {
             do {
                 let eventRep = try decoder.decode(EventRepresentation.self, from: data)
                 print("date from eventRep: \(eventRep.eventDate)")
+                self.updateEventID(for: event, with: eventRep)
                 completion(.success(eventRep))
             } catch {
                 print("Error in func: \(#function)\n error: \(error.localizedDescription)\n Technical error: \(error)")
                 completion(.failure(.decodeError(error)))
             }
+        }
+    }
+
+    func updateEventID(for event: Event, with eventRep: EventRepresentation) {
+        guard let eventID = eventRep.eventID else {
+            print("Error on line: \(#line) in function: \(#function)\n")
+            return
+        }
+        event.eventID = eventID
+        do {
+            try CoreDataStack.shared.save()
+        } catch {
+            print("""
+                Error on line: \(#line) in function: \(#function)\n
+                Readable error: \(error.localizedDescription)\n Technical error: \(error)
+                """)
         }
     }
 

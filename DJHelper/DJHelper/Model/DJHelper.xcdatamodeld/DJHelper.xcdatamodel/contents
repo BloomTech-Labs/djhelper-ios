@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Event" representedClassName="Event" syncable="YES" codeGenerationType="class">
-        <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="eventDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="eventDescription" optional="YES" attributeType="String"/>
         <attribute name="eventID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="eventType" optional="YES" attributeType="String"/>
         <attribute name="hostID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="URI"/>
-        <attribute name="locationID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
-        <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="host" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Host" inverseName="events" inverseEntity="Host"/>
     </entity>
     <entity name="Host" representedClassName="Host" syncable="YES" codeGenerationType="class">
@@ -27,7 +24,7 @@
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="host" inverseEntity="Event"/>
     </entity>
     <elements>
+        <element name="Event" positionX="152.8671875" positionY="46.67578125" width="128" height="178"/>
         <element name="Host" positionX="-45" positionY="0" width="128" height="193"/>
-        <element name="Event" positionX="152.8671875" positionY="46.67578125" width="128" height="223"/>
     </elements>
 </model>
