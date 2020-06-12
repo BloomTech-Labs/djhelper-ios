@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1B323D3A248422210065D94C /* HostRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B323D39248422210065D94C /* HostRepresentation.swift */; };
 		1B3D9BBB2492FC6700E8625C /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D9BBA2492FC6700E8625C /* CustomAlert.swift */; };
+		1B3D9BBD24931BA800E8625C /* EventPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D9BBC24931BA800E8625C /* EventPageViewController.swift */; };
 		1BA4A8B4248577B1002A67E2 /* HostLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA4A8B3248577B1002A67E2 /* HostLogin.swift */; };
 		1BA4A8B6248577F4002A67E2 /* HostLoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA4A8B5248577F4002A67E2 /* HostLoginResponse.swift */; };
 		1BA4A8B8248586B9002A67E2 /* EventRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA4A8B7248586B9002A67E2 /* EventRepresentation.swift */; };
@@ -65,6 +66,7 @@
 /* Begin PBXFileReference section */
 		1B323D39248422210065D94C /* HostRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRepresentation.swift; sourceTree = "<group>"; };
 		1B3D9BBA2492FC6700E8625C /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
+		1B3D9BBC24931BA800E8625C /* EventPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EventPageViewController.swift; path = DJHelper/EventPageViewController.swift; sourceTree = SOURCE_ROOT; };
 		1BA4A8B3248577B1002A67E2 /* HostLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostLogin.swift; sourceTree = "<group>"; };
 		1BA4A8B5248577F4002A67E2 /* HostLoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostLoginResponse.swift; sourceTree = "<group>"; };
 		1BA4A8B7248586B9002A67E2 /* EventRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRepresentation.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 		4446F7A02476397B005ACE10 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1B3D9BBC24931BA800E8625C /* EventPageViewController.swift */,
 				447F537D2475805E00F706F1 /* ViewController.swift */,
 				44214DEC2490698F00D63B6A /* TabBarViewController.swift */,
 				44214DEA248F2CA000D63B6A /* EventPlaylistViewController.swift */,
@@ -515,6 +518,7 @@
 				1BA4A8C42485F27A002A67E2 /* EventAuthRequest.swift in Sources */,
 				447F537A2475805E00F706F1 /* AppDelegate.swift in Sources */,
 				44214DEF249125BF00D63B6A /* HostUpdate.swift in Sources */,
+				1B3D9BBD24931BA800E8625C /* EventPageViewController.swift in Sources */,
 				447F537C2475805E00F706F1 /* SceneDelegate.swift in Sources */,
 				44214DEB248F2CA000D63B6A /* EventPlaylistViewController.swift in Sources */,
 				1B3D9BBB2492FC6700E8625C /* CustomAlert.swift in Sources */,

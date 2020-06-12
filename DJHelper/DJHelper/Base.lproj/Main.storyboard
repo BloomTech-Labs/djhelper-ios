@@ -358,10 +358,10 @@
             </objects>
             <point key="canvasLocation" x="1354" y="989"/>
         </scene>
-        <!--View Controller-->
+        <!--Event Page View Controller-->
         <scene sceneID="SWi-H3-aOI">
             <objects>
-                <viewController id="YVd-oo-gbT" sceneMemberID="viewController">
+                <viewController id="YVd-oo-gbT" customClass="EventPageViewController" customModule="DJHelper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="r7n-uE-7R3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
