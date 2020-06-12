@@ -10,6 +10,16 @@ import UIKit
 
 class EventPageViewController: UIViewController {
 
+    // MARK: - IBOutlets
+    @IBOutlet weak var eventTitleLabel: UILabel!
+    @IBOutlet weak var detailButtonProperties: UIButton!
+    @IBOutlet weak var shareLinkButtonProperties: UIButton!
+    
+    @IBOutlet weak var segmentedControlProperties: UISegmentedControl!
+    
+    @IBOutlet weak var addSongButtonProperties: UIButton!
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -17,6 +27,19 @@ class EventPageViewController: UIViewController {
     }
     
 
+    // MARK: - IBActions
+    @IBAction func detailButtonTapped(_ sender: UIButton) {
+    }
+    
+    @IBAction func shareLinkButtonTapped(_ sender: UIButton) {
+    }
+    
+    @IBAction func addSongButtonTapped(_ sender: UIButton) {
+    }
+    
+    @IBAction func segueValueChanged(_ sender: UISegmentedControl) {
+    }
+    
     /*
     // MARK: - Navigation
 

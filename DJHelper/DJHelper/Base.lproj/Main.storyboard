@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9du-3N-F1H">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YVd-oo-gbT">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -370,6 +370,9 @@
                                 <rect key="frame" x="20" y="86" width="47" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Details"/>
+                                <connections>
+                                    <action selector="detailButtonTapped:" destination="YVd-oo-gbT" eventType="touchUpInside" id="fU3-Tn-k9F"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7jE-XC-Acs">
                                 <rect key="frame" x="186" y="44" width="81" height="21"/>
@@ -382,6 +385,9 @@
                                 <rect key="frame" x="20" y="124" width="72" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Share Link"/>
+                                <connections>
+                                    <action selector="shareLinkButtonTapped:" destination="YVd-oo-gbT" eventType="touchUpInside" id="gJK-hU-oOf"/>
+                                </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="MlX-gg-v2t">
                                 <rect key="frame" x="20" y="159" width="369" height="32"/>
@@ -391,6 +397,9 @@
                                     <segment title="Set List"/>
                                     <segment title="Played"/>
                                 </segments>
+                                <connections>
+                                    <action selector="segueValueChanged:" destination="YVd-oo-gbT" eventType="valueChanged" id="xYO-p4-IDH"/>
+                                </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mxn-BC-R0l">
                                 <rect key="frame" x="20" y="232" width="374" height="664"/>
@@ -420,11 +429,22 @@
                                 <rect key="frame" x="20" y="194" width="67" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add Song"/>
+                                <connections>
+                                    <action selector="addSongButtonTapped:" destination="YVd-oo-gbT" eventType="touchUpInside" id="Uai-Q7-aPB"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="abJ-pP-ewa"/>
                     </view>
+                    <connections>
+                        <outlet property="addSongButtonProperties" destination="eie-9Q-LzK" id="T39-nP-dxF"/>
+                        <outlet property="detailButtonProperties" destination="oQ8-yn-12c" id="tcc-89-6W3"/>
+                        <outlet property="eventTitleLabel" destination="7jE-XC-Acs" id="3TJ-Ed-jp2"/>
+                        <outlet property="segmentedControlProperties" destination="MlX-gg-v2t" id="5Fk-kX-hc7"/>
+                        <outlet property="shareLinkButtonProperties" destination="vA0-2f-4qG" id="vCV-om-tmK"/>
+                        <outlet property="tableView" destination="mxn-BC-R0l" id="tja-Vr-14n"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lsz-ac-CQi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
