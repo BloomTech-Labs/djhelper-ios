@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import MessageUI
 
 class EventPageViewController: UIViewController {
+    
+    // MARK: - Properties
+    var event: Event?
 
     // MARK: - IBOutlets
     @IBOutlet weak var eventTitleLabel: UILabel!
@@ -34,6 +38,7 @@ class EventPageViewController: UIViewController {
     }
 
     @IBAction func shareLinkButtonTapped(_ sender: UIButton) {
+        setupEmailForLink()
     }
 
     @IBAction func addSongButtonTapped(_ sender: UIButton) {
@@ -47,6 +52,30 @@ class EventPageViewController: UIViewController {
         detailButtonProperties.colorTheme()
         shareLinkButtonProperties.colorTheme()
         addSongButtonProperties.colorTheme()
+    }
+    
+    // Provides feature to send a URL via the Mail app.
+    // When testing, it only works on a device, not the simulator.
+    private func setupEmailForLink() {
+        guard MFMailComposeViewController.canSendMail(),
+            event != nil else {
+                return
+        }
+        
+        let mailController = MFMailComposeViewController()
+        mailController.mailComposeDelegate = self
+        
+        // Configure the fields of the interface.
+        mailController.setSubject("You've Been Invited to a DJHelper Event!")
+        mailController.setMessageBody("""
+            \(String(describing: event?.host?.name)) has invited you to view a music playlist for an event they are hosting. You will be able to view the playlist, request additional songs, and upvote existing requests that you like.
+            
+            View the event playlist here: <insert FE web link here>.
+            """,
+            isHTML: false)
+        
+        // Present the view controller modally.
+        self.present(mailController, animated: true, completion: nil)
     }
     /*
     // MARK: - Navigation
@@ -66,5 +95,28 @@ extension EventPageViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return UITableViewCell()
+    }
+}
+
+extension EventPageViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        
+        guard error == nil else {
+            print("Mail finished with error: \(String(describing: error))")
+        }
+        
+        switch result {
+            
+        case .cancelled:
+            <#code#>
+        case .saved:
+            <#code#>
+        case .sent:
+            <#code#>
+        case .failed:
+            <#code#>
+        @unknown default:
+            print("A new feature in iOS has caused the mail controller to fail")
+        }
     }
 }
