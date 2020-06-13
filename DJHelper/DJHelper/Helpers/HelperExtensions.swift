@@ -29,7 +29,8 @@ extension String {
 extension String {
     func eventDateFromString() -> Date? {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        formatter.dateFormat = "M/d/yyyy h:mm a"
+//        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         return formatter.date(from: self)
     }
 }
@@ -82,13 +83,13 @@ extension EventController {
     func deleteEvent(for event: Event) {
         let moc = CoreDataStack.shared.mainContext
         moc.delete(event)
-        deleteEventFromServer(event) { (result) in
-            switch result {
-            case .success:
-                print("\(event.eventID)")
-            case .failure:
-                return
-            }
+        deleteEventFromServer(event) { (_) in
+//            switch result {
+//            case .success:
+//                print("\(event.eventID)")
+//            case .failure:
+//                return
+//            }
         }
         do {
             try CoreDataStack.shared.save()
