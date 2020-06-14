@@ -42,6 +42,7 @@ class EventPageViewController: UIViewController {
 
         detailButtonProperties.frame.size.width = 150
         shareLinkButtonProperties.frame.size.width = 150
+        addSongButtonProperties.frame.size.width = view.frame.width - 40
 
         updateViews()
 
