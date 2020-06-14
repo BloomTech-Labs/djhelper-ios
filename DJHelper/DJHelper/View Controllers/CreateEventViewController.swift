@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateEventViewController: UIViewController {
+class CreateEventViewController: ShiftableViewController {
     let myAlert = CustomAlert()
     var currentHost: Host?
     var eventController: EventController!
@@ -192,5 +192,10 @@ extension CreateEventViewController {
                 break
             }
         }
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
 }

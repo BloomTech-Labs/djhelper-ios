@@ -177,7 +177,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="fbD-kp-YIW" kind="show" identifier="updateEventSegue" id="btz-n7-Fl7"/>
+                                            <segue destination="YVd-oo-gbT" kind="show" identifier="showEventSegue" id="cSb-Ki-RJ8"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -452,6 +452,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="abJ-pP-ewa"/>
                     </view>
+                    <navigationItem key="navigationItem" id="i0X-0w-dSF"/>
                     <connections>
                         <outlet property="addSongButtonProperties" destination="eie-9Q-LzK" id="T39-nP-dxF"/>
                         <outlet property="detailButtonProperties" destination="oQ8-yn-12c" id="tcc-89-6W3"/>
@@ -761,7 +762,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="vSp-NC-SYN"/>
-        <segue reference="btz-n7-Fl7"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="gear" catalog="system" width="128" height="119"/>

@@ -10,9 +10,16 @@ import UIKit
 import MessageUI
 
 class EventPageViewController: UIViewController {
-    
+
     // MARK: - Properties
-    var event: Event?
+    var event: Event? {
+        didSet {
+            updateViews()
+        }
+    }
+    var hostController: HostController?
+    var currentHost: Host?
+    var eventController: EventController?
 
     // MARK: - IBOutlets
     @IBOutlet weak var eventTitleLabel: UILabel!
@@ -20,17 +27,26 @@ class EventPageViewController: UIViewController {
     @IBOutlet weak var shareLinkButtonProperties: UIButton!
 
     @IBOutlet weak var segmentedControlProperties: UISegmentedControl!
-    
+
     @IBOutlet weak var addSongButtonProperties: UIButton!
     @IBOutlet weak var tableView: UITableView!
 
+    // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
         tableView.delegate = self
         tableView.dataSource = self
+
         setupButtons()
+
         detailButtonProperties.frame.size.width = 150
         shareLinkButtonProperties.frame.size.width = 150
+
+        updateViews()
+
+        let tapToDismiss = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tapToDismiss)
     }
 
     // MARK: - IBActions
@@ -48,12 +64,12 @@ class EventPageViewController: UIViewController {
     }
 
     // MARK: - Private functions
-    func setupButtons() {
+    private func setupButtons() {
         detailButtonProperties.colorTheme()
         shareLinkButtonProperties.colorTheme()
         addSongButtonProperties.colorTheme()
     }
-    
+
     // Provides feature to send a URL via the Mail app.
     // When testing, it only works on a device, not the simulator.
     private func setupEmailForLink() {
@@ -61,22 +77,32 @@ class EventPageViewController: UIViewController {
             event != nil else {
                 return
         }
-        
+        guard let hostName = event?.host?.name else { return }
+
         let mailController = MFMailComposeViewController()
         mailController.mailComposeDelegate = self
-        
+
         // Configure the fields of the interface.
         mailController.setSubject("You've Been Invited to a DJHelper Event!")
         mailController.setMessageBody("""
-            \(String(describing: event?.host?.name)) has invited you to view a music playlist for an event they are hosting. You will be able to view the playlist, request additional songs, and upvote existing requests that you like.
-            
+            \(hostName) has invited you to view a music playlist for an event they are hosting.
+            You will be able to view the playlist, request additional songs, and upvote existing requests that you like.
+
             View the event playlist here: <insert FE web link here>.
             """,
             isHTML: false)
-        
+
         // Present the view controller modally.
         self.present(mailController, animated: true, completion: nil)
     }
+
+    private func updateViews() {
+        guard isViewLoaded else { return }
+        guard let event = event else { return }
+
+        self.title = event.name
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -100,21 +126,22 @@ extension EventPageViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension EventPageViewController: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        
+
         guard error == nil else {
             print("Mail finished with error: \(String(describing: error))")
+            return
         }
-        
+
         switch result {
-            
+
         case .cancelled:
-            <#code#>
+            self.dismiss(animated: true, completion: nil)
         case .saved:
-            <#code#>
+            return
         case .sent:
-            <#code#>
+            self.dismiss(animated: true, completion: nil)
         case .failed:
-            <#code#>
+            return
         @unknown default:
             print("A new feature in iOS has caused the mail controller to fail")
         }

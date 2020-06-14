@@ -28,8 +28,9 @@ class HostProfileViewController: ShiftableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        profilePicTextField.delegate = self
+        bioTextView.delegate = self
         updateViews()
-        // Do any additional setup after loading the view.
     }
 
     @IBAction func saveChanges(_ sender: UIBarButtonItem) {

@@ -79,8 +79,8 @@ class HostEventsTableViewController: UIViewController {
                 newEventVC.currentHost = currentHost
                 newEventVC.eventController = eventController
             }
-        case "updateEventSegue":
-            guard let newEventVC = segue.destination as? CreateEventViewController, let index = tableView.indexPathForSelectedRow else {
+        case "showEventSegue":
+            guard let newEventVC = segue.destination as? EventPageViewController, let index = tableView.indexPathForSelectedRow else {
                 print("Error on line: \(#line) in function: \(#function)\n")
                 return
                     }
