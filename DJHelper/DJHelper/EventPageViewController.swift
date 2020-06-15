@@ -40,10 +40,6 @@ class EventPageViewController: UIViewController {
 
         setupButtons()
 
-        detailButtonProperties.frame.size.width = 150
-        shareLinkButtonProperties.frame.size.width = 150
-        addSongButtonProperties.frame.size.width = view.frame.width - 40
-
         updateViews()
 
         let tapToDismiss = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
@@ -104,15 +100,17 @@ class EventPageViewController: UIViewController {
         self.title = event.name
     }
     
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "eventDetailsSegue" {
+            guard let eventDetailVC = segue.destination as? CreateEventViewController else { return }
+
+            eventDetailVC.currentHost = currentHost
+            eventDetailVC.event = event
+            eventDetailVC.eventController = eventController
+        }
     }
-    */
 
 }
 extension EventPageViewController: UITableViewDataSource, UITableViewDelegate {

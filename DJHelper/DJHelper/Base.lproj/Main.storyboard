@@ -381,12 +381,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQ8-yn-12c">
-                                <rect key="frame" x="20" y="86" width="47" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQ8-yn-12c">
+                                <rect key="frame" x="20" y="104" width="150" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="x8k-VO-jZQ"/>
+                                </constraints>
                                 <state key="normal" title="Details"/>
                                 <connections>
                                     <action selector="detailButtonTapped:" destination="YVd-oo-gbT" eventType="touchUpInside" id="fU3-Tn-k9F"/>
+                                    <segue destination="fbD-kp-YIW" kind="show" identifier="eventDetailsSegue" id="CQD-ea-bE8"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7jE-XC-Acs">
@@ -396,17 +399,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vA0-2f-4qG">
-                                <rect key="frame" x="20" y="124" width="72" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Share Link"/>
-                                <connections>
-                                    <action selector="shareLinkButtonTapped:" destination="YVd-oo-gbT" eventType="touchUpInside" id="gJK-hU-oOf"/>
-                                </connections>
-                            </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="MlX-gg-v2t">
-                                <rect key="frame" x="20" y="159" width="369" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="MlX-gg-v2t">
+                                <rect key="frame" x="20" y="172" width="374" height="32"/>
                                 <segments>
                                     <segment title="Queue"/>
                                     <segment title="Set List"/>
@@ -416,9 +410,8 @@
                                     <action selector="segueValueChanged:" destination="YVd-oo-gbT" eventType="valueChanged" id="xYO-p4-IDH"/>
                                 </connections>
                             </segmentedControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mxn-BC-R0l">
-                                <rect key="frame" x="20" y="232" width="374" height="664"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mxn-BC-R0l">
+                                <rect key="frame" x="20" y="251" width="374" height="645"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="L8t-GY-IGc" style="IBUITableViewCellStyleDefault" id="Nz3-7b-Yrp">
@@ -440,16 +433,41 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eie-9Q-LzK">
-                                <rect key="frame" x="20" y="194" width="67" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eie-9Q-LzK">
+                                <rect key="frame" x="20" y="211" width="374" height="30"/>
                                 <state key="normal" title="Add Song"/>
                                 <connections>
                                     <action selector="addSongButtonTapped:" destination="YVd-oo-gbT" eventType="touchUpInside" id="Uai-Q7-aPB"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vA0-2f-4qG">
+                                <rect key="frame" x="20" y="138" width="150" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="lKk-dT-gLZ"/>
+                                </constraints>
+                                <state key="normal" title="Share Link"/>
+                                <connections>
+                                    <action selector="shareLinkButtonTapped:" destination="YVd-oo-gbT" eventType="touchUpInside" id="gJK-hU-oOf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="vA0-2f-4qG" firstAttribute="top" secondItem="oQ8-yn-12c" secondAttribute="bottom" constant="4" id="1VC-0z-21i"/>
+                            <constraint firstItem="oQ8-yn-12c" firstAttribute="top" secondItem="abJ-pP-ewa" secondAttribute="top" constant="16" id="2TB-Vn-Uwc"/>
+                            <constraint firstItem="mxn-BC-R0l" firstAttribute="leading" secondItem="abJ-pP-ewa" secondAttribute="leading" constant="20" id="7kc-hy-SUY"/>
+                            <constraint firstItem="abJ-pP-ewa" firstAttribute="trailing" secondItem="mxn-BC-R0l" secondAttribute="trailing" constant="20" id="ERx-VN-zoF"/>
+                            <constraint firstItem="MlX-gg-v2t" firstAttribute="top" secondItem="vA0-2f-4qG" secondAttribute="bottom" constant="4" id="MJv-BZ-joY"/>
+                            <constraint firstItem="abJ-pP-ewa" firstAttribute="trailing" secondItem="MlX-gg-v2t" secondAttribute="trailing" constant="20" id="Mw5-ZN-lb5"/>
+                            <constraint firstItem="eie-9Q-LzK" firstAttribute="top" secondItem="MlX-gg-v2t" secondAttribute="bottom" constant="8" id="SIv-St-GPF"/>
+                            <constraint firstAttribute="bottom" secondItem="mxn-BC-R0l" secondAttribute="bottom" id="TOU-3V-bMK"/>
+                            <constraint firstItem="MlX-gg-v2t" firstAttribute="leading" secondItem="abJ-pP-ewa" secondAttribute="leading" constant="20" id="Uqs-Yc-K1k"/>
+                            <constraint firstItem="eie-9Q-LzK" firstAttribute="leading" secondItem="abJ-pP-ewa" secondAttribute="leading" constant="20" id="W7s-YR-lwa"/>
+                            <constraint firstItem="mxn-BC-R0l" firstAttribute="top" secondItem="eie-9Q-LzK" secondAttribute="bottom" constant="10" id="YvQ-Ml-gIW"/>
+                            <constraint firstItem="oQ8-yn-12c" firstAttribute="leading" secondItem="abJ-pP-ewa" secondAttribute="leading" constant="20" id="bW2-WX-sbQ"/>
+                            <constraint firstItem="vA0-2f-4qG" firstAttribute="leading" secondItem="abJ-pP-ewa" secondAttribute="leading" constant="20" id="gDA-Cr-2bW"/>
+                            <constraint firstItem="abJ-pP-ewa" firstAttribute="trailing" secondItem="eie-9Q-LzK" secondAttribute="trailing" constant="20" id="yh8-KQ-nMc"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="abJ-pP-ewa"/>
                     </view>
                     <navigationItem key="navigationItem" id="i0X-0w-dSF"/>
@@ -537,7 +555,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YgQ-wv-773" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3123" y="319"/>
+            <point key="canvasLocation" x="3712" y="319"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -762,6 +780,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="vSp-NC-SYN"/>
+        <segue reference="CQD-ea-bE8"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="gear" catalog="system" width="128" height="119"/>
