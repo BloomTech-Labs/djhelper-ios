@@ -73,7 +73,7 @@ class CreateEventViewController: ShiftableViewController {
 
         if let passedInEvent = event {
 
-            guard let dateFromString = dateString.dateFromString() else {
+            guard let dateFromString = dateString.eventDateFromString() else {
                 print("Error on line: \(#line) in function: \(#function)\n")
                 return
             }

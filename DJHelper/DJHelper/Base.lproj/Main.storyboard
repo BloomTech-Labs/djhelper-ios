@@ -629,7 +629,7 @@
                                 <accessibility key="accessibilityConfiguration" identifier="HostSignIn.PasswordTextField"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ns1-sx-iRy">
                                 <rect key="frame" x="40" y="384" width="150" height="50"/>
@@ -779,7 +779,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="vSp-NC-SYN"/>
+        <segue reference="UtX-VA-g8O"/>
         <segue reference="CQD-ea-bE8"/>
     </inferredMetricsTieBreakers>
     <resources>
