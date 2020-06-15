@@ -297,8 +297,4 @@ class EventController {
                 """)
         }
     }
-
-    // TODO: add delete event method
-
-    // TODO: add update event method
 }

@@ -48,6 +48,7 @@ class EventPageViewController: UIViewController {
 
     // MARK: - IBActions
     @IBAction func detailButtonTapped(_ sender: UIButton) {
+        // segues to CreateEventViewController
     }
 
     @IBAction func shareLinkButtonTapped(_ sender: UIButton) {
@@ -99,7 +100,6 @@ class EventPageViewController: UIViewController {
 
         self.title = event.name
     }
-    
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

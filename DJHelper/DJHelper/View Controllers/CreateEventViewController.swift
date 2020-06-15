@@ -32,7 +32,7 @@ class CreateEventViewController: ShiftableViewController {
 
         updateViewsWithEvent()
 
-        // a date picker is displayed when the user taps in either of the two date text fields
+        // a date picker is displayed when the user taps the date text field
         // the date value of the picker then populates that text field
         eventTimeDatePicker = UIDatePicker()
         eventTimeDatePicker?.datePickerMode = .dateAndTime
@@ -58,11 +58,6 @@ class CreateEventViewController: ShiftableViewController {
 
     // MARK: - IBActions
     @IBAction func saveEvent(_ sender: UIBarButtonItem) {
-        print("Paste what's in the tempButton's body")
-    }
-
-    @IBAction func tempButton(_ sender: UIButton) {
-
         guard let currentHost = currentHost,
             let eventController = eventController,
             let name = eventNameTextField.text, !name.isEmpty,

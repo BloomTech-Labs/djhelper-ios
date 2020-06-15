@@ -8,6 +8,10 @@
 
 import UIKit
 
+// This class shifts the view if the active text field is behind the keyboard.
+// To use it, set the text field's delegate property to self.
+// eg. mytextfield.delegate = self
+
 class ShiftableViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIGestureRecognizerDelegate {
 
     var currentYShiftForKeyboard: CGFloat = 0

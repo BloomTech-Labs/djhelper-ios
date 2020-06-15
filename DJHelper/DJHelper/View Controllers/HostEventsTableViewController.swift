@@ -46,10 +46,8 @@ class HostEventsTableViewController: UIViewController {
 
         return nsfrc
     }()
-    // My plan is to do a fetch request to see if the Host identifier exists in core data.
-    // If it does not exist, we will create a host object and add it to core data.
-    // We will then create a fetched results controller to get the results for the table view data source.
 
+    // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -96,6 +94,7 @@ class HostEventsTableViewController: UIViewController {
      }
 }
 
+// MARK: - TableView Data Source
 extension HostEventsTableViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -126,6 +125,7 @@ extension HostEventsTableViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - FRC Delegate
 extension HostEventsTableViewController: NSFetchedResultsControllerDelegate {
     //will tell the tableViewController get ready to do something.
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {

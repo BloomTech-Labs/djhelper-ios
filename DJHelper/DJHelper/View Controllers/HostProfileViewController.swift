@@ -10,6 +10,7 @@ import UIKit
 
 class HostProfileViewController: ShiftableViewController {
 
+    // MARK: - Properties
     var currentHost: Host? {
         didSet {
             updateViews()
@@ -17,6 +18,7 @@ class HostProfileViewController: ShiftableViewController {
     }
     var hostController: HostController?
 
+    // MARK: - Outlets
     @IBOutlet var usernameTextField: UITextField!
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var emailTextField: UITextField!
@@ -25,6 +27,7 @@ class HostProfileViewController: ShiftableViewController {
     @IBOutlet var profilePicTextField: UITextField!
     @IBOutlet var bioTextView: UITextView!
 
+    // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,6 +36,7 @@ class HostProfileViewController: ShiftableViewController {
         updateViews()
     }
 
+    // MARK: - Actions
     @IBAction func saveChanges(_ sender: UIBarButtonItem) {
 
         guard let host = currentHost,
@@ -80,6 +84,7 @@ class HostProfileViewController: ShiftableViewController {
         // failed result should also present alert controller
     }
 
+    // MARK: - Private Methods
     private func updateViews() {
         guard let host = currentHost else { return }
         guard isViewLoaded else { return }
@@ -92,15 +97,4 @@ class HostProfileViewController: ShiftableViewController {
         profilePicTextField.text = host.profilePic?.absoluteString
         bioTextView.text = host.bio
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

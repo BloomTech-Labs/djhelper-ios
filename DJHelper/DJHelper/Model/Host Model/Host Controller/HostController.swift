@@ -10,7 +10,8 @@ import UIKit
 import CoreData
 
 class HostController {
-    // MARK: - HOST ERRORS
+
+    // MARK: - NETWORK ERRORS
     enum HostErrors: Error {
         case registrationError(Error)
         case unknownError(Error)
@@ -174,5 +175,4 @@ class HostController {
     }
 
     // MARK: - Delete Host
-    // server does not presently have a DEL for host(DJ)
 }
