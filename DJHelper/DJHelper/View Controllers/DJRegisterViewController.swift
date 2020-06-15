@@ -85,7 +85,7 @@ class DJRegisterViewController: ShiftableViewController {
             return
         }
 
-        // create new host object
+        // create new host object (temp ID until the actual one is returned from server)
         currentHost = Host(username: username, email: email, password: password, identifier: Int32(999))
 
         // call network register method

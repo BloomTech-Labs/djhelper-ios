@@ -272,7 +272,7 @@ class EventController {
 
             do {
                 let eventRep = try decoder.decode(EventRepresentation.self, from: data)
-                print("date from eventRep: \(eventRep.eventDate)")
+//                print("date from eventRep: \(eventRep.eventDate)")
                 self.updateEventID(for: event, with: eventRep)
                 completion(.success(eventRep))
             } catch {
@@ -297,8 +297,4 @@ class EventController {
                 """)
         }
     }
-
-    // TODO: add delete event method
-
-    // TODO: add update event method
 }

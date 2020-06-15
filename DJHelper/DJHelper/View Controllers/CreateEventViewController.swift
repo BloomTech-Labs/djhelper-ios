@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateEventViewController: UIViewController {
+class CreateEventViewController: ShiftableViewController {
     let myAlert = CustomAlert()
     var currentHost: Host?
     var eventController: EventController!
@@ -18,8 +18,7 @@ class CreateEventViewController: UIViewController {
             updateViewsWithEvent()
         }
     }
-    private var startTimeDatePicker: UIDatePicker?
-    private var endTimeDatePicker: UIDatePicker?
+    private var eventTimeDatePicker: UIDatePicker?
 
     // MARK: - IBOutlets
     @IBOutlet weak var eventNameTextField: UITextField!
@@ -33,6 +32,15 @@ class CreateEventViewController: UIViewController {
 
         updateViewsWithEvent()
 
+        // a date picker is displayed when the user taps the date text field
+        // the date value of the picker then populates that text field
+        eventTimeDatePicker = UIDatePicker()
+        eventTimeDatePicker?.datePickerMode = .dateAndTime
+        eventTimeDatePicker?.minuteInterval = 15
+        eventTimeDatePicker?.addTarget(self, action: #selector(self.eventDateChanged(datePicker:)), for: .valueChanged)
+
+        eventDateTextField.inputView = eventTimeDatePicker
+
         // tap anywhere on the screen to dismiss the date picker
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.viewTapped(gestureRecognizer:)))
         view.addGestureRecognizer(tapGesture)
@@ -41,6 +49,7 @@ class CreateEventViewController: UIViewController {
     @objc func eventDateChanged(datePicker: UIDatePicker) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "M/d/yyyy h:mm a"
+        eventDateTextField.text = dateFormatter.string(from: datePicker.date)
     }
 
     @objc func viewTapped(gestureRecognizer: UITapGestureRecognizer) {
@@ -49,11 +58,6 @@ class CreateEventViewController: UIViewController {
 
     // MARK: - IBActions
     @IBAction func saveEvent(_ sender: UIBarButtonItem) {
-        print("Paste what's in the tempButton's body")
-    }
-
-    @IBAction func tempButton(_ sender: UIButton) {
-
         guard let currentHost = currentHost,
             let eventController = eventController,
             let name = eventNameTextField.text, !name.isEmpty,
@@ -64,9 +68,7 @@ class CreateEventViewController: UIViewController {
 
         if let passedInEvent = event {
 
-            // TODO: Need to make sure the date pickers are set to the curent values of the start time and end time
-            // TODO: instead of this guard let, if the end is empty, that is fine because it is optional
-            guard let dateFromString = dateString.dateFromString() else {
+            guard let dateFromString = dateString.eventDateFromString() else {
                 print("Error on line: \(#line) in function: \(#function)\n")
                 return
             }
@@ -81,7 +83,7 @@ class CreateEventViewController: UIViewController {
             self.activityIndicator(shouldStart: true)
             putUpdateEvent(with: updatedEvent, andEventController: eventController)
         } else {
-            guard let dateFromString = dateString.dateFromString() else {
+            guard let dateFromString = dateString.eventDateFromString() else {
                 print("Error on line: \(#line) in function: \(#function)\n")
                 return
             }
@@ -123,12 +125,12 @@ class CreateEventViewController: UIViewController {
 extension CreateEventViewController {
 
     // MARK: - PRIVATE FUNCTIONS
-    
+
     ///this dismisses the custom alert controller
     @objc func dissmiss() {
          myAlert.dismissAlert()
        }
-    
+
     private func updateViewsWithEvent() {
         guard let passedInEvent = event, isViewLoaded else { return }
         print("This is the event's id: \(passedInEvent.eventID)")
@@ -143,6 +145,7 @@ extension CreateEventViewController {
 
     // Had to add the following functions because SwiftLint was warning that the SaveEvent button function was longer than 40 lines
     private func authorizeEvent(_ event: Event, withHost currentHost: Host, andEventController eventController: EventController) {
+
         // NOTE: This next line is what causes the event to be linked with the current host in Core Data
         event.host = currentHost
 
@@ -184,5 +187,10 @@ extension CreateEventViewController {
                 break
             }
         }
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
 }
