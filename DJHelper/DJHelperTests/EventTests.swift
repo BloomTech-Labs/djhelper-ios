@@ -13,11 +13,11 @@ import CoreData
 class EventTests: XCTestCase {
 
     /*
-     Creating a new event with valid inputs does not give error
-     Creating a new event with valid inputs adds one element to the event array
-     Creating a new event with invalid inputs results in an error
-     Deleting an event does not result in error
-     Deleting an event reduces the event array count by one
+     DONE Creating a new event with valid inputs does not give error
+     DONE Creating a new event with valid inputs adds one element to the event array
+     MOVE TO UI TEST Creating a new event with invalid inputs results in an error
+     MOVE TO UI TEST Deleting an event does not result in error
+     DONE Deleting an event reduces the event array count by one
      Updating an event with valid inputs does not give error
      Updating an event with invalid inputs results in an error
      */
@@ -149,5 +149,72 @@ class EventTests: XCTestCase {
         afterCount = fetchedEvents!.count
 
         XCTAssertTrue(afterCount == (beforeCount! - 1))
+    }
+
+    func testValidEventUpdate() {
+        let eventController = EventController()
+
+        let testHost = Host(username: "lulu", email: "lulu@me.com", password: "bully", identifier: 28)
+
+        let testEventDate = Date()
+
+        var validNewEvent = Event(name: "UnitTest",
+                                  eventType: "UnitTest",
+                                  eventDescription: "Testing Valid Event Creation",
+                                  eventDate: testEventDate,
+                                  hostID: testHost.identifier,
+                                  eventID: nil)
+
+        let createEventExpectation = expectation(description: "Wait for event to be created")
+
+        eventController.authorize(event: validNewEvent) { (results) in
+            createEventExpectation.fulfill()
+
+            switch results {
+
+            case let .success(newEventResponse):
+                XCTAssertNotNil(newEventResponse)
+                XCTAssertEqual(newEventResponse.eventType, "UnitTest")
+                validNewEvent.eventID = newEventResponse.eventID!
+            case let .failure(error):
+                XCTAssertNil(error)
+            }
+        }
+        wait(for: [createEventExpectation], timeout: 3)
+
+        // updated event changes the contents of eventType
+        let updatedEvent = eventController.updateEvent(event: validNewEvent,
+                                                       eventName: "UnitTest",
+                                                       eventDate: Date(),
+                                                       description: "Testing Valid Event Creation",
+                                                       type: "UnitTest Update",
+                                                       notes: "Testing Update")
+
+        let updateEventExpectaton = expectation(description: "Wait for event to be updated"
+        )
+        eventController.saveUpdateEvent(updatedEvent) { (results) in
+            updateEventExpectaton.fulfill()
+
+            switch results {
+            case .success: break
+            case let .failure(error):
+                XCTAssertNil(error)
+            }
+        }
+        wait(for: [updateEventExpectaton], timeout: 3)
+
+        // Fetch event created previously by using its eventID and verify eventType was updated
+        let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
+        let hostPredicate = NSPredicate(format: "eventID == %i", validNewEvent.eventID)
+        fetchRequest.predicate = hostPredicate
+        var fetchedEvents: [Event]?
+
+        let moc = CoreDataStack.shared.mainContext
+        moc.performAndWait {
+            fetchedEvents = try? fetchRequest.execute()
+        }
+
+        let verifyUpdatedEvent = fetchedEvents?.first
+        XCTAssertEqual(verifyUpdatedEvent?.eventType, "UnitTest Update")
     }
 }
