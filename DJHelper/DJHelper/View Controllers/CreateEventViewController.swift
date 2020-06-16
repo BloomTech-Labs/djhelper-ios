@@ -93,7 +93,7 @@ class CreateEventViewController: ShiftableViewController {
                               eventDescription: description,
                               eventDate: dateFromString,
                               hostID: currentHost.identifier,
-                              imageURL: URL(string: "tewtststtt.com")!,
+                              imageURL: URL(string: "")!,
                               notes: notes,
                               eventID: nil)
             self.activityIndicator(shouldStart: true)
@@ -144,7 +144,7 @@ extension CreateEventViewController {
     }
 
     // Had to add the following functions because SwiftLint was warning that the SaveEvent button function was longer than 40 lines
-    private func authorizeEvent(_ event: Event, withHost currentHost: Host, andEventController eventController: EventController) {
+    func authorizeEvent(_ event: Event, withHost currentHost: Host, andEventController eventController: EventController) {
 
         // NOTE: This next line is what causes the event to be linked with the current host in Core Data
         event.host = currentHost
