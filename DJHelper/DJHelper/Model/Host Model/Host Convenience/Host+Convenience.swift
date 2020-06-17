@@ -39,10 +39,14 @@ extension Host {
     convenience init?(hostRepresnetation: HostRepresentation,
                       context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         guard let bio = hostRepresnetation.bio,
-            let identifier = hostRepresnetation.identifier,
-            let phone = hostRepresnetation.phone,
-            let pic = hostRepresnetation.profilePic,
-            let website = hostRepresnetation.website else { return nil }
+            let identifier = hostRepresnetation.identifier else { return nil }
+        if hostRepresnetation.website == "" {
+
+        }
+//        ,
+//            let phone = hostRepresnetation.phone,
+//            let pic = hostRepresnetation.profilePic,
+//            let website = hostRepresnetation.website else { return nil }
 
         self.init(name: hostRepresnetation.name,
                   username: hostRepresnetation.username,
@@ -50,9 +54,9 @@ extension Host {
                   password: hostRepresnetation.password,
                   bio: bio,
                   identifier: identifier,
-                  phone: phone,
-                  profilePic: pic,
-                  website: website)
+                  phone: hostRepresnetation.phone,
+                  profilePic: URL(string: hostRepresnetation.profilePic ?? ""),
+                  website: URL(string: hostRepresnetation.website ?? ""))
     }
 
     var hostLogin: HostLogin? {
@@ -99,10 +103,10 @@ extension Host {
                                   username: username,
                                   email: email,
                                   password: password,
-                                  phone: phone,
-                                  website: website,
-                                  bio: bio,
-                                  profilePic: self.profilePic,
+                                  phone: self.phone,
+                                  website: website?.absoluteString,
+                                  bio: self.bio,
+                                  profilePic: self.profilePic?.absoluteString,
                                   identifier: self.identifier)
     }
 }

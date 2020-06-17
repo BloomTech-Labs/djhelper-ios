@@ -12,6 +12,7 @@ extension Date {
     func stringFromDate() -> String {
         let formatter = DateFormatter()
 //        formatter.dateFormat = "M/d/yyyy h:mm a"
+//                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         formatter.dateStyle = .short
         return formatter.string(from: self)
     }
@@ -21,7 +22,8 @@ extension String {
     func dateFromString() -> Date? {
         let formatter = DateFormatter()
 //        formatter.dateFormat = "M/d/yyyy h:mm a"
-        formatter.dateStyle = .short
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+//        formatter.dateStyle = .short
         return formatter.date(from: self)
     }
 }

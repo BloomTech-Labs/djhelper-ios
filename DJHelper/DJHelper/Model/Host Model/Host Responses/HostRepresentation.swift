@@ -14,9 +14,9 @@ struct HostRepresentation: Codable {
     var password: String
     var email: String
     var phone: String?
-    var website: URL?
+    var website: String?
     var bio: String?
-    var profilePic: URL?
+    var profilePic: String?
     var identifier: Int32?
 
     enum HostCodingKeys: String, CodingKey {
@@ -36,9 +36,9 @@ struct HostRepresentation: Codable {
          email: String,
          password: String,
          phone: String? = nil,
-         website: URL? = nil,
+         website: String? = nil,
          bio: String? = nil,
-         profilePic: URL? = nil,
+         profilePic: String? = nil,
          identifier: Int32? = nil) {
         self.name = name
         self.username = username
@@ -60,9 +60,9 @@ struct HostRepresentation: Codable {
         password = try container.decode(String.self, forKey: .password)
         email = try container.decode(String.self, forKey: .email)
         phone = try container.decode(String?.self, forKey: .phone)
-        website = try container.decode(URL?.self, forKey: .website)
+        website = try container.decode(String?.self, forKey: .website)
         bio = try container.decode(String?.self, forKey: .bio)
-        profilePic = try container.decode(URL?.self, forKey: .profilePic)
+        profilePic = try container.decode(String?.self, forKey: .profilePic)
         identifier = try container.decode(Int32.self, forKey: .identifier)
     }
 

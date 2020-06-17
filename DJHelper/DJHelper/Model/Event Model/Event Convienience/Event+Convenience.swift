@@ -38,9 +38,10 @@ extension Event {
     //EventRepresentation -> Event
     convenience init?(eventRepresentation: EventRepresentation,
                       context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
-        guard let eventDateFromString = eventRepresentation.eventDate.dateFromString(),
-            let imageURL = eventRepresentation.imageURL,
-            let notes = eventRepresentation.notes else { return nil }
+        guard let eventDateFromString = eventRepresentation.eventDate.dateFromString() else { return nil }
+//        ,
+//            let imageURL = eventRepresentation.imageURL,
+//            let notes = eventRepresentation.notes else { return nil }
 //            let eventID = eventRepresentation.eventID else { return nil }
 
         self.init(name: eventRepresentation.name,
@@ -48,8 +49,8 @@ extension Event {
                   eventDescription: eventRepresentation.eventDescription,
                   eventDate: eventDateFromString,
                   hostID: eventRepresentation.hostID,
-                  imageURL: imageURL,
-                  notes: notes,
+                  imageURL: eventRepresentation.imageURL,
+                  notes: eventRepresentation.notes,
                   eventID: eventRepresentation.eventID)
     }
 

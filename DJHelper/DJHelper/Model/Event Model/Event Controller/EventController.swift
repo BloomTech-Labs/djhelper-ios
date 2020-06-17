@@ -173,7 +173,7 @@ class EventController {
 
             do {
                 let eventRepArray = try decoder.decode([EventRepresentation].self, from: data)
-                let eventArray = eventRepArray.compactMap { Event(eventRepresentation: $0 )}
+                let eventArray: [Event] = eventRepArray.compactMap { Event(eventRepresentation: $0 )}
                 completion(.success(eventArray))
             } catch {
                 print("""

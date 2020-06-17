@@ -115,6 +115,7 @@ class DJLoginViewController: ShiftableViewController {
         case "GuestSignInSegue":
             if let guestSignInVC = segue.destination as? GuestLoginViewController {
                 guestSignInVC.eventController = eventController
+                guestSignInVC.hostController = hostController
             }
         default:
             return

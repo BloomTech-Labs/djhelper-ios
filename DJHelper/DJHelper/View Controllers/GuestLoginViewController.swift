@@ -12,9 +12,12 @@ import CoreData
 class GuestLoginViewController: ShiftableViewController {
 
     var currentHost: Host?
+    var allHosts: [Host]?
+    var allEvents: [Event]?
     var event: Event?
     var isGuest: Bool?
     var eventController: EventController?
+    var hostController: HostController?
 
     // MARK: - Outlets
     @IBOutlet weak var eventCodeTextField: UITextField!
@@ -23,6 +26,28 @@ class GuestLoginViewController: ShiftableViewController {
     // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        hostController?.fetchAllHostsFromServer(completion: { (results) in
+            switch results {
+            case let .success(hosts):
+                DispatchQueue.main.async {
+                    self.allHosts = hosts
+                }
+            case let .failure(error):
+                print("Error fetching all hosts from server: \(error)")
+            }
+        })
+
+        eventController?.fetchAllEventsFromServer(completion: { (results) in
+            switch results {
+            case let .success(events):
+                DispatchQueue.main.async {
+                    self.allEvents = events
+                }
+            case let .failure(error):
+                print("Error fetching all events from server: \(error)")
+            }
+        })
 
         setupButtons()
         setUpSubviews()
@@ -43,36 +68,35 @@ class GuestLoginViewController: ShiftableViewController {
 
     @IBAction func viewEvents(_ sender: UIButton) {
         guard let eventCode = eventCodeTextField.text,
-            !eventCode.isEmpty else { return }
+            !eventCode.isEmpty,
+        let allEvents = allEvents,
+        let allHosts = allHosts else { return }
 
         // Check that the text entered is convertible to Int
         guard let intEventCode = Int(eventCode) else {
             let inputAlert = CustomAlert()
-            inputAlert.showAlert(with: "Invalid Entry", message: "The event code must be a whole number only. Please check the input and try again.", on: self)
+            inputAlert.showAlert(with: "Invalid Entry",
+                                 message: "The event code must be a whole number only. Please check the input and try again.",
+                                 on: self)
             return
         }
 
-        var returnedEvents: [Event] = []
-        eventController?.fetchAllEventsFromServer { (results) in
-            switch results {
-            case let .success(events):
-                returnedEvents = events
-
-                let matchingEventIDs = returnedEvents.filter { $0.eventID == intEventCode }
-                
-                if let matchingEvent = matchingEventIDs.first {
-                    self.event = matchingEvent
-                    self.currentHost = matchingEvent.host
-                    self.isGuest = true
-                } else {
-                    let unmatchedEventAlert = CustomAlert()
-                    unmatchedEventAlert.showAlert(with: "Event Not Found", message: "There was no event found with the code. Please verify the code and try again.", on: self)
-                }
-            case let .failure(error):
-                print("Error fetching all events from server: \(error)")
+        let matchingEventIDs = allEvents.filter { $0.eventID == intEventCode }
+        if let matchingEvent = matchingEventIDs.first {
+            self.event = matchingEvent
+            let matchingHostID = matchingEvent.hostID
+            let matchingHosts = allHosts.filter { $0.identifier == matchingHostID }
+            if let matchingHost = matchingHosts.first {
+                self.currentHost = matchingHost
+                self.event?.host = matchingHost
             }
+            self.isGuest = true
+        } else {
+            let unmatchedEventAlert = CustomAlert()
+                                    unmatchedEventAlert.showAlert(with: "Event Not Found",
+                                                                  message: "There was no event found with the code. Please verify the code and try again.",
+                                                                  on: self)
         }
-
     }
 
     // MARK: - Methods
