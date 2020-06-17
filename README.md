@@ -3,7 +3,7 @@
 
 You can find the deployed project at https://www.dj-helper.com.
 
-## 4️⃣ Contributors
+## Contributors
 
 
 |                                       Craig Swanson                                        |                                       [Student 2](https://github.com/)                                        |
