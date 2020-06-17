@@ -90,7 +90,7 @@
                                     <attributedString key="attributedTitle">
                                         <fragment content="Create Account">
                                             <attributes>
-                                                <color key="NSColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <font key="NSFont" size="24" name="HelveticaNeue-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
@@ -482,7 +482,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lsz-ac-CQi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2957.971014492754" y="1069.4196428571429"/>
+            <point key="canvasLocation" x="3046" y="-412"/>
         </scene>
         <!--Create Event View Controller-->
         <scene sceneID="9np-5s-OAK">
@@ -636,7 +636,7 @@
                                     <attributedString key="attributedTitle">
                                         <fragment content="Sign in">
                                             <attributes>
-                                                <color key="NSColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <font key="NSFont" size="24" name="HelveticaNeue-Bold"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
@@ -678,6 +678,45 @@
                                     <segue destination="lsu-IV-jHp" kind="show" identifier="djRegisterSegue" id="ple-Ah-urM"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="if3-rP-gba">
+                                <rect key="frame" x="50" y="474" width="324" height="21"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Invited to view event?">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="18" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dzV-Hz-RzY">
+                                <rect key="frame" x="40" y="505" width="150" height="50"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration" identifier="HostSignIn.SignInButton"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="8xs-Yo-hpY"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="i4B-q9-JnR"/>
+                                    <constraint firstAttribute="height" constant="50" id="uhy-QC-FTC"/>
+                                    <constraint firstAttribute="width" constant="150" id="yWS-a9-yfB"/>
+                                </constraints>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Guest">
+                                            <attributes>
+                                                <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <font key="NSFont" size="24" name="HelveticaNeue-Bold"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="hostLogIn:" destination="bwM-iG-43S" eventType="touchUpInside" id="B1n-Ig-1x4"/>
+                                    <segue destination="PR4-TT-pvu" kind="show" id="cy7-Xa-SNi"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -688,8 +727,12 @@
                             <constraint firstItem="ODt-JB-Wj3" firstAttribute="leading" secondItem="jkS-vw-ODC" secondAttribute="leading" constant="40" id="Fpe-FG-jsa"/>
                             <constraint firstItem="fqv-ne-53O" firstAttribute="leading" secondItem="jkS-vw-ODC" secondAttribute="leading" constant="40" id="Geb-vV-zYo"/>
                             <constraint firstItem="Nam-sl-PXF" firstAttribute="top" secondItem="jkS-vw-ODC" secondAttribute="top" constant="40" id="HVE-Uv-87h"/>
+                            <constraint firstItem="dzV-Hz-RzY" firstAttribute="top" secondItem="if3-rP-gba" secondAttribute="bottom" constant="10" id="HgT-kU-RR4"/>
                             <constraint firstItem="16Y-5P-mdD" firstAttribute="leading" secondItem="jkS-vw-ODC" secondAttribute="leading" constant="40" id="MCA-VI-5wG"/>
+                            <constraint firstItem="if3-rP-gba" firstAttribute="top" secondItem="Ns1-sx-iRy" secondAttribute="bottom" constant="40" id="SwZ-gW-CKb"/>
+                            <constraint firstItem="jkS-vw-ODC" firstAttribute="trailing" secondItem="if3-rP-gba" secondAttribute="trailing" constant="40" id="TIB-jx-hbZ"/>
                             <constraint firstItem="A3p-Z9-8TZ" firstAttribute="top" secondItem="16Y-5P-mdD" secondAttribute="bottom" constant="20" id="UCg-cZ-m7X"/>
+                            <constraint firstItem="if3-rP-gba" firstAttribute="leading" secondItem="jkS-vw-ODC" secondAttribute="leading" constant="50" id="UcV-dl-sB5"/>
                             <constraint firstItem="jkS-vw-ODC" firstAttribute="trailing" secondItem="fqv-ne-53O" secondAttribute="trailing" constant="40" id="eZZ-0v-IjK"/>
                             <constraint firstItem="TJa-gP-sPD" firstAttribute="leading" secondItem="jkS-vw-ODC" secondAttribute="leading" constant="40" id="f4g-H2-0iR"/>
                             <constraint firstItem="jkS-vw-ODC" firstAttribute="bottom" secondItem="A3p-Z9-8TZ" secondAttribute="bottom" constant="40" id="hdQ-DU-uiO"/>
@@ -698,12 +741,14 @@
                             <constraint firstItem="Nam-sl-PXF" firstAttribute="leading" secondItem="jkS-vw-ODC" secondAttribute="leading" constant="40" id="mhA-wl-0ku"/>
                             <constraint firstItem="jPr-dR-Isi" firstAttribute="top" secondItem="ODt-JB-Wj3" secondAttribute="bottom" constant="6" id="nRG-zn-fKh"/>
                             <constraint firstItem="Ns1-sx-iRy" firstAttribute="top" secondItem="fqv-ne-53O" secondAttribute="bottom" constant="30" id="qX8-2R-6z2"/>
+                            <constraint firstItem="dzV-Hz-RzY" firstAttribute="leading" secondItem="jkS-vw-ODC" secondAttribute="leading" constant="40" id="rUa-CA-Ljg"/>
                             <constraint firstItem="fqv-ne-53O" firstAttribute="top" secondItem="TJa-gP-sPD" secondAttribute="bottom" constant="30" id="xII-cP-IXN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jkS-vw-ODC"/>
                     </view>
                     <navigationItem key="navigationItem" id="BOh-Ff-nyj"/>
                     <connections>
+                        <outlet property="guestButton" destination="dzV-Hz-RzY" id="b2e-i7-Zm9"/>
                         <outlet property="passwordTextField" destination="fqv-ne-53O" id="NGn-7P-C9E"/>
                         <outlet property="signInButton" destination="Ns1-sx-iRy" id="HyV-eZ-q9d"/>
                         <outlet property="usernameTextField" destination="TJa-gP-sPD" id="PmN-zw-0ba"/>
@@ -713,6 +758,93 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZGA-J8-ai2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-284.05797101449275" y="95.758928571428569"/>
+        </scene>
+        <!--Guest Login View Controller-->
+        <scene sceneID="mbx-3d-bOm">
+            <objects>
+                <viewController id="PR4-TT-pvu" customClass="GuestLoginViewController" customModule="DJHelper" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wCC-vV-bVP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="245-61-eZX">
+                                <rect key="frame" x="40" y="84" width="114" height="29"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="DJ Helper">
+                                        <attributes>
+                                            <font key="NSFont" size="24" name="HelveticaNeue-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LcJ-w5-VJv">
+                                <rect key="frame" x="40" y="153" width="106" height="29"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Welcome">
+                                        <attributes>
+                                            <font key="NSFont" size="24" name="HelveticaNeue-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BdJ-1S-TTa">
+                                <rect key="frame" x="40" y="188" width="324" height="57"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Enter or paste the event code to continue">
+                                        <attributes>
+                                            <font key="NSFont" size="24" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YHb-tv-09A">
+                                <rect key="frame" x="40" y="285" width="334" height="34"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pqv-Nn-rD6">
+                                <rect key="frame" x="40" y="349" width="334" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="m8H-fh-PmP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
+                                <state key="normal" title="View Event"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="BdJ-1S-TTa" firstAttribute="top" secondItem="LcJ-w5-VJv" secondAttribute="bottom" constant="6" id="2rF-go-YPS"/>
+                            <constraint firstItem="245-61-eZX" firstAttribute="top" secondItem="7QU-e4-5AW" secondAttribute="top" constant="40" id="9BE-9Q-S2z"/>
+                            <constraint firstItem="BdJ-1S-TTa" firstAttribute="leading" secondItem="7QU-e4-5AW" secondAttribute="leading" constant="40" id="BYh-Zb-auj"/>
+                            <constraint firstItem="Pqv-Nn-rD6" firstAttribute="top" secondItem="YHb-tv-09A" secondAttribute="bottom" constant="30" id="Bb6-hQ-03o"/>
+                            <constraint firstItem="LcJ-w5-VJv" firstAttribute="top" secondItem="245-61-eZX" secondAttribute="bottom" constant="40" id="EzC-2C-UJz"/>
+                            <constraint firstItem="LcJ-w5-VJv" firstAttribute="leading" secondItem="7QU-e4-5AW" secondAttribute="leading" constant="40" id="NfX-CO-dyG"/>
+                            <constraint firstAttribute="trailing" secondItem="BdJ-1S-TTa" secondAttribute="trailing" constant="50" id="OqO-PU-hcB"/>
+                            <constraint firstItem="YHb-tv-09A" firstAttribute="top" secondItem="BdJ-1S-TTa" secondAttribute="bottom" constant="40" id="QTz-ui-kMB"/>
+                            <constraint firstItem="7QU-e4-5AW" firstAttribute="trailing" secondItem="Pqv-Nn-rD6" secondAttribute="trailing" constant="40" id="Yuv-bS-5MT"/>
+                            <constraint firstItem="Pqv-Nn-rD6" firstAttribute="leading" secondItem="7QU-e4-5AW" secondAttribute="leading" constant="40" id="axj-f4-mKf"/>
+                            <constraint firstItem="7QU-e4-5AW" firstAttribute="trailing" secondItem="YHb-tv-09A" secondAttribute="trailing" constant="40" id="uRS-qB-mV7"/>
+                            <constraint firstItem="YHb-tv-09A" firstAttribute="leading" secondItem="7QU-e4-5AW" secondAttribute="leading" constant="40" id="v2N-ci-ctW"/>
+                            <constraint firstItem="245-61-eZX" firstAttribute="leading" secondItem="7QU-e4-5AW" secondAttribute="leading" constant="40" id="xlM-Om-Ylu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7QU-e4-5AW"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="tnz-U5-yQr"/>
+                    <connections>
+                        <outlet property="eventCodeTextField" destination="YHb-tv-09A" id="DZM-9z-1o4"/>
+                        <outlet property="viewEventButton" destination="Pqv-Nn-rD6" id="93P-1C-NOe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Zy-7S-dc1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="502" y="99"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="QIs-GD-hox">

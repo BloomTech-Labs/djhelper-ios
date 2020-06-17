@@ -19,12 +19,14 @@ class DJLoginViewController: ShiftableViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var guestButton: UIButton!
 
     // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        signInButton.layer.cornerRadius = 25
+//        signInButton.layer.cornerRadius = 25
+        setupButtons()
 
         let tapToDismiss = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tapToDismiss)
@@ -107,6 +109,11 @@ class DJLoginViewController: ShiftableViewController {
         default:
             return
         }
+    }
+
+    func setupButtons() {
+        signInButton.colorTheme()
+        guestButton.colorTheme()
     }
 
     func updateViews() {

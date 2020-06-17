@@ -26,12 +26,19 @@ class DJRegisterViewController: ShiftableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        createAccountButton.layer.cornerRadius = 25
+        setupButtons()
         setUpSubviews()
+        usernameTextField.delegate = self
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
         confirmTextField.delegate = self
 
         let tapToDismiss = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tapToDismiss)
+    }
+
+    func setupButtons() {
+        createAccountButton.colorTheme()
     }
 
     // Programmatically setting up the Sign In button in the view.
