@@ -18,8 +18,8 @@ class EventTests: XCTestCase {
      MOVE TO UI TEST Creating a new event with invalid inputs results in an error
      MOVE TO UI TEST Deleting an event does not result in error
      DONE Deleting an event reduces the event array count by one
-     Updating an event with valid inputs does not give error
-     Updating an event with invalid inputs results in an error
+     DONE Updating an event with valid inputs does not give error
+     MOVE TO UI TEST Updating an event with invalid inputs results in an error
      */
 
     func testValidNewEvent() {
@@ -152,13 +152,23 @@ class EventTests: XCTestCase {
     }
 
     func testValidEventUpdate() {
+
+        /*
+         The idea for this test is to:
+         1. Create a new event and post it to the server
+         2. Verify the post was successful (as in a previous test)
+         3. Update that new event by changing one of its properties
+         4. Call the update method
+         5. Verify that the event now has the updated data
+         */
+
         let eventController = EventController()
 
         let testHost = Host(username: "lulu", email: "lulu@me.com", password: "bully", identifier: 28)
 
         let testEventDate = Date()
 
-        var validNewEvent = Event(name: "UnitTest",
+        let validNewEvent = Event(name: "UnitTest",
                                   eventType: "UnitTest",
                                   eventDescription: "Testing Valid Event Creation",
                                   eventDate: testEventDate,
@@ -182,7 +192,7 @@ class EventTests: XCTestCase {
         }
         wait(for: [createEventExpectation], timeout: 3)
 
-        // updated event changes the contents of eventType
+        // this updatedEvent object changes the contents of eventType property
         let updatedEvent = eventController.updateEvent(event: validNewEvent,
                                                        eventName: "UnitTest",
                                                        eventDate: Date(),
