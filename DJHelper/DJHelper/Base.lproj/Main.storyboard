@@ -701,7 +701,7 @@
                                 </state>
                                 <connections>
                                     <action selector="hostLogIn:" destination="bwM-iG-43S" eventType="touchUpInside" id="B1n-Ig-1x4"/>
-                                    <segue destination="PR4-TT-pvu" kind="show" id="cy7-Xa-SNi"/>
+                                    <segue destination="PR4-TT-pvu" kind="show" identifier="GuestSignInSegue" id="cy7-Xa-SNi"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -800,6 +800,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
                                 <state key="normal" title="View Event"/>
+                                <connections>
+                                    <action selector="viewEvents:" destination="PR4-TT-pvu" eventType="touchUpInside" id="eSa-Iq-52s"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

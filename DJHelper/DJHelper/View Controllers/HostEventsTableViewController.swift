@@ -11,9 +11,10 @@ import CoreData
 
 class HostEventsTableViewController: UIViewController {
 
-    var eventController = EventController()
+    var eventController: EventController!
     var hostController: HostController!
     var currentHost: Host!
+    var isGuest: Bool?
 
     @IBOutlet var tableView: UITableView!
 

@@ -13,7 +13,9 @@ class DJLoginViewController: ShiftableViewController {
 
     // MARK: - Properties
     var hostController = HostController()
+    var eventController = EventController()
     var currentHost: Host?
+    var isGuest: Bool = false
 
     // MARK: - Outlets
     @IBOutlet weak var usernameTextField: UITextField!
@@ -95,6 +97,8 @@ class DJLoginViewController: ShiftableViewController {
         case "djRegisterSegue":
             if let djRegisterVC = segue.destination as? DJRegisterViewController {
                 djRegisterVC.hostController = hostController
+                djRegisterVC.eventController = eventController
+                djRegisterVC.isGuest = isGuest
             }
         case "SignInSegue":
             if let barViewControllers = segue.destination as? UITabBarController {
@@ -103,8 +107,14 @@ class DJLoginViewController: ShiftableViewController {
                     if let logInVC = logInNC.viewControllers.first as? HostEventsTableViewController {
                         logInVC.currentHost = currentHost
                         logInVC.hostController = hostController
+                        logInVC.eventController = eventController
+                        logInVC.isGuest = isGuest
                     }
                 }
+            }
+        case "GuestSignInSegue":
+            if let guestSignInVC = segue.destination as? GuestLoginViewController {
+                guestSignInVC.eventController = eventController
             }
         default:
             return

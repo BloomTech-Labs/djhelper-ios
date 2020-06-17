@@ -145,6 +145,47 @@ class EventController {
     }
 
     // MARK: - FETCH ALL EVENTS
+    func fetchAllEventsFromServer(completion: @escaping(Result<[Event], EventErrors>) -> Void) {
+        let url = baseURL.appendingPathComponent("events")
+        let urlRequest = URLRequest(url: url)
+
+        dataLoader.loadData(from: urlRequest) { (data, response, error) in
+            if let response = response as? HTTPURLResponse {
+                print("HTTPResponse: \(response.statusCode) in function: \(#function)")
+            }
+
+            if let error = error {
+                print("""
+                    Error: \(error.localizedDescription) on line \(#line)
+                    in function: \(#function)\n Technical error: \(error)
+                    """)
+                completion(.failure(.otherError(error)))
+            }
+
+            guard let data = data else {
+                print("Error on line: \(#line) in function: \(#function)")
+                completion(.failure(.noDataError))
+                return
+            }
+
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+
+            do {
+                let eventRepArray = try decoder.decode([EventRepresentation].self, from: data)
+                let eventArray = eventRepArray.compactMap { Event(eventRepresentation: $0 )}
+                completion(.success(eventArray))
+            } catch {
+                print("""
+                    Error on line: \(#line) in function: \(#function)\n
+                    Readable error: \(error.localizedDescription)\n Technical error: \(error)
+                    """)
+                completion(.failure(.decodeError(error)))
+            }
+        }
+    }
+
+    // MARK: - FETCH EVENTS FOR HOST
     func fetchAllEventsFromServer(for host: Host, completion: @escaping(Result<[Event], EventErrors>) -> Void) {
         let url = baseURL.appendingPathComponent("events")
         let urlRequest = URLRequest(url: url)

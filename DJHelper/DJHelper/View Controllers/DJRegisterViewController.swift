@@ -13,7 +13,9 @@ class DJRegisterViewController: ShiftableViewController {
 
     // MARK: - Properties
     var hostController: HostController!
+    var eventController: EventController?
     var currentHost: Host?
+    var isGuest: Bool?
 
     // MARK: - Outlets
     @IBOutlet weak var usernameTextField: UITextField!
@@ -163,6 +165,8 @@ class DJRegisterViewController: ShiftableViewController {
                     if let logInVC = logInNC.viewControllers.first as? HostEventsTableViewController {
                         logInVC.currentHost = currentHost
                         logInVC.hostController = hostController
+                        logInVC.eventController = eventController
+                        logInVC.isGuest = isGuest
                     }
                 }
             }
