@@ -38,8 +38,7 @@ extension Host {
     @discardableResult
     convenience init?(hostRepresnetation: HostRepresentation,
                       context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
-        guard let bio = hostRepresnetation.bio,
-            let identifier = hostRepresnetation.identifier else { return nil }
+        guard let identifier = hostRepresnetation.identifier else { return nil }
         if hostRepresnetation.website == "" {
 
         }
@@ -52,7 +51,7 @@ extension Host {
                   username: hostRepresnetation.username,
                   email: hostRepresnetation.email,
                   password: hostRepresnetation.password,
-                  bio: bio,
+                  bio: hostRepresnetation.bio,
                   identifier: identifier,
                   phone: hostRepresnetation.phone,
                   profilePic: URL(string: hostRepresnetation.profilePic ?? ""),
