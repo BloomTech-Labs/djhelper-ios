@@ -64,7 +64,7 @@ extension Event {
         return EventRepresentation(name: name,
                                    eventType: eventType,
                                    eventDescription: description,
-                                   eventDate: eventDate.stringFromDate(),
+                                   eventDate: eventDate.jsonStringFromDate(),
                                    hostID: self.hostID,
                                    imageURL: self.imageURL,
                                    notes: self.notes,

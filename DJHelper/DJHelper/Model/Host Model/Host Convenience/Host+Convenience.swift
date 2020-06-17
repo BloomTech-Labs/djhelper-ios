@@ -42,10 +42,6 @@ extension Host {
         if hostRepresnetation.website == "" {
 
         }
-//        ,
-//            let phone = hostRepresnetation.phone,
-//            let pic = hostRepresnetation.profilePic,
-//            let website = hostRepresnetation.website else { return nil }
 
         self.init(name: hostRepresnetation.name,
                   username: hostRepresnetation.username,
@@ -93,10 +89,6 @@ extension Host {
             let username = self.username,
             let password = self.password,
             let email = self.email else { return nil }
-//            let phone = self.phone,
-//            let website = self.website,
-//            let bio = self.bio,
-//            let pic = self.profilePic else { return nil }
 
         return HostRepresentation(name: name,
                                   username: username,
