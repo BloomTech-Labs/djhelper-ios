@@ -197,11 +197,7 @@
                         <viewLayoutGuide key="safeArea" id="Yko-ze-pUB"/>
                     </view>
                     <navigationItem key="navigationItem" id="c7g-Yp-Gzc">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="84H-1f-D8l">
-                            <connections>
-                                <segue destination="fbD-kp-YIW" kind="show" identifier="createEventSegue" id="9Nh-BT-9XY"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="84H-1f-D8l"/>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="ejy-vK-cKC" id="uHK-FM-0vX"/>
@@ -483,6 +479,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lsz-ac-CQi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3046" y="-412"/>
+        </scene>
+        <!--Create-->
+        <scene sceneID="46R-h2-gAU">
+            <objects>
+                <viewController id="XfY-Jk-YkK" customClass="NewEventViewController" customModule="DJHelper" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CSY-GX-DMI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bCK-bK-NXY">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="qHV-qT-nFj"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="XmX-My-F9c"/>
+                                <connections>
+                                    <outlet property="delegate" destination="XfY-Jk-YkK" id="c5D-Sv-DxZ"/>
+                                </connections>
+                            </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="b76-Ay-6w5">
+                                <rect key="frame" x="132" y="721" width="150" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="zyY-XB-gMR"/>
+                                </constraints>
+                            </pageControl>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="lVr-Mc-3vb" firstAttribute="bottom" secondItem="b76-Ay-6w5" secondAttribute="bottom" constant="55" id="1YI-pQ-Hze"/>
+                            <constraint firstItem="b76-Ay-6w5" firstAttribute="centerX" secondItem="CSY-GX-DMI" secondAttribute="centerX" id="GpO-DO-ThJ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="lVr-Mc-3vb"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Create" image="plus" catalog="system" id="8Vy-Rv-fsT"/>
+                    <navigationItem key="navigationItem" id="3YN-9A-X8Q"/>
+                    <connections>
+                        <outlet property="pageControl" destination="b76-Ay-6w5" id="WtQ-x7-FZ6"/>
+                        <outlet property="scrollView" destination="bCK-bK-NXY" id="vdL-8m-Z0m"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dPa-09-yfm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1385.5072463768117" y="1668.75"/>
         </scene>
         <!--Create Event View Controller-->
         <scene sceneID="9np-5s-OAK">
@@ -864,6 +902,7 @@
                     <connections>
                         <segue destination="8zz-93-Oy1" kind="relationship" relationship="viewControllers" id="Ug6-C5-i4T"/>
                         <segue destination="Sgx-IZ-BVl" kind="relationship" relationship="viewControllers" id="GXH-K4-Voz"/>
+                        <segue destination="XfY-Jk-YkK" kind="relationship" relationship="viewControllers" id="zDH-4C-J7l"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gN5-dD-GuV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -892,10 +931,10 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="UtX-VA-g8O"/>
-        <segue reference="9Nh-BT-9XY"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
     </resources>
 </document>
