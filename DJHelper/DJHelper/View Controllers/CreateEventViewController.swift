@@ -97,7 +97,7 @@ class CreateEventViewController: ShiftableViewController {
                               eventDescription: description,
                               eventDate: eventDate,
                               hostID: currentHost.identifier,
-                              imageURL: URL(string: "")!,
+                              imageURL: URL(string: ""),
                               notes: notes,
                               eventID: nil)
             self.activityIndicator(shouldStart: true)

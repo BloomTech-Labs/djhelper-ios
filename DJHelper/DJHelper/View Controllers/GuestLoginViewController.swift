@@ -18,6 +18,7 @@ class GuestLoginViewController: ShiftableViewController {
     var isGuest: Bool?
     var eventController: EventController?
     var hostController: HostController?
+    var customAlert = CustomAlert()
 
     // MARK: - Outlets
     @IBOutlet weak var eventCodeTextField: UITextField!
@@ -92,11 +93,15 @@ class GuestLoginViewController: ShiftableViewController {
             }
             self.isGuest = true
         } else {
-            let unmatchedEventAlert = CustomAlert()
-                                    unmatchedEventAlert.showAlert(with: "Event Not Found",
+//            let unmatchedEventAlert = CustomAlert()
+                                    customAlert.showAlert(with: "Event Not Found",
                                                                   message: "There was no event found with the code. Please verify the code and try again.",
                                                                   on: self)
         }
+    }
+
+    @objc func dismissAlert() {
+        customAlert.dismissAlert()
     }
 
     // MARK: - Methods
