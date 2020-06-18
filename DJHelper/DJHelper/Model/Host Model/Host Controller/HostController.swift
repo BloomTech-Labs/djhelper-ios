@@ -205,7 +205,8 @@ class HostController {
 
             do {
                 let updateHostResponse = try JSONDecoder().decode(HostUpdate.self, from: data)
-                try CoreDataStack.shared.mainContext.save()
+                let moc = CoreDataStack.shared.container.newBackgroundContext()
+                try CoreDataStack.shared.save(context: moc)
                 completion(.success(updateHostResponse))
             } catch {
                 print("Error in func: \(#function)\n error: \(error.localizedDescription)\n Technical error: \(error)")

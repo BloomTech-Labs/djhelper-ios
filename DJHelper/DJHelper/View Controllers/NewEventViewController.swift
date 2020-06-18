@@ -31,7 +31,8 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
 
         pageControl.numberOfPages = slides.count
         pageControl.currentPage = 0
-        pageControl.backgroundColor = .lightGray
+        pageControl.pageIndicatorTintColor = .darkGray
+        pageControl.currentPageIndicatorTintColor = .lightGray
         view.bringSubviewToFront(pageControl)
     }
 
