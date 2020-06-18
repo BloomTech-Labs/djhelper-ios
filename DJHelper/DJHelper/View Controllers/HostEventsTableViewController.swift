@@ -57,12 +57,13 @@ class HostEventsTableViewController: UIViewController {
         guard let profileVC = barViewControllers?[1] as? HostProfileViewController else { return }
         profileVC.currentHost = self.currentHost
         profileVC.hostController = self.hostController
-        guard let newEventVC = barViewControllers?[2] as? NewEventViewController else { return }
-        newEventVC.eventController = self.eventController
-        newEventVC.hostController = self.hostController
-        newEventVC.currentHost = self.currentHost
-        newEventVC.hostEventCount = self.hostEventCount
-
+        guard let newEventNC = barViewControllers?[2] as? UINavigationController else { return }
+        if let newEventVC = newEventNC.viewControllers.first as? NewEventViewController {
+            newEventVC.eventController = self.eventController
+            newEventVC.hostController = self.hostController
+            newEventVC.currentHost = self.currentHost
+            newEventVC.hostEventCount = self.hostEventCount
+        }
         eventController.fetchAllEventsFromServer(for: self.currentHost) { (results) in
             switch results {
             case .success:

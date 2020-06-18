@@ -66,16 +66,16 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
     }
 
     func setupSlideScrollView(slides: [Slide]) {
-        scrollView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height - 100)
+        scrollView.frame = CGRect(x: 0, y: 88, width: view.frame.width, height: view.frame.height)
         scrollView.contentSize = CGSize(width: view.frame.width * CGFloat(slides.count),
-                                        height: view.frame.height - 50)
+                                        height: view.frame.height - 150)
         scrollView.isPagingEnabled = true
 
         for identifier in 0..<slides.count {
-            slides[identifier].frame = CGRect(x: view.frame.width * CGFloat(identifier),
+            slides[identifier].frame = CGRect(x: scrollView.frame.width * CGFloat(identifier),
                                               y: 0,
-                                              width: view.frame.width,
-                                              height: view.frame.height - 50)
+                                              width: scrollView.frame.width,
+                                              height: scrollView.frame.height)
             scrollView.addSubview(slides[identifier])
         }
     }
