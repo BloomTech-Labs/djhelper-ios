@@ -14,6 +14,7 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
     var eventController: EventController?
     var hostController: HostController?
     var currentHost: Host?
+    var hostEventCount: Int?
     var eventName: String = ""
     var eventDescription: String = ""
     var eventDate: Date = Date()
@@ -57,7 +58,11 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
         slide4.subtitleLabel.isHidden = true
         slide4.textField.placeholder = "Event date     🗓"
 
-        return [slide1, slide2, slide3, slide4]
+        if hostEventCount == 0 {
+            return [slide1, slide2, slide3, slide4]
+        } else {
+            return [slide2, slide3, slide4]
+        }
     }
 
     func setupSlideScrollView(slides: [Slide]) {

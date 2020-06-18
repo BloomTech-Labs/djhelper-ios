@@ -15,6 +15,7 @@ class HostEventsTableViewController: UIViewController {
     var hostController: HostController!
     var currentHost: Host!
     var isGuest: Bool?
+    var hostEventCount: Int?
 
     @IBOutlet var tableView: UITableView!
 
@@ -60,6 +61,7 @@ class HostEventsTableViewController: UIViewController {
         newEventVC.eventController = self.eventController
         newEventVC.hostController = self.hostController
         newEventVC.currentHost = self.currentHost
+        newEventVC.hostEventCount = self.hostEventCount
 
         eventController.fetchAllEventsFromServer(for: self.currentHost) { (results) in
             switch results {
@@ -107,7 +109,8 @@ extension HostEventsTableViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        fetchedResultsController.sections?[section].numberOfObjects ?? 0
+        self.hostEventCount = fetchedResultsController.sections?[section].numberOfObjects
+        return self.hostEventCount ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
