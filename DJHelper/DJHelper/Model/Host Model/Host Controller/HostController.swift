@@ -30,6 +30,46 @@ class HostController {
         self.dataLoader = dataLoader
     }
 
+    // MARK: - Fetch All Hosts
+    func fetchAllHostsFromServer(completion: @escaping (Result<[Host], HostErrors>) -> Void) {
+        let url = baseURL.appendingPathComponent("djs")
+        let urlRequest = URLRequest(url: url)
+
+        dataLoader.loadData(from: urlRequest) { (data, response, error) in
+            if let response = response as? HTTPURLResponse {
+                print("HTTPResponse: \(response.statusCode) in function: \(#function)")
+            }
+
+            if let error = error {
+                print("""
+                    Error: \(error.localizedDescription) on line \(#line)
+                    in function: \(#function)\n Technical error: \(error)
+                    """)
+                completion(.failure(.unknownError(error)))
+            }
+
+            guard let data = data else {
+                print("Error on line: \(#line) in function: \(#function)")
+                completion(.failure(.noDataError))
+                return
+            }
+
+            let decoder = JSONDecoder()
+
+            do {
+                let hostRepArray = try decoder.decode([HostRepresentation].self, from: data)
+                let hostArray: [Host] = hostRepArray.compactMap { Host(hostRepresnetation: $0) }
+                completion(.success(hostArray))
+            } catch {
+                print("""
+                    Error on line: \(#line) in function: \(#function)\n
+                    Readable error: \(error.localizedDescription)\n Technical error: \(error)
+                    """)
+                completion(.failure(.unknownError(error)))
+            }
+        }
+    }
+
     // MARK: - Register New Host
     // the server returns the host properties along with the generated ID
     func registerHost(with host: Host, completion: @escaping (Result<HostRegistrationResponse, HostErrors>) -> Void) {

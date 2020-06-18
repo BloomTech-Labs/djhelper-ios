@@ -18,6 +18,8 @@ class EventPageViewController: UIViewController {
         }
     }
     var hostController: HostController?
+
+    // If a currentHost is not passed in, hide the UI elements designed for a Host.
     var currentHost: Host?
     var eventController: EventController?
 

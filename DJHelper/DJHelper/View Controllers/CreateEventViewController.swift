@@ -19,6 +19,7 @@ class CreateEventViewController: ShiftableViewController {
         }
     }
     private var eventTimeDatePicker: UIDatePicker?
+    var eventDate: Date?
 
     // MARK: - IBOutlets
     @IBOutlet weak var eventNameTextField: UITextField!
@@ -47,6 +48,7 @@ class CreateEventViewController: ShiftableViewController {
     }
 
     @objc func eventDateChanged(datePicker: UIDatePicker) {
+        eventDate = datePicker.date
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "M/d/yyyy h:mm a"
         eventDateTextField.text = dateFormatter.string(from: datePicker.date)
@@ -68,32 +70,34 @@ class CreateEventViewController: ShiftableViewController {
 
         if let passedInEvent = event {
 
-            guard let dateFromString = dateString.eventDateFromString() else {
-                print("Error on line: \(#line) in function: \(#function)\n")
-                return
-            }
+            guard let eventDate = eventDate else { return }
+//            guard let dateFromString = dateString.eventDateFromString() else {
+//                print("Error on line: \(#line) in function: \(#function)\n")
+//                return
+//            }
 
             // here possibly only pass the data that actually changed?
             let updatedEvent = eventController.updateEvent(event: passedInEvent,
                                                            eventName: name,
-                                                           eventDate: dateFromString,
+                                                           eventDate: eventDate,
                                                            description: description,
                                                            type: type,
                                                            notes: notes)
             self.activityIndicator(shouldStart: true)
             putUpdateEvent(with: updatedEvent, andEventController: eventController)
         } else {
-            guard let dateFromString = dateString.eventDateFromString() else {
-                print("Error on line: \(#line) in function: \(#function)\n")
-                return
-            }
+            guard let eventDate = eventDate else { return }
+            //            guard let dateFromString = dateString.eventDateFromString() else {
+            //                print("Error on line: \(#line) in function: \(#function)\n")
+            //                return
+            //            }
 
             let event = Event(name: name,
                               eventType: type,
                               eventDescription: description,
-                              eventDate: dateFromString,
+                              eventDate: eventDate,
                               hostID: currentHost.identifier,
-                              imageURL: URL(string: "")!,
+                              imageURL: URL(string: ""),
                               notes: notes,
                               eventID: nil)
             self.activityIndicator(shouldStart: true)
@@ -138,6 +142,7 @@ extension CreateEventViewController {
         self.title = passedInEvent.name
         eventNameTextField.text = passedInEvent.name
         descriptionTextField.text = passedInEvent.eventDescription
+        eventDate = passedInEvent.eventDate
         eventDateTextField.text = passedInEvent.eventDate?.stringFromDate()
         typeTextField.text = passedInEvent.eventType
         notesTextField.text = passedInEvent.notes

@@ -38,21 +38,20 @@ extension Host {
     @discardableResult
     convenience init?(hostRepresnetation: HostRepresentation,
                       context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
-        guard let bio = hostRepresnetation.bio,
-            let identifier = hostRepresnetation.identifier,
-            let phone = hostRepresnetation.phone,
-            let pic = hostRepresnetation.profilePic,
-            let website = hostRepresnetation.website else { return nil }
+        guard let identifier = hostRepresnetation.identifier else { return nil }
+        if hostRepresnetation.website == "" {
+
+        }
 
         self.init(name: hostRepresnetation.name,
                   username: hostRepresnetation.username,
                   email: hostRepresnetation.email,
                   password: hostRepresnetation.password,
-                  bio: bio,
+                  bio: hostRepresnetation.bio,
                   identifier: identifier,
-                  phone: phone,
-                  profilePic: pic,
-                  website: website)
+                  phone: hostRepresnetation.phone,
+                  profilePic: URL(string: hostRepresnetation.profilePic ?? ""),
+                  website: URL(string: hostRepresnetation.website ?? ""))
     }
 
     var hostLogin: HostLogin? {
@@ -90,19 +89,15 @@ extension Host {
             let username = self.username,
             let password = self.password,
             let email = self.email else { return nil }
-//            let phone = self.phone,
-//            let website = self.website,
-//            let bio = self.bio,
-//            let pic = self.profilePic else { return nil }
 
         return HostRepresentation(name: name,
                                   username: username,
                                   email: email,
                                   password: password,
-                                  phone: phone,
-                                  website: website,
-                                  bio: bio,
-                                  profilePic: self.profilePic,
+                                  phone: self.phone,
+                                  website: website?.absoluteString,
+                                  bio: self.bio,
+                                  profilePic: self.profilePic?.absoluteString,
                                   identifier: self.identifier)
     }
 }

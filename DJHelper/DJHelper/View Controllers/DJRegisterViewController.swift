@@ -13,7 +13,9 @@ class DJRegisterViewController: ShiftableViewController {
 
     // MARK: - Properties
     var hostController: HostController!
+    var eventController: EventController?
     var currentHost: Host?
+    var isGuest: Bool?
 
     // MARK: - Outlets
     @IBOutlet weak var usernameTextField: UITextField!
@@ -26,12 +28,19 @@ class DJRegisterViewController: ShiftableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        createAccountButton.layer.cornerRadius = 25
+        setupButtons()
         setUpSubviews()
+        usernameTextField.delegate = self
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
         confirmTextField.delegate = self
 
         let tapToDismiss = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tapToDismiss)
+    }
+
+    func setupButtons() {
+        createAccountButton.colorTheme()
     }
 
     // Programmatically setting up the Sign In button in the view.
@@ -156,6 +165,8 @@ class DJRegisterViewController: ShiftableViewController {
                     if let logInVC = logInNC.viewControllers.first as? HostEventsTableViewController {
                         logInVC.currentHost = currentHost
                         logInVC.hostController = hostController
+                        logInVC.eventController = eventController
+                        logInVC.isGuest = isGuest
                     }
                 }
             }

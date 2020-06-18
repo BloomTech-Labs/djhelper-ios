@@ -13,18 +13,22 @@ class DJLoginViewController: ShiftableViewController {
 
     // MARK: - Properties
     var hostController = HostController()
+    var eventController = EventController()
     var currentHost: Host?
+    var isGuest: Bool = false
 
     // MARK: - Outlets
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var guestButton: UIButton!
 
     // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        signInButton.layer.cornerRadius = 25
+//        signInButton.layer.cornerRadius = 25
+        setupButtons()
 
         let tapToDismiss = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tapToDismiss)
@@ -93,6 +97,8 @@ class DJLoginViewController: ShiftableViewController {
         case "djRegisterSegue":
             if let djRegisterVC = segue.destination as? DJRegisterViewController {
                 djRegisterVC.hostController = hostController
+                djRegisterVC.eventController = eventController
+                djRegisterVC.isGuest = isGuest
             }
         case "SignInSegue":
             if let barViewControllers = segue.destination as? UITabBarController {
@@ -101,12 +107,24 @@ class DJLoginViewController: ShiftableViewController {
                     if let logInVC = logInNC.viewControllers.first as? HostEventsTableViewController {
                         logInVC.currentHost = currentHost
                         logInVC.hostController = hostController
+                        logInVC.eventController = eventController
+                        logInVC.isGuest = isGuest
                     }
                 }
+            }
+        case "GuestSignInSegue":
+            if let guestSignInVC = segue.destination as? GuestLoginViewController {
+                guestSignInVC.eventController = eventController
+                guestSignInVC.hostController = hostController
             }
         default:
             return
         }
+    }
+
+    func setupButtons() {
+        signInButton.colorTheme()
+        guestButton.colorTheme()
     }
 
     func updateViews() {
