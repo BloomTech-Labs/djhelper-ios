@@ -107,7 +107,7 @@ class DJRegisterViewController: ShiftableViewController {
 
                 self.currentHost?.identifier = newHost.identifier
 
-                try? CoreDataStack.shared.mainContext.save()
+                try? CoreDataStack.shared.save()
 
                 // if registration is successful, present alert with "login" button and "cancel" button
                 // if login is successful, transition to hostEventsTableViewController

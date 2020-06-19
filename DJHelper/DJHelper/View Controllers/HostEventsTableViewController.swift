@@ -15,6 +15,15 @@ class HostEventsTableViewController: UIViewController {
     var hostController: HostController!
     var currentHost: Host!
     var isGuest: Bool?
+    var hostEventCount: Int? {
+        didSet {
+            let barViewControllers = self.tabBarController?.viewControllers
+            guard let newEventNC = barViewControllers?[2] as? UINavigationController else { return }
+            if let newEventVC = newEventNC.viewControllers.first as? NewEventViewController {
+                newEventVC.hostEventCount = self.hostEventCount
+            }
+        }
+    }
 
     @IBOutlet var tableView: UITableView!
 
@@ -25,7 +34,7 @@ class HostEventsTableViewController: UIViewController {
         fetchRequest.sortDescriptors = [dateSortDescriptor]
 
         if self.currentHost != nil {
-            let fetchRequestPredicate = NSPredicate(format: "host.identifier == %i", self.currentHost!.identifier)
+            let fetchRequestPredicate = NSPredicate(format: "hostID == %i", self.currentHost!.identifier)
             fetchRequest.predicate = fetchRequestPredicate
         }
 
@@ -52,11 +61,26 @@ class HostEventsTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Code to clear out the core data objects
+//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Event")
+//        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+//        do {
+//            try CoreDataStack.shared.mainContext.execute(batchDeleteRequest)
+//        } catch {
+//            print("no dice")
+//        }
+
         let barViewControllers = self.tabBarController?.viewControllers
         guard let profileVC = barViewControllers?[1] as? HostProfileViewController else { return }
         profileVC.currentHost = self.currentHost
         profileVC.hostController = self.hostController
-
+        guard let newEventNC = barViewControllers?[2] as? UINavigationController else { return }
+        if let newEventVC = newEventNC.viewControllers.first as? NewEventViewController {
+            newEventVC.eventController = self.eventController
+            newEventVC.hostController = self.hostController
+            newEventVC.currentHost = self.currentHost
+            newEventVC.hostEventCount = self.hostEventCount
+        }
         eventController.fetchAllEventsFromServer(for: self.currentHost) { (results) in
             switch results {
             case .success:
@@ -103,7 +127,8 @@ extension HostEventsTableViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        fetchedResultsController.sections?[section].numberOfObjects ?? 0
+        self.hostEventCount = fetchedResultsController.sections?[section].numberOfObjects
+        return self.hostEventCount ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

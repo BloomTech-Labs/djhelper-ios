@@ -9,18 +9,18 @@
 import Foundation
 import CoreData
 
-class EventController {
-    enum EventErrors: Error {
-        case authorizationError(Error)
-        case noDataError
-        case encodeError(Error)
-        case decodeError(Error)
-        case errorUpdatingEventOnServer(Error)
-        case otherError(Error)
-        case noEventsInServerOrCoreData
-        case couldNotInitializeAnEvent
-    }
+enum EventErrors: Error {
+    case authorizationError(Error)
+    case noDataError
+    case encodeError(Error)
+    case decodeError(Error)
+    case errorUpdatingEventOnServer(Error)
+    case otherError(Error)
+    case noEventsInServerOrCoreData
+    case couldNotInitializeAnEvent
+}
 
+class EventController {
     private let baseURL = URL(string: "https://dj-helper-be.herokuapp.com/api")!
     let dataLoader: NetworkDataLoader
 
@@ -29,7 +29,6 @@ class EventController {
     }
 
     // MARK: - UPDATE EVENT
-
     func updateEvent(event: Event,
                      eventName: String,
                      eventDate: Date,
@@ -247,6 +246,12 @@ class EventController {
         var placeHolderArray: [Event] = []
 
         do {
+//            var fetchedEvents: [Event]?
+//            let moc = CoreDataStack.shared.mainContext
+//            moc.performAndWait {
+//                fetchedEvents = try? fetchRequest.execute()
+//            }
+//            let eventsInCoreData = fetchedEvents ?? []
             let eventsInCoreData = try CoreDataStack.shared.mainContext.fetch(fetchRequest)
             print("events in coreDataArray's count: \(eventsInCoreData.count)")
 
@@ -283,7 +288,7 @@ class EventController {
         encoder.dateEncodingStrategy = .iso8601
 
         do {
-            try CoreDataStack.shared.save()
+//            try CoreDataStack.shared.save()  // commented out this line because it's redundant with later in the method
             urlRequest.httpBody = try encoder.encode(eventToAuthorize)
         } catch {
             print("Error in func: \(#function)\n error: \(error.localizedDescription)\n Technical error: \(error)")
