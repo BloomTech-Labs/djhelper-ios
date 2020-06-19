@@ -181,7 +181,7 @@ class HostController {
 
         do {
             let encoder = JSONEncoder()
-            encoder.keyEncodingStrategy = .convertToSnakeCase
+//            encoder.keyEncodingStrategy = .convertToSnakeCase
             urlRequest.httpBody = try encoder.encode(hostRepresentation)
         } catch {
             print("Error encoding HostUpdate:\n error: \(error.localizedDescription)\n Technical error: \(error)")

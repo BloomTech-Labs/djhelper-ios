@@ -10,7 +10,6 @@ import XCTest
 
 class DJHelperUITests: XCTestCase {
 
-
     // Register with empty text field should return nothing
 
     let app = XCUIApplication()

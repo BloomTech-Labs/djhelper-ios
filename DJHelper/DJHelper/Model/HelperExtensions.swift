@@ -17,7 +17,6 @@ extension Date {
     }
 }
 
-
 // MARK: - String Ext.
 extension String {
     func dateFromString() -> Date? {
@@ -60,26 +59,3 @@ extension UIViewController {
         shouldStart == true ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

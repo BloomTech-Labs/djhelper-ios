@@ -26,7 +26,7 @@ class HostEventsTableViewController: UIViewController {
         fetchRequest.sortDescriptors = [dateSortDescriptor]
 
         if self.currentHost != nil {
-            let fetchRequestPredicate = NSPredicate(format: "host.identifier == %i", self.currentHost!.identifier)
+            let fetchRequestPredicate = NSPredicate(format: "hostID == %i", self.currentHost!.identifier)
             fetchRequest.predicate = fetchRequestPredicate
         }
 
@@ -52,6 +52,15 @@ class HostEventsTableViewController: UIViewController {
     // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Code to clear out the core data objects
+//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Event")
+//        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+//        do {
+//            try CoreDataStack.shared.mainContext.execute(batchDeleteRequest)
+//        } catch {
+//            print("no dice")
+//        }
 
         let barViewControllers = self.tabBarController?.viewControllers
         guard let profileVC = barViewControllers?[1] as? HostProfileViewController else { return }

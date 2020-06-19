@@ -131,7 +131,7 @@ extension EventController {
                 }
             }
 
-            guard let data = possibleData else {
+            guard possibleData != nil else {
                 print("Error on line: \(#line) in function: \(#function)")
                 completion(.failure(.noDataError))
                 return

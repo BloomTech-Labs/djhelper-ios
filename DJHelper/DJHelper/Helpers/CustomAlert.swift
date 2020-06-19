@@ -9,7 +9,7 @@
 import UIKit
 
 class CustomAlert {
-    
+
     struct Constants {
         static let backgroundAlphaTo: CGFloat = 0.6
     }
@@ -62,7 +62,7 @@ class CustomAlert {
         alertView.addSubview(messageLabel)
 
         //CONFIGURE BUTTON
-        let button = UIButton(frame: CGRect(x: 0, y: alertView.frame.size.height - 50 , width: alertView.frame.size.width, height: 50))
+        let button = UIButton(frame: CGRect(x: 0, y: alertView.frame.size.height - 50, width: alertView.frame.size.width, height: 50))
 
         button.setTitle("Dismiss", for: .normal)
         button.setTitleColor(.blue, for: .normal)
@@ -96,7 +96,8 @@ class CustomAlert {
         }, completion: { done in
             if done {
                 //another animation in the original animation closure
-                UIView.animate(withDuration: 0.25, animations:  {
+                UIView.animate(withDuration: 0.25,
+                               animations: {
                     self.backgroundView.alpha = 0
                 }, completion: { finished in
                     if finished {
