@@ -59,7 +59,7 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
         slide4.subtitleLabel.isHidden = true
         slide4.textField.placeholder = "Event date     🗓"
 
-        if hostEventCount == 0 {
+        if hostEventCount == nil {
             return [slide1, slide2, slide3, slide4]
         } else {
             return [slide2, slide3, slide4]

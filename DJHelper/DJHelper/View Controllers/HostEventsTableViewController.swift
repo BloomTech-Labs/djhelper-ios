@@ -15,7 +15,15 @@ class HostEventsTableViewController: UIViewController {
     var hostController: HostController!
     var currentHost: Host!
     var isGuest: Bool?
-    var hostEventCount: Int?
+    var hostEventCount: Int? {
+        didSet {
+            let barViewControllers = self.tabBarController?.viewControllers
+            guard let newEventNC = barViewControllers?[2] as? UINavigationController else { return }
+            if let newEventVC = newEventNC.viewControllers.first as? NewEventViewController {
+                newEventVC.hostEventCount = self.hostEventCount
+            }
+        }
+    }
 
     @IBOutlet var tableView: UITableView!
 

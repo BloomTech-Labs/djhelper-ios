@@ -16,6 +16,7 @@ class HostController {
         case registrationError(Error)
         case unknownError(Error)
         case loginError(Error)
+        case noAuthorization
         case noDataError
     }
 
@@ -170,6 +171,10 @@ class HostController {
     // MARK: - Update Existing Host
     func updateHost(with host: Host, completion: @escaping (Result<HostUpdate, HostErrors>) -> Void) {
         guard let hostRepresentation = host.hostUpdate else { return }
+        guard let bearer = bearer else {
+            completion(.failure(.noAuthorization))
+            return
+        }
 
         let requestURL = baseURL.appendingPathComponent("auth")
             .appendingPathComponent("dj")
@@ -178,6 +183,7 @@ class HostController {
         var urlRequest = URLRequest(url: requestURL)
         urlRequest.httpMethod = HTTPMethod.put.rawValue
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue("\(bearer.token)", forHTTPHeaderField: "Authorization")
 
         do {
             let encoder = JSONEncoder()
@@ -205,8 +211,7 @@ class HostController {
 
             do {
                 let updateHostResponse = try JSONDecoder().decode(HostUpdate.self, from: data)
-                let moc = CoreDataStack.shared.container.newBackgroundContext()
-                try CoreDataStack.shared.save(context: moc)
+                try CoreDataStack.shared.save()
                 completion(.success(updateHostResponse))
             } catch {
                 print("Error in func: \(#function)\n error: \(error.localizedDescription)\n Technical error: \(error)")
