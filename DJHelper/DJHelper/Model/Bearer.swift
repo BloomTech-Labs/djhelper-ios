@@ -9,6 +9,12 @@
 import Foundation
 
 // used to get the authorization token from the server
-struct Bearer: Codable {
-    var token: String
+//struct Bearer: Codable {
+//    var token: String
+//}
+
+class Bearer: Codable {
+    static let shared = Bearer()
+
+    var token: String?
 }

@@ -50,15 +50,19 @@ class EventController {
             print("Error on line: \(#line) in function: \(#function)\n")
             return
         }
+        guard let bearer = Bearer.shared.token else {
+            completion(.failure(.couldNotInitializeAnEvent))
+            return
+        }
 
         let authURL = baseURL.appendingPathComponent("auth")
         let eventURL = authURL.appendingPathComponent("event")
         let finalURL = eventURL.appendingPathComponent("\(eventId)")
-        print("finalURL: \(finalURL.absoluteURL)")
 
         var urlRequest = URLRequest(url: finalURL)
         urlRequest.httpMethod = HTTPMethod.put.rawValue
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue("\(bearer)", forHTTPHeaderField: "Authorization")
 
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
@@ -278,11 +282,18 @@ class EventController {
     ///The server returns an object with the event data
     func authorize(event: Event, completion: @escaping (Result<EventRepresentation, EventErrors>) -> Void) {
         guard let eventToAuthorize = event.eventAuthRequest else { return }
+        guard let bearer = Bearer.shared.token else {
+            completion(.failure(.couldNotInitializeAnEvent))
+            return
+        }
 
-        let url = baseURL.appendingPathComponent("auth").appendingPathComponent("event")
+        let url = baseURL.appendingPathComponent("auth")
+            .appendingPathComponent("event")
+
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = HTTPMethod.post.rawValue
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue("\(bearer)", forHTTPHeaderField: "Authorization")
 
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
