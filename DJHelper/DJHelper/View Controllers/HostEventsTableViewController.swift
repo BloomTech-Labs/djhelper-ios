@@ -96,7 +96,7 @@ class HostEventsTableViewController: UIViewController {
      // MARK: - Navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
-        case "createEventSegue":
+        case "tempCreateEvent":
             if let newEventVC = segue.destination as? CreateEventViewController {
                 newEventVC.hostController = hostController
                 newEventVC.currentHost = currentHost

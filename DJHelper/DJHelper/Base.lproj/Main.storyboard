@@ -197,7 +197,11 @@
                         <viewLayoutGuide key="safeArea" id="Yko-ze-pUB"/>
                     </view>
                     <navigationItem key="navigationItem" id="c7g-Yp-Gzc">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="84H-1f-D8l"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="84H-1f-D8l">
+                            <connections>
+                                <segue destination="fbD-kp-YIW" kind="show" identifier="tempCreateEvent" id="VMB-cg-viX"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="ejy-vK-cKC" id="uHK-FM-0vX"/>
@@ -951,6 +955,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="UtX-VA-g8O"/>
+        <segue reference="CQD-ea-bE8"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="gear" catalog="system" width="128" height="119"/>

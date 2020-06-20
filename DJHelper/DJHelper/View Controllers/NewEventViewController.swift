@@ -43,16 +43,19 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
         slide1.titleLabel.text = "Welcome! \nLet's create your first event."
         slide1.subtitleLabel.text = "Our goal is to get the audience to participate in your setlist by requesting tracks and reacting to what you play."
         slide1.textField.isHidden = true
+        slide1.saveEvent.isHidden = true
 
         let slide2: Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
         slide2.titleLabel.text = "Give your event a Title."
         slide2.subtitleLabel.text = "What is your event called?"
         slide2.textField.placeholder = "Event title"
+        slide2.saveEvent.isHidden = true
 
         let slide3: Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
         slide3.titleLabel.text = "Give your event a Description."
         slide3.subtitleLabel.text = "What genre of music are you playing? \nAny special details to share?"
         slide3.textField.placeholder = "Event description"
+        slide3.saveEvent.isHidden = true
 
         let slide4: Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
         slide4.titleLabel.text = "When is your Event \nHappening?"
