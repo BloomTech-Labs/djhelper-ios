@@ -19,11 +19,18 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
     var eventDescription: String = ""
     var eventDate: Date = Date()
 
+    private var eventTimeDatePicker: UIDatePicker?
+
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControl: UIPageControl!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        eventTimeDatePicker = UIDatePicker()
+        eventTimeDatePicker?.datePickerMode = .dateAndTime
+        eventTimeDatePicker?.minuteInterval = 15
+        eventTimeDatePicker?.addTarget(self, action: #selector(self.eventDateChanged(datePicker:)), for: .valueChanged)
 
         scrollView.delegate = self
         slides = createSlides()
@@ -34,6 +41,21 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
         pageControl.pageIndicatorTintColor = .darkGray
         pageControl.currentPageIndicatorTintColor = .lightGray
         view.bringSubviewToFront(pageControl)
+
+        // tap anywhere on the screen to dismiss the date picker
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.viewTapped(gestureRecognizer:)))
+        view.addGestureRecognizer(tapGesture)
+    }
+
+    @objc func eventDateChanged(datePicker: UIDatePicker) {
+        eventDate = datePicker.date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M/d/yyyy h:mm a"
+        slides[slides.count - 1].textField.text = dateFormatter.string(from: datePicker.date)
+    }
+
+    @objc func viewTapped(gestureRecognizer: UITapGestureRecognizer) {
+        view.endEditing(true)
     }
 
     func createSlides() -> [Slide] {
@@ -61,6 +83,7 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
         slide4.titleLabel.text = "When is your Event \nHappening?"
         slide4.subtitleLabel.isHidden = true
         slide4.textField.placeholder = "Event date     🗓"
+        slide4.textField.inputView = eventTimeDatePicker
 
         if hostEventCount == nil {
             return [slide1, slide2, slide3, slide4]
