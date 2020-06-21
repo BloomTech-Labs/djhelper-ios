@@ -58,7 +58,35 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
         view.endEditing(true)
     }
 
-    func createSlides() -> [Slide] {
+    // MARK: - Actions
+    @IBAction func saveNewEvent(_ sender: UIButton) {
+        guard let eventController = eventController,
+        let currentHost = currentHost,
+        !eventName.isEmpty,
+            !eventDescription.isEmpty else { return }
+
+        let newEvent = Event(name: eventName, eventType: "", eventDescription: eventDescription, eventDate: eventDate, hostID: currentHost.identifier, eventID: nil)
+        self.activityIndicator(shouldStart: true)
+
+    }
+
+    // MARK: - Methods for New Event
+    func authorizeEvent(_ event: Event, withHost currentHost: Host, andEventController eventController: EventController) {
+
+        event.host = currentHost
+
+        eventController.authorize(event: event) { (results) in
+            switch results {
+            case let .success(eventRep):
+                print("Successful attempt to create event in vc: \(eventRep.name)")
+            case let .failure(error):
+                
+            }
+        }
+    }
+
+    // MARK: - Methods for Slides
+    private func createSlides() -> [Slide] {
 
         // swiftlint:disable all
         let slide1: Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
@@ -92,7 +120,7 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
         }
     }
 
-    func setupSlideScrollView(slides: [Slide]) {
+    private func setupSlideScrollView(slides: [Slide]) {
         scrollView.frame = CGRect(x: 0, y: 88, width: view.frame.width, height: view.frame.height)
         scrollView.contentSize = CGSize(width: view.frame.width * CGFloat(slides.count),
                                         height: view.frame.height - 150)
