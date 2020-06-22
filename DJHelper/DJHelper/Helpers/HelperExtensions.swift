@@ -96,12 +96,6 @@ extension EventController {
         let moc = CoreDataStack.shared.mainContext
         moc.delete(event)
         deleteEventFromServer(event) { (_) in
-//            switch result {
-//            case .success:
-//                print("\(event.eventID)")
-//            case .failure:
-//                return
-//            }
         }
         do {
             try CoreDataStack.shared.save()
@@ -112,9 +106,17 @@ extension EventController {
 
     func deleteEventFromServer(_ event: Event, completion: @escaping (Result<Int, EventErrors>) -> Void) {
         let baseURL = URL(string: "https://dj-helper-be.herokuapp.com/api")!
-        let requestURL = baseURL.appendingPathComponent("auth").appendingPathComponent("event").appendingPathComponent("\(event.eventID)")
+        guard let bearer = Bearer.shared.token else {
+            completion(.failure(.couldNotInitializeAnEvent))
+            return
+        }
+        let requestURL = baseURL.appendingPathComponent("auth")
+            .appendingPathComponent("event")
+            .appendingPathComponent("\(event.eventID)")
         var request = URLRequest(url: requestURL)
         request.httpMethod = HTTPMethod.delete.rawValue
+
+        request.setValue("\(bearer)", forHTTPHeaderField: "Authorization")
 
         self.dataLoader.loadData(from: request) { (possibleData, possibleResponse, possibleError) in
             if let response = possibleResponse as? HTTPURLResponse {

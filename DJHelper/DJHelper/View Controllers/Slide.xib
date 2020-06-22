@@ -43,9 +43,19 @@
                     <attributedString key="attributedText"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zyR-gh-p2O">
+                    <rect key="frame" x="60" y="311" width="294" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="Save Event"/>
+                    <connections>
+                        <action selector="saveNewEvent:" destination="-1" eventType="touchUpInside" id="zcU-FK-E80"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="zyR-gh-p2O" secondAttribute="trailing" constant="60" id="8A1-hF-sU1"/>
+                <constraint firstItem="zyR-gh-p2O" firstAttribute="top" secondItem="QGu-jt-XOX" secondAttribute="bottom" constant="50" id="BDV-oW-g5M"/>
                 <constraint firstItem="QGu-jt-XOX" firstAttribute="top" secondItem="sLm-gC-XGh" secondAttribute="bottom" constant="30" id="DZ8-dU-0ww"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="QGu-jt-XOX" secondAttribute="trailing" constant="30" id="Eme-3B-85V"/>
                 <constraint firstItem="sLm-gC-XGh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="FuU-OJ-haI"/>
@@ -55,9 +65,11 @@
                 <constraint firstItem="sLm-gC-XGh" firstAttribute="top" secondItem="bxr-yD-LGF" secondAttribute="bottom" constant="30" id="iDN-S9-5kJ"/>
                 <constraint firstItem="QGu-jt-XOX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="kTg-r2-bxT"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sLm-gC-XGh" secondAttribute="trailing" constant="30" id="keT-rs-R41"/>
+                <constraint firstItem="zyR-gh-p2O" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="60" id="sG1-Gl-LAl"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <connections>
+                <outlet property="saveEvent" destination="zyR-gh-p2O" id="K3e-1v-FDg"/>
                 <outlet property="subtitleLabel" destination="sLm-gC-XGh" id="ADM-fD-UBU"/>
                 <outlet property="textField" destination="QGu-jt-XOX" id="rZS-dt-bU2"/>
                 <outlet property="titleLabel" destination="bxr-yD-LGF" id="lEa-oj-Wcs"/>

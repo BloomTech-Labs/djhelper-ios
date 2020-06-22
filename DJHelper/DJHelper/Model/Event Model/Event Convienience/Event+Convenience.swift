@@ -18,7 +18,7 @@ extension Event {
                      eventDate: Date,
                      hostID: Int32,
                      imageURL: URL? = nil,
-                     notes: String? = nil,
+                     notes: String? = "",
                      eventID: Int32?,
                      context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
 

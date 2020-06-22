@@ -13,4 +13,18 @@ class Slide: UIView {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var saveEvent: UIButton!
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
+    override func layoutSubviews() {
+        super .layoutSubviews()
+        setupButton()
+    }
+
+    private func setupButton() {
+        saveEvent.colorTheme()
+    }
 }

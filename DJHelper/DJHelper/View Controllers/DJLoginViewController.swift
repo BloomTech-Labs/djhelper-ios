@@ -27,7 +27,6 @@ class DJLoginViewController: ShiftableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        signInButton.layer.cornerRadius = 25
         setupButtons()
 
         let tapToDismiss = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))

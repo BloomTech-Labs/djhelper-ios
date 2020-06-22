@@ -23,7 +23,7 @@ class HostController {
     typealias HostHandler = (Result<Host, HostErrors>) -> Void
 
     private let baseURL = URL(string: "https://dj-helper-be.herokuapp.com/api")!
-    var bearer: Bearer?
+//    var bearer: Bearer?
 
     let dataLoader: NetworkDataLoader
 
@@ -158,7 +158,7 @@ class HostController {
 
             do {
                 let hostLoginResponse = try JSONDecoder().decode(HostLoginResponse.self, from: data)
-                self.bearer = try JSONDecoder().decode(Bearer.self, from: data)
+                Bearer.shared.token = try JSONDecoder().decode(Bearer.self, from: data).token
 
                 completion(.success(hostLoginResponse))
             } catch {
@@ -171,7 +171,7 @@ class HostController {
     // MARK: - Update Existing Host
     func updateHost(with host: Host, completion: @escaping (Result<HostUpdate, HostErrors>) -> Void) {
         guard let hostRepresentation = host.hostUpdate else { return }
-        guard let bearer = bearer else {
+        guard let bearer = Bearer.shared.token else {
             completion(.failure(.noAuthorization))
             return
         }
@@ -183,7 +183,7 @@ class HostController {
         var urlRequest = URLRequest(url: requestURL)
         urlRequest.httpMethod = HTTPMethod.put.rawValue
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        urlRequest.setValue("\(bearer.token)", forHTTPHeaderField: "Authorization")
+        urlRequest.setValue("\(bearer)", forHTTPHeaderField: "Authorization")
 
         do {
             let encoder = JSONEncoder()
