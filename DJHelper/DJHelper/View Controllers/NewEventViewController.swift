@@ -11,6 +11,7 @@ import UIKit
 class NewEventViewController: UIViewController, UIScrollViewDelegate {
 
     var slides: [Slide] = []
+    var myAlert = CustomAlert()
     var eventController: EventController?
     var hostController: HostController?
     var currentHost: Host?
@@ -65,8 +66,14 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
         !eventName.isEmpty,
             !eventDescription.isEmpty else { return }
 
-        let newEvent = Event(name: eventName, eventType: "", eventDescription: eventDescription, eventDate: eventDate, hostID: currentHost.identifier, eventID: nil)
+        let newEvent = Event(name: eventName,
+                             eventType: "default",
+                             eventDescription: eventDescription,
+                             eventDate: eventDate,
+                             hostID: currentHost.identifier,
+                             eventID: nil)
         self.activityIndicator(shouldStart: true)
+        authorizeEvent(newEvent, withHost: currentHost, andEventController: eventController)
 
     }
 
@@ -80,7 +87,12 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
             case let .success(eventRep):
                 print("Successful attempt to create event in vc: \(eventRep.name)")
             case let .failure(error):
-                
+                self.activityIndicator(shouldStart: false)
+                self.myAlert.showAlert(with: "Error Creating Event", message: "\(error.localizedDescription)", on: self)
+                print("""
+                Error on line: \(#line) in function: \(#function)\n
+                Readable error: \(error.localizedDescription)\n Technical error: \(error)
+                """)
             }
         }
     }

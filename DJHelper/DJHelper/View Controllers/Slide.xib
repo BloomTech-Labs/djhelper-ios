@@ -47,6 +47,9 @@
                     <rect key="frame" x="60" y="311" width="294" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal" title="Save Event"/>
+                    <connections>
+                        <action selector="saveNewEvent:" destination="-1" eventType="touchUpInside" id="zcU-FK-E80"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

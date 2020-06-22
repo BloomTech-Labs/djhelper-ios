@@ -299,8 +299,8 @@ class EventController {
         encoder.dateEncodingStrategy = .iso8601
 
         do {
-//            try CoreDataStack.shared.save()  // commented out this line because it's redundant with later in the method
             urlRequest.httpBody = try encoder.encode(eventToAuthorize)
+            print(String(data: urlRequest.httpBody!, encoding: .utf8))
         } catch {
             print("Error in func: \(#function)\n error: \(error.localizedDescription)\n Technical error: \(error)")
             completion(.failure(.encodeError(error)))
