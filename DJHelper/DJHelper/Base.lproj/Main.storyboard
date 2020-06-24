@@ -482,7 +482,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lsz-ac-CQi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3046" y="-412"/>
+            <point key="canvasLocation" x="3146" y="319"/>
         </scene>
         <!--Create Event-->
         <scene sceneID="46R-h2-gAU">
@@ -515,15 +515,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lVr-Mc-3vb"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Create Event" id="qXJ-Or-jQg">
-                        <barButtonItem key="rightBarButtonItem" title="Next" id="0fO-Hw-cJw"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Create Event" id="qXJ-Or-jQg"/>
                     <connections>
                         <outlet property="pageControl" destination="b76-Ay-6w5" id="WtQ-x7-FZ6"/>
                         <outlet property="scrollView" destination="bCK-bK-NXY" id="vdL-8m-Z0m"/>
+                        <segue destination="cDj-Ad-MbH" kind="unwind" identifier="unwindToEventList" unwindAction="unwindToEventListWithSegue:" id="oh7-aP-iK7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dPa-09-yfm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="cDj-Ad-MbH" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2295.6521739130435" y="1668.75"/>
         </scene>
@@ -591,7 +591,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YgQ-wv-773" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3712" y="319"/>
+            <point key="canvasLocation" x="4149" y="319"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -955,7 +955,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="UtX-VA-g8O"/>
-        <segue reference="VMB-cg-viX"/>
+        <segue reference="CQD-ea-bE8"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="gear" catalog="system" width="128" height="119"/>

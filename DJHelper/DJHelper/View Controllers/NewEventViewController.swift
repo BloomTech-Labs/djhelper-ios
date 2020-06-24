@@ -25,6 +25,7 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var pageControl: UIPageControl!
 
+    // MARK: - View Control Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,6 +49,20 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
         view.addGestureRecognizer(tapGesture)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+
+        // Here I want to make sure that it is presenting the first slide on screen
+        // I think the way to do that is to make sure it is at the left-most point of the frame?
+        slides = createSlides()
+        setupSlideScrollView(slides: slides)
+        pageControl.numberOfPages = slides.count
+        pageControl.currentPage = 0
+        pageControl.pageIndicatorTintColor = .darkGray
+        pageControl.currentPageIndicatorTintColor = .lightGray
+        view.bringSubviewToFront(pageControl)
+    }
+
     @objc func eventDateChanged(datePicker: UIDatePicker) {
         eventDate = datePicker.date
         let dateFormatter = DateFormatter()
@@ -62,9 +77,30 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
     // MARK: - Actions
     @IBAction func saveNewEvent(_ sender: UIButton) {
         guard let eventController = eventController,
-        let currentHost = currentHost,
-        !eventName.isEmpty,
+            let currentHost = currentHost,
+            !eventName.isEmpty,
             !eventDescription.isEmpty else { return }
+
+/*
+         I haven't been able to figure out how to use this code.
+         It continues on to the authorizeEvent method instead of stopping like I need it to.
+
+        if eventName.isEmpty {
+            let alertController = UIAlertController(title: "Missing Field", message: "Please enter in a value for Event Name", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .default) { (_) in
+                return
+            }
+            alertController.addAction(alertAction)
+            self.present(alertController, animated: true)
+        } else if eventDescription.isEmpty {
+            let alertController = UIAlertController(title: "Missing Field", message: "Please enter in a value for Event Description", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .default) { (_) in
+                return
+            }
+            alertController.addAction(alertAction)
+            self.present(alertController, animated: true)
+        }
+ */
 
         let newEvent = Event(name: eventName,
                              eventType: "default",
@@ -84,16 +120,48 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
 
         eventController.authorize(event: event) { (results) in
             switch results {
-            case let .success(eventRep):
-                print("Successful attempt to create event in vc: \(eventRep.name)")
+            case .success:
+                DispatchQueue.main.async {
+                    let alertController = UIAlertController(title: "Event Created",
+                                                            message: "Congratulations! Your event has been created.",
+                                                            preferredStyle: .alert)
+                    let alertAction = UIAlertAction(title: "OK", style: .default) { (_) in
+                        self.resetForm()
+                        self.performSegue(withIdentifier: "unwindToEventList", sender: self)
+                    }
+                    alertController.addAction(alertAction)
+                    self.present(alertController, animated: true)
+                }
             case let .failure(error):
-                self.activityIndicator(shouldStart: false)
-                self.myAlert.showAlert(with: "Error Creating Event", message: "\(error.localizedDescription)", on: self)
+                DispatchQueue.main.async {
+                    self.activityIndicator(shouldStart: false)
+                    self.myAlert.showAlert(with: "Error Creating Event", message: "\(error.localizedDescription)", on: self)
+                }
                 print("""
                 Error on line: \(#line) in function: \(#function)\n
                 Readable error: \(error.localizedDescription)\n Technical error: \(error)
                 """)
             }
+        }
+    }
+
+    private func resetForm() {
+        self.activityIndicator(shouldStart: false)
+        eventName = ""
+        eventDescription = ""
+        eventDate = Date()
+
+        if slides.count == 4 {
+            slides[1].textField.text = nil
+            slides[2].textField.text = nil
+            slides[3].textField.text = nil
+            scrollView.scrollRectToVisible(CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height), animated: false)
+
+        } else {
+            slides[0].textField.text = nil
+            slides[1].textField.text = nil
+            slides[2].textField.text = nil
+            scrollView.scrollRectToVisible(CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height), animated: false)
         }
     }
 
@@ -151,13 +219,24 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
         let pageIndex = round(scrollView.contentOffset.x / view.frame.width)
         pageControl.currentPage = Int(pageIndex)
 
-        switch Int(pageIndex) {
-        case 1:
-            self.eventName = slides[1].textField.text ?? ""
-        case 2:
-            self.eventDescription = slides[2].textField.text ?? ""
-        default:
-            return
+        if slides.count == 4 {
+            switch Int(pageIndex) {
+            case 1:
+                self.eventName = slides[1].textField.text ?? ""
+            case 2:
+                self.eventDescription = slides[2].textField.text ?? ""
+            default:
+                return
+            }
+        } else {
+            switch Int(pageIndex) {
+            case 1:
+                self.eventName = slides[0].textField.text ?? ""
+            case 2:
+                self.eventDescription = slides[1].textField.text ?? ""
+            default:
+                return
+            }
         }
     }
 }

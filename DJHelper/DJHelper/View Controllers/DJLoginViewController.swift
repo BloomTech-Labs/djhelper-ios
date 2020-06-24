@@ -42,9 +42,15 @@ class DJLoginViewController: ShiftableViewController {
             let password = passwordTextField.text,
             !password.isEmpty else { return }
 
-        // create fetchRequest to look for a Host object with this username from CoreData.
-        // if username is found, set the currentHost variable to the Host fetched from the fetchRequest.
-        // if not found, present an alert and prompt to the registration scene.
+        // The current process is to:
+        //    - create fetchRequest to look for a Host object with this username from CoreData.
+        //    - if username is found, set the currentHost variable to the Host fetched from the fetchRequest.
+        //    - if not found, present an alert and prompt to the registration scene.
+        // This process should probably change to:
+        //    - Create a new Host struct that contains only username and password
+        //    - Create a new network call method with that struct to log in
+        //    - Parse the hostID that is returned from the server
+        //    - Then do the fetchRequest to get the host from core data and segue to tableview
         let fetchRequest: NSFetchRequest<Host> = Host.fetchRequest()
         let predicate = NSPredicate(format: "username == %@", username)
         fetchRequest.predicate = predicate
