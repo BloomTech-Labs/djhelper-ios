@@ -10,7 +10,7 @@ import Foundation
 struct EventRepresentation: Codable {
     let name: String
     let eventType: String
-    let eventDescription: String
+    let eventDescription: String?
     let eventDate: String
     let hostID: Int32
     var imageURL: URL?
@@ -30,7 +30,7 @@ struct EventRepresentation: Codable {
 
     init(name: String,
          eventType: String,
-         eventDescription: String,
+         eventDescription: String?,
          eventDate: String,
          hostID: Int32,
          imageURL: URL? = nil,
@@ -51,7 +51,7 @@ struct EventRepresentation: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         name = try container.decode(String.self, forKey: .name)
         eventType = try container.decode(String.self, forKey: .eventType)
-        eventDescription = try container.decode(String.self, forKey: .eventDescription)
+        eventDescription = try container.decode(String?.self, forKey: .eventDescription)
         eventDate = try container.decode(String.self, forKey: .eventDate)
         hostID = try container.decode(Int32.self, forKey: .hostID)
         imageURL = try container.decode(URL?.self, forKey: .imageURL)

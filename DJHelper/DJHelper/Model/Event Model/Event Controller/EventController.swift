@@ -219,12 +219,20 @@ class EventController {
                 let eventRepArray = try decoder.decode([EventRepresentation].self, from: data)
                 print("eventRepArray's count: \(eventRepArray.count)")
 
-                if let cdAndServerEvents = self.compareServerEvents(host: host, eventRepArray) {
-                    completion(.success(cdAndServerEvents))
-                } else {
-                     print("Error- no cd or server events on line: \(#line) in function: \(#function)\n")
-                    completion(.failure(.noEventsInServerOrCoreData))
+                var eventsFromServer: [Event] = []
+                for event in eventRepArray {
+                    if let newEvent = Event(eventRepresentation: event) {
+                        eventsFromServer.append(newEvent)
+                    }
                 }
+                completion(.success(eventsFromServer))
+
+//                if let cdAndServerEvents = self.compareServerEvents(host: host, eventRepArray) {
+//                    completion(.success(cdAndServerEvents))
+//                } else {
+//                     print("Error- no cd or server events on line: \(#line) in function: \(#function)\n")
+//                    completion(.failure(.noEventsInServerOrCoreData))
+//                }
 
             } catch {
                  print("""

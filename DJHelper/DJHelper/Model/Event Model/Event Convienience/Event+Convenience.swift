@@ -14,7 +14,7 @@ extension Event {
     @discardableResult
     convenience init(name: String,
                      eventType: String,
-                     eventDescription: String,
+                     eventDescription: String?,
                      eventDate: Date,
                      hostID: Int32,
                      imageURL: URL? = nil,
@@ -58,12 +58,12 @@ extension Event {
     var eventAuthorizationRep: EventRepresentation? {
         guard let name = self.name,
             let eventType = self.eventType,
-            let description = self.eventDescription,
+//            let description = self.eventDescription,
             let eventDate = self.eventDate else { return nil }
 
         return EventRepresentation(name: name,
                                    eventType: eventType,
-                                   eventDescription: description,
+                                   eventDescription: self.eventDescription,
                                    eventDate: eventDate.jsonStringFromDate(),
                                    hostID: self.hostID,
                                    imageURL: self.imageURL,
@@ -75,12 +75,12 @@ extension Event {
     var eventAuthRequest: EventAuthRequest? {
         guard let name = self.name,
              let eventType = self.eventType,
-             let description = self.eventDescription,
+//             let description = self.eventDescription,
              let eventDate = self.eventDate else { return nil }
 
         return EventAuthRequest(name: name,
                                 eventType: eventType,
-                                eventDescription: description,
+                                eventDescription: self.eventDescription ?? "",
                                 eventDate: eventDate,
                                 hostID: self.hostID,
                                 imageURL: self.imageURL,
