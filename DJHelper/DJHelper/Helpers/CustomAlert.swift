@@ -52,15 +52,6 @@ class CustomAlert {
 
         alertView.addSubview(titleLabel)
 
-        // CONFIGURE MESSAGE LABEL
-        let messageLabel = UILabel(frame: CGRect(x: 0, y: 80, width: alertView.frame.size.width, height: 170))
-
-        messageLabel.numberOfLines = 0
-        messageLabel.text = message
-        messageLabel.textAlignment = .left
-
-        alertView.addSubview(messageLabel)
-
         //CONFIGURE BUTTON
         let button = UIButton(frame: CGRect(x: 0, y: alertView.frame.size.height - 50, width: alertView.frame.size.width, height: 50))
 
@@ -81,6 +72,25 @@ class CustomAlert {
                 })
             }
         })
+
+        // CONFIGURE MESSAGE LABEL
+        let messageLabel = UILabel()
+
+        messageLabel.numberOfLines = 0
+        messageLabel.text = message
+        messageLabel.font = UIFont(name: "Palatino", size: 18)
+        messageLabel.textAlignment = .left
+        messageLabel.lineBreakMode = .byWordWrapping
+
+        alertView.addSubview(messageLabel)
+
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate(
+            [messageLabel.leadingAnchor.constraint(equalTo: alertView.leadingAnchor),
+             messageLabel.trailingAnchor.constraint(equalTo: alertView.trailingAnchor),
+             messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: -60),
+             messageLabel.bottomAnchor.constraint(equalTo: button.topAnchor, constant: 10)]
+        )
     }
 
     @objc func dismissAlert() {
