@@ -93,6 +93,9 @@ class HostEventsTableViewController: UIViewController {
         }
     }
 
+    @IBAction func unwindToEventList(segue: UIStoryboardSegue) {
+    }
+
      // MARK: - Navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
