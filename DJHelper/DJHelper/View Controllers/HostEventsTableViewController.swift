@@ -61,7 +61,7 @@ class HostEventsTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Code to clear out the core data objects
+        // Code to clear out the core data objects (keeping for future use, if needed)
 //        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Event")
 //        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 //        do {
@@ -93,6 +93,7 @@ class HostEventsTableViewController: UIViewController {
         }
     }
 
+    // This action unwinds from the create new event tab after a new event is created.
     @IBAction func unwindToEventList(segue: UIStoryboardSegue) {
     }
 

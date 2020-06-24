@@ -122,9 +122,9 @@ class HostController {
 
     // MARK: - Log In Existing Host
     // the server returns the host properties along with the generated bearer token
-    func logIn(with host: Host, completion: @escaping (Result<HostLoginResponse, HostErrors>) -> Void) {
+    func logIn(with host: HostLogin, completion: @escaping (Result<HostLoginResponse, HostErrors>) -> Void) {
         //take the host and turn in into a host login
-        guard let hostLogin = host.hostLogin else { return }
+        let hostLogin = host
 
         //create url
         let registrationURL = baseURL.appendingPathComponent("login").appendingPathComponent("dj")

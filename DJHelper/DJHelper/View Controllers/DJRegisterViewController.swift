@@ -118,7 +118,8 @@ class DJRegisterViewController: ShiftableViewController {
                         message: "Congratulations! Your account has been created. Tap Sign In to continue to your Events list, or cancel to return.",
                             preferredStyle: .alert)
                     let alertAction = UIAlertAction(title: "Sign In", style: .default) { (_) in
-                        self.hostController.logIn(with: host) { (result) in
+                        guard let hostLogin = self.currentHost?.hostLogin else { return }
+                        self.hostController.logIn(with: hostLogin) { (result) in
                             switch result {
                             case .success:
                                 DispatchQueue.main.async {
