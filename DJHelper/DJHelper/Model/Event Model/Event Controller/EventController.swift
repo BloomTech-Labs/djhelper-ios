@@ -189,7 +189,7 @@ class EventController {
     }
 
     // MARK: - FETCH EVENTS FOR HOST
-    func fetchAllEventsFromServer(for host: Host, completion: @escaping(Result<[Event], EventErrors>) -> Void) {
+    func fetchAllEventsFromServer(for host: Host, completion: @escaping(Result<Bool, EventErrors>) -> Void) {
         let url = baseURL.appendingPathComponent("events")
         let urlRequest = URLRequest(url: url)
 
@@ -219,20 +219,14 @@ class EventController {
                 let eventRepArray = try decoder.decode([EventRepresentation].self, from: data)
                 print("eventRepArray's count: \(eventRepArray.count)")
 
-                var eventsFromServer: [Event] = []
-                for event in eventRepArray {
-                    if let newEvent = Event(eventRepresentation: event) {
-                        eventsFromServer.append(newEvent)
-                    }
-                }
-                completion(.success(eventsFromServer))
-
-//                if let cdAndServerEvents = self.compareServerEvents(host: host, eventRepArray) {
-//                    completion(.success(cdAndServerEvents))
-//                } else {
-//                     print("Error- no cd or server events on line: \(#line) in function: \(#function)\n")
-//                    completion(.failure(.noEventsInServerOrCoreData))
-//                }
+                // When the array of representations is made from the JSON, the update method is called
+                // This filters the events by using our host identifier
+                // and then compares that array of events with events in core data
+                // If an event in core data was not on the server, it is deleted
+                // If an event in core data was also on the server, we call a method to update desired properties
+                // If an event on the server, was not in core data, it is created and saved to core data
+                try self.updateEventsFromServer(events: eventRepArray, withHost: host)
+                completion(.success(true))
 
             } catch {
                  print("""
@@ -244,46 +238,50 @@ class EventController {
         }
     }
 
-    func compareServerEvents(host: Host, _ eventRepresentationArray: [EventRepresentation]) -> [Event]? {
-        // TODO: - FIX LATER
-        let eventsWithCurrentHostIDs = eventRepresentationArray.filter { $0.hostID == host.identifier }
+    func updateEventsFromServer(events eventRespresentations: [EventRepresentation], withHost host: Host) throws {
+        let eventsWithHost = eventRespresentations.filter { $0.hostID == host.identifier }
+        let eventIdentifiers = eventsWithHost.compactMap { $0.eventID }
 
-        //check core data
+        let representationsByID = Dictionary(uniqueKeysWithValues: zip(eventIdentifiers, eventsWithHost))
+        var eventsToCreate = representationsByID
+
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
+        let moc = CoreDataStack.shared.container.newBackgroundContext()
 
-         // TODO: - FIX LATER
-        let predicate = NSPredicate(format: "hostID == %i", host.identifier)
-        fetchRequest.predicate = predicate
+        moc.perform {
+            do {
+                let existingEvents = try moc.fetch(fetchRequest)
 
-        var placeHolderArray: [Event] = []
+                for event in existingEvents {
+                    let eventID = event.eventID
+                    guard let representation = representationsByID[eventID] else {
+                        moc.delete(event)
+                        continue
+                    }
 
-        do {
-//            var fetchedEvents: [Event]?
-//            let moc = CoreDataStack.shared.mainContext
-//            moc.performAndWait {
-//                fetchedEvents = try? fetchRequest.execute()
-//            }
-//            let eventsInCoreData = fetchedEvents ?? []
-            let eventsInCoreData = try CoreDataStack.shared.mainContext.fetch(fetchRequest)
-            print("events in coreDataArray's count: \(eventsInCoreData.count)")
+                    self.updateCoreDataEvent(event: event, representation: representation)
 
-            //loop
-            for event in eventsInCoreData {
-            placeHolderArray = eventsWithCurrentHostIDs.filter {
-                $0.name != event.name }.compactMap {
-                Event(eventRepresentation: $0)
+                    eventsToCreate.removeValue(forKey: eventID)
                 }
+
+                // whatever is left from the server, make into an Event
+                for representation in eventsToCreate.values {
+                    Event(eventRepresentation: representation, context: moc)
+                }
+            } catch {
+                print("Error fetching events for identifiers: \(error)")
             }
-
-            return placeHolderArray
-
-        } catch {
-            print("""
-                Error on line: \(#line) in function: \(#function)\n
-                Readable error: \(error.localizedDescription)\n Technical error: \(error)
-                """)
-            return []
         }
+        try CoreDataStack.shared.save(context: moc)
+    }
+
+    func updateCoreDataEvent(event: Event, representation: EventRepresentation) {
+        event.name = representation.name
+        event.eventDescription = representation.eventDescription
+        event.eventType = representation.eventType
+        event.eventDate = representation.eventDate.dateFromString()
+        event.notes = representation.notes
+        event.imageURL = representation.imageURL
     }
 
     // MARK: - AUTHORIZE AN EVENT
