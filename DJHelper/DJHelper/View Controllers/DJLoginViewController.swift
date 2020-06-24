@@ -42,6 +42,8 @@ class DJLoginViewController: ShiftableViewController {
             let password = passwordTextField.text,
             !password.isEmpty else { return }
 
+        let hostLogin: HostLogin = HostLogin(username: username, password: password)
+
         // The current process is to:
         //    - create fetchRequest to look for a Host object with this username from CoreData.
         //    - if username is found, set the currentHost variable to the Host fetched from the fetchRequest.
@@ -51,49 +53,73 @@ class DJLoginViewController: ShiftableViewController {
         //    - Create a new network call method with that struct to log in
         //    - Parse the hostID that is returned from the server
         //    - Then do the fetchRequest to get the host from core data and segue to tableview
-        let fetchRequest: NSFetchRequest<Host> = Host.fetchRequest()
-        let predicate = NSPredicate(format: "username == %@", username)
-        fetchRequest.predicate = predicate
-        var fetchedHosts: [Host]?
 
-        let moc = CoreDataStack.shared.mainContext
-        moc.performAndWait {
-            fetchedHosts = try? fetchRequest.execute()
-        }
-        if let host = fetchedHosts?.first {
+//        let fetchRequest: NSFetchRequest<Host> = Host.fetchRequest()
+//        let predicate = NSPredicate(format: "username == %@", username)
+//        fetchRequest.predicate = predicate
+//        var fetchedHosts: [Host]?
+//
+//        let moc = CoreDataStack.shared.mainContext
+//        moc.performAndWait {
+//            fetchedHosts = try? fetchRequest.execute()
+//        }
+//        if let host = fetchedHosts?.first {
+//
+//            self.currentHost = host
 
-            self.currentHost = host
-        // call hostLogIn network function
-        // handle possible error
-        // transition to primary view controller
-        hostController.logIn(with: host) { (result) in
-            switch result {
-            case .success:
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "SignInSegue", sender: self)
+            // call hostLogIn network function
+            // handle possible error
+            // transition to primary view controller
+            hostController.logIn(with: hostLogin) { (result) in
+                switch result {
+                case let .success(hostResponse):
+                    let fetchRequest: NSFetchRequest<Host> = Host.fetchRequest()
+                    let predicate = NSPredicate(format: "username = %@", hostResponse.username)
+                    fetchRequest.predicate = predicate
+                    var fetchedHosts: [Host]?
+
+                    let moc = CoreDataStack.shared.mainContext
+                    moc.performAndWait {
+                        fetchedHosts = try? fetchRequest.execute()
+                    }
+                    if let host = fetchedHosts?.first {
+                        self.currentHost = host
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "SignInSegue", sender: self)
+                        }
+                    } else {
+                        let newHost = Host(name: hostResponse.name, username: hostResponse.username, email: hostResponse.email, password: password, bio: hostResponse.bio, identifier: hostResponse.identifier, phone: hostResponse.phone, profilePic: hostResponse.profilePic, website: hostResponse.website, context: CoreDataStack.shared.mainContext)
+
+                        self.currentHost = newHost
+                        try? CoreDataStack.shared.save()
+
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "SignInSegue", sender: self)
+                        }
+
+                    }
+                case let .failure(error):
+                    DispatchQueue.main.async {
+                        let alertController = UIAlertController(title: "LogIn Error",
+                                                                message: "There was an error signing in with message: \(error). Please verify and try again.",
+                            preferredStyle: .alert)
+                        let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                        alertController.addAction(alertAction)
+                        self.present(alertController, animated: true)
+                    }
+                    return
                 }
-            case let .failure(error):
-                DispatchQueue.main.async {
-                    let alertController = UIAlertController(title: "LogIn Error",
-                        message: "There was an error signing in with message: \(error). Please verify and try again.",
-                        preferredStyle: .alert)
-                    let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                    alertController.addAction(alertAction)
-                    self.present(alertController, animated: true)
-                }
-                return
             }
-        }
-        } else {
-            let alertController = UIAlertController(title: "Username Not Found",
-                                                    message: """
-                The username \(username) was not found on this device. Please verify and try again, or tap Register to create a new account.
-                """,
-                preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alertController.addAction(alertAction)
-            self.present(alertController, animated: true)
-        }
+            //        } else {
+            //            let alertController = UIAlertController(title: "Username Not Found",
+            //                                                    message: """
+            //                The username \(username) was not found on this device. Please verify and try again, or tap Register to create a new account.
+            //                """,
+            //                preferredStyle: .alert)
+            //            let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            //            alertController.addAction(alertAction)
+            //            self.present(alertController, animated: true)
+//        }
     }
 
     // MARK: - Navigation

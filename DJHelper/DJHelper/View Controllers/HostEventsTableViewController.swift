@@ -93,6 +93,7 @@ class HostEventsTableViewController: UIViewController {
         }
     }
 
+    // This action unwinds from the create new event tab after a new event is created.
     @IBAction func unwindToEventList(segue: UIStoryboardSegue) {
     }
 
