@@ -61,7 +61,9 @@ class HostProfileViewController: ShiftableViewController {
                     let alertController = UIAlertController(title: "Profile Updated",
                                                             message: "Nice! Your profile has been updated!",
                         preferredStyle: .alert)
-                    let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    let alertAction = UIAlertAction(title: "OK", style: .default) { _ in
+                        self.tabBarController?.selectedIndex = 0
+                    }
                     alertController.addAction(alertAction)
                     self.present(alertController, animated: true)
                 }

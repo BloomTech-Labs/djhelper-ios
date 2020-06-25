@@ -170,7 +170,9 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
 
         // swiftlint:disable all
         let slide1: Slide = Bundle.main.loadNibNamed("Slide", owner: self, options: nil)?.first as! Slide
-        slide1.titleLabel.text = "Welcome! \nLet's create your first event."
+        slide1.titleLabel.text = "Welcome!\nLet's create your first event."
+        slide1.titleLabel.textAlignment = .center
+        slide1.titleLabel.adjustsFontSizeToFitWidth = true
         slide1.subtitleLabel.text = "Our goal is to get the audience to participate in your setlist by requesting tracks and reacting to what you play."
         slide1.textField.isHidden = true
         slide1.saveEvent.isHidden = true
