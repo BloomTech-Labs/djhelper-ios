@@ -845,7 +845,6 @@
                                 <state key="normal" title="View Event"/>
                                 <connections>
                                     <action selector="viewEvents:" destination="PR4-TT-pvu" eventType="touchUpInside" id="eSa-Iq-52s"/>
-                                    <segue destination="kQQ-kj-GmS" kind="show" identifier="GuestPlaylistSegue" id="mjx-VZ-QcY"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -885,13 +884,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f0H-DI-zjS">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="event-default" translatesAutoresizingMaskIntoConstraints="NO" id="f0H-DI-zjS">
                                 <rect key="frame" x="0.0" y="44" width="414" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="0rW-AQ-TPq"/>
                                 </constraints>
                             </imageView>
-                            <navigationBar alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eqC-if-N8j">
+                            <navigationBar alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eqC-if-N8j">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <items>
                                     <navigationItem id="hxG-Tj-nqX">
@@ -1099,6 +1098,7 @@
         <segue reference="VMB-cg-viX"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="event-default" width="4368" height="2912"/>
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>
         <image name="plus" catalog="system" width="128" height="113"/>
