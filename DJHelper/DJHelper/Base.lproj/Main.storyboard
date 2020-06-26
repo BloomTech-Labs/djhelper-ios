@@ -906,7 +906,8 @@
                                 <attributedString key="attributedText">
                                     <fragment content="Event Name Label">
                                         <attributes>
-                                            <font key="NSFont" size="24" name="HelveticaNeue-Bold"/>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="24" name="HelveticaNeue-Medium"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
