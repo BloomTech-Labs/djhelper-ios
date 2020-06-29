@@ -874,12 +874,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Zy-7S-dc1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="502" y="99"/>
+            <point key="canvasLocation" x="516" y="-389"/>
         </scene>
-        <!--Guest Playlist View Controller-->
+        <!--Event Playlist View Controller-->
         <scene sceneID="CAr-hx-iHh">
             <objects>
-                <viewController id="kQQ-kj-GmS" customClass="GuestPlaylistViewController" customModule="DJHelper" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="kQQ-kj-GmS" customClass="EventPlaylistViewController" customModule="DJHelper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tbe-m6-NY6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1000,6 +1000,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="kQQ-kj-GmS" id="vVH-C4-rVB"/>
+                                    <outlet property="delegate" destination="kQQ-kj-GmS" id="McU-YC-asT"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -1034,6 +1038,16 @@
                         <viewLayoutGuide key="safeArea" id="Y7L-3v-sDf"/>
                     </view>
                     <navigationItem key="navigationItem" id="ohh-zZ-VwV"/>
+                    <connections>
+                        <outlet property="dateLabel" destination="jnX-Ow-NtX" id="OKg-sI-8fq"/>
+                        <outlet property="eventDescriptionLabel" destination="fxR-ad-mx8" id="bY2-EZ-xgz"/>
+                        <outlet property="eventImage" destination="f0H-DI-zjS" id="bkO-Nh-h3w"/>
+                        <outlet property="eventNameLabel" destination="O12-MZ-ySQ" id="RGA-YF-eJW"/>
+                        <outlet property="hostNameButton" destination="cJd-6I-Fj3" id="zjW-IB-kSE"/>
+                        <outlet property="searchBar" destination="9ix-5O-1HL" id="Uk9-fF-cK6"/>
+                        <outlet property="tableView" destination="0yt-hM-vgE" id="a0o-5i-HgK"/>
+                        <outlet property="timeLabel" destination="SLY-OU-ZfD" id="6wV-QT-BYD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2iC-LL-bDg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
