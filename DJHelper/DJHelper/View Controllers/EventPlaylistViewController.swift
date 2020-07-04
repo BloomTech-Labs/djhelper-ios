@@ -13,6 +13,7 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
     // MARK: - Properties
     var event: Event?
     var currentHost: Host?
+    var songs: [Song] = []
     private let refreshControl = UIRefreshControl()
 
     // MARK: - Outlets
@@ -62,16 +63,29 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
 
 extension EventPlaylistViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        <#code#>
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+        return songs.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath)
+        
+        let song = songs[indexPath.row]
+        // Create custom cell Swift file and pass song into the cell
+        
+        return cell
     }
 
 
+}
+
+
+// Temporary song struct to use for the data source calls
+struct Song {
+    let artist: String
+    let songName: String
+    var upVotes: Int
 }
