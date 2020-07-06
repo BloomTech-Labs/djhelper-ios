@@ -1069,6 +1069,56 @@
                                     <outlet property="delegate" destination="kQQ-kj-GmS" id="McU-YC-asT"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EyW-lB-7YW">
+                                <rect key="frame" x="312" y="371.5" width="52" height="33.5"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Setlist">
+                                            <attributes>
+                                                <font key="NSFont" size="18" name="HelveticaNeue-Medium"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <state key="selected">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Setlist">
+                                            <attributes>
+                                                <color key="NSColor" red="0.39715844436734821" green="0.20339279031484853" blue="0.85130472715736039" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <font key="NSFont" size="18" name="HelveticaNeue-Medium"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ddw-SH-Sdf">
+                                <rect key="frame" x="50" y="371.5" width="79" height="33.5"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Requests">
+                                            <attributes>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <font key="NSFont" size="18" name="HelveticaNeue-Medium"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <state key="selected">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Requests">
+                                            <attributes>
+                                                <color key="NSColor" red="0.39715844436734821" green="0.20339279031484853" blue="0.85130472715736039" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <font key="NSFont" size="18" name="HelveticaNeue-Medium"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -1079,9 +1129,12 @@
                             <constraint firstItem="Y7L-3v-sDf" firstAttribute="trailing" secondItem="fxR-ad-mx8" secondAttribute="trailing" constant="20" id="5yS-Jy-zr1"/>
                             <constraint firstItem="fxR-ad-mx8" firstAttribute="top" secondItem="O12-MZ-ySQ" secondAttribute="bottom" constant="10" id="6sz-fb-yfx"/>
                             <constraint firstItem="Y7L-3v-sDf" firstAttribute="trailing" secondItem="f0H-DI-zjS" secondAttribute="trailing" id="95Y-k8-nYh"/>
+                            <constraint firstItem="Ddw-SH-Sdf" firstAttribute="leading" secondItem="Y7L-3v-sDf" secondAttribute="leading" constant="50" id="AgT-ak-Ake"/>
                             <constraint firstItem="f0H-DI-zjS" firstAttribute="leading" secondItem="Y7L-3v-sDf" secondAttribute="leading" id="EFu-hN-B6D"/>
+                            <constraint firstItem="Y7L-3v-sDf" firstAttribute="trailing" secondItem="EyW-lB-7YW" secondAttribute="trailing" constant="50" id="FMq-Ot-x1f"/>
                             <constraint firstItem="Y7L-3v-sDf" firstAttribute="trailing" secondItem="O12-MZ-ySQ" secondAttribute="trailing" constant="20" id="Fhz-fI-VgL"/>
                             <constraint firstItem="jnX-Ow-NtX" firstAttribute="leading" secondItem="cJd-6I-Fj3" secondAttribute="trailing" constant="50" id="KVK-BA-dtT"/>
+                            <constraint firstItem="0yt-hM-vgE" firstAttribute="top" secondItem="EyW-lB-7YW" secondAttribute="bottom" id="KZT-M9-4dp"/>
                             <constraint firstItem="cJd-6I-Fj3" firstAttribute="centerY" secondItem="ucL-gA-mcV" secondAttribute="centerY" id="N02-qM-e9e"/>
                             <constraint firstItem="O12-MZ-ySQ" firstAttribute="leading" secondItem="Y7L-3v-sDf" secondAttribute="leading" constant="20" id="N5h-Wf-843"/>
                             <constraint firstItem="eqC-if-N8j" firstAttribute="top" secondItem="Y7L-3v-sDf" secondAttribute="top" id="Ncc-3J-Mpo"/>
@@ -1089,6 +1142,7 @@
                             <constraint firstItem="Y7L-3v-sDf" firstAttribute="trailing" secondItem="0yt-hM-vgE" secondAttribute="trailing" id="Y3e-9o-DeM"/>
                             <constraint firstItem="ucL-gA-mcV" firstAttribute="leading" secondItem="Y7L-3v-sDf" secondAttribute="leading" constant="20" id="bNd-tY-eS6"/>
                             <constraint firstItem="eqC-if-N8j" firstAttribute="trailing" secondItem="Y7L-3v-sDf" secondAttribute="trailing" id="hnR-2Z-9nq"/>
+                            <constraint firstItem="0yt-hM-vgE" firstAttribute="top" secondItem="Ddw-SH-Sdf" secondAttribute="bottom" id="iSY-ye-AKx"/>
                             <constraint firstItem="0yt-hM-vgE" firstAttribute="leading" secondItem="Y7L-3v-sDf" secondAttribute="leading" id="lmo-g9-gNi"/>
                             <constraint firstItem="SLY-OU-ZfD" firstAttribute="top" secondItem="jnX-Ow-NtX" secondAttribute="bottom" constant="8" id="maE-Tp-Vbi"/>
                             <constraint firstItem="ucL-gA-mcV" firstAttribute="top" secondItem="fxR-ad-mx8" secondAttribute="bottom" constant="20" id="nQk-1u-M44"/>
