@@ -79,28 +79,29 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
         guard let eventController = eventController,
             let currentHost = currentHost,
             !eventName.isEmpty,
-            !eventDescription.isEmpty else { return }
+            !eventDescription.isEmpty else {
 
-/*
-         I haven't been able to figure out how to use this code.
-         It continues on to the authorizeEvent method instead of stopping like I need it to.
-
-        if eventName.isEmpty {
-            let alertController = UIAlertController(title: "Missing Field", message: "Please enter in a value for Event Name", preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "OK", style: .default) { (_) in
+                if eventName.isEmpty {
+                    let alertController = UIAlertController(title: "Missing Field",
+                                                            message: "Please enter in a value for Event Name",
+                                                            preferredStyle: .alert)
+                    let alertAction = UIAlertAction(title: "OK", style: .default) { (_) in
+                        return
+                    }
+                    alertController.addAction(alertAction)
+                    self.present(alertController, animated: true)
+                } else if eventDescription.isEmpty {
+                    let alertController = UIAlertController(title: "Missing Field",
+                                                            message: "Please enter in a value for Event Description",
+                                                            preferredStyle: .alert)
+                    let alertAction = UIAlertAction(title: "OK", style: .default) { (_) in
+                        return
+                    }
+                    alertController.addAction(alertAction)
+                    self.present(alertController, animated: true)
+                }
                 return
-            }
-            alertController.addAction(alertAction)
-            self.present(alertController, animated: true)
-        } else if eventDescription.isEmpty {
-            let alertController = UIAlertController(title: "Missing Field", message: "Please enter in a value for Event Description", preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "OK", style: .default) { (_) in
-                return
-            }
-            alertController.addAction(alertAction)
-            self.present(alertController, animated: true)
         }
- */
 
         let newEvent = Event(name: eventName,
                              eventType: "default",
