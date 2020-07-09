@@ -27,6 +27,8 @@
 		44214DED2490698F00D63B6A /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DEC2490698F00D63B6A /* TabBarViewController.swift */; };
 		44214DEF249125BF00D63B6A /* HostUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DEE249125BF00D63B6A /* HostUpdate.swift */; };
 		44214DF12491952100D63B6A /* ShiftableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DF02491952100D63B6A /* ShiftableViewController.swift */; };
+		44352AC724B7C4E300E449F2 /* Song+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44352AC624B7C4E300E449F2 /* Song+Convenience.swift */; };
+		44352AC924B7C68B00E449F2 /* SongRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44352AC824B7C68B00E449F2 /* SongRepresentation.swift */; };
 		4446F799247638D4005ACE10 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F798247638D4005ACE10 /* HTTPMethod.swift */; };
 		4446F79B247638F9005ACE10 /* NetworkDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F79A247638F9005ACE10 /* NetworkDataLoader.swift */; };
 		4446F79D24763935005ACE10 /* URLSessionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F79C24763935005ACE10 /* URLSessionExtension.swift */; };
@@ -91,6 +93,8 @@
 		44214DEC2490698F00D63B6A /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		44214DEE249125BF00D63B6A /* HostUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostUpdate.swift; sourceTree = "<group>"; };
 		44214DF02491952100D63B6A /* ShiftableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShiftableViewController.swift; path = DJHelper/Helpers/ShiftableViewController.swift; sourceTree = SOURCE_ROOT; };
+		44352AC624B7C4E300E449F2 /* Song+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Song+Convenience.swift"; sourceTree = "<group>"; };
+		44352AC824B7C68B00E449F2 /* SongRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongRepresentation.swift; sourceTree = "<group>"; };
 		4446F798247638D4005ACE10 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		4446F79A247638F9005ACE10 /* NetworkDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataLoader.swift; sourceTree = "<group>"; };
 		4446F79C24763935005ACE10 /* URLSessionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionExtension.swift; sourceTree = "<group>"; };
@@ -254,6 +258,15 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		44352AC524B770A700E449F2 /* Song Model */ = {
+			isa = PBXGroup;
+			children = (
+				44352AC624B7C4E300E449F2 /* Song+Convenience.swift */,
+				44352AC824B7C68B00E449F2 /* SongRepresentation.swift */,
+			);
+			path = "Song Model";
+			sourceTree = "<group>";
+		};
 		4446F79E24763959005ACE10 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,6 +285,7 @@
 				4446F7D9247DCAD8005ACE10 /* Bearer.swift */,
 				1BA4A8BD2485B956002A67E2 /* Event Model */,
 				1BA4A8B92485B004002A67E2 /* Host Model */,
+				44352AC524B770A700E449F2 /* Song Model */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -512,6 +526,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44352AC924B7C68B00E449F2 /* SongRepresentation.swift in Sources */,
 				4446F79D24763935005ACE10 /* URLSessionExtension.swift in Sources */,
 				44214DF12491952100D63B6A /* ShiftableViewController.swift in Sources */,
 				1BA4A8C82486858D002A67E2 /* HelperExtensions.swift in Sources */,
@@ -544,6 +559,7 @@
 				1BDBE284248508FC006DE77E /* HostRegistration.swift in Sources */,
 				4446F7DA247DCAD8005ACE10 /* Bearer.swift in Sources */,
 				4446F7D6247DC51F005ACE10 /* Host+Convenience.swift in Sources */,
+				44352AC724B7C4E300E449F2 /* Song+Convenience.swift in Sources */,
 				4446F8272480D792005ACE10 /* DJRegisterViewController.swift in Sources */,
 				4446F79B247638F9005ACE10 /* NetworkDataLoader.swift in Sources */,
 				447F53C12476315200F706F1 /* DJHelper.xcdatamodeld in Sources */,
