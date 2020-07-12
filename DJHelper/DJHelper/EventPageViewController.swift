@@ -55,7 +55,7 @@ class EventPageViewController: UIViewController {
 
     @IBAction func shareLinkButtonTapped(_ sender: UIButton) {
 //        setupEmailForLink()
-        
+
         let message = "Hey! Please check out this new event I created!"
         let tempUrlToPass = URL(string: "djscheme://www.djhelper.com/guestLogin?eventId=\(1)")!
         let objectsToShare: [Any] = [message, tempUrlToPass]
