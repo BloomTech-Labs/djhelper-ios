@@ -54,7 +54,16 @@ class EventPageViewController: UIViewController {
     }
 
     @IBAction func shareLinkButtonTapped(_ sender: UIButton) {
-        setupEmailForLink()
+//        setupEmailForLink()
+//        guard let passedInEvent = event else {
+//            print("Error on line: \(#line) in function: \(#function)\n")
+//            return
+//        }
+//        let eventID = passedInEvent.eventID
+//        let urlToPass = URL(string: "djscheme://www.djhelper.com/guestLogin?eventId=\(eventID)")!
+        let tempUrlToPass = URL(string: "djscheme://www.djhelper.com/guestLogin?eventId=\(1)")!
+        let activityController = UIActivityViewController(activityItems: [tempUrlToPass], applicationActivities: nil)
+        present(activityController, animated: true, completion: nil)
     }
 
     @IBAction func addSongButtonTapped(_ sender: UIButton) {
