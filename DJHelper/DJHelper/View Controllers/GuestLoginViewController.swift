@@ -11,6 +11,11 @@ import CoreData
 
 class GuestLoginViewController: ShiftableViewController {
 
+    var eventID: Int32? {
+        didSet {
+            self.view.backgroundColor = .green
+        }
+    }
     var currentHost: Host?
     var allHosts: [Host]?
     var allEvents: [Event]?
