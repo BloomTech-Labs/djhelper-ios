@@ -55,14 +55,11 @@ class EventPageViewController: UIViewController {
 
     @IBAction func shareLinkButtonTapped(_ sender: UIButton) {
 //        setupEmailForLink()
-//        guard let passedInEvent = event else {
-//            print("Error on line: \(#line) in function: \(#function)\n")
-//            return
-//        }
-//        let eventID = passedInEvent.eventID
-//        let urlToPass = URL(string: "djscheme://www.djhelper.com/guestLogin?eventId=\(eventID)")!
+        
+        let message = "Hey! Please check out this new event I created!"
         let tempUrlToPass = URL(string: "djscheme://www.djhelper.com/guestLogin?eventId=\(1)")!
-        let activityController = UIActivityViewController(activityItems: [tempUrlToPass], applicationActivities: nil)
+        let objectsToShare: [Any] = [message, tempUrlToPass]
+        let activityController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         present(activityController, animated: true, completion: nil)
     }
 

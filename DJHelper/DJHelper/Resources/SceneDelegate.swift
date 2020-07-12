@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let url = connectionOptions.urlContexts.first?.url, let scheme = url.scheme else {
-              print("Error on line: \(#line) in function: \(#function)\n")
+              print("App opened by user: \(#line) in function: \(#function)\n")
               return
           }
 
@@ -39,7 +39,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
               let guestLoginVC = storyboard.instantiateViewController(withIdentifier: "guestLoginVC") as! GuestLoginViewController
                   guestLoginVC.eventID = eventInt32
               window?.rootViewController = guestLoginVC
-          }
+          } else {
+            print("scheme does not match our 'djscheme' scheme")
+            return
+        }
 
         guard let _ = (scene as? UIWindowScene) else { return }
     }
