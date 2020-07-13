@@ -82,7 +82,7 @@ extension EventPlaylistViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch currentSongState {
         case .requested:
@@ -102,18 +102,15 @@ extension EventPlaylistViewController: UITableViewDataSource {
             let song = setListedSongs[indexPath.row]
         }
         // Create custom cell Swift file and pass song into the cell
-        
+
         return cell
     }
-
-
 }
-
 
 // Temporary song struct to use for the data source calls
-struct Song {
-    let artist: String
-    let songName: String
-    var upVotes: Int
-    var inSetList: Bool
-}
+//struct Song {
+//    let artist: String
+//    let songName: String
+//    var upVotes: Int
+//    var inSetList: Bool
+//}
