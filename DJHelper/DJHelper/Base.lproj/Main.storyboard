@@ -870,6 +870,7 @@
                     <connections>
                         <outlet property="eventCodeTextField" destination="YHb-tv-09A" id="DZM-9z-1o4"/>
                         <outlet property="viewEventButton" destination="Pqv-Nn-rD6" id="93P-1C-NOe"/>
+                        <segue destination="kQQ-kj-GmS" kind="show" identifier="EventPlaylistSegue" id="Nsc-Zp-tqT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Zy-7S-dc1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

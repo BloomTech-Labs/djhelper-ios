@@ -9,7 +9,7 @@
 import Foundation
 
 struct HostRepresentation: Codable {
-    var name: String
+    var name: String?
     var username: String
     var password: String
     var email: String
@@ -31,7 +31,7 @@ struct HostRepresentation: Codable {
         case identifier = "id"
     }
 
-    init(name: String,
+    init(name: String?,
          username: String,
          email: String,
          password: String,
@@ -55,7 +55,7 @@ struct HostRepresentation: Codable {
     // MARK: - CODABLE INITAILIZERS
      init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: HostCodingKeys.self)
-        name = try container.decode(String.self, forKey: .name)
+        name = try container.decode(String?.self, forKey: .name)
         username = try container.decode(String.self, forKey: .username)
         password = try container.decode(String.self, forKey: .password)
         email = try container.decode(String.self, forKey: .email)
