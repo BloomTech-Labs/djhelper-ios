@@ -68,7 +68,7 @@ class GuestLoginViewController: ShiftableViewController {
             return
         }
         eventCodeTextField.text = "\(eventID)"
-        eventCodeTextField.textColor = .white
+        eventCodeTextField.textColor = .black
         self.view.backgroundColor = .cyan
 
     }
