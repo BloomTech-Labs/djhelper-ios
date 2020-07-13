@@ -66,7 +66,7 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
 
         eventNameLabel.text = event.name
         eventDescriptionLabel.text = event.eventDescription
-        hostNameButton.titleLabel?.text = currentHost.name
+        hostNameButton.setTitle(currentHost.name ?? "CurrentHost", for: .normal)
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
