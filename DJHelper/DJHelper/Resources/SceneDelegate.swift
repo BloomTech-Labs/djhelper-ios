@@ -18,6 +18,32 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        guard let url = connectionOptions.urlContexts.first?.url, let scheme = url.scheme else {
+              print("App opened by user: \(#line) in function: \(#function)\n")
+              return
+          }
+
+          print("App opened by link: Here's the URL (from clicking a link): \(url) and the associated scheme: \(scheme)")
+
+          let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)
+          //        let tempUrlToPass = URL(string: "djscheme://www.djhelper.com/guestLogin?eventId=\(1)")!
+
+          guard let eventID = urlComponents?.queryItems?.first?.value, let eventInt32 = Int32(eventID) else {
+              print("Error on line: \(#line) in function: \(#function)\n")
+              return
+          }
+          print("eventID = \(eventInt32)")
+
+          if scheme == "djscheme" {
+              let storyboard = UIStoryboard(name: "Main", bundle: .main)
+              let guestLoginVC = storyboard.instantiateViewController(withIdentifier: "guestLoginVC") as! GuestLoginViewController
+                  guestLoginVC.eventID = eventInt32
+              window?.rootViewController = guestLoginVC
+          } else {
+            print("scheme does not match our 'djscheme' scheme")
+            return
+        }
+
         guard let _ = (scene as? UIWindowScene) else { return }
     }
 
@@ -47,5 +73,30 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+    }
+
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        guard let url = URLContexts.first?.url, let scheme = url.scheme else {
+            print("Error on line: \(#line) in function: \(#function)\n")
+            return
+        }
+
+        print("App opened by link: Here's the URL (from clicking a link): \(url) and the associated scheme: \(scheme)")
+
+        let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true)
+        //        let tempUrlToPass = URL(string: "djscheme://www.djhelper.com/guestLogin?eventId=\(1)")!
+
+        guard let eventID = urlComponents?.queryItems?.first?.value, let eventInt32 = Int32(eventID) else {
+            print("Error on line: \(#line) in function: \(#function)\n")
+            return
+        }
+        print("eventID = \(eventInt32)")
+
+        if scheme == "djscheme" {
+            let storyboard = UIStoryboard(name: "Main", bundle: .main)
+            let guestLoginVC = storyboard.instantiateViewController(withIdentifier: "guestLoginVC") as! GuestLoginViewController
+                guestLoginVC.eventID = eventInt32
+            window?.rootViewController = guestLoginVC
+        }
     }
 }

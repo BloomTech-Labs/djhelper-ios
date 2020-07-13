@@ -11,6 +11,12 @@ import CoreData
 
 class GuestLoginViewController: ShiftableViewController {
 
+    var eventID: Int32? {
+        didSet {
+            loadViewIfNeeded()
+            updateView()
+        }
+    }
     var currentHost: Host?
     var allHosts: [Host]?
     var allEvents: [Event]?
@@ -27,7 +33,6 @@ class GuestLoginViewController: ShiftableViewController {
     // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
         hostController?.fetchAllHostsFromServer(completion: { (results) in
             switch results {
             case let .success(hosts):
@@ -57,6 +62,16 @@ class GuestLoginViewController: ShiftableViewController {
         let tapToDismiss = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tapToDismiss)
     }
+    private func updateView() {
+        guard let eventID = eventID else {
+            print("Error on line: \(#line) in function: \(#function)\n")
+            return
+        }
+        eventCodeTextField.text = "\(eventID)"
+        eventCodeTextField.textColor = .black
+        self.view.backgroundColor = .cyan
+
+    }
 
     // MARK: - Actions
 
@@ -68,6 +83,7 @@ class GuestLoginViewController: ShiftableViewController {
     // if not present, present an error alert
 
     @IBAction func viewEvents(_ sender: UIButton) {
+        print("view event button pressed.")
         guard let eventCode = eventCodeTextField.text,
             !eventCode.isEmpty,
         let allEvents = allEvents,
