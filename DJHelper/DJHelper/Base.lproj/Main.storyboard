@@ -1038,6 +1038,9 @@
                                 <state key="normal" title="Setlist">
                                     <color key="titleColor" name="customTextColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="setlistButtonSelected:" destination="kQQ-kj-GmS" eventType="touchUpInside" id="LG6-U3-xfR"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ddw-SH-Sdf">
                                 <rect key="frame" x="50" y="371" width="79" height="34"/>
@@ -1046,6 +1049,9 @@
                                 <state key="normal" title="Requests">
                                     <color key="titleColor" name="customTextColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="requestButtonSelected:" destination="kQQ-kj-GmS" eventType="touchUpInside" id="hjM-1z-G9p"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -1090,6 +1096,8 @@
                         <outlet property="eventImage" destination="f0H-DI-zjS" id="bkO-Nh-h3w"/>
                         <outlet property="eventNameLabel" destination="O12-MZ-ySQ" id="RGA-YF-eJW"/>
                         <outlet property="hostNameButton" destination="cJd-6I-Fj3" id="zjW-IB-kSE"/>
+                        <outlet property="leftRequestSetlistButton" destination="Ddw-SH-Sdf" id="BiQ-Sx-ehv"/>
+                        <outlet property="rightRequestSetlistButton" destination="EyW-lB-7YW" id="Lgj-E4-J4q"/>
                         <outlet property="searchBar" destination="9ix-5O-1HL" id="Uk9-fF-cK6"/>
                         <outlet property="tableView" destination="0yt-hM-vgE" id="a0o-5i-HgK"/>
                         <outlet property="timeLabel" destination="SLY-OU-ZfD" id="6wV-QT-BYD"/>

@@ -36,6 +36,8 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet var hostNameButton: UIButton!
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var timeLabel: UILabel!
+    @IBOutlet var leftRequestSetlistButton: UIButton!
+    @IBOutlet var rightRequestSetlistButton: UIButton!
 
     // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
@@ -49,6 +51,18 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
         updateViews()
         updateSongList()
     }
+
+    @IBAction func requestButtonSelected(_ sender: UIButton) {
+        currentSongState = .requested
+        updateViews()
+    }
+
+    @IBAction func setlistButtonSelected(_ sender: UIButton) {
+        currentSongState = .setListed
+        updateViews()
+    }
+
+
 
     // MARK: - Methods
     @objc func refreshSongData(_ sender: Any) {
@@ -70,13 +84,42 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
 
         let buttonTitle = NSMutableAttributedString(string: "\(currentHost.name ?? "EventHost")", attributes: [
             NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 14)!,
-            NSAttributedString.Key.foregroundColor: UIColor.blue
+            NSAttributedString.Key.foregroundColor: UIColor.systemBlue
         ])
         hostNameButton.setAttributedTitle(buttonTitle, for: .normal)
 
         // udpateViews() should also swap the location of the
         // Setlist and Requests buttons based on the value of isGuest
-        
+        let requestButtonTitle = NSMutableAttributedString(string: "Requests", attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 18)!,
+            NSAttributedString.Key.foregroundColor: {
+                switch self.currentSongState {
+                case .requested:
+                    return UIColor.systemBlue
+                case .setListed:
+                    return UIColor(named: "customTextColor")
+                }
+            }()
+        ])
+
+        let setlistButtonTitle = NSMutableAttributedString(string: "Setlist", attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 18)!,
+            NSAttributedString.Key.foregroundColor: {
+                switch self.currentSongState {
+                case .requested:
+                    return UIColor(named: "customTextColor")
+                case .setListed:
+                    return UIColor.systemBlue
+                }
+            }()
+        ])
+        if isGuest {
+            self.leftRequestSetlistButton.setAttributedTitle(requestButtonTitle, for: .normal)
+            self.rightRequestSetlistButton.setAttributedTitle(setlistButtonTitle, for: .normal)
+        } else {
+            self.leftRequestSetlistButton.setAttributedTitle(setlistButtonTitle, for: .normal)
+            self.rightRequestSetlistButton.setAttributedTitle(requestButtonTitle, for: .normal)
+        }
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -118,11 +161,3 @@ extension EventPlaylistViewController: UITableViewDataSource {
         return cell
     }
 }
-
-// Temporary song struct to use for the data source calls
-//struct Song {
-//    let artist: String
-//    let songName: String
-//    var upVotes: Int
-//    var inSetList: Bool
-//}
