@@ -22,6 +22,8 @@ class DJLoginViewController: ShiftableViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var guestButton: UIButton!
+    @IBOutlet var registerButton: UIButton!
+    @IBOutlet var forgotPasswordButton: UIButton!
 
     // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
@@ -156,6 +158,18 @@ class DJLoginViewController: ShiftableViewController {
     func setupButtons() {
         signInButton.colorTheme()
         guestButton.colorTheme()
+
+        let registerButtonTitle = NSMutableAttributedString(string: "Register", attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 18)!,
+            NSAttributedString.Key.foregroundColor: UIColor(named: "customTextColor")
+        ])
+        registerButton.setAttributedTitle(registerButtonTitle, for: .normal)
+
+        let forgotPasswordButtonTitle = NSMutableAttributedString(string: "Forgot Password", attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 18)!,
+            NSAttributedString.Key.foregroundColor: UIColor(named: "customTextColor")
+        ])
+        forgotPasswordButton.setAttributedTitle(forgotPasswordButtonTitle, for: .normal)
     }
 
     func updateViews() {

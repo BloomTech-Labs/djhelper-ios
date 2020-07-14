@@ -22,6 +22,7 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
     var hostController: HostController?
     var eventController: EventController?
     var currentSongState: SongState = .requested
+    var isGuest: Bool = false
     var requestedSongs: [Song] = []
     var setListedSongs: [Song] = []
     private let refreshControl = UIRefreshControl()
@@ -72,6 +73,10 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
             NSAttributedString.Key.foregroundColor: UIColor.blue
         ])
         hostNameButton.setAttributedTitle(buttonTitle, for: .normal)
+
+        // udpateViews() should also swap the location of the
+        // Setlist and Requests buttons based on the value of isGuest
+        
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

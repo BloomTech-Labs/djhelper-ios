@@ -138,7 +138,7 @@ class GuestLoginViewController: ShiftableViewController {
 
         let customButtonTitle = NSMutableAttributedString(string: "Sign In", attributes: [
             NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 18)!,
-            NSAttributedString.Key.foregroundColor: UIColor.black
+            NSAttributedString.Key.foregroundColor: UIColor(named: "customTextColor")
         ])
 
         backToSignIn.setAttributedTitle(customButtonTitle, for: .normal)
@@ -161,6 +161,7 @@ class GuestLoginViewController: ShiftableViewController {
             eventPlaylistVC.event = event
             eventPlaylistVC.hostController = hostController
             eventPlaylistVC.eventController = eventController
+            eventPlaylistVC.isGuest = true
         } else {
             return
         }
