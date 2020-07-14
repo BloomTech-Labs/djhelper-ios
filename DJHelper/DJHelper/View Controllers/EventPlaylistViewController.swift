@@ -66,7 +66,12 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
 
         eventNameLabel.text = event.name
         eventDescriptionLabel.text = event.eventDescription
-        hostNameButton.setTitle(currentHost.name ?? "CurrentHost", for: .normal)
+
+        let buttonTitle = NSMutableAttributedString(string: "\(currentHost.name ?? "EventHost")", attributes: [
+            NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 14)!,
+            NSAttributedString.Key.foregroundColor: UIColor.blue
+        ])
+        hostNameButton.setAttributedTitle(buttonTitle, for: .normal)
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
