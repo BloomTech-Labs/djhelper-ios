@@ -111,7 +111,7 @@ class GuestLoginViewController: ShiftableViewController {
 
             // Perform segue to eventPlaylistViewController
             performSegue(withIdentifier: "EventPlaylistSegue", sender: self)
-            
+
         } else {
 //            let unmatchedEventAlert = CustomAlert()
                                     customAlert.showAlert(with: "Event Not Found",

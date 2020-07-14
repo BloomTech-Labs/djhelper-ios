@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 // enum is a state indicator, and the basis of the table view data source
 enum SongState {
@@ -72,6 +73,14 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
         // call to the server for songs in Event
         // set the returned results to some variable
         // filter that variable based on inSetList bool
+        let fetchRequest: NSFetchRequest<Song> = Song.fetchRequest()
+        let predicate = NSPredicate(format: "event.eventID == %i", self.event!.eventID)
+        fetchRequest.predicate = predicate
+        var fetchedSongs: [Song]?
+        let moc = CoreDataStack.shared.mainContext
+        moc.performAndWait {
+            fetchedSongs = try? fetchRequest.execute()
+        }
         self.refreshControl.endRefreshing()
     }
     private func updateViews() {
@@ -161,3 +170,19 @@ extension EventPlaylistViewController: UITableViewDataSource {
         return cell
     }
 }
+
+// this was added to test the playlist view controller with mock song data
+//        let moc = CoreDataStack.shared.mainContext
+//        moc.performAndWait {
+//
+//            let song1 = Song(artist: "song1 Artist", songID: 1111111, songName: "song1 Name")
+//            let song2 = Song(artist: "song2 Artist", songID: 2222222, songName: "song2 Name")
+//            let song3 = Song(artist: "song3 Artist", songID: 3333333, songName: "song3 Name")
+//            let event456 = Event(name: "mock event", eventType: "test", eventDescription: "test of playlist", eventDate: Date(), hostID: 30, eventID: 456)
+//            song1.addToEvents(event456)
+//            song2.addToEvents(event456)
+//            song3.addToEvents(event456)
+//            do {
+//                try? CoreDataStack.shared.save()
+//            }
+//        }
