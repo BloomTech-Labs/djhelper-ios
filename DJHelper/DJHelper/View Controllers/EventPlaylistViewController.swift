@@ -52,6 +52,7 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
         updateSongList()
     }
 
+    // MARK: - Actions
     @IBAction func requestButtonSelected(_ sender: UIButton) {
         currentSongState = .requested
         updateViews()
@@ -61,8 +62,6 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
         currentSongState = .setListed
         updateViews()
     }
-
-
 
     // MARK: - Methods
     @objc func refreshSongData(_ sender: Any) {
@@ -97,7 +96,7 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
                 case .requested:
                     return UIColor.systemBlue
                 case .setListed:
-                    return UIColor(named: "customTextColor")
+                    return UIColor(named: "customTextColor")!
                 }
             }()
         ])
@@ -107,7 +106,7 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
             NSAttributedString.Key.foregroundColor: {
                 switch self.currentSongState {
                 case .requested:
-                    return UIColor(named: "customTextColor")
+                    return UIColor(named: "customTextColor")!
                 case .setListed:
                     return UIColor.systemBlue
                 }
@@ -127,6 +126,7 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
     }
 }
 
+// MARK: - Table View Data Source
 extension EventPlaylistViewController: UITableViewDataSource {
     // perform GET to retrieve all Song entries for the Event
     // when in "set list" mode, filter for songs with inSetList set to true;
