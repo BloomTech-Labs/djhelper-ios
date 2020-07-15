@@ -83,6 +83,7 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
         }
         self.refreshControl.endRefreshing()
     }
+    
     private func updateViews() {
         guard let event = event,
             let currentHost = currentHost else { return }
