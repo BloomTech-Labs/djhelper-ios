@@ -10,6 +10,7 @@ import UIKit
 
 class CreateEventViewController: ShiftableViewController {
     let myAlert = CustomAlert()
+    let activityIndicatorView = UIActivityIndicatorView(style: .large)
     var currentHost: Host?
     var eventController: EventController!
     var hostController: HostController!
@@ -83,7 +84,7 @@ class CreateEventViewController: ShiftableViewController {
                                                            description: description,
                                                            type: type,
                                                            notes: notes)
-            self.activityIndicator(shouldStart: true)
+            self.activityIndicator(activityIndicatorView: activityIndicatorView, shouldStart: true)
             putUpdateEvent(with: updatedEvent, andEventController: eventController)
         } else {
             guard let eventDate = eventDate else { return }
@@ -100,7 +101,7 @@ class CreateEventViewController: ShiftableViewController {
                               imageURL: URL(string: ""),
                               notes: notes,
                               eventID: nil)
-            self.activityIndicator(shouldStart: true)
+            self.activityIndicator(activityIndicatorView: activityIndicatorView, shouldStart: true)
             authorizeEvent(event, withHost: currentHost, andEventController: eventController)
         }
 //        self.activityIndicator(shouldStart: false)
@@ -160,10 +161,10 @@ extension CreateEventViewController {
                 print("successful attempt to create event in vc: \(eventRep.name)")
                 DispatchQueue.main.async {
                     self.navigationController?.popViewController(animated: true)
-                    self.activityIndicator(shouldStart: false)
+                    self.activityIndicator(activityIndicatorView: self.activityIndicatorView, shouldStart: false)
                 }
             case let .failure(error):
-                self.activityIndicator(shouldStart: false)
+                self.activityIndicator(activityIndicatorView: self.activityIndicatorView, shouldStart: false)
                 self.myAlert.showAlert(with: "Error Creating an Event", message: "\(error.localizedDescription)", on: self)
                 print("""
                     Error on line: \(#line) in function: \(#function)\n
@@ -181,11 +182,11 @@ extension CreateEventViewController {
                 print("successfully called the put function to update event on server")
                 DispatchQueue.main.async {
                     self.navigationController?.popViewController(animated: true)
-                    self.activityIndicator(shouldStart: false)
+                    self.activityIndicator(activityIndicatorView: self.activityIndicatorView, shouldStart: false)
                 }
 
             case .failure(.errorUpdatingEventOnServer(let error)):
-                self.activityIndicator(shouldStart: false)
+                self.activityIndicator(activityIndicatorView: self.activityIndicatorView, shouldStart: false)
                 self.myAlert.showAlert(with: "Error Creating an Event", message: "\(error.localizedDescription)", on: self)
                 print("Error on line: \(#line) in function: \(#function)\n")
             default:
