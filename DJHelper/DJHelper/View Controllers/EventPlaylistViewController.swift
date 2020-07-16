@@ -22,6 +22,7 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
     var currentHost: Host?
     var hostController: HostController?
     var eventController: EventController?
+    var songController = SongController()
     var currentSongState: SongState = .requested
     var isGuest: Bool = false
     var requestedSongs: [Song] = []
