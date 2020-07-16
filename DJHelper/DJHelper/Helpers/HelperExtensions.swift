@@ -82,12 +82,11 @@ extension UIViewController {
         present(alert, animated: true)
     }
 
-    func activityIndicator(shouldStart: Bool) {
-        let activityIndicator = UIActivityIndicatorView(style: .large)
-        activityIndicator.center.x = self.view.bounds.width / 2
-        activityIndicator.center.y = self.view.bounds.height / 2
-        self.view.addSubview(activityIndicator)
-        shouldStart == true ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
+    func activityIndicator(activityIndicatorView: UIActivityIndicatorView, shouldStart: Bool) {
+        activityIndicatorView.center.x = self.view.bounds.width / 2
+        activityIndicatorView.center.y = self.view.bounds.height / 2
+        self.view.addSubview(activityIndicatorView)
+        shouldStart == true ? activityIndicatorView.startAnimating() : activityIndicatorView.stopAnimating()
     }
 }
 

@@ -12,6 +12,7 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
 
     var slides: [Slide] = []
     var myAlert = CustomAlert()
+    let activityIndicatorView = UIActivityIndicatorView(style: .large)
     var eventController: EventController?
     var hostController: HostController?
     var currentHost: Host?
@@ -109,7 +110,7 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
                              eventDate: eventDate,
                              hostID: currentHost.identifier,
                              eventID: nil)
-        self.activityIndicator(shouldStart: true)
+        self.activityIndicator(activityIndicatorView: activityIndicatorView, shouldStart: true)
         authorizeEvent(newEvent, withHost: currentHost, andEventController: eventController)
 
     }
@@ -135,7 +136,7 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
                 }
             case let .failure(error):
                 DispatchQueue.main.async {
-                    self.activityIndicator(shouldStart: false)
+                    self.activityIndicator(activityIndicatorView: self.activityIndicatorView, shouldStart: false)
                     self.myAlert.showAlert(with: "Error Creating Event", message: "\(error.localizedDescription)", on: self)
                 }
                 print("""
@@ -147,7 +148,7 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
     }
 
     private func resetForm() {
-        self.activityIndicator(shouldStart: false)
+        self.activityIndicator(activityIndicatorView: activityIndicatorView, shouldStart: false)
         eventName = ""
         eventDescription = ""
         eventDate = Date()

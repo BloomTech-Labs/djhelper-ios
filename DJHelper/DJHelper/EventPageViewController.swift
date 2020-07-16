@@ -8,53 +8,75 @@
 
 import UIKit
 import MessageUI
+import CoreData
 
-class EventPageViewController: UIViewController {
+class EventPageViewController: UIViewController, UISearchBarDelegate {
 
     // MARK: - Properties
     var event: Event? {
         didSet {
+            loadViewIfNeeded()
             updateViews()
         }
     }
+
     var hostController: HostController?
 
     // If a currentHost is not passed in, hide the UI elements designed for a Host.
     var currentHost: Host?
     var eventController: EventController?
+    var songController = SongController()
+    var currentSongState: SongState = .requested
+    var requestedSongs: [Song] = []
+    var setListedSongs: [Song] = []
+    private let refreshControl = UIRefreshControl()
 
     // MARK: - IBOutlets
-    @IBOutlet weak var eventTitleLabel: UILabel!
-    @IBOutlet weak var detailButtonProperties: UIButton!
-    @IBOutlet weak var shareLinkButtonProperties: UIButton!
-
-    @IBOutlet weak var segmentedControlProperties: UISegmentedControl!
-
-    @IBOutlet weak var addSongButtonProperties: UIButton!
+    @IBOutlet weak var eventNameLabel: UILabel!
+    @IBOutlet weak var eventDescriptionLabel: UILabel!
+    @IBOutlet weak var eventTypeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var searchBar: UISearchBar!
+    @IBOutlet var eventImage: UIImageView!
+    @IBOutlet var dateLabel: UILabel!
+    @IBOutlet var timeLabel: UILabel!
+    @IBOutlet weak var setListButtonProperties: UIButton!
+    @IBOutlet weak var requestButtonProperties: UIButton!
+    @IBOutlet var leftRequestSetlistButton: UIButton!
+    @IBOutlet var rightRequestSetlistButton: UIButton!
 
     // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.delegate = self
+//        tableView.delegate = self
         tableView.dataSource = self
+        searchBar.delegate = self
 
-        setupButtons()
+        tableView.keyboardDismissMode = .onDrag
+        tableView.refreshControl = refreshControl
+
+//        refreshControl.addTarget(self, action: #selector(refreshSongData(_:)), for: .valueChanged)
 
         updateViews()
+        updateSongList()
 
         let tapToDismiss = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tapToDismiss)
     }
 
     // MARK: - IBActions
-    @IBAction func detailButtonTapped(_ sender: UIButton) {
-        // segues to CreateEventViewController
+    @IBAction func requestButtonSelected(_ sender: UIButton) {
+        currentSongState = .requested
+        updateViews()
     }
 
-    @IBAction func shareLinkButtonTapped(_ sender: UIButton) {
-//        setupEmailForLink()
+    @IBAction func setlistButtonSelected(_ sender: UIButton) {
+        currentSongState = .setListed
+        updateViews()
+    }
+
+    @IBAction func shareLinkButtonTapped(_ sender: UIBarButtonItem) {
         guard let passedInEvent = event else {
             print("No event passed to the EventpageVC.\nError on line: \(#line) in function: \(#function)\n")
             return
@@ -69,50 +91,58 @@ class EventPageViewController: UIViewController {
         present(activityController, animated: true, completion: nil)
     }
 
-    @IBAction func addSongButtonTapped(_ sender: UIButton) {
-    }
+    // MARK: - Methods
+//    @objc func refreshSongData(_ sender: Any) {
+//        updateSongList()
+//    }
 
-    @IBAction func segueValueChanged(_ sender: UISegmentedControl) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // code to search for song
     }
 
     // MARK: - Private functions
-    private func setupButtons() {
-        detailButtonProperties.colorTheme()
-        shareLinkButtonProperties.colorTheme()
-        addSongButtonProperties.colorTheme()
-    }
-
-    // Provides feature to send a URL via the Mail app.
-    // When testing, it only works on a device, not the simulator.
-    private func setupEmailForLink() {
-        guard MFMailComposeViewController.canSendMail(),
-            event != nil else {
-                return
-        }
-        guard let hostName = event?.host?.name else { return }
-
-        let mailController = MFMailComposeViewController()
-        mailController.mailComposeDelegate = self
-
-        // Configure the fields of the interface.
-        mailController.setSubject("You've Been Invited to a DJHelper Event!")
-        mailController.setMessageBody("""
-            \(hostName) has invited you to view a music playlist for an event they are hosting.
-            You will be able to view the playlist, request additional songs, and upvote existing requests that you like.
-
-            View the event playlist here: <insert FE web link here>.
-            """,
-            isHTML: false)
-
-        // Present the view controller modally.
-        self.present(mailController, animated: true, completion: nil)
+    func updateSongList() {
+        // call to the server for songs in event playlist or requested songs
+        // set the returned results to some variable
+        // filter that variable based on inSetList bool
+//        let fetchRequest: NSFetchRequest<Song> = Song.fetchRequest()
+//        let predicate = NSPredicate(format: "event.eventID == %i", self.event!.eventID)
+//        fetchRequest.predicate = predicate
+//        var fetchedSongs: [Song]?
+//        let moc = CoreDataStack.shared.mainContext
+//        moc.performAndWait {
+//            fetchedSongs = try? fetchRequest.execute()
+//        }
+//        self.refreshControl.endRefreshing()
     }
 
     private func updateViews() {
-        guard isViewLoaded else { return }
-        guard let event = event else { return }
+        guard let event = event, let name = event.name, let description = event.eventDescription, let type = event.eventType else {
+            print("Error on line: \(#line) in function: \(#function)\n")
+            return }
 
-        self.title = event.name
+        eventNameLabel.text = "Event Name: \(name)"
+        eventDescriptionLabel.text = "Description of event: \(description)"
+        eventTypeLabel.text = "Event Type: \(type)"
+
+        if let eventDate = event.eventDate {
+            dateLabel.text = longDateToString(with: eventDate)
+            timeLabel.text = timeToString(with: eventDate)
+        }
+        setListButtonProperties.titleLabel?.font = UIFont(name: "Helvetica Neue", size: 18)!
+        setListButtonProperties.setTitleColor(.systemBlue, for: .normal)
+    }
+
+    private func longDateToString(with date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE, MMM d, yyyy"
+        return formatter.string(from: date)
+    }
+
+    private func timeToString(with date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a"
+        return formatter.string(from: date)
     }
 
     // MARK: - Navigation
@@ -125,38 +155,40 @@ class EventPageViewController: UIViewController {
             eventDetailVC.eventController = eventController
         }
     }
-
 }
-extension EventPageViewController: UITableViewDataSource, UITableViewDelegate {
+
+// MARK: - Table View Data Source
+extension EventPageViewController: UITableViewDataSource {
+    // perform GET to retrieve all Song entries for the Event
+    // when in "set list" mode, filter for songs with inSetList set to true;
+    // when in "requests" mode, inSetList is false.
+    // currently, how a guest makes a request is not in the UX design
+    // presumably, a request would POST a Song to the server
+    // an upvote should PUT the upvote data to the server for the specific Song
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        switch currentSongState {
+        case .requested:
+            return requestedSongs.count
+        case .setListed:
+            return setListedSongs.count
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
-    }
-}
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath)
 
-extension EventPageViewController: MFMailComposeViewControllerDelegate {
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-
-        guard error == nil else {
-            print("Mail finished with error: \(String(describing: error))")
-            return
+        switch currentSongState {
+        case .requested:
+            let song = requestedSongs[indexPath.row]
+        case .setListed:
+            let song = setListedSongs[indexPath.row]
         }
+        // Create custom cell Swift file and pass song into the cell
 
-        switch result {
-
-        case .cancelled:
-            self.dismiss(animated: true, completion: nil)
-        case .saved:
-            return
-        case .sent:
-            self.dismiss(animated: true, completion: nil)
-        case .failed:
-            return
-        @unknown default:
-            print("A new feature in iOS has caused the mail controller to fail")
-        }
+        return cell
     }
 }
