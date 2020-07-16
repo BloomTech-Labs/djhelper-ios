@@ -46,29 +46,6 @@ class DJLoginViewController: ShiftableViewController {
 
         let hostLogin: HostLogin = HostLogin(username: username, password: password)
 
-        // The current process is to:
-        //    - create fetchRequest to look for a Host object with this username from CoreData.
-        //    - if username is found, set the currentHost variable to the Host fetched from the fetchRequest.
-        //    - if not found, present an alert and prompt to the registration scene.
-        // This process should probably change to:
-        //    - Create a new Host struct that contains only username and password
-        //    - Create a new network call method with that struct to log in
-        //    - Parse the hostID that is returned from the server
-        //    - Then do the fetchRequest to get the host from core data and segue to tableview
-
-//        let fetchRequest: NSFetchRequest<Host> = Host.fetchRequest()
-//        let predicate = NSPredicate(format: "username == %@", username)
-//        fetchRequest.predicate = predicate
-//        var fetchedHosts: [Host]?
-//
-//        let moc = CoreDataStack.shared.mainContext
-//        moc.performAndWait {
-//            fetchedHosts = try? fetchRequest.execute()
-//        }
-//        if let host = fetchedHosts?.first {
-//
-//            self.currentHost = host
-
             // call hostLogIn network function
             // handle possible error
             // transition to primary view controller
@@ -112,16 +89,6 @@ class DJLoginViewController: ShiftableViewController {
                     return
                 }
             }
-            //        } else {
-            //            let alertController = UIAlertController(title: "Username Not Found",
-            //                                                    message: """
-            //                The username \(username) was not found on this device. Please verify and try again, or tap Register to create a new account.
-            //                """,
-            //                preferredStyle: .alert)
-            //            let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            //            alertController.addAction(alertAction)
-            //            self.present(alertController, animated: true)
-//        }
     }
 
     // MARK: - Navigation
