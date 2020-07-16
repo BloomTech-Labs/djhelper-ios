@@ -71,7 +71,7 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
     }
 
     func updateSongList() {
-        // call to the server for songs in Event
+        // call to the server for songs in event playlist or requested songs
         // set the returned results to some variable
         // filter that variable based on inSetList bool
         let fetchRequest: NSFetchRequest<Song> = Song.fetchRequest()
@@ -91,6 +91,11 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
 
         eventNameLabel.text = event.name
         eventDescriptionLabel.text = event.eventDescription
+
+        if let eventDate = event.eventDate {
+            dateLabel.text = longDateToString(with: eventDate)
+            timeLabel.text = timeToString(with: eventDate)
+        }
 
         let buttonTitle = NSMutableAttributedString(string: "\(currentHost.name ?? "EventHost")", attributes: [
             NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 14)!,
@@ -134,6 +139,18 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         // code to search for song
+    }
+
+    func longDateToString(with date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE, MMM d, yyyy"
+        return formatter.string(from: date)
+    }
+
+    func timeToString(with date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a"
+        return formatter.string(from: date)
     }
 }
 
