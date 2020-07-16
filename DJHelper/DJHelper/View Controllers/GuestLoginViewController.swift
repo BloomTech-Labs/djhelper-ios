@@ -108,6 +108,10 @@ class GuestLoginViewController: ShiftableViewController {
                 self.event?.host = matchingHost
             }
             self.isGuest = true
+
+            // Perform segue to eventPlaylistViewController
+            performSegue(withIdentifier: "EventPlaylistSegue", sender: self)
+
         } else {
 //            let unmatchedEventAlert = CustomAlert()
                                     customAlert.showAlert(with: "Event Not Found",
@@ -134,7 +138,7 @@ class GuestLoginViewController: ShiftableViewController {
 
         let customButtonTitle = NSMutableAttributedString(string: "Sign In", attributes: [
             NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 18)!,
-            NSAttributedString.Key.foregroundColor: UIColor.black
+            NSAttributedString.Key.foregroundColor: UIColor(named: "customTextColor")
         ])
 
         backToSignIn.setAttributedTitle(customButtonTitle, for: .normal)
@@ -151,7 +155,16 @@ class GuestLoginViewController: ShiftableViewController {
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        return
+        if segue.identifier == "EventPlaylistSegue" {
+            guard let eventPlaylistVC = segue.destination as? EventPlaylistViewController else { fatalError() }
+            eventPlaylistVC.currentHost = currentHost
+            eventPlaylistVC.event = event
+            eventPlaylistVC.hostController = hostController
+            eventPlaylistVC.eventController = eventController
+            eventPlaylistVC.isGuest = true
+        } else {
+            return
+        }
     }
 }
 

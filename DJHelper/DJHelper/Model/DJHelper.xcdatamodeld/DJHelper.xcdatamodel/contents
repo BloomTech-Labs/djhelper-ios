@@ -10,7 +10,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
         <relationship name="host" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Host" inverseName="events" inverseEntity="Host"/>
-        <relationship name="songs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Song" inverseName="events" inverseEntity="Song"/>
+        <relationship name="songs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Song" inverseName="event" inverseEntity="Song"/>
     </entity>
     <entity name="Host" representedClassName="Host" syncable="YES" codeGenerationType="class">
         <attribute name="bio" optional="YES" attributeType="String"/>
@@ -30,7 +30,7 @@
         <attribute name="songID" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="songName" attributeType="String"/>
         <attribute name="upVotes" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="songs" inverseEntity="Event"/>
+        <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="songs" inverseEntity="Event"/>
     </entity>
     <elements>
         <element name="Event" positionX="157.0234375" positionY="22.32421875" width="128" height="193"/>
