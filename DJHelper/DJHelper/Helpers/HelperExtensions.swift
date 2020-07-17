@@ -67,7 +67,7 @@ extension UIButton {
      func colorTheme() {
         let button = self
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .darkGray
+        button.backgroundColor = UIColor(named: "PurpleColor")
         button.layer.masksToBounds = true
         button.layer.cornerRadius = self.frame.size.height / 2
     }
