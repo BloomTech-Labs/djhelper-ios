@@ -41,6 +41,9 @@ class DJRegisterViewController: ShiftableViewController {
 
     func setupButtons() {
         createAccountButton.colorTheme()
+        usernameTextField.textColor = UIColor(named: "customTextColor")
+        emailTextField.textColor = UIColor(named: "customTextColor")
+        passwordTextField.textColor = UIColor(named: "customTextColor")
     }
 
     // Programmatically setting up the Sign In button in the view.
@@ -52,7 +55,7 @@ class DJRegisterViewController: ShiftableViewController {
 
         let customButtonTitle = NSMutableAttributedString(string: "Sign In", attributes: [
             NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 18)!,
-            NSAttributedString.Key.foregroundColor: UIColor.black
+            NSAttributedString.Key.foregroundColor: UIColor(named: "customTextColor")
         ])
 
         backToSignIn.setAttributedTitle(customButtonTitle, for: .normal)

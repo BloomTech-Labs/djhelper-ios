@@ -65,6 +65,15 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
         updateViews()
     }
 
+    @IBAction func viewHostDetail(_ sender: UIButton) {
+        guard let currentHost = currentHost else { return }
+
+        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+        let hostProfileVC = storyboard.instantiateViewController(identifier: "HostProfile") as! HostProfileViewController
+        hostProfileVC.currentHost = currentHost
+        self.navigationController?.present(hostProfileVC, animated: true, completion: nil)
+    }
+
     // MARK: - Methods
     @objc func refreshSongData(_ sender: Any) {
         updateSongList()

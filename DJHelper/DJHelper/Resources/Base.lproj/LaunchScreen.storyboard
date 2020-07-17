@@ -15,19 +15,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="launch-screen-image" translatesAutoresizingMaskIntoConstraints="NO" id="O7C-73-RXm">
-                                <rect key="frame" x="57" y="298" width="250" height="250"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="6Wj-er-W1K">
+                                <rect key="frame" x="100" y="261" width="214" height="214"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="uId-Nn-MiP"/>
-                                    <constraint firstAttribute="height" constant="250" id="unp-d4-O6F"/>
+                                    <constraint firstAttribute="width" secondItem="6Wj-er-W1K" secondAttribute="height" multiplier="1:1" id="oin-4j-fmc"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ah-Qa-Uo3">
+                                <rect key="frame" x="100" y="475" width="214" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="fch-wp-aJT"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="DJ Helper">
+                                        <attributes>
+                                            <color key="NSColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="48" name="SFProText-Black"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" red="0.49411764705882355" green="0.0" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="O7C-73-RXm" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Kd4-VR-Wjl"/>
-                            <constraint firstItem="O7C-73-RXm" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="RZJ-x4-UdB"/>
+                            <constraint firstItem="6Wj-er-W1K" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="5Yy-TV-bYh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8ah-Qa-Uo3" secondAttribute="trailing" constant="100" id="CD7-qv-KNv"/>
+                            <constraint firstItem="8ah-Qa-Uo3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="EoJ-h0-T3m"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6Wj-er-W1K" secondAttribute="trailing" constant="100" id="Es0-x2-yom"/>
+                            <constraint firstItem="6Wj-er-W1K" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-80" id="JrS-E8-NTr"/>
+                            <constraint firstItem="8ah-Qa-Uo3" firstAttribute="top" secondItem="6Wj-er-W1K" secondAttribute="bottom" id="eYc-2U-BX7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -38,6 +56,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launch-screen-image" width="572" height="652"/>
+        <image name="logo" width="164" height="132"/>
     </resources>
 </document>
