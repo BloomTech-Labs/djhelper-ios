@@ -71,7 +71,7 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         let hostProfileVC = storyboard.instantiateViewController(identifier: "HostProfile") as! HostProfileViewController
         hostProfileVC.currentHost = currentHost
-        self.navigationController?.pushViewController(hostProfileVC, animated: true)
+        self.navigationController?.present(hostProfileVC, animated: true, completion: nil)
     }
 
     // MARK: - Methods
