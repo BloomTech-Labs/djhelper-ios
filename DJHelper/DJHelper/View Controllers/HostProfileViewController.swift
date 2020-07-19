@@ -29,7 +29,7 @@ class HostProfileViewController: ShiftableViewController {
     @IBOutlet var bioTextView: UITextView!
     @IBOutlet var saveButton: UIBarButtonItem!
     @IBOutlet weak var pageTitle: UINavigationItem!
-    
+
     // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,7 +101,7 @@ class HostProfileViewController: ShiftableViewController {
         websiteTextField.text = host.website?.absoluteString
         profilePicTextField.text = host.profilePic?.absoluteString
         bioTextView.text = host.bio
-        
+
         if isGuest {
             saveButton.tintColor = UIColor.clear
             pageTitle.title = "\(currentHost?.name ?? "DJ")'s Profile"

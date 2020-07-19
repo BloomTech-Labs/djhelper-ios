@@ -364,8 +364,10 @@
                         <outlet property="bioTextView" destination="vWB-CP-agf" id="cpP-bE-DbV"/>
                         <outlet property="emailTextField" destination="RYo-Te-EsG" id="AAr-yJ-s8j"/>
                         <outlet property="nameTextField" destination="N07-eU-LqM" id="0bN-4x-veR"/>
+                        <outlet property="pageTitle" destination="3aF-em-HI6" id="3D9-dJ-Yen"/>
                         <outlet property="phoneTextField" destination="8oq-Su-GAS" id="FCA-LM-E0I"/>
                         <outlet property="profilePicTextField" destination="J5y-Vg-kus" id="Due-bJ-bEq"/>
+                        <outlet property="saveButton" destination="Zgv-4T-Ye3" id="9aj-0N-sGV"/>
                         <outlet property="usernameTextField" destination="7ps-19-bfF" id="aSG-mn-LdQ"/>
                         <outlet property="websiteTextField" destination="fef-N9-7c7" id="Wjb-qI-IPM"/>
                     </connections>
