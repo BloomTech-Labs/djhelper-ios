@@ -126,7 +126,7 @@ class EventPageViewController: UIViewController, UISearchBarDelegate {
         eventTypeLabel.text = "Event Type: \(type)"
 
         if let eventDate = event.eventDate {
-            dateLabel.text = longDateToString(with: eventDate)
+            dateLabel.text = "Date: \(longDateToString(with: eventDate))"
             timeLabel.text = timeToString(with: eventDate)
         }
         setListButtonProperties.titleLabel?.font = UIFont(name: "Helvetica Neue", size: 18)!
