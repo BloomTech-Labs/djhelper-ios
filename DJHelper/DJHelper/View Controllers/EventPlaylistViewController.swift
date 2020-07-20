@@ -120,7 +120,7 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
             NSAttributedString.Key.foregroundColor: {
                 switch self.currentSongState {
                 case .requested:
-                    return UIColor.systemBlue
+                    return UIColor(named: "PurpleColor")!
                 case .setListed:
                     return UIColor(named: "customTextColor")!
                 }
@@ -134,7 +134,7 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
                 case .requested:
                     return UIColor(named: "customTextColor")!
                 case .setListed:
-                    return UIColor.systemBlue
+                    return UIColor(named: "PurpleColor")!
                 }
             }()
         ])
