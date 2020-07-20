@@ -62,6 +62,7 @@ class GuestLoginViewController: ShiftableViewController {
         let tapToDismiss = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tapToDismiss)
     }
+
     private func updateView() {
         guard let eventID = eventID else {
             print("Error on line: \(#line) in function: \(#function)\n")
