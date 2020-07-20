@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9du-3N-F1H">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9du-3N-F1H">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -1191,13 +1191,13 @@
                                 <color key="textColor" name="customTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1wx-ff-BiM">
-                                <rect key="frame" x="20" y="333" width="75" height="16.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1wx-ff-BiM">
+                                <rect key="frame" x="20" y="333" width="75" height="82"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="v3R-TF-MKx"/>
                                 </constraints>
                                 <attributedString key="attributedText">
-                                    <fragment content="Event Type:">
+                                    <fragment content="Event Type: this is a long message too">
                                         <attributes>
                                             <font key="NSFont" size="14" name="HelveticaNeue"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
@@ -1207,7 +1207,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qgv-f4-s3Y">
-                                <rect key="frame" x="103" y="327" width="100" height="29"/>
+                                <rect key="frame" x="103" y="359.5" width="100" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="dEQ-dL-Kc9"/>
                                 </constraints>
@@ -1216,14 +1216,14 @@
                                     <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qW3-me-zjL">
-                                <rect key="frame" x="253" y="333" width="141" height="16.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date Label this is a long message" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qW3-me-zjL">
+                                <rect key="frame" x="183.5" y="333" width="210.5" height="16.5"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" name="customTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YNo-XZ-ypJ">
-                                <rect key="frame" x="253" y="357.5" width="141" height="16.5"/>
+                                <rect key="frame" x="183.5" y="357.5" width="210.5" height="16.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Time label">
                                         <attributes>
@@ -1351,16 +1351,15 @@
                         <constraints>
                             <constraint firstItem="5VP-87-zLr" firstAttribute="trailing" secondItem="qW3-me-zjL" secondAttribute="trailing" constant="20" id="0Ix-bz-A65"/>
                             <constraint firstItem="1wx-ff-BiM" firstAttribute="leading" secondItem="5VP-87-zLr" secondAttribute="leading" constant="20" id="0NV-5d-mEI"/>
-                            <constraint firstItem="qW3-me-zjL" firstAttribute="centerY" secondItem="Qgv-f4-s3Y" secondAttribute="centerY" id="4BE-I9-GuR"/>
                             <constraint firstItem="5VP-87-zLr" firstAttribute="bottom" secondItem="ile-VC-S81" secondAttribute="bottom" id="91q-SQ-Bbk"/>
                             <constraint firstItem="H66-fz-fgA" firstAttribute="leading" secondItem="5VP-87-zLr" secondAttribute="leading" constant="50" id="DeA-8f-Nwf"/>
                             <constraint firstItem="py2-jW-Mmz" firstAttribute="leading" secondItem="5VP-87-zLr" secondAttribute="leading" constant="20" id="Ghh-YH-AKb"/>
                             <constraint firstItem="5VP-87-zLr" firstAttribute="trailing" secondItem="YNo-XZ-ypJ" secondAttribute="trailing" constant="20" id="IZj-kK-pAK"/>
                             <constraint firstItem="ile-VC-S81" firstAttribute="leading" secondItem="5VP-87-zLr" secondAttribute="leading" id="Juc-OX-lAL"/>
-                            <constraint firstItem="qW3-me-zjL" firstAttribute="leading" secondItem="Qgv-f4-s3Y" secondAttribute="trailing" constant="50" id="K4e-6s-jkH"/>
                             <constraint firstItem="5VP-87-zLr" firstAttribute="trailing" secondItem="py2-jW-Mmz" secondAttribute="trailing" constant="20" id="KRU-Md-efT"/>
                             <constraint firstItem="Q3d-bJ-JbK" firstAttribute="leading" secondItem="5VP-87-zLr" secondAttribute="leading" id="NYd-kC-akM"/>
                             <constraint firstItem="Qgv-f4-s3Y" firstAttribute="leading" secondItem="1wx-ff-BiM" secondAttribute="trailing" constant="8" id="Nut-ou-v2Q"/>
+                            <constraint firstItem="qW3-me-zjL" firstAttribute="top" secondItem="1wx-ff-BiM" secondAttribute="top" id="RTM-02-Ed6"/>
                             <constraint firstItem="5VP-87-zLr" firstAttribute="trailing" secondItem="Q3d-bJ-JbK" secondAttribute="trailing" id="Rqa-eS-Mdz"/>
                             <constraint firstItem="5VP-87-zLr" firstAttribute="trailing" secondItem="ile-VC-S81" secondAttribute="trailing" id="T94-TX-idf"/>
                             <constraint firstItem="ile-VC-S81" firstAttribute="top" secondItem="OUc-A0-6Uh" secondAttribute="bottom" id="XlO-eq-3Pc"/>
