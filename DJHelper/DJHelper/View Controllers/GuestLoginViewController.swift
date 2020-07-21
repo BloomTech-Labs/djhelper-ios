@@ -62,6 +62,35 @@ class GuestLoginViewController: ShiftableViewController {
         let tapToDismiss = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tapToDismiss)
     }
+
+    // I added the network calls to a viewWillAppear override in order to be called
+    // after the scene delegate navigates to this scene. When they are only in the
+    // viewDidLoad, they are called before the scene delegate navigates here.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        hostController?.fetchAllHostsFromServer(completion: { (results) in
+            switch results {
+            case let .success(hosts):
+                DispatchQueue.main.async {
+                    self.allHosts = hosts
+                }
+            case let .failure(error):
+                print("Error fetching all hosts from server: \(error)")
+            }
+        })
+
+        eventController?.fetchAllEventsFromServer(completion: { (results) in
+            switch results {
+            case let .success(events):
+                DispatchQueue.main.async {
+                    self.allEvents = events
+                }
+            case let .failure(error):
+                print("Error fetching all events from server: \(error)")
+            }
+        })
+    }
+
     private func updateView() {
         guard let eventID = eventID else {
             print("Error on line: \(#line) in function: \(#function)\n")
