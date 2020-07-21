@@ -179,13 +179,21 @@ class GuestLoginViewController: ShiftableViewController {
     }
 
     @objc private func backToSignIn() {
-        navigationController?.popViewController(animated: true)
+        if isGuest == nil {
+            let storyboard = UIStoryboard(name: "Main", bundle: .main)
+            let djLogInVC = storyboard.instantiateViewController(identifier: "DJLogIn") as! DJLoginViewController
+            djLogInVC.modalPresentationStyle = .fullScreen
+            present(djLogInVC, animated: true, completion: nil)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
     }
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EventPlaylistSegue" {
             guard let eventPlaylistVC = segue.destination as? EventPlaylistViewController else { fatalError() }
+            eventPlaylistVC.modalPresentationStyle = .fullScreen
             eventPlaylistVC.currentHost = currentHost
             eventPlaylistVC.event = event
             eventPlaylistVC.hostController = hostController

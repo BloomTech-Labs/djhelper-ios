@@ -93,9 +93,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         print("eventID = \(eventInt32)")
 
         if scheme == "djscheme" {
+            let eventController = EventController()
+            let hostController = HostController()
             let storyboard = UIStoryboard(name: "Main", bundle: .main)
             let guestLoginVC = storyboard.instantiateViewController(withIdentifier: "guestLoginVC") as! GuestLoginViewController
                 guestLoginVC.eventID = eventInt32
+            guestLoginVC.eventController = eventController
+            guestLoginVC.hostController = hostController
             window?.rootViewController = guestLoginVC
         }
     }
