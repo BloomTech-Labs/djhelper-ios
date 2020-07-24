@@ -33,13 +33,11 @@ class EventController {
                      eventName: String,
                      eventDate: Date,
                      description: String,
-                     type: String,
-                     notes: String) -> Event {
+                     explicit: Bool) -> Event {
             event.name = eventName
             event.eventDate = eventDate
             event.eventDescription = description
-            event.eventType = type
-            event.notes = notes
+            event.isExplicit = explicit
 
         return event
     }
@@ -127,7 +125,7 @@ class EventController {
 
     func update(event: Event, withEventRep eventRep: EventRepresentation) {
         event.name = eventRep.name
-        event.eventType = eventRep.eventType
+        event.isExplicit = eventRep.isExplicit
         event.eventDescription = eventRep.eventDescription
         event.eventDate = eventRep.eventDate.dateFromString()
         event.hostID = eventRep.hostID
@@ -278,9 +276,8 @@ class EventController {
     func updateCoreDataEvent(event: Event, representation: EventRepresentation) {
         event.name = representation.name
         event.eventDescription = representation.eventDescription
-        event.eventType = representation.eventType
+        event.isExplicit = representation.isExplicit
         event.eventDate = representation.eventDate.dateFromString()
-        event.notes = representation.notes
         event.imageURL = representation.imageURL
     }
 
