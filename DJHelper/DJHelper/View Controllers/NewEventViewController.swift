@@ -105,7 +105,7 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
         }
 
         let newEvent = Event(name: eventName,
-                             eventType: "default",
+                             isExplicit: true,
                              eventDescription: eventDescription,
                              eventDate: eventDate,
                              hostID: currentHost.identifier,

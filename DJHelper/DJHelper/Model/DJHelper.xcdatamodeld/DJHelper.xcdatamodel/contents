@@ -4,11 +4,10 @@
         <attribute name="eventDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="eventDescription" optional="YES" attributeType="String"/>
         <attribute name="eventID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="eventType" optional="YES" attributeType="String"/>
         <attribute name="hostID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="URI"/>
+        <attribute name="isExplicit" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="notes" optional="YES" attributeType="String"/>
         <relationship name="host" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Host" inverseName="events" inverseEntity="Host"/>
         <relationship name="songs" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Song" inverseName="event" inverseEntity="Song"/>
     </entity>
@@ -33,7 +32,7 @@
         <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="songs" inverseEntity="Event"/>
     </entity>
     <elements>
-        <element name="Event" positionX="157.0234375" positionY="22.32421875" width="128" height="193"/>
+        <element name="Event" positionX="157.0234375" positionY="22.32421875" width="128" height="178"/>
         <element name="Host" positionX="-45" positionY="0" width="128" height="193"/>
         <element name="Song" positionX="340.79296875" positionY="53.16015625" width="128" height="133"/>
     </elements>

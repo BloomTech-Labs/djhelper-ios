@@ -34,7 +34,6 @@ class EventPageViewController: UIViewController, UISearchBarDelegate {
     // MARK: - IBOutlets
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var eventDescriptionLabel: UILabel!
-    @IBOutlet weak var eventTypeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var eventImage: UIImageView!
@@ -117,13 +116,12 @@ class EventPageViewController: UIViewController, UISearchBarDelegate {
     }
 
     private func updateViews() {
-        guard let event = event, let name = event.name, let description = event.eventDescription, let type = event.eventType else {
+        guard let event = event, let name = event.name, let description = event.eventDescription else {
             print("Error on line: \(#line) in function: \(#function)\n")
             return }
 
         eventNameLabel.text = "Event Name: \(name)"
         eventDescriptionLabel.text = "Description of event: \(description)"
-        eventTypeLabel.text = "Event Type: \(type)"
 
         if let eventDate = event.eventDate {
             dateLabel.text = "Date: \(longDateToString(with: eventDate))"

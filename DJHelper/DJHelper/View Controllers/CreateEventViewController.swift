@@ -26,8 +26,6 @@ class CreateEventViewController: ShiftableViewController {
     @IBOutlet weak var eventNameTextField: UITextField!
     @IBOutlet weak var eventDateTextField: UITextField!
     @IBOutlet weak var descriptionTextField: UITextField!
-    @IBOutlet weak var typeTextField: UITextField!
-    @IBOutlet weak var notesTextField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,9 +63,7 @@ class CreateEventViewController: ShiftableViewController {
             let eventController = eventController,
             let name = eventNameTextField.text, !name.isEmpty,
             let dateString = eventDateTextField.text, !dateString.isEmpty,
-            let description = descriptionTextField.text, !description.isEmpty,
-            let type = typeTextField.text, !type.isEmpty,
-            let notes = notesTextField.text, !notes.isEmpty else { unwrapTextFields() ; return }
+            let description = descriptionTextField.text, !description.isEmpty else { unwrapTextFields() ; return }
 
         if let passedInEvent = event {
 
@@ -82,8 +78,7 @@ class CreateEventViewController: ShiftableViewController {
                                                            eventName: name,
                                                            eventDate: eventDate,
                                                            description: description,
-                                                           type: type,
-                                                           notes: notes)
+                                                           explicit: true)
             self.activityIndicator(activityIndicatorView: activityIndicatorView, shouldStart: true)
             putUpdateEvent(with: updatedEvent, andEventController: eventController)
         } else {
@@ -94,12 +89,11 @@ class CreateEventViewController: ShiftableViewController {
             //            }
 
             let event = Event(name: name,
-                              eventType: type,
+                              isExplicit: true,
                               eventDescription: description,
                               eventDate: eventDate,
                               hostID: currentHost.identifier,
                               imageURL: URL(string: ""),
-                              notes: notes,
                               eventID: nil)
             self.activityIndicator(activityIndicatorView: activityIndicatorView, shouldStart: true)
             authorizeEvent(event, withHost: currentHost, andEventController: eventController)
@@ -113,9 +107,7 @@ class CreateEventViewController: ShiftableViewController {
 
         textFieldArray.append(contentsOf: [eventNameTextField,
                                            descriptionTextField,
-                                           eventDateTextField,
-                                           typeTextField,
-                                           notesTextField])
+                                           eventDateTextField])
 
         for tField in textFieldArray {
             if tField.text == "" && tField.placeholder != nil {
@@ -145,8 +137,6 @@ extension CreateEventViewController {
         descriptionTextField.text = passedInEvent.eventDescription
         eventDate = passedInEvent.eventDate
         eventDateTextField.text = passedInEvent.eventDate?.stringFromDate()
-        typeTextField.text = passedInEvent.eventType
-        notesTextField.text = passedInEvent.notes
     }
 
     // Had to add the following functions because SwiftLint was warning that the SaveEvent button function was longer than 40 lines

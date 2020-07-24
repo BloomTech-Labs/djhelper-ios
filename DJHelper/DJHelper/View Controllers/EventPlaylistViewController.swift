@@ -104,8 +104,10 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
         eventDescriptionLabel.text = event.eventDescription
 
         if let eventDate = event.eventDate {
-            dateLabel.text = longDateToString(with: eventDate)
-            timeLabel.text = timeToString(with: eventDate)
+            let longDate = longDateToString(with: eventDate)
+            let time = timeToString(with: eventDate)
+            dateLabel.textColor = UIColor(named: "PurpleColor")
+            dateLabel.text = String("\(longDate) ▪︎ \(time)")
         }
 
         let buttonTitle = NSMutableAttributedString(string: "\(currentHost.name ?? "EventHost")", attributes: [
@@ -154,7 +156,7 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
 
     func longDateToString(with date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "EEEE, MMM d, yyyy"
+        formatter.dateFormat = "EEE, MMM d, yyyy"
         return formatter.string(from: date)
     }
 
