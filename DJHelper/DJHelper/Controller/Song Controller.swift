@@ -116,7 +116,7 @@ class SongController {
 
     // MARK: - Search for Song
     func searchForSong(withSearchTerm search: String, completion: @escaping(Result<[SongRepresentation], SongError>) -> Void) {
-        let url = baseURL.appendingPathComponent("playlist").appendingPathComponent("\(event.eventID)")
+        let url = baseURL.appendingPathComponent("track").appendingPathComponent("\(search)")
         let urlRequest = URLRequest(url: url)
 
         dataLoader.loadData(from: urlRequest) { possibleData, possibleResponse, possibleError in
