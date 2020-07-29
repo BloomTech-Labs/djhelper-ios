@@ -18,6 +18,8 @@
 		1BA4A8C82486858D002A67E2 /* HelperExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA4A8C72486858D002A67E2 /* HelperExtensions.swift */; };
 		1BDBE284248508FC006DE77E /* HostRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDBE283248508FC006DE77E /* HostRegistration.swift */; };
 		1BDBE28624850CF3006DE77E /* HostRegistrationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDBE28524850CF3006DE77E /* HostRegistrationResponse.swift */; };
+		4415FFA924CF721700538ECE /* LogoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4415FFA824CF721700538ECE /* LogoController.swift */; };
+		4415FFAB24CF7BBB00538ECE /* SplashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4415FFAA24CF7BBB00538ECE /* SplashScreenViewController.swift */; };
 		441CB84D2498500D00637CC0 /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441CB84C2498500D00637CC0 /* EventTests.swift */; };
 		441CB84F2499CE1E00637CC0 /* GuestLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441CB84E2499CE1E00637CC0 /* GuestLoginViewController.swift */; };
 		44214DE5248D6FF500D63B6A /* DJHelperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DE3248D676600D63B6A /* DJHelperUITests.swift */; };
@@ -83,6 +85,8 @@
 		1BA4A8C72486858D002A67E2 /* HelperExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperExtensions.swift; sourceTree = "<group>"; };
 		1BDBE283248508FC006DE77E /* HostRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRegistration.swift; sourceTree = "<group>"; };
 		1BDBE28524850CF3006DE77E /* HostRegistrationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRegistrationResponse.swift; sourceTree = "<group>"; };
+		4415FFA824CF721700538ECE /* LogoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoController.swift; sourceTree = "<group>"; };
+		4415FFAA24CF7BBB00538ECE /* SplashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		441CB84C2498500D00637CC0 /* EventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
 		441CB84E2499CE1E00637CC0 /* GuestLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestLoginViewController.swift; sourceTree = "<group>"; };
 		44214DD8248D673800D63B6A /* DJHelperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DJHelperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -285,6 +289,8 @@
 				447F53BF2476315200F706F1 /* DJHelper.xcdatamodeld */,
 				447F53C2247634EE00F706F1 /* CoreDataStack.swift */,
 				4446F7D9247DCAD8005ACE10 /* Bearer.swift */,
+				4415FFA824CF721700538ECE /* LogoController.swift */,
+				4415FFAA24CF7BBB00538ECE /* SplashScreenViewController.swift */,
 				1BA4A8BD2485B956002A67E2 /* Event Model */,
 				1BA4A8B92485B004002A67E2 /* Host Model */,
 				44352AC524B770A700E449F2 /* Song Model */,
@@ -553,6 +559,7 @@
 				1BA4A8B8248586B9002A67E2 /* EventRepresentation.swift in Sources */,
 				1BDBE28624850CF3006DE77E /* HostRegistrationResponse.swift in Sources */,
 				4446F7D8247DC67E005ACE10 /* HostController.swift in Sources */,
+				4415FFA924CF721700538ECE /* LogoController.swift in Sources */,
 				449380522485A15D004C96F7 /* HostEventsTableViewController.swift in Sources */,
 				4446F7D4247DC3BB005ACE10 /* Event+Convenience.swift in Sources */,
 				1BA4A8B4248577B1002A67E2 /* HostLogin.swift in Sources */,
@@ -575,6 +582,7 @@
 				4446F8272480D792005ACE10 /* DJRegisterViewController.swift in Sources */,
 				4446F79B247638F9005ACE10 /* NetworkDataLoader.swift in Sources */,
 				447F53C12476315200F706F1 /* DJHelper.xcdatamodeld in Sources */,
+				4415FFAB24CF7BBB00538ECE /* SplashScreenViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

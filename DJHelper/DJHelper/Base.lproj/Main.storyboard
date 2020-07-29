@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9du-3N-F1H">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jam-db-qLF">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -8,6 +8,83 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Splash Screen View Controller-->
+        <scene sceneID="oYF-UP-BI9">
+            <objects>
+                <viewController id="jam-db-qLF" customClass="SplashScreenViewController" customModule="DJHelper" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YhG-DJ-LuO">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="nTJ-Fq-Fwi">
+                                <rect key="frame" x="50" y="94" width="176" height="200"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LhD-hv-yhV" customClass="LogoView" customModule="DJHelper" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="32" height="200"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="32" id="Rek-b0-YqX"/>
+                                            <constraint firstAttribute="height" constant="200" id="vUV-Vz-7xs"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                <color key="value" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L34-cz-YU7" customClass="LogoView" customModule="DJHelper" customModuleProvider="target">
+                                        <rect key="frame" x="48" y="0.0" width="32" height="200"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="6Iw-JS-IKg"/>
+                                            <constraint firstAttribute="width" constant="32" id="fea-yQ-p6Z"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                <color key="value" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kMd-KL-Fgh" customClass="LogoView" customModule="DJHelper" customModuleProvider="target">
+                                        <rect key="frame" x="96" y="0.0" width="32" height="200"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="s0x-p3-p4Q"/>
+                                            <constraint firstAttribute="width" constant="32" id="z4H-4I-Dcn"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                <color key="value" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bW9-Jg-22z" customClass="LogoView" customModule="DJHelper" customModuleProvider="target">
+                                        <rect key="frame" x="144" y="0.0" width="32" height="200"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="32" id="ILP-LV-84h"/>
+                                            <constraint firstAttribute="height" constant="200" id="Se2-cj-kAJ"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                <color key="value" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="Auu-oI-RbC"/>
+                                    <constraint firstAttribute="width" constant="176" id="L2R-IU-2Ub"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Aaw-Ah-mbo"/>
+                    </view>
+                    <connections>
+                        <outlet property="eqStackView" destination="nTJ-Fq-Fwi" id="ccy-i3-6Sw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7eZ-EB-ALX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1094.2028985507247" y="892.63392857142856"/>
+        </scene>
         <!--Register View Controller-->
         <scene sceneID="WSZ-g5-4DZ">
             <objects>
