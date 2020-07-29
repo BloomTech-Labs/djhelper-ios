@@ -9,6 +9,17 @@
 import Foundation
 import CoreData
 
+enum SongError: Error {
+    case authorizationError(Error)
+    case noDataError
+    case encodeError(Error)
+    case decodeError(Error)
+    case errorUpdatingEventOnServer(Error)
+    case otherError(Error)
+    case noEventsInServerOrCoreData
+    case couldNotInitializeAnEvent
+}
+
 class SongController {
     private let baseURL = URL(string: "https://dj-helper-be.herokuapp.com/api")!
     let dataLoader: NetworkDataLoader
@@ -104,6 +115,45 @@ class SongController {
     }
 
     // MARK: - Search for Song
+    func searchForSong(withSearchTerm search: String, completion: @escaping(Result<[SongRepresentation], SongError>) -> Void) {
+        let url = baseURL.appendingPathComponent("playlist").appendingPathComponent("\(event.eventID)")
+        let urlRequest = URLRequest(url: url)
+
+        dataLoader.loadData(from: urlRequest) { possibleData, possibleResponse, possibleError in
+            if let response = possibleResponse as? HTTPURLResponse {
+                print("HTTPResponse: \(response.statusCode) in function: \(#function)")
+            }
+
+            if let error = possibleError {
+                print("""
+                    Error: \(error.localizedDescription) on line \(#line)
+                    in function: \(#function)\nTechnical error: \(error)
+                    """)
+                completion(.failure(.otherError(error)))
+                return
+            }
+
+            guard let data = possibleData else {
+                print("Error on line: \(#line) in function: \(#function)")
+                completion(.failure(.noDataError))
+                return
+            }
+
+            let decoder = JSONDecoder()
+            do {
+                let songRepresentationArray = try decoder.decode([SongRepresentation].self,
+                                                                 from: data)
+                completion(.success(songRepresentationArray))
+            } catch {
+                print("""
+                    Error on line: \(#line) in function \(#function)
+                    Readable error: \(error.localizedDescription)\nTechnical error:
+                    \(error)
+                    """)
+                completion(.failure(.decodeError(error)))
+            }
+        }
+    }
 
     // MARK: - Add Song to Playlist
 

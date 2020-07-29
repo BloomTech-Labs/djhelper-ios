@@ -10,6 +10,8 @@ import Foundation
 
 struct SongRepresentation: Codable {
     var artist: String
+    var explicit: Bool
+    var externalURL: URL
     var songID: Int
     var songName: String
 }

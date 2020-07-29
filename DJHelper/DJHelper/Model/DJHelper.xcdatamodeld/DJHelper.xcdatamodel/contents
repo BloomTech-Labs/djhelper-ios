@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19G73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Event" representedClassName="Event" syncable="YES" codeGenerationType="class">
         <attribute name="eventDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="eventDescription" optional="YES" attributeType="String"/>
@@ -25,15 +25,18 @@
     </entity>
     <entity name="Song" representedClassName="Song" syncable="YES" codeGenerationType="class">
         <attribute name="artist" attributeType="String"/>
+        <attribute name="explicit" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="externalURL" optional="YES" attributeType="URI"/>
         <attribute name="inSetList" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="songID" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="songName" attributeType="String"/>
         <attribute name="upVotes" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="voted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="songs" inverseEntity="Event"/>
     </entity>
     <elements>
         <element name="Event" positionX="157.0234375" positionY="22.32421875" width="128" height="178"/>
         <element name="Host" positionX="-45" positionY="0" width="128" height="193"/>
-        <element name="Song" positionX="340.79296875" positionY="53.16015625" width="128" height="133"/>
+        <element name="Song" positionX="340.79296875" positionY="53.16015625" width="128" height="178"/>
     </elements>
 </model>
