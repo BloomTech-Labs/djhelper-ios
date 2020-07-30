@@ -58,8 +58,8 @@ class HostController {
             let decoder = JSONDecoder()
 
             do {
-                let printableData = String(data: data, encoding: .utf8)
-                print(printableData)
+//                let printableData = String(data: data, encoding: .utf8)
+//                print(printableData)
                 let hostRepArray = try decoder.decode([HostRepresentation].self, from: data)
                 let hostArray: [Host] = hostRepArray.compactMap { Host(hostRepresnetation: $0) }
                 completion(.success(hostArray))
