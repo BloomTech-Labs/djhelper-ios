@@ -11,24 +11,13 @@ import CoreData
 
 extension Song {
 
-    enum CodingKeys: String, CodingKey {
-        case artist = "artist_name"
-        case explicit
-        case externalURL = "external_urls"
-        case inSetList
-        case songID = "id"
-        case songName = "song_name"
-        case upVotes
-        case voted
-    }
-
     var songRepresentation: SongRepresentation? {
         guard let artist = artist,
             let songName = songName else { return nil }
         return SongRepresentation(artist: artist,
                                   explicit: explicit,
                                   externalURL: (externalURL ?? URL(string: ""))!,
-                                  songID: Int(songID),
+                                  songID: songID ?? "",
                                   songName: songName)
     }
 
@@ -36,7 +25,7 @@ extension Song {
                                         explicit: Bool = true,
                                         externalURL: URL,
                                         inSetList: Bool = false,
-                                        songID: Int?,
+                                        songID: String?,
                                         songName: String,
                                         upVotes: Int = 0,
                                         context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
@@ -45,7 +34,7 @@ extension Song {
         self.explicit = explicit
         self.externalURL = externalURL
     self.inSetList = inSetList
-    self.songID = Int32(songID ?? 0)
+    self.songID = songID ?? ""
     self.songName = songName
     self.upVotes = Int32(upVotes)
     }

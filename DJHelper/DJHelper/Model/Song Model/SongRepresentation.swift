@@ -9,9 +9,18 @@
 import Foundation
 
 struct SongRepresentation: Codable {
+
+    enum CodingKeys: String, CodingKey {
+        case artist = "artist_name"
+        case explicit
+        case externalURL = "external_urls"
+        case songID = "id"
+        case songName = "song_name"
+    }
+    
     var artist: String
     var explicit: Bool
     var externalURL: URL
-    var songID: Int
+    var songID: String
     var songName: String
 }

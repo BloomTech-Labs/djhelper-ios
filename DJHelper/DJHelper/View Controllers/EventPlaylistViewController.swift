@@ -27,6 +27,7 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
     var isGuest: Bool = false
     var requestedSongs: [Song] = []
     var setListedSongs: [Song] = []
+    var myAlert = CustomAlert()
     private let refreshControl = UIRefreshControl()
 
     // MARK: - Outlets
@@ -150,9 +151,32 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
         }
     }
 
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        // code to search for song
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchTerm = searchBar.text,
+            searchTerm != "" else { return }
+        songController.searchForSong(withSearchTerm: searchTerm) { (results) in
+            switch results {
+            case let .success(songResults):
+                print(songResults)
+            case .failure:
+                DispatchQueue.main.async {
+                    self.myAlert.showAlert(with: "No songs fetched", message: "There we no songs found with that search description.", on: self)
+                }
+            }
+        }
     }
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        songController.searchForSong(withSearchTerm: searchText) { (results) in
+//            switch results {
+//            case let .success(songResults):
+//                print(songResults)
+//            case .failure:
+//                DispatchQueue.main.async {
+//                    self.myAlert.showAlert(with: "No songs fetched", message: "There we no songs found with that search description.", on: self)
+//                }
+//            }
+//        }
+//    }
 
     func longDateToString(with date: Date) -> String {
         let formatter = DateFormatter()

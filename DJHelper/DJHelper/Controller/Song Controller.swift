@@ -141,8 +141,8 @@ class SongController {
 
             let decoder = JSONDecoder()
             do {
-                let songRepresentationArray = try decoder.decode([SongRepresentation].self,
-                                                                 from: data)
+                let songRepresentationArray = Array(try decoder.decode([String: SongRepresentation].self,
+                    from: data).values)
                 completion(.success(songRepresentationArray))
             } catch {
                 print("""
