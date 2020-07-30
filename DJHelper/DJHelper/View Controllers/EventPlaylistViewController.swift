@@ -13,6 +13,7 @@ import CoreData
 enum SongState {
     case requested
     case setListed
+    case searched
 }
 
 class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
@@ -27,6 +28,7 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
     var isGuest: Bool = false
     var requestedSongs: [Song] = []
     var setListedSongs: [Song] = []
+    var searchResults: [Song] = []
     var myAlert = CustomAlert()
     private let refreshControl = UIRefreshControl()
 
@@ -125,7 +127,7 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
                 switch self.currentSongState {
                 case .requested:
                     return UIColor(named: "PurpleColor")!
-                case .setListed:
+                default:
                     return UIColor(named: "customTextColor")!
                 }
             }()
@@ -135,10 +137,10 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
             NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 18)!,
             NSAttributedString.Key.foregroundColor: {
                 switch self.currentSongState {
-                case .requested:
-                    return UIColor(named: "customTextColor")!
                 case .setListed:
                     return UIColor(named: "PurpleColor")!
+                default:
+                    return UIColor(named: "customTextColor")!
                 }
             }()
         ])
@@ -197,19 +199,25 @@ extension EventPlaylistViewController: UITableViewDataSource {
             return requestedSongs.count
         case .setListed:
             return setListedSongs.count
+        case .searched:
+            return searchResults.count
         }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as? SongDetailTableViewCell else { return UITableViewCell() }
 
         switch currentSongState {
         case .requested:
             let song = requestedSongs[indexPath.row]
+            cell.song = song
         case .setListed:
             let song = setListedSongs[indexPath.row]
+            cell.song = song
+        case .searched:
+            let song = searchResults[indexPath.row]
+            cell.song = song
         }
-        // Create custom cell Swift file and pass song into the cell
 
         return cell
     }
