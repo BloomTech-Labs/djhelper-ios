@@ -10,12 +10,20 @@ import UIKit
 
 class HostEventViewController: UIViewController {
 
+    @IBOutlet weak var upcomingShowsCollectionView: UICollectionView!
+    @IBOutlet weak var hostingEventCollectionView: UICollectionView!
+    @IBOutlet weak var pastEventsCollectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setDataSourceForCollectionViews()
     }
     
+    private func setDataSourceForCollectionViews() {
+        upcomingShowsCollectionView.dataSource = self
+        hostingEventCollectionView.dataSource = self
+        pastEventsCollectionView.dataSource = self
+    }
 
     /*
     // MARK: - Navigation
@@ -27,4 +35,18 @@ class HostEventViewController: UIViewController {
     }
     */
 
+}
+
+extension HostEventViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 40
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        var cell: UICollectionViewCell?
+        
+        return cell!
+    }
+    
+    
 }
