@@ -13,6 +13,7 @@
 		1B71118C24D2A35C00BF4256 /* EventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B71118B24D2A35C00BF4256 /* EventView.xib */; };
 		1B71118E24D2A48000BF4256 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B71118D24D2A48000BF4256 /* EventView.swift */; };
 		1B71119024D2A6E400BF4256 /* HostEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B71118F24D2A6E400BF4256 /* HostEventViewController.swift */; };
+		1B71119224D2A94D00BF4256 /* HostEventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B71119124D2A94D00BF4256 /* HostEventCollectionViewCell.swift */; };
 		1BA4A8B4248577B1002A67E2 /* HostLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA4A8B3248577B1002A67E2 /* HostLogin.swift */; };
 		1BA4A8B6248577F4002A67E2 /* HostLoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA4A8B5248577F4002A67E2 /* HostLoginResponse.swift */; };
 		1BA4A8B8248586B9002A67E2 /* EventRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA4A8B7248586B9002A67E2 /* EventRepresentation.swift */; };
@@ -82,6 +83,7 @@
 		1B71118B24D2A35C00BF4256 /* EventView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventView.xib; sourceTree = "<group>"; };
 		1B71118D24D2A48000BF4256 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		1B71118F24D2A6E400BF4256 /* HostEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HostEventViewController.swift; path = DJHelper/HostEventViewController.swift; sourceTree = SOURCE_ROOT; };
+		1B71119124D2A94D00BF4256 /* HostEventCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HostEventCollectionViewCell.swift; path = DJHelper/HostEventCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		1BA4A8B3248577B1002A67E2 /* HostLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostLogin.swift; sourceTree = "<group>"; };
 		1BA4A8B5248577F4002A67E2 /* HostLoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostLoginResponse.swift; sourceTree = "<group>"; };
 		1BA4A8B7248586B9002A67E2 /* EventRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRepresentation.swift; sourceTree = "<group>"; };
@@ -391,6 +393,7 @@
 		44A025BE24D25A1A00BFB762 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1B71119124D2A94D00BF4256 /* HostEventCollectionViewCell.swift */,
 				44A025BC24D25A0500BFB762 /* SongDetailTableViewCell.swift */,
 			);
 			path = Views;
@@ -589,6 +592,7 @@
 				4446F8252480CD32005ACE10 /* DJLoginViewController.swift in Sources */,
 				1BA4A8C22485C152002A67E2 /* EventController.swift in Sources */,
 				1B71119024D2A6E400BF4256 /* HostEventViewController.swift in Sources */,
+				1B71119224D2A94D00BF4256 /* HostEventCollectionViewCell.swift in Sources */,
 				4446F799247638D4005ACE10 /* HTTPMethod.swift in Sources */,
 				441CB84F2499CE1E00637CC0 /* GuestLoginViewController.swift in Sources */,
 				1BA4A8C42485F27A002A67E2 /* EventAuthRequest.swift in Sources */,
