@@ -1225,6 +1225,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Bcf-4y-iix"/>
                     </view>
+                    <connections>
+                        <outlet property="hostingEventCollectionView" destination="Csd-fC-PJF" id="HWC-7g-KiR"/>
+                        <outlet property="pastEventsCollectionView" destination="0HF-hp-tYh" id="4m0-QK-4KP"/>
+                        <outlet property="upcomingShowsCollectionView" destination="zGu-7m-Z13" id="Rcf-mW-1Ws"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="obh-MW-uzP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
