@@ -1082,15 +1082,15 @@
             </objects>
             <point key="canvasLocation" x="1362.3188405797102" y="-389.0625"/>
         </scene>
-        <!--View Controller-->
+        <!--Host Event View Controller-->
         <scene sceneID="WeG-HX-Qtn">
             <objects>
-                <viewController id="KS7-vC-bQD" sceneMemberID="viewController">
+                <viewController id="KS7-vC-bQD" customClass="HostEventViewController" customModule="DJHelper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8mY-4i-P0F">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5v-jO-vPp">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5v-jO-vPp" customClass="EventView" customModule="DJHelper" customModuleProvider="target">
                                 <rect key="frame" x="20" y="103.5" width="330" height="153"/>
                                 <color key="backgroundColor" systemColor="systemGray4Color" red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -1118,7 +1118,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="200" height="130"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0hc-ip-aeZ">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0hc-ip-aeZ" customClass="EventView" customModule="DJHelper" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="200" height="130"/>
                                                             <color key="backgroundColor" systemColor="systemGray4Color" red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </view>
@@ -1150,7 +1150,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="200" height="130"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4VC-Yt-mfV">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4VC-Yt-mfV" customClass="EventView" customModule="DJHelper" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="200" height="130"/>
                                                             <color key="backgroundColor" systemColor="systemGray4Color" red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </view>
@@ -1182,7 +1182,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="200" height="130"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MfR-2Z-Vaf">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MfR-2Z-Vaf" customClass="EventView" customModule="DJHelper" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="200" height="130"/>
                                                             <color key="backgroundColor" systemColor="systemGray3Color" red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </view>
