@@ -1126,6 +1126,9 @@
                                                         <constraint firstItem="0hc-ip-aeZ" firstAttribute="leading" secondItem="ova-7P-SV1" secondAttribute="leading" id="hs8-Bh-KMc"/>
                                                     </constraints>
                                                 </collectionViewCellContentView>
+                                                <connections>
+                                                    <outlet property="cellView" destination="0hc-ip-aeZ" id="PMX-f2-IaK"/>
+                                                </connections>
                                             </collectionViewCell>
                                         </cells>
                                     </collectionView>
