@@ -48,6 +48,7 @@
 		447F53C3247634EE00F706F1 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F53C2247634EE00F706F1 /* CoreDataStack.swift */; };
 		449380522485A15D004C96F7 /* HostEventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449380512485A15D004C96F7 /* HostEventsTableViewController.swift */; };
 		449380682486F255004C96F7 /* DJHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449380672486F255004C96F7 /* DJHelperTests.swift */; };
+		44A025BD24D25A0500BFB762 /* SongDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A025BC24D25A0500BFB762 /* SongDetailTableViewCell.swift */; };
 		44BA393A24BF9FAA009E1680 /* Song Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA393924BF9FAA009E1680 /* Song Controller.swift */; };
 		44F48900249BF4E800B2646C /* NewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F488FE249BF4E800B2646C /* NewEventViewController.swift */; };
 		44F48901249BF4E800B2646C /* Slide.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44F488FF249BF4E800B2646C /* Slide.xib */; };
@@ -119,6 +120,7 @@
 		449380652486F255004C96F7 /* DJHelperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DJHelperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		449380672486F255004C96F7 /* DJHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJHelperTests.swift; sourceTree = "<group>"; };
 		449380692486F255004C96F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		44A025BC24D25A0500BFB762 /* SongDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SongDetailTableViewCell.swift; path = DJHelper/Views/SongDetailTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		44BA393924BF9FAA009E1680 /* Song Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Song Controller.swift"; sourceTree = "<group>"; };
 		44F488FE249BF4E800B2646C /* NewEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventViewController.swift; sourceTree = "<group>"; };
 		44F488FF249BF4E800B2646C /* Slide.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Slide.xib; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 				4446F79F24763969005ACE10 /* Model */,
 				44BA393824BF9F93009E1680 /* Controller */,
 				4446F79E24763959005ACE10 /* Networking */,
+				44A025BE24D25A1A00BFB762 /* Views */,
 				4446F7A02476397B005ACE10 /* View Controllers */,
 				44214DF22491953C00D63B6A /* Helpers */,
 				447F537F2475805E00F706F1 /* Main.storyboard */,
@@ -366,6 +369,14 @@
 				449380692486F255004C96F7 /* Info.plist */,
 			);
 			path = DJHelperTests;
+			sourceTree = "<group>";
+		};
+		44A025BE24D25A1A00BFB762 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				44A025BC24D25A0500BFB762 /* SongDetailTableViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		44BA393824BF9F93009E1680 /* Controller */ = {
@@ -562,6 +573,7 @@
 				4446F799247638D4005ACE10 /* HTTPMethod.swift in Sources */,
 				441CB84F2499CE1E00637CC0 /* GuestLoginViewController.swift in Sources */,
 				1BA4A8C42485F27A002A67E2 /* EventAuthRequest.swift in Sources */,
+				44A025BD24D25A0500BFB762 /* SongDetailTableViewCell.swift in Sources */,
 				447F537A2475805E00F706F1 /* AppDelegate.swift in Sources */,
 				44214DEF249125BF00D63B6A /* HostUpdate.swift in Sources */,
 				1B3D9BBD24931BA800E8625C /* EventPageViewController.swift in Sources */,

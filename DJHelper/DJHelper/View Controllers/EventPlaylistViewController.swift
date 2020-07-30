@@ -165,18 +165,6 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
             }
         }
     }
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        songController.searchForSong(withSearchTerm: searchText) { (results) in
-//            switch results {
-//            case let .success(songResults):
-//                print(songResults)
-//            case .failure:
-//                DispatchQueue.main.async {
-//                    self.myAlert.showAlert(with: "No songs fetched", message: "There we no songs found with that search description.", on: self)
-//                }
-//            }
-//        }
-//    }
 
     func longDateToString(with date: Date) -> String {
         let formatter = DateFormatter()
@@ -226,19 +214,3 @@ extension EventPlaylistViewController: UITableViewDataSource {
         return cell
     }
 }
-
-// this was added to test the playlist view controller with mock song data
-//        let moc = CoreDataStack.shared.mainContext
-//        moc.performAndWait {
-//
-//            let song1 = Song(artist: "song1 Artist", songID: 1111111, songName: "song1 Name")
-//            let song2 = Song(artist: "song2 Artist", songID: 2222222, songName: "song2 Name")
-//            let song3 = Song(artist: "song3 Artist", songID: 3333333, songName: "song3 Name")
-//            let event456 = Event(name: "mock event", eventType: "test", eventDescription: "test of playlist", eventDate: Date(), hostID: 30, eventID: 456)
-//            song1.addToEvents(event456)
-//            song2.addToEvents(event456)
-//            song3.addToEvents(event456)
-//            do {
-//                try? CoreDataStack.shared.save()
-//            }
-//        }
