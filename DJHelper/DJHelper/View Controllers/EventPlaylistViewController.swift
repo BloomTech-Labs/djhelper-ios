@@ -159,7 +159,14 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
         songController.searchForSong(withSearchTerm: searchTerm) { (results) in
             switch results {
             case let .success(songResults):
-                print(songResults)
+                DispatchQueue.main.async {
+                    for song in songResults {
+                        let newSong = Song(artist: song.artist, externalURL: song.externalURL, songID: Int.random(in: 1...50000), songName: song.songName)
+                        self.searchResults.append(newSong)
+                    }
+                    self.currentSongState = .searched
+                    self.tableView.reloadData()
+                }
             case .failure:
                 DispatchQueue.main.async {
                     self.myAlert.showAlert(with: "No songs fetched", message: "There we no songs found with that search description.", on: self)

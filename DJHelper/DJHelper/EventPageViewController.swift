@@ -173,6 +173,8 @@ extension EventPageViewController: UITableViewDataSource {
             return requestedSongs.count
         case .setListed:
             return setListedSongs.count
+        default:
+            return 1  // FIXME
         }
     }
 
@@ -184,6 +186,8 @@ extension EventPageViewController: UITableViewDataSource {
             let song = requestedSongs[indexPath.row]
         case .setListed:
             let song = setListedSongs[indexPath.row]
+        default:   // FIXME
+            break
         }
         // Create custom cell Swift file and pass song into the cell
 
