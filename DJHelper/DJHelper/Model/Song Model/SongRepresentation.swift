@@ -14,13 +14,13 @@ struct SongRepresentation: Codable {
         case artist = "artist_name"
         case explicit
         case externalURL = "external_urls"
-        case songID = "id"
+        case songId = "id"
         case songName = "song_name"
     }
 
     var artist: String
     var explicit: Bool
     var externalURL: URL
-    var songID: String
+    var songId: String
     var songName: String
 }

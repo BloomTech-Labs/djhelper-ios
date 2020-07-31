@@ -161,7 +161,7 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
             case let .success(songResults):
                 DispatchQueue.main.async {
                     for song in songResults {
-                        let newSong = Song(artist: song.artist, externalURL: song.externalURL, songID: Int.random(in: 1...50000), songName: song.songName)
+                        let newSong = Song(artist: song.artist, externalURL: song.externalURL, songId: song.songId, songName: song.songName)
                         self.searchResults.append(newSong)
                     }
                     self.currentSongState = .searched
