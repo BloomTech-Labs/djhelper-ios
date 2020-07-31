@@ -17,7 +17,7 @@ extension Song {
         return SongRepresentation(artist: artist,
                                   explicit: explicit,
                                   externalURL: (externalURL ?? URL(string: ""))!,
-                                  songId: String("\(songId)"),
+                                  songId: songId ?? "",
                                   songName: songName)
     }
 
