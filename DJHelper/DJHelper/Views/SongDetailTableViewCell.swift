@@ -10,6 +10,16 @@ import UIKit
 
 class SongDetailTableViewCell: UITableViewCell {
 
+    var song: Song? {
+        didSet {
+            updateViews()
+        }
+    }
+
+    @IBOutlet var songLabel: UILabel!
+    @IBOutlet var artistLabel: UILabel!
+
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,4 +31,10 @@ class SongDetailTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    func updateViews() {
+        guard let song = song else { return }
+
+        songLabel.text = song.songName
+        artistLabel.text = song.artist
+    }
 }

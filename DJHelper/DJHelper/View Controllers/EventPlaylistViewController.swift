@@ -13,6 +13,7 @@ import CoreData
 enum SongState {
     case requested
     case setListed
+    case searched
 }
 
 class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
@@ -27,6 +28,7 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
     var isGuest: Bool = false
     var requestedSongs: [Song] = []
     var setListedSongs: [Song] = []
+    var searchResults: [Song] = []
     var myAlert = CustomAlert()
     private let refreshControl = UIRefreshControl()
 
@@ -125,7 +127,7 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
                 switch self.currentSongState {
                 case .requested:
                     return UIColor(named: "PurpleColor")!
-                case .setListed:
+                default:
                     return UIColor(named: "customTextColor")!
                 }
             }()
@@ -135,10 +137,10 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
             NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 18)!,
             NSAttributedString.Key.foregroundColor: {
                 switch self.currentSongState {
-                case .requested:
-                    return UIColor(named: "customTextColor")!
                 case .setListed:
                     return UIColor(named: "PurpleColor")!
+                default:
+                    return UIColor(named: "customTextColor")!
                 }
             }()
         ])
@@ -157,7 +159,14 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
         songController.searchForSong(withSearchTerm: searchTerm) { (results) in
             switch results {
             case let .success(songResults):
-                print(songResults)
+                DispatchQueue.main.async {
+                    for song in songResults {
+                        let newSong = Song(artist: song.artist, externalURL: song.externalURL, songId: song.songId, songName: song.songName)
+                        self.searchResults.append(newSong)
+                    }
+                    self.currentSongState = .searched
+                    self.tableView.reloadData()
+                }
             case .failure:
                 DispatchQueue.main.async {
                     self.myAlert.showAlert(with: "No songs fetched", message: "There we no songs found with that search description.", on: self)
@@ -197,19 +206,25 @@ extension EventPlaylistViewController: UITableViewDataSource {
             return requestedSongs.count
         case .setListed:
             return setListedSongs.count
+        case .searched:
+            return searchResults.count
         }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as? SongDetailTableViewCell else { return UITableViewCell() }
 
         switch currentSongState {
         case .requested:
             let song = requestedSongs[indexPath.row]
+            cell.song = song
         case .setListed:
             let song = setListedSongs[indexPath.row]
+            cell.song = song
+        case .searched:
+            let song = searchResults[indexPath.row]
+            cell.song = song
         }
-        // Create custom cell Swift file and pass song into the cell
 
         return cell
     }

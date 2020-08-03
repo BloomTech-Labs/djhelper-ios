@@ -17,7 +17,7 @@ extension Song {
         return SongRepresentation(artist: artist,
                                   explicit: explicit,
                                   externalURL: (externalURL ?? URL(string: ""))!,
-                                  songID: songID ?? "",
+                                  songId: songId ?? "",
                                   songName: songName)
     }
 
@@ -25,7 +25,7 @@ extension Song {
                                         explicit: Bool = true,
                                         externalURL: URL,
                                         inSetList: Bool = false,
-                                        songID: String?,
+                                        songId: String?,
                                         songName: String,
                                         upVotes: Int = 0,
                                         context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
@@ -34,7 +34,7 @@ extension Song {
         self.explicit = explicit
         self.externalURL = externalURL
     self.inSetList = inSetList
-    self.songID = songID ?? ""
+    self.songId = songId
     self.songName = songName
     self.upVotes = Int32(upVotes)
     }
@@ -45,7 +45,7 @@ extension Song {
         self.init(artist: songRepresentation.artist,
                   explicit: songRepresentation.explicit,
                   externalURL: songRepresentation.externalURL,
-                  songID: songRepresentation.songID,
+                  songId: songRepresentation.songId,  // FIXME
                   songName: songRepresentation.songName)
     }
 }
