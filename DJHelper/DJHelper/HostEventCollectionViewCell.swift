@@ -9,6 +9,5 @@
 import UIKit
 
 class HostEventCollectionViewCell: UICollectionViewCell {
-    
     @IBOutlet weak var cellView: EventView!
 }
