@@ -7,9 +7,16 @@
 //
 
 import UIKit
+import CoreData
 
 class HostEventViewController: UIViewController {
-
+    var currentHost: Host?
+    var eventController: EventController?
+    let todaysDate = Date().stringFromDate()
+    var eventsHappeningNow: [Event]!
+    var upcomingEvents: [Event]!
+    var pastEvents: [Event]!
+    
     @IBOutlet weak var upcomingShowsCollectionView: UICollectionView!
     @IBOutlet weak var hostingEventCollectionView: UICollectionView!
     @IBOutlet weak var pastEventsCollectionView: UICollectionView!
@@ -17,6 +24,7 @@ class HostEventViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setDataSourceForCollectionViews()
+        sortEvents(events: fetchRequest())
     }
     
     private func setDataSourceForCollectionViews() {
@@ -24,7 +32,35 @@ class HostEventViewController: UIViewController {
         hostingEventCollectionView.dataSource = self
         pastEventsCollectionView.dataSource = self
     }
+    private func fetchEventsCurrentHostCreated() {
+        guard let passedInHost = currentHost, let eventController = eventController else {
+            print("Error on line: \(#line) in function: \(#function)\n")
+            return
+        }
+    }
+    
+    private func fetchRequest() -> [Event] {
+        let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
+        var events: [Event]?
+        do {
+             events = try CoreDataStack.shared.mainContext.fetch(fetchRequest)
+        } catch  {
+            print("""
+                Error on line: \(#line) in function: \(#function)\n
+                Readable error: \(error.localizedDescription)\n Technical error: \(error)
+                """)
+            events = []
+        }
+        return events ?? []
+    }
+    
+    private func sortEvents(events: [Event]) {
+        eventsHappeningNow = events.filter { $0.eventDate == Date() }
 
+        pastEvents = events.filter { $0.eventDate! < Date() }
+
+        upcomingEvents = events.filter { $0.eventDate! > Date() }
+    }
     /*
     // MARK: - Navigation
 

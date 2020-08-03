@@ -152,7 +152,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ejy-vK-cKC">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EventCell" textLabel="Ubi-TV-b6a" detailTextLabel="VEc-uI-z2q" style="IBUITableViewCellStyleSubtitle" id="WLv-8s-4Yt">
@@ -515,11 +515,11 @@
             <objects>
                 <viewController id="fbD-kp-YIW" customClass="CreateEventViewController" customModule="DJHelper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BfY-sZ-rRI">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="UZx-FJ-ymN">
-                                <rect key="frame" x="16" y="104" width="382" height="144"/>
+                                <rect key="frame" x="16" y="16" width="382" height="144"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gWg-GV-JMQ">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="34"/>
@@ -1087,7 +1087,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5v-jO-vPp" customClass="EventView" customModule="DJHelper" customModuleProvider="target">
-                                <rect key="frame" x="20" y="103.5" width="330" height="153"/>
+                                <rect key="frame" x="20" y="110" width="330" height="153"/>
                                 <color key="backgroundColor" systemColor="systemGray4Color" red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="153" id="7ZS-vh-dze"/>
@@ -1095,10 +1095,10 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="g7Y-bd-Fsr">
-                                <rect key="frame" x="16" y="293.5" width="382" height="552.5"/>
+                                <rect key="frame" x="16" y="300" width="382" height="497"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zGu-7m-Z13">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="173.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="155"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Rdp-Or-Ypw">
                                             <size key="itemSize" width="200" height="130"/>
@@ -1108,7 +1108,7 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="upcomingShowCell" id="ekr-0P-x0A" customClass="HostEventCollectionViewCell" customModule="DJHelper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="22" width="200" height="130"/>
+                                                <rect key="frame" x="0.0" y="12.5" width="200" height="130"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ova-7P-SV1">
                                                     <rect key="frame" x="0.0" y="0.0" width="200" height="130"/>
@@ -1133,7 +1133,7 @@
                                         </cells>
                                     </collectionView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Csd-fC-PJF">
-                                        <rect key="frame" x="0.0" y="189.5" width="382" height="173.5"/>
+                                        <rect key="frame" x="0.0" y="171" width="382" height="155"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1BV-uU-Fei">
                                             <size key="itemSize" width="200" height="130"/>
@@ -1143,7 +1143,7 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="hostingEventsCell" id="BbR-s0-sgg" customClass="HostEventCollectionViewCell" customModule="DJHelper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="22" width="200" height="130"/>
+                                                <rect key="frame" x="0.0" y="12.5" width="200" height="130"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="3fH-HL-vdM">
                                                     <rect key="frame" x="0.0" y="0.0" width="200" height="130"/>
@@ -1165,7 +1165,7 @@
                                         </cells>
                                     </collectionView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0HF-hp-tYh">
-                                        <rect key="frame" x="0.0" y="379" width="382" height="173.5"/>
+                                        <rect key="frame" x="0.0" y="342" width="382" height="155"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MnA-gs-SA6">
                                             <size key="itemSize" width="200" height="130"/>
@@ -1175,7 +1175,7 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="pastEventCell" id="K34-9U-azS" customClass="HostEventCollectionViewCell" customModule="DJHelper" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="22" width="200" height="130"/>
+                                                <rect key="frame" x="0.0" y="12.5" width="200" height="130"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="iAM-Wv-aCP">
                                                     <rect key="frame" x="0.0" y="0.0" width="200" height="130"/>
@@ -1199,13 +1199,13 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t3L-MO-DBB">
-                                <rect key="frame" x="20" y="44" width="62.5" height="24"/>
+                                <rect key="frame" x="20" y="88" width="62.5" height="0.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Happening now" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W2X-Hm-etP">
-                                <rect key="frame" x="20" y="80" width="91.5" height="14"/>
+                                <rect key="frame" x="20" y="100.5" width="91.5" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                 <color key="textColor" name="PurpleColor"/>
                                 <nil key="highlightedColor"/>
@@ -1228,6 +1228,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Bcf-4y-iix"/>
                     </view>
+                    <navigationItem key="navigationItem" id="RBg-Nb-zyQ"/>
                     <connections>
                         <outlet property="hostingEventCollectionView" destination="Csd-fC-PJF" id="HWC-7g-KiR"/>
                         <outlet property="pastEventsCollectionView" destination="0HF-hp-tYh" id="4m0-QK-4KP"/>
@@ -1288,7 +1289,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="v01-Ne-NHb" kind="relationship" relationship="rootViewController" id="gKh-un-a1t"/>
+                        <segue destination="KS7-vC-bQD" kind="relationship" relationship="rootViewController" id="9fN-9c-528"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y9V-lC-KcB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1319,23 +1320,23 @@
             <objects>
                 <viewController id="3Wd-nG-ixP" customClass="EventPageViewController" customModule="DJHelper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sAE-fL-48y">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="event-default" translatesAutoresizingMaskIntoConstraints="NO" id="Q3d-bJ-JbK">
-                                <rect key="frame" x="0.0" y="88" width="414" height="150"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="367-06-esG"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="py2-jW-Mmz">
-                                <rect key="frame" x="20" y="253" width="374" height="29"/>
+                                <rect key="frame" x="20" y="165" width="374" height="29"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="24"/>
                                 <color key="textColor" name="customTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Description" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="6ew-uQ-h12">
-                                <rect key="frame" x="20" y="292" width="374" height="21"/>
+                                <rect key="frame" x="20" y="204" width="374" height="21"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                 <color key="textColor" name="customTextColor"/>
                                 <nil key="highlightedColor"/>
