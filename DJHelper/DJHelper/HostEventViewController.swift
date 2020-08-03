@@ -16,22 +16,23 @@ class HostEventViewController: UIViewController {
     var eventsHappeningNow: [Event]!
     var upcomingEvents: [Event]!
     var pastEvents: [Event]!
-    
+
     @IBOutlet weak var upcomingShowsCollectionView: UICollectionView!
     @IBOutlet weak var hostingEventCollectionView: UICollectionView!
     @IBOutlet weak var pastEventsCollectionView: UICollectionView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setDataSourceForCollectionViews()
         sortEvents(events: fetchRequest())
     }
-    
+
     private func setDataSourceForCollectionViews() {
         upcomingShowsCollectionView.dataSource = self
         hostingEventCollectionView.dataSource = self
         pastEventsCollectionView.dataSource = self
     }
+
     private func fetchEventsCurrentHostCreated() {
         guard let passedInHost = currentHost, let eventController = eventController else {
             print("Error on line: \(#line) in function: \(#function)\n")
@@ -44,7 +45,7 @@ class HostEventViewController: UIViewController {
         var events: [Event]?
         do {
              events = try CoreDataStack.shared.mainContext.fetch(fetchRequest)
-        } catch  {
+        } catch {
             print("""
                 Error on line: \(#line) in function: \(#function)\n
                 Readable error: \(error.localizedDescription)\n Technical error: \(error)
@@ -53,7 +54,7 @@ class HostEventViewController: UIViewController {
         }
         return events ?? []
     }
-    
+
     private func sortEvents(events: [Event]) {
         eventsHappeningNow = events.filter { $0.eventDate == Date() }
 
@@ -77,12 +78,10 @@ extension HostEventViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 40
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cell: UICollectionViewCell?
-        
+
         return cell!
     }
-    
-    
 }
