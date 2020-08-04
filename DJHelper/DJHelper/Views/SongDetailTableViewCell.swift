@@ -19,7 +19,6 @@ class SongDetailTableViewCell: UITableViewCell {
     @IBOutlet var songLabel: UILabel!
     @IBOutlet var artistLabel: UILabel!
 
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
