@@ -31,17 +31,48 @@ class SongDetailTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
     @IBAction func requestSong(_ sender: UIButton) {
+        guard let song = song else { return }
+        if addSongButton.isSelected {
+            addSongRequest(song)
+        } else {
+            cancelSongRequest(song)
+        }
         addSongButton.isSelected.toggle()
+
+    }
+
+    @IBAction func upvoteSong(_ sender: UIButton) {
+        guard let song = song else { return }
+        if upvoteSongButton.isSelected {
+            addUpvoteSong(song)
+        } else {
+            // present an alert verifying intention to cancel upvote
+            cancelUpvoteSong(song)
+        }
+        upvoteSongButton.isSelected.toggle()
+    }
+
+    func addSongRequest(_ song: Song) {
+        // Insert network call here to request a song
+    }
+
+    func cancelSongRequest(_ song: Song) {
+        // Insert network call here to delete the existing request
+    }
+
+    func addUpvoteSong(_ song: Song) {
+        // Insert network call here to upvote a song
+    }
+
+    func cancelUpvoteSong(_ song: Song) {
+        // Insert network call here to cancel the upvote request
     }
 
     func updateViews() {
@@ -54,6 +85,7 @@ class SongDetailTableViewCell: UITableViewCell {
         switch currentSongState {
         case .requested:
             voteCountLabel.isHidden = false
+            // on song states where voteCountLabel is visible, network call to update the vote count?
             addSongButton.isHidden = true
             upvoteSongButton.isHidden = false
         case .none:
