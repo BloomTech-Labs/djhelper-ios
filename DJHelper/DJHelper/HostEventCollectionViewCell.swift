@@ -15,21 +15,20 @@ class HostEventCollectionViewCell: UICollectionViewCell {
             updateViews()
         }
     }
-    
+
     @IBOutlet weak var cellView: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var eventNameLabel: UILabel!
-    
-    
+
     private func updateViews() {
         guard let passedInEvent = event else {
             print("Error on line: \(#line) in function: \(#function)\n")
             return
         }
-        
+
         dateLabel.text = passedInEvent.eventDate?.stringFromDate()
         eventNameLabel.text = passedInEvent.name
-        imageView.image = UIImage(named: "up-arrow")!
+//        imageView.image = UIImage(named: "up-arrow")!
     }
 }

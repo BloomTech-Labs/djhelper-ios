@@ -10,6 +10,8 @@ import UIKit
 import CoreData
 
 class HostEventViewController: UIViewController {
+
+    // MARK: - Instance Variables
     var currentHost: Host?
     var eventController: EventController?
     let todaysDate = Date().stringFromDate()
@@ -18,19 +20,24 @@ class HostEventViewController: UIViewController {
     var pastEvents: [Event]?
     var allEvents: [Event]?
 
+    // MARK: - IBOutlets
     @IBOutlet weak var upcomingShowsCollectionView: UICollectionView!
     @IBOutlet weak var hostingEventCollectionView: UICollectionView!
     @IBOutlet weak var pastEventsCollectionView: UICollectionView!
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        eventController?.fetchAllEventsFromServer(for: self.currentHost!) { (results) in
+        fetchEventsFromServer()
+    }
+
+    // MARK: - Private Methods
+    ///We should be able to fetch from core data but I'm fetching from the server for testing.
+    private func fetchEventsFromServer() {
+        guard let host = currentHost, let eventController = eventController else {
+            print("Error on line: \(#line) in function: \(#function)\n")
+            return
+        }
+        eventController.fetchAllEventsFromServer(for: host) { (results) in
                   switch results {
                   case .success:
                       DispatchQueue.main.async {
@@ -41,8 +48,6 @@ class HostEventViewController: UIViewController {
                       return
                   }
               }
-//        sortEvents(events: fetchRequest())
-//        setDataSourceForCollectionViews()
     }
 
     private func setDataSourceForCollectionViews() {
@@ -51,13 +56,7 @@ class HostEventViewController: UIViewController {
         pastEventsCollectionView.dataSource = self
     }
 
-    private func fetchEventsCurrentHostCreated() {
-        guard let passedInHost = currentHost, let eventController = eventController else {
-            print("Error on line: \(#line) in function: \(#function)\n")
-            return
-        }
-    }
-    
+        ///CODE FOR FETCHING FROM CORE DATA
     private func fetchRequest() -> [Event] {
         let fetchRequest: NSFetchRequest<Event> = Event.fetchRequest()
         var events: [Event]?
@@ -76,15 +75,15 @@ class HostEventViewController: UIViewController {
 
     private func sortEvents(events: [Event]) {
         eventsHappeningNow = events.filter { $0.eventDate == Date() }
-        print("Event's happening now: \(eventsHappeningNow?.count)")
-        
+        print("Event's happening now: \(String(describing: eventsHappeningNow?.count))")
+
         pastEvents = events.filter { $0.eventDate! < Date() }
-        print("passedEvents: \(pastEvents?.count)")
-        
+        print("passedEvents: \(String(describing: pastEvents?.count))")
+
         upcomingEvents = events.filter { $0.eventDate! > Date() }
-        print("upcomingEvents: \(upcomingEvents?.count)")
+        print("upcomingEvents: \(String(describing: upcomingEvents?.count))")
     }
-    
+
     /*
     // MARK: - Navigation
 
@@ -94,14 +93,13 @@ class HostEventViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
 
 extension HostEventViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
         case hostingEventCollectionView:
-            if let count = eventsHappeningNow?.count  {
+            if let count = eventsHappeningNow?.count {
                 return count
             } else {
                 return 1
@@ -125,15 +123,18 @@ extension HostEventViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView {
         case hostingEventCollectionView:
-           let cell = hostingEventCollectionView.dequeueReusableCell(withReuseIdentifier: "hostingEventsCell", for: indexPath) as! HostEventCollectionViewCell
+           let cell = hostingEventCollectionView.dequeueReusableCell(withReuseIdentifier: "hostingEventsCell",
+                                                                     for: indexPath) as! HostEventCollectionViewCell
             return cell
         case upcomingShowsCollectionView:
-            let cell = upcomingShowsCollectionView.dequeueReusableCell(withReuseIdentifier: "upcomingShowCell", for: indexPath) as! HostEventCollectionViewCell
+            let cell = upcomingShowsCollectionView.dequeueReusableCell(withReuseIdentifier: "upcomingShowCell",
+                                                                       for: indexPath) as! HostEventCollectionViewCell
             let event = upcomingEvents?[indexPath.row]
             cell.event = event
             return cell
         case pastEventsCollectionView:
-            let cell = pastEventsCollectionView.dequeueReusableCell(withReuseIdentifier: "pastEventCell", for: indexPath) as! HostEventCollectionViewCell
+            let cell = pastEventsCollectionView.dequeueReusableCell(withReuseIdentifier: "pastEventCell",
+                                                                    for: indexPath) as! HostEventCollectionViewCell
             return cell
         default:
             return UICollectionViewCell()
