@@ -151,6 +151,7 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
             self.leftRequestSetlistButton.setAttributedTitle(setlistButtonTitle, for: .normal)
             self.rightRequestSetlistButton.setAttributedTitle(requestButtonTitle, for: .normal)
         }
+        tableView.reloadData()
     }
 
     // MARK: - Search for Song
@@ -220,12 +221,15 @@ extension EventPlaylistViewController: UITableViewDataSource {
         case .requested:
             let song = requestedSongs[indexPath.row]
             cell.song = song
+            cell.currentSongState = self.currentSongState
         case .setListed:
             let song = setListedSongs[indexPath.row]
             cell.song = song
+            cell.currentSongState = self.currentSongState
         case .searched:
             let song = searchResults[indexPath.row]
             cell.song = song
+            cell.currentSongState = self.currentSongState
         }
 
         return cell
