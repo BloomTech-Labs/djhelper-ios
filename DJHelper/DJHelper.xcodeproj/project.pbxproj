@@ -10,7 +10,6 @@
 		1B323D3A248422210065D94C /* HostRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B323D39248422210065D94C /* HostRepresentation.swift */; };
 		1B3D9BBB2492FC6700E8625C /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D9BBA2492FC6700E8625C /* CustomAlert.swift */; };
 		1B3D9BBD24931BA800E8625C /* EventPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D9BBC24931BA800E8625C /* EventPageViewController.swift */; };
-		1B71118C24D2A35C00BF4256 /* EventView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B71118B24D2A35C00BF4256 /* EventView.xib */; };
 		1B71119024D2A6E400BF4256 /* HostEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B71118F24D2A6E400BF4256 /* HostEventViewController.swift */; };
 		1B71119224D2A94D00BF4256 /* HostEventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B71119124D2A94D00BF4256 /* HostEventCollectionViewCell.swift */; };
 		1BA4A8B4248577B1002A67E2 /* HostLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA4A8B3248577B1002A67E2 /* HostLogin.swift */; };
@@ -79,7 +78,6 @@
 		1B323D39248422210065D94C /* HostRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRepresentation.swift; sourceTree = "<group>"; };
 		1B3D9BBA2492FC6700E8625C /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		1B3D9BBC24931BA800E8625C /* EventPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EventPageViewController.swift; path = DJHelper/EventPageViewController.swift; sourceTree = SOURCE_ROOT; };
-		1B71118B24D2A35C00BF4256 /* EventView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventView.xib; sourceTree = "<group>"; };
 		1B71118F24D2A6E400BF4256 /* HostEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HostEventViewController.swift; path = DJHelper/HostEventViewController.swift; sourceTree = SOURCE_ROOT; };
 		1B71119124D2A94D00BF4256 /* HostEventCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HostEventCollectionViewCell.swift; path = DJHelper/HostEventCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		1BA4A8B3248577B1002A67E2 /* HostLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostLogin.swift; sourceTree = "<group>"; };
@@ -161,7 +159,6 @@
 		1B71118A24D2A33400BF4256 /* Xib */ = {
 			isa = PBXGroup;
 			children = (
-				1B71118B24D2A35C00BF4256 /* EventView.xib */,
 			);
 			path = Xib;
 			sourceTree = "<group>";
@@ -517,7 +514,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				447F53862475805E00F706F1 /* LaunchScreen.storyboard in Resources */,
-				1B71118C24D2A35C00BF4256 /* EventView.xib in Resources */,
 				447F53832475805E00F706F1 /* Assets.xcassets in Resources */,
 				44F48901249BF4E800B2646C /* Slide.xib in Resources */,
 				447F53812475805E00F706F1 /* Main.storyboard in Resources */,
