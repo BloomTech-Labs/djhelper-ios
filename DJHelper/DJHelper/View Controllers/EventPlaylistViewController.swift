@@ -16,7 +16,7 @@ enum SongState {
     case searched
 }
 
-class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
+class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate {
 
     // MARK: - Properties
     var event: Event?
@@ -25,6 +25,7 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
     var eventController: EventController?
     var songController = SongController()
     var currentSongState: SongState = .requested
+    let activityIndicatorView = UIActivityIndicatorView(style: .large)
     var isGuest: Bool = false
     var requestedSongs: [Song] = []
     var setListedSongs: [Song] = []
@@ -151,11 +152,15 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
             self.leftRequestSetlistButton.setAttributedTitle(setlistButtonTitle, for: .normal)
             self.rightRequestSetlistButton.setAttributedTitle(requestButtonTitle, for: .normal)
         }
+        tableView.reloadData()
     }
 
+    // MARK: - Search for Song
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchTerm = searchBar.text,
             searchTerm != "" else { return }
+        searchResults = []
+        self.activityIndicator(activityIndicatorView: activityIndicatorView, shouldStart: true)
         songController.searchForSong(withSearchTerm: searchTerm) { (results) in
             switch results {
             case let .success(songResults):
@@ -166,9 +171,11 @@ class EventPlaylistViewController: UIViewController, UISearchBarDelegate {
                     }
                     self.currentSongState = .searched
                     self.tableView.reloadData()
+                    self.activityIndicator(activityIndicatorView: self.activityIndicatorView, shouldStart: false)
                 }
             case .failure:
                 DispatchQueue.main.async {
+                    self.activityIndicator(activityIndicatorView: self.activityIndicatorView, shouldStart: false)
                     self.myAlert.showAlert(with: "No songs fetched", message: "There we no songs found with that search description.", on: self)
                 }
             }
@@ -218,12 +225,15 @@ extension EventPlaylistViewController: UITableViewDataSource {
         case .requested:
             let song = requestedSongs[indexPath.row]
             cell.song = song
+            cell.currentSongState = self.currentSongState
         case .setListed:
             let song = setListedSongs[indexPath.row]
             cell.song = song
+            cell.currentSongState = self.currentSongState
         case .searched:
             let song = searchResults[indexPath.row]
             cell.song = song
+            cell.currentSongState = self.currentSongState
         }
 
         return cell

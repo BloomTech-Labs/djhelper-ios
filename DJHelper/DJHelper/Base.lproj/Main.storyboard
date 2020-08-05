@@ -898,7 +898,7 @@
                                     <action selector="viewHostDetail:" destination="kQQ-kj-GmS" eventType="touchUpInside" id="RmZ-Bn-v1a"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0yt-hM-vgE">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0yt-hM-vgE">
                                 <rect key="frame" x="0.0" y="402.5" width="414" height="459.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="9ix-5O-1HL">
@@ -980,6 +980,26 @@
                                                     </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rTK-um-i2C">
+                                                    <rect key="frame" x="344" y="30" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="40" id="Abq-hV-V7O"/>
+                                                        <constraint firstAttribute="height" constant="40" id="C33-wB-V7I"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="X8m-wh-Rnb"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="jd1-5f-Rv7"/>
+                                                    </constraints>
+                                                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <state key="normal" image="add inactive">
+                                                        <attributedString key="attributedTitle"/>
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="heavy"/>
+                                                    </state>
+                                                    <state key="selected" image="check mark active">
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="heavy"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="requestSong:" destination="4Sl-sJ-kXv" eventType="touchUpInside" id="h32-S8-r3X"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="E9l-8l-QIB" firstAttribute="leading" secondItem="hrd-Rw-ozD" secondAttribute="trailing" constant="15" id="6yE-xj-i0r"/>
@@ -987,15 +1007,22 @@
                                                 <constraint firstItem="l9H-G3-Enp" firstAttribute="top" secondItem="OgA-hi-V87" secondAttribute="bottom" id="AtY-ZH-vFk"/>
                                                 <constraint firstItem="l9H-G3-Enp" firstAttribute="centerX" secondItem="OgA-hi-V87" secondAttribute="centerX" id="JRP-Uj-ChG"/>
                                                 <constraint firstItem="hrd-Rw-ozD" firstAttribute="centerY" secondItem="DPP-LV-kno" secondAttribute="centerY" id="bPY-zc-Amx"/>
+                                                <constraint firstItem="rTK-um-i2C" firstAttribute="centerY" secondItem="DPP-LV-kno" secondAttribute="centerY" id="bgQ-7a-Kn1"/>
                                                 <constraint firstItem="hrd-Rw-ozD" firstAttribute="leading" secondItem="DPP-LV-kno" secondAttribute="leading" constant="20" id="e0n-xI-AHe"/>
                                                 <constraint firstItem="OgA-hi-V87" firstAttribute="trailing" secondItem="DPP-LV-kno" secondAttribute="trailingMargin" constant="-10" id="kyy-u7-l46"/>
+                                                <constraint firstItem="rTK-um-i2C" firstAttribute="leading" secondItem="E9l-8l-QIB" secondAttribute="trailing" constant="25" id="wBy-in-Tp4"/>
                                                 <constraint firstItem="OgA-hi-V87" firstAttribute="leading" secondItem="E9l-8l-QIB" secondAttribute="trailing" constant="25" id="x06-OU-lfU"/>
                                                 <constraint firstItem="E9l-8l-QIB" firstAttribute="centerY" secondItem="DPP-LV-kno" secondAttribute="centerY" id="zpO-Dw-0KU"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <viewLayoutGuide key="safeArea" id="8qN-zF-6nm"/>
                                         <connections>
+                                            <outlet property="addSongButton" destination="rTK-um-i2C" id="d4M-PS-fRE"/>
                                             <outlet property="artistLabel" destination="KRK-6C-Yc7" id="ML7-P8-OMB"/>
+                                            <outlet property="coverArtImageView" destination="hrd-Rw-ozD" id="Ucp-vd-WZM"/>
                                             <outlet property="songLabel" destination="0vo-LV-DHA" id="lgO-HS-WbV"/>
+                                            <outlet property="upvoteSongButton" destination="OgA-hi-V87" id="umx-rR-QQT"/>
+                                            <outlet property="voteCountLabel" destination="l9H-G3-Enp" id="emh-y0-DxD"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1639,6 +1666,8 @@
         <segue reference="UtX-VA-g8O"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="add inactive" width="30" height="30"/>
+        <image name="check mark active" width="26" height="26"/>
         <image name="event-default" width="4368" height="2912"/>
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>
