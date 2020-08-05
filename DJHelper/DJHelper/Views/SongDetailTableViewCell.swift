@@ -26,6 +26,8 @@ class SongDetailTableViewCell: UITableViewCell {
     @IBOutlet var artistLabel: UILabel!
     @IBOutlet var coverArtImageView: UIImageView!
     @IBOutlet var voteCountLabel: UILabel!
+    @IBOutlet var addSongButton: UIButton!
+    @IBOutlet var upvoteSongButton: UIButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,6 +40,10 @@ class SongDetailTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func requestSong(_ sender: UIButton) {
+        addSongButton.isSelected.toggle()
+    }
+
     func updateViews() {
         guard let song = song else { return }
 
@@ -48,12 +54,20 @@ class SongDetailTableViewCell: UITableViewCell {
         switch currentSongState {
         case .requested:
             voteCountLabel.isHidden = false
+            addSongButton.isHidden = true
+            upvoteSongButton.isHidden = false
         case .none:
             voteCountLabel.isHidden = false
-        case .some(.setListed):
+            addSongButton.isHidden = true
+            upvoteSongButton.isHidden = false
+        case .setListed:
             voteCountLabel.isHidden = false
-        case .some(.searched):
+            upvoteSongButton.isHidden = true
+            addSongButton.isHidden = true
+        case .searched:
             voteCountLabel.isHidden = true
+            upvoteSongButton.isHidden = true
+            addSongButton.isHidden = false
         }
     }
 }
