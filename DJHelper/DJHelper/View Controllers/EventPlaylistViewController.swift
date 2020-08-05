@@ -25,6 +25,7 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
     var eventController: EventController?
     var songController = SongController()
     var currentSongState: SongState = .requested
+    let activityIndicatorView = UIActivityIndicatorView(style: .large)
     var isGuest: Bool = false
     var requestedSongs: [Song] = []
     var setListedSongs: [Song] = []
@@ -159,6 +160,7 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
         guard let searchTerm = searchBar.text,
             searchTerm != "" else { return }
         searchResults = []
+        self.activityIndicator(activityIndicatorView: activityIndicatorView, shouldStart: true)
         songController.searchForSong(withSearchTerm: searchTerm) { (results) in
             switch results {
             case let .success(songResults):
@@ -169,9 +171,11 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
                     }
                     self.currentSongState = .searched
                     self.tableView.reloadData()
+                    self.activityIndicator(activityIndicatorView: self.activityIndicatorView, shouldStart: false)
                 }
             case .failure:
                 DispatchQueue.main.async {
+                    self.activityIndicator(activityIndicatorView: self.activityIndicatorView, shouldStart: false)
                     self.myAlert.showAlert(with: "No songs fetched", message: "There we no songs found with that search description.", on: self)
                 }
             }
