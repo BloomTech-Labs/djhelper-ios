@@ -10,6 +10,8 @@
 		1B323D3A248422210065D94C /* HostRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B323D39248422210065D94C /* HostRepresentation.swift */; };
 		1B3D9BBB2492FC6700E8625C /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D9BBA2492FC6700E8625C /* CustomAlert.swift */; };
 		1B3D9BBD24931BA800E8625C /* EventPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D9BBC24931BA800E8625C /* EventPageViewController.swift */; };
+		1B71119024D2A6E400BF4256 /* HostEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B71118F24D2A6E400BF4256 /* HostEventViewController.swift */; };
+		1B71119224D2A94D00BF4256 /* HostEventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B71119124D2A94D00BF4256 /* HostEventCollectionViewCell.swift */; };
 		1BA4A8B4248577B1002A67E2 /* HostLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA4A8B3248577B1002A67E2 /* HostLogin.swift */; };
 		1BA4A8B6248577F4002A67E2 /* HostLoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA4A8B5248577F4002A67E2 /* HostLoginResponse.swift */; };
 		1BA4A8B8248586B9002A67E2 /* EventRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA4A8B7248586B9002A67E2 /* EventRepresentation.swift */; };
@@ -76,6 +78,8 @@
 		1B323D39248422210065D94C /* HostRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRepresentation.swift; sourceTree = "<group>"; };
 		1B3D9BBA2492FC6700E8625C /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		1B3D9BBC24931BA800E8625C /* EventPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EventPageViewController.swift; path = DJHelper/EventPageViewController.swift; sourceTree = SOURCE_ROOT; };
+		1B71118F24D2A6E400BF4256 /* HostEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HostEventViewController.swift; path = DJHelper/HostEventViewController.swift; sourceTree = SOURCE_ROOT; };
+		1B71119124D2A94D00BF4256 /* HostEventCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HostEventCollectionViewCell.swift; path = DJHelper/HostEventCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
 		1BA4A8B3248577B1002A67E2 /* HostLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostLogin.swift; sourceTree = "<group>"; };
 		1BA4A8B5248577F4002A67E2 /* HostLoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostLoginResponse.swift; sourceTree = "<group>"; };
 		1BA4A8B7248586B9002A67E2 /* EventRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRepresentation.swift; sourceTree = "<group>"; };
@@ -152,6 +156,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B71118A24D2A33400BF4256 /* Xib */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Xib;
+			sourceTree = "<group>";
+		};
 		1BA4A8B92485B004002A67E2 /* Host Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -297,6 +308,7 @@
 		4446F7A02476397B005ACE10 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1B71118F24D2A6E400BF4256 /* HostEventViewController.swift */,
 				1B3D9BBC24931BA800E8625C /* EventPageViewController.swift */,
 				441CB84E2499CE1E00637CC0 /* GuestLoginViewController.swift */,
 				447F537D2475805E00F706F1 /* ViewController.swift */,
@@ -349,6 +361,7 @@
 		447F53782475805D00F706F1 /* DJHelper */ = {
 			isa = PBXGroup;
 			children = (
+				1B71118A24D2A33400BF4256 /* Xib */,
 				4446F79F24763969005ACE10 /* Model */,
 				44BA393824BF9F93009E1680 /* Controller */,
 				4446F79E24763959005ACE10 /* Networking */,
@@ -374,6 +387,7 @@
 		44A025BE24D25A1A00BFB762 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1B71119124D2A94D00BF4256 /* HostEventCollectionViewCell.swift */,
 				44A025BC24D25A0500BFB762 /* SongDetailTableViewCell.swift */,
 			);
 			path = Views;
@@ -570,6 +584,8 @@
 				44214DE7248D81AA00D63B6A /* CreateEventViewController.swift in Sources */,
 				4446F8252480CD32005ACE10 /* DJLoginViewController.swift in Sources */,
 				1BA4A8C22485C152002A67E2 /* EventController.swift in Sources */,
+				1B71119024D2A6E400BF4256 /* HostEventViewController.swift in Sources */,
+				1B71119224D2A94D00BF4256 /* HostEventCollectionViewCell.swift in Sources */,
 				4446F799247638D4005ACE10 /* HTTPMethod.swift in Sources */,
 				441CB84F2499CE1E00637CC0 /* GuestLoginViewController.swift in Sources */,
 				1BA4A8C42485F27A002A67E2 /* EventAuthRequest.swift in Sources */,
