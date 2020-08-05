@@ -21,5 +21,18 @@ class EventView: UIView {
         // Drawing code
     }
     */
-
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        colors()
+    }
+    
+    private func colors() {
+        print("print colors")
+//        dateLabel.backgroundColor = .black
+//        eventNameLabel.backgroundColor = .black
+    }
 }
