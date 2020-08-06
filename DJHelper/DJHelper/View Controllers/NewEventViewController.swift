@@ -197,7 +197,7 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
         slide4.textField.placeholder = "Event date     🗓"
         slide4.textField.inputView = eventTimeDatePicker
 
-        if hostEventCount == nil {
+        if hostEventCount == 0 {
             return [slide1, slide2, slide3, slide4]
         } else {
             return [slide2, slide3, slide4]

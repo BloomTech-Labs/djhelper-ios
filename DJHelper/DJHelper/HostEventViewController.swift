@@ -14,20 +14,37 @@ class HostEventViewController: UIViewController {
     // MARK: - Instance Variables
     var currentHost: Host?
     var eventController: EventController?
+    var hostController: HostController?
+    var isGuest: Bool?
     let todaysDate = Date().stringFromDate()
     var eventsHappeningNow: [Event]?
     var upcomingEvents: [Event]?
     var pastEvents: [Event]?
-    var allEvents: [Event]?
+    var allEvents: [Event] = []
+    var upcomingEventsVC = UpcomingEventsViewController()
+    var pastEventsVC = PastEventsViewController()
+    var hostingEventsVC = HostingEventsViewController()
 
     // MARK: - IBOutlets
     @IBOutlet weak var upcomingShowsCollectionView: UICollectionView!
     @IBOutlet weak var hostingEventCollectionView: UICollectionView!
     @IBOutlet weak var pastEventsCollectionView: UICollectionView!
 
+    // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchEventsFromServer()
+        let barViewControllers = self.tabBarController?.viewControllers
+        guard let profileVC = barViewControllers?[1] as? HostProfileViewController else { return }
+        profileVC.currentHost = self.currentHost
+        profileVC.hostController = self.hostController
+        guard let newEventNC = barViewControllers?[2] as? UINavigationController else { return }
+        if let newEventVC = newEventNC.viewControllers.first as? NewEventViewController {
+            newEventVC.eventController = self.eventController
+            newEventVC.hostController = self.hostController
+            newEventVC.currentHost = self.currentHost
+            newEventVC.hostEventCount = self.upcomingEvents?.count ?? 0
+        }
     }
 
     // MARK: - Private Methods
@@ -42,18 +59,11 @@ class HostEventViewController: UIViewController {
                   case .success:
                       DispatchQueue.main.async {
                         self.sortEvents(events: self.fetchRequest())
-                        self.setDataSourceForCollectionViews()
                       }
                   case .failure:
                       return
                   }
               }
-    }
-
-    private func setDataSourceForCollectionViews() {
-        upcomingShowsCollectionView.dataSource = self
-        hostingEventCollectionView.dataSource = self
-        pastEventsCollectionView.dataSource = self
     }
 
         ///CODE FOR FETCHING FROM CORE DATA
@@ -75,69 +85,41 @@ class HostEventViewController: UIViewController {
 
     private func sortEvents(events: [Event]) {
         eventsHappeningNow = events.filter { $0.eventDate == Date() }
-        print("Event's happening now: \(String(describing: eventsHappeningNow?.count))")
 
         pastEvents = events.filter { $0.eventDate! < Date() }
-        print("passedEvents: \(String(describing: pastEvents?.count))")
+        pastEventsVC.pastEvents = self.pastEvents
 
         upcomingEvents = events.filter { $0.eventDate! > Date() }
-        print("upcomingEvents: \(String(describing: upcomingEvents?.count))")
-    }
+        upcomingEventsVC.upcomingEvents = self.upcomingEvents
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-}
-
-extension HostEventViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch collectionView {
-        case hostingEventCollectionView:
-            if let count = eventsHappeningNow?.count {
-                return count
-            } else {
-                return 1
+        if let upcomingEvents = upcomingEvents {
+            for event in upcomingEvents {
+                allEvents.append(event)
             }
-        case upcomingShowsCollectionView:
-            if let count = upcomingEvents?.count {
-                return count
-            } else {
-                return 1
-            }
-        case pastEventsCollectionView:
-            if let count = pastEvents?.count {
-                return count
-            }
-            return 1
-        default:
-            return 20
         }
+        if let pastEvents = pastEvents {
+            for event in pastEvents {
+                allEvents.append(event)
+            }
+        }
+        hostingEventsVC.hostingEvents = self.allEvents
     }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch collectionView {
-        case hostingEventCollectionView:
-           let cell = hostingEventCollectionView.dequeueReusableCell(withReuseIdentifier: "hostingEventsCell",
-                                                                     for: indexPath) as! HostEventCollectionViewCell
-            return cell
-        case upcomingShowsCollectionView:
-            let cell = upcomingShowsCollectionView.dequeueReusableCell(withReuseIdentifier: "upcomingShowCell",
-                                                                       for: indexPath) as! HostEventCollectionViewCell
-            let event = upcomingEvents?[indexPath.row]
-            cell.event = event
-            return cell
-        case pastEventsCollectionView:
-            let cell = pastEventsCollectionView.dequeueReusableCell(withReuseIdentifier: "pastEventCell",
-                                                                    for: indexPath) as! HostEventCollectionViewCell
-            return cell
-        default:
-            return UICollectionViewCell()
+    // This action unwinds from the create new event tab after a new event is created.
+    @IBAction func unwindToEventList(segue: UIStoryboardSegue) {
+    }
+
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "UpcomingEventsSegue" {
+            guard let destinationVC = segue.destination as? UpcomingEventsViewController else { return }
+            self.upcomingEventsVC = destinationVC
+        } else if segue.identifier == "PastEventsSegue" {
+            guard let destinationVC = segue.destination as? PastEventsViewController else { return }
+            self.pastEventsVC = destinationVC
+        } else if segue.identifier == "HostingEventsSegue" {
+            guard let destinationVC = segue.destination as? HostingEventsViewController else { return }
+            self.hostingEventsVC = destinationVC
         }
     }
 }
