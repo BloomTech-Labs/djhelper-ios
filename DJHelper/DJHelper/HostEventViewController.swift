@@ -20,7 +20,7 @@ class HostEventViewController: UIViewController {
     var eventsHappeningNow: [Event]?
     var upcomingEvents: [Event]?
     var pastEvents: [Event]?
-    var allEvents: [Event]?
+    var allEvents: [Event] = []
     var upcomingEventsVC = UpcomingEventsViewController()
     var pastEventsVC = PastEventsViewController()
     var hostingEventsVC = HostingEventsViewController()
@@ -85,15 +85,24 @@ class HostEventViewController: UIViewController {
 
     private func sortEvents(events: [Event]) {
         eventsHappeningNow = events.filter { $0.eventDate == Date() }
-        print("Event's happening now: \(String(describing: eventsHappeningNow?.count))")
 
         pastEvents = events.filter { $0.eventDate! < Date() }
         pastEventsVC.pastEvents = self.pastEvents
-        print("passedEvents: \(String(describing: pastEvents?.count))")
 
         upcomingEvents = events.filter { $0.eventDate! > Date() }
         upcomingEventsVC.upcomingEvents = self.upcomingEvents
-        print("upcomingEvents: \(String(describing: upcomingEvents?.count))")
+
+        if let upcomingEvents = upcomingEvents {
+            for event in upcomingEvents {
+                allEvents.append(event)
+            }
+        }
+        if let pastEvents = pastEvents {
+            for event in pastEvents {
+                allEvents.append(event)
+            }
+        }
+        hostingEventsVC.hostingEvents = self.allEvents
     }
 
     // This action unwinds from the create new event tab after a new event is created.
