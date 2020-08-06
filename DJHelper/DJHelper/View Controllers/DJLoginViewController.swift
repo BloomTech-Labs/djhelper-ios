@@ -105,12 +105,11 @@ class DJLoginViewController: ShiftableViewController {
 
                 if let logInNC = barViewControllers.viewControllers![0] as? UINavigationController {
                     if let logInVC = logInNC.viewControllers.first as? HostEventViewController {
-//                        logInVC.modalPresentationStyle = .fullScreen
+                        logInVC.modalPresentationStyle = .fullScreen
                         logInVC.currentHost = currentHost
-//                        logInVC.hostController = hostController
+                        logInVC.hostController = hostController
                         logInVC.eventController = eventController
-//                        logInVC.isGuest = isGuest
-                        
+                        logInVC.isGuest = isGuest
                     }
                 }
             }

@@ -15,12 +15,15 @@ class HostEventViewController: UIViewController {
     var currentHost: Host?
     var eventController: EventController?
     var hostController: HostController?
+    var isGuest: Bool?
     let todaysDate = Date().stringFromDate()
     var eventsHappeningNow: [Event]?
     var upcomingEvents: [Event]?
     var pastEvents: [Event]?
     var allEvents: [Event]?
     var upcomingEventsVC = UpcomingEventsViewController()
+    var pastEventsVC = PastEventsViewController()
+    var hostingEventsVC = HostingEventsViewController()
 
     // MARK: - IBOutlets
     @IBOutlet weak var upcomingShowsCollectionView: UICollectionView!
@@ -85,6 +88,7 @@ class HostEventViewController: UIViewController {
         print("Event's happening now: \(String(describing: eventsHappeningNow?.count))")
 
         pastEvents = events.filter { $0.eventDate! < Date() }
+        pastEventsVC.pastEvents = self.pastEvents
         print("passedEvents: \(String(describing: pastEvents?.count))")
 
         upcomingEvents = events.filter { $0.eventDate! > Date() }
@@ -101,6 +105,12 @@ class HostEventViewController: UIViewController {
         if segue.identifier == "UpcomingEventsSegue" {
             guard let destinationVC = segue.destination as? UpcomingEventsViewController else { return }
             self.upcomingEventsVC = destinationVC
+        } else if segue.identifier == "PastEventsSegue" {
+            guard let destinationVC = segue.destination as? PastEventsViewController else { return }
+            self.pastEventsVC = destinationVC
+        } else if segue.identifier == "HostingEventsSegue" {
+            guard let destinationVC = segue.destination as? HostingEventsViewController else { return }
+            self.hostingEventsVC = destinationVC
         }
     }
 }

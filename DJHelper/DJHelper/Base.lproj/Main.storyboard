@@ -624,14 +624,14 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="gracie" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TJa-gP-sPD">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TJa-gP-sPD">
                                 <rect key="frame" x="40" y="256" width="334" height="34"/>
                                 <accessibility key="accessibilityConfiguration" identifier="HostSignIn.UsernameTextField"/>
                                 <color key="textColor" name="customTextColor"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="test" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fqv-ne-53O">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fqv-ne-53O">
                                 <rect key="frame" x="40" y="320" width="334" height="34"/>
                                 <accessibility key="accessibilityConfiguration" identifier="HostSignIn.PasswordTextField"/>
                                 <color key="textColor" name="customTextColor"/>
@@ -1152,7 +1152,7 @@
                                     <constraint firstAttribute="height" constant="133" id="HTn-X6-hzg"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="qpK-xb-LiC" kind="embed" id="k03-3i-tds"/>
+                                    <segue destination="qpK-xb-LiC" kind="embed" identifier="PastEventsSegue" id="k03-3i-tds"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wab-Nk-Uhd">
@@ -1161,7 +1161,7 @@
                                     <constraint firstAttribute="height" constant="133" id="ULt-Qb-Lgz"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="Yjp-7W-e6d" kind="embed" id="ko0-7p-kia"/>
+                                    <segue destination="Yjp-7W-e6d" kind="embed" identifier="HostingEventsSegue" id="ko0-7p-kia"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -1686,6 +1686,7 @@
                             <constraint firstAttribute="bottom" secondItem="O6d-uS-g3b" secondAttribute="bottom" id="bPG-Gd-SON"/>
                             <constraint firstItem="O6d-uS-g3b" firstAttribute="top" secondItem="AxQ-Qu-q0D" secondAttribute="top" id="eQY-yb-bqi"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="hvm-Of-dFt"/>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="O6d-uS-g3b" id="7Wy-nf-E74"/>
@@ -1789,6 +1790,7 @@
                             <constraint firstItem="GAt-B4-Q7W" firstAttribute="leading" secondItem="GA2-zo-yat" secondAttribute="leading" id="JjE-EB-mel"/>
                             <constraint firstAttribute="trailing" secondItem="GAt-B4-Q7W" secondAttribute="trailing" id="MRi-mA-4ow"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="YTX-Ch-Rk6"/>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="GAt-B4-Q7W" id="7Pn-pF-zrx"/>
