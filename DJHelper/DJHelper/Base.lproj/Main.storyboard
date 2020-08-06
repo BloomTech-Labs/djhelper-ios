@@ -1287,7 +1287,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gnw-82-kqd">
                                 <rect key="frame" x="0.0" y="313" width="414" height="142"/>
                                 <connections>
-                                    <segue destination="SIo-02-6Rm" kind="embed" id="Izs-or-jaJ"/>
+                                    <segue destination="SIo-02-6Rm" kind="embed" identifier="UpcomingEventsSegue" id="Izs-or-jaJ"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -1634,7 +1634,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="n3D-Jx-9rX" customClass="HostEventCollectionViewCell" customModule="DJHelper" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="eventCell" id="n3D-Jx-9rX" customClass="HostEventCollectionViewCell" customModule="DJHelper" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="3.5" width="128" height="135"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="lhZ-5C-klf">
@@ -1654,13 +1654,13 @@
                                                                         <constraint firstAttribute="height" constant="78" id="uwT-IY-8de"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kib-QK-7z8">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="kib-QK-7z8">
                                                                     <rect key="frame" x="0.0" y="82" width="42" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <nil key="textColor"/>
+                                                                    <color key="textColor" name="PurpleColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Thz-zG-HlE">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Thz-zG-HlE">
                                                                     <rect key="frame" x="0.0" y="106.5" width="42" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -1690,8 +1690,17 @@
                                                 <constraint firstAttribute="trailing" secondItem="HLR-cB-kUN" secondAttribute="trailing" id="zXD-XJ-7JA"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="kib-QK-7z8" id="g5s-Hd-wzX"/>
+                                            <outlet property="eventNameLabel" destination="Thz-zG-HlE" id="BoS-wF-ewo"/>
+                                            <outlet property="imageView" destination="0m2-Vu-OXK" id="bCw-K4-5Z2"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="SIo-02-6Rm" id="OHr-5T-0fH"/>
+                                    <outlet property="delegate" destination="SIo-02-6Rm" id="fKr-4P-N8V"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -1701,7 +1710,11 @@
                             <constraint firstAttribute="bottom" secondItem="52S-PO-esn" secondAttribute="bottom" id="YXu-ek-6H8"/>
                             <constraint firstItem="52S-PO-esn" firstAttribute="top" secondItem="1F0-Re-2rU" secondAttribute="top" id="xfN-be-mZn"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="iBg-ex-bQP"/>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="52S-PO-esn" id="ttD-mD-fUo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KBj-Ax-Zum" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

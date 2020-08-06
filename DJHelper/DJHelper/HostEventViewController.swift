@@ -19,6 +19,7 @@ class HostEventViewController: UIViewController {
     var upcomingEvents: [Event]?
     var pastEvents: [Event]?
     var allEvents: [Event]?
+    var upcomingEventsVC = UpcomingEventsViewController()
 
     // MARK: - IBOutlets
     @IBOutlet weak var upcomingShowsCollectionView: UICollectionView!
@@ -51,7 +52,7 @@ class HostEventViewController: UIViewController {
     }
 
     private func setDataSourceForCollectionViews() {
-        upcomingShowsCollectionView.dataSource = self
+//        upcomingShowsCollectionView.dataSource = self
         hostingEventCollectionView.dataSource = self
         pastEventsCollectionView.dataSource = self
     }
@@ -81,18 +82,17 @@ class HostEventViewController: UIViewController {
         print("passedEvents: \(String(describing: pastEvents?.count))")
 
         upcomingEvents = events.filter { $0.eventDate! > Date() }
+        upcomingEventsVC.upcomingEvents = self.upcomingEvents
         print("upcomingEvents: \(String(describing: upcomingEvents?.count))")
     }
 
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "UpcomingEventsSegue" {
+            guard let destinationVC = segue.destination as? UpcomingEventsViewController else { return }
+            self.upcomingEventsVC = destinationVC
+        }
     }
-    */
 }
 
 extension HostEventViewController: UICollectionViewDataSource {
@@ -104,12 +104,12 @@ extension HostEventViewController: UICollectionViewDataSource {
             } else {
                 return 1
             }
-        case upcomingShowsCollectionView:
-            if let count = upcomingEvents?.count {
-                return count
-            } else {
-                return 1
-            }
+//        case upcomingShowsCollectionView:
+//            if let count = upcomingEvents?.count {
+//                return count
+//            } else {
+//                return 1
+//            }
         case pastEventsCollectionView:
             if let count = pastEvents?.count {
                 return count
@@ -126,12 +126,12 @@ extension HostEventViewController: UICollectionViewDataSource {
            let cell = hostingEventCollectionView.dequeueReusableCell(withReuseIdentifier: "hostingEventsCell",
                                                                      for: indexPath) as! HostEventCollectionViewCell
             return cell
-        case upcomingShowsCollectionView:
-            let cell = upcomingShowsCollectionView.dequeueReusableCell(withReuseIdentifier: "upcomingShowCell",
-                                                                       for: indexPath) as! HostEventCollectionViewCell
-            let event = upcomingEvents?[indexPath.row]
-            cell.event = event
-            return cell
+//        case upcomingShowsCollectionView:
+//            let cell = upcomingShowsCollectionView.dequeueReusableCell(withReuseIdentifier: "upcomingShowCell",
+//                                                                       for: indexPath) as! HostEventCollectionViewCell
+//            let event = upcomingEvents?[indexPath.row]
+//            cell.event = event
+//            return cell
         case pastEventsCollectionView:
             let cell = pastEventsCollectionView.dequeueReusableCell(withReuseIdentifier: "pastEventCell",
                                                                     for: indexPath) as! HostEventCollectionViewCell

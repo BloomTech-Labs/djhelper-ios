@@ -8,14 +8,35 @@
 
 import UIKit
 
-class UpcomingEventsViewController: UIViewController {
+class UpcomingEventsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+
+    var upcomingEvents: [Event]? {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
+
+    @IBOutlet var collectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return upcomingEvents?.count ?? 0
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let upcomingEvents = upcomingEvents,
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventCell", for: indexPath) as? HostEventCollectionViewCell else { return UICollectionViewCell() }
+
+        let event = upcomingEvents[indexPath.item]
+        cell.event = event
+
+        return cell
+    }
 
     /*
     // MARK: - Navigation

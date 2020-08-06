@@ -29,6 +29,6 @@ class HostEventCollectionViewCell: UICollectionViewCell {
 
         dateLabel.text = passedInEvent.eventDate?.stringFromDate()
         eventNameLabel.text = passedInEvent.name
-//        imageView.image = UIImage(named: "up-arrow")!
+        imageView.image = #imageLiteral(resourceName: "musicSymbol")
     }
 }
