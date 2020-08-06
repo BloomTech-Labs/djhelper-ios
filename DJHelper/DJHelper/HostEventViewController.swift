@@ -95,7 +95,7 @@ class HostEventViewController: UIViewController {
         upcomingEventsVC.upcomingEvents = self.upcomingEvents
         print("upcomingEvents: \(String(describing: upcomingEvents?.count))")
     }
-    
+
     // This action unwinds from the create new event tab after a new event is created.
     @IBAction func unwindToEventList(segue: UIStoryboardSegue) {
     }
