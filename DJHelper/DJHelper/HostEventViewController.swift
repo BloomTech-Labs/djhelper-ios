@@ -9,7 +9,11 @@
 import UIKit
 import CoreData
 
-class HostEventViewController: UIViewController {
+class HostEventViewController: UIViewController, newEventCreatedDelegate {
+    func loadNewEvent() {
+        fetchEventsFromServer()
+    }
+
 
     // MARK: - Instance Variables
     var currentHost: Host?
@@ -18,7 +22,15 @@ class HostEventViewController: UIViewController {
     var isGuest: Bool?
     let todaysDate = Date().stringFromDate()
     var eventsHappeningNow: [Event]?
-    var upcomingEvents: [Event]?
+    var upcomingEvents: [Event]? {
+        didSet {
+            let barViewControllers = self.tabBarController?.viewControllers
+            guard let newEventNC = barViewControllers?[2] as? UINavigationController else { return }
+            if let newEventVC = newEventNC.viewControllers.first as? NewEventViewController {
+                newEventVC.hostEventCount = self.upcomingEvents?.count ?? 0
+            }
+        }
+    }
     var pastEvents: [Event]?
     var allEvents: [Event] = []
     var upcomingEventsVC = UpcomingEventsViewController()
@@ -43,13 +55,14 @@ class HostEventViewController: UIViewController {
             newEventVC.eventController = self.eventController
             newEventVC.hostController = self.hostController
             newEventVC.currentHost = self.currentHost
+            newEventVC.delegate = self
             newEventVC.hostEventCount = self.upcomingEvents?.count ?? 0
         }
     }
 
     // MARK: - Private Methods
     ///We should be able to fetch from core data but I'm fetching from the server for testing.
-    private func fetchEventsFromServer() {
+    func fetchEventsFromServer() {
         guard let host = currentHost, let eventController = eventController else {
             print("Error on line: \(#line) in function: \(#function)\n")
             return
@@ -116,12 +129,21 @@ class HostEventViewController: UIViewController {
         if segue.identifier == "UpcomingEventsSegue" {
             guard let destinationVC = segue.destination as? UpcomingEventsViewController else { return }
             self.upcomingEventsVC = destinationVC
+            destinationVC.currentHost = self.currentHost
+            destinationVC.eventController = self.eventController
+            destinationVC.hostController = self.hostController
         } else if segue.identifier == "PastEventsSegue" {
             guard let destinationVC = segue.destination as? PastEventsViewController else { return }
             self.pastEventsVC = destinationVC
+            destinationVC.currentHost = self.currentHost
+            destinationVC.eventController = self.eventController
+            destinationVC.hostController = self.hostController
         } else if segue.identifier == "HostingEventsSegue" {
             guard let destinationVC = segue.destination as? HostingEventsViewController else { return }
             self.hostingEventsVC = destinationVC
+            destinationVC.currentHost = self.currentHost
+            destinationVC.eventController = self.eventController
+            destinationVC.hostController = self.hostController
         }
     }
 }

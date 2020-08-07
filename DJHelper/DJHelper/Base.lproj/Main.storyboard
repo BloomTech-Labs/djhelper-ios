@@ -779,7 +779,7 @@
         <!--Event Playlist View Controller-->
         <scene sceneID="CAr-hx-iHh">
             <objects>
-                <viewController id="kQQ-kj-GmS" customClass="EventPlaylistViewController" customModule="DJHelper" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EventDetailVC" id="kQQ-kj-GmS" customClass="EventPlaylistViewController" customModule="DJHelper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tbe-m6-NY6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1049,7 +1049,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2iC-LL-bDg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4071" y="-389"/>
+            <point key="canvasLocation" x="4223" y="-16"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="QIs-GD-hox">

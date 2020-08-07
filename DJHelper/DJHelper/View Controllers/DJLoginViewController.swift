@@ -130,13 +130,13 @@ class DJLoginViewController: ShiftableViewController {
 
         let registerButtonTitle = NSMutableAttributedString(string: "Register", attributes: [
             NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 18)!,
-            NSAttributedString.Key.foregroundColor: UIColor(named: "customTextColor")
+            NSAttributedString.Key.foregroundColor: UIColor(named: "customTextColor")!
         ])
         registerButton.setAttributedTitle(registerButtonTitle, for: .normal)
 
         let forgotPasswordButtonTitle = NSMutableAttributedString(string: "Forgot Password", attributes: [
             NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 18)!,
-            NSAttributedString.Key.foregroundColor: UIColor(named: "customTextColor")
+            NSAttributedString.Key.foregroundColor: UIColor(named: "customTextColor")!
         ])
         forgotPasswordButton.setAttributedTitle(forgotPasswordButtonTitle, for: .normal)
     }

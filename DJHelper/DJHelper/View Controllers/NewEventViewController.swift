@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol newEventCreatedDelegate {
+    func loadNewEvent()
+}
+
 class NewEventViewController: UIViewController, UIScrollViewDelegate {
 
     var slides: [Slide] = []
@@ -20,6 +24,7 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
     var eventName: String = ""
     var eventDescription: String = ""
     var eventDate: Date = Date()
+    var delegate: newEventCreatedDelegate?
 
     private var eventTimeDatePicker: UIDatePicker?
 
@@ -129,6 +134,7 @@ class NewEventViewController: UIViewController, UIScrollViewDelegate {
                                                             preferredStyle: .alert)
                     let alertAction = UIAlertAction(title: "OK", style: .default) { (_) in
                         self.resetForm()
+                        self.delegate?.loadNewEvent()
                         self.performSegue(withIdentifier: "unwindToEventList", sender: self)
                     }
                     alertController.addAction(alertAction)

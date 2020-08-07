@@ -10,6 +10,9 @@ import UIKit
 
 class PastEventsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
+    var currentHost: Host?
+    var eventController: EventController?
+    var hostController: HostController?
     var pastEvents: [Event]? {
         didSet {
             self.collectionView.reloadData()
@@ -37,14 +40,16 @@ class PastEventsViewController: UIViewController, UICollectionViewDelegate, UICo
 
         return cell
     }
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let eventDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "EventDetailVC") as? EventPlaylistViewController,
+            let pastEvents = pastEvents else { return }
+        eventDetailVC.event = pastEvents[indexPath.item]
+        eventDetailVC.modalPresentationStyle = .fullScreen
+        eventDetailVC.currentHost = currentHost
+        eventDetailVC.hostController = hostController
+        eventDetailVC.eventController = eventController
+        eventDetailVC.isGuest = false
+        self.navigationController?.pushViewController(eventDetailVC, animated: true)
     }
-    */
-
 }
