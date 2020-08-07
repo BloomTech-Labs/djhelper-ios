@@ -26,9 +26,9 @@ class HostEventViewController: UIViewController {
     var hostingEventsVC = HostingEventsViewController()
 
     // MARK: - IBOutlets
-    @IBOutlet weak var upcomingShowsCollectionView: UICollectionView!
-    @IBOutlet weak var hostingEventCollectionView: UICollectionView!
-    @IBOutlet weak var pastEventsCollectionView: UICollectionView!
+//    @IBOutlet weak var upcomingShowsCollectionView: UICollectionView!
+//    @IBOutlet weak var hostingEventCollectionView: UICollectionView!
+//    @IBOutlet weak var pastEventsCollectionView: UICollectionView!
 
     // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
@@ -58,7 +58,9 @@ class HostEventViewController: UIViewController {
                   switch results {
                   case .success:
                       DispatchQueue.main.async {
-                        self.sortEvents(events: self.fetchRequest())
+                        let hostEvents = self.fetchRequest()
+                        guard hostEvents.count != 0 else { return }
+                        self.sortEvents(events: hostEvents)
                       }
                   case .failure:
                       return

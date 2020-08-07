@@ -1109,10 +1109,10 @@
             </objects>
             <point key="canvasLocation" x="4071" y="-389"/>
         </scene>
-        <!--Host Event View Controller-->
+        <!--View Controller-->
         <scene sceneID="WeG-HX-Qtn">
             <objects>
-                <viewController id="KS7-vC-bQD" customClass="HostEventViewController" customModule="DJHelper" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KS7-vC-bQD" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8mY-4i-P0F">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1569,7 +1569,7 @@
                                                     <constraint firstAttribute="height" constant="133" id="Wwq-n5-CPp"/>
                                                 </constraints>
                                                 <connections>
-                                                    <segue destination="EXH-3b-vna" kind="embed" id="cby-nj-vxM"/>
+                                                    <segue destination="EXH-3b-vna" kind="embed" identifier="UpcomingEventsSegue" id="cby-nj-vxM"/>
                                                 </connections>
                                             </containerView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Events You Are Hosting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nkv-5K-Mc0">
@@ -1584,7 +1584,7 @@
                                                     <constraint firstAttribute="height" constant="133" id="HHO-jX-U6J"/>
                                                 </constraints>
                                                 <connections>
-                                                    <segue destination="ASy-KM-5fq" kind="embed" id="JSI-s7-Ysd"/>
+                                                    <segue destination="ASy-KM-5fq" kind="embed" identifier="HostingEventsSegue" id="JSI-s7-Ysd"/>
                                                 </connections>
                                             </containerView>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5FA-4Z-bqC" userLabel="Past Container View">
@@ -1593,7 +1593,7 @@
                                                     <constraint firstAttribute="height" constant="133" id="Jdh-I6-yUm"/>
                                                 </constraints>
                                                 <connections>
-                                                    <segue destination="qUo-pe-9FW" kind="embed" id="kI5-rB-rDP"/>
+                                                    <segue destination="qUo-pe-9FW" kind="embed" identifier="PastEventsSegue" id="kI5-rB-rDP"/>
                                                 </connections>
                                             </containerView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Past Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cac-Oo-9i4">
@@ -1660,10 +1660,10 @@
             </objects>
             <point key="canvasLocation" x="1872" y="-984"/>
         </scene>
-        <!--Upcoming Events View Controller-->
+        <!--View Controller-->
         <scene sceneID="yiM-Zq-yJb">
             <objects>
-                <viewController id="SIo-02-6Rm" customClass="UpcomingEventsViewController" customModule="DJHelper" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="SIo-02-6Rm" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1F0-Re-2rU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="133"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1678,7 +1678,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="eventCell" id="n3D-Jx-9rX" customClass="HostEventCollectionViewCell" customModule="DJHelper" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="eventCell" id="n3D-Jx-9rX">
                                         <rect key="frame" x="0.0" y="5.5" width="188" height="122.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="lhZ-5C-klf">
@@ -1756,18 +1756,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iBg-ex-bQP"/>
                     </view>
-                    <connections>
-                        <outlet property="collectionView" destination="52S-PO-esn" id="ttD-mD-fUo"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KBj-Ax-Zum" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3251" y="-1005"/>
         </scene>
-        <!--Hosting Events View Controller-->
+        <!--View Controller-->
         <scene sceneID="E18-vt-kdv">
             <objects>
-                <viewController id="Yjp-7W-e6d" customClass="HostingEventsViewController" customModule="DJHelper" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Yjp-7W-e6d" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AxQ-Qu-q0D">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="133"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1782,7 +1779,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="eventCell" id="isL-vv-iNJ" customClass="HostEventCollectionViewCell" customModule="DJHelper" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="eventCell" id="isL-vv-iNJ">
                                         <rect key="frame" x="0.0" y="5.5" width="188" height="122.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="cBQ-hB-QID">
@@ -1860,18 +1857,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hvm-Of-dFt"/>
                     </view>
-                    <connections>
-                        <outlet property="collectionView" destination="O6d-uS-g3b" id="7Wy-nf-E74"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I6D-Ve-d1E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3252" y="-872"/>
         </scene>
-        <!--Past Events View Controller-->
+        <!--View Controller-->
         <scene sceneID="4uy-h0-pdi">
             <objects>
-                <viewController id="qpK-xb-LiC" customClass="PastEventsViewController" customModule="DJHelper" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="qpK-xb-LiC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GA2-zo-yat">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="133"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1886,7 +1880,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="eventCell" id="jj1-y1-b99" customClass="HostEventCollectionViewCell" customModule="DJHelper" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="eventCell" id="jj1-y1-b99">
                                         <rect key="frame" x="0.0" y="7.5" width="188" height="118.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="L44-fP-mco">
@@ -1964,9 +1958,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YTX-Ch-Rk6"/>
                     </view>
-                    <connections>
-                        <outlet property="collectionView" destination="GAt-B4-Q7W" id="7Pn-pF-zrx"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eH4-tv-6d1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1990,7 +1981,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Czo-O2-mMs">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="eventCell" id="Czo-O2-mMs" customClass="HostEventCollectionViewCell" customModule="DJHelper" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="5.5" width="188" height="122.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="OQy-cu-A0k">
@@ -2046,8 +2037,17 @@
                                                 <constraint firstAttribute="trailing" secondItem="FG0-GQ-se2" secondAttribute="trailing" id="uWr-sk-cmw"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="q33-lx-0Le" id="YAP-ig-gvy"/>
+                                            <outlet property="eventNameLabel" destination="LiG-28-oan" id="uc0-07-BLK"/>
+                                            <outlet property="imageView" destination="vl9-72-lIu" id="0DY-ld-auq"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="EXH-3b-vna" id="FS3-zF-Nq7"/>
+                                    <outlet property="delegate" destination="EXH-3b-vna" id="1fy-eL-zbH"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -2058,10 +2058,13 @@
                             <constraint firstItem="QJl-Dc-uzE" firstAttribute="top" secondItem="QdP-jG-Sdq" secondAttribute="top" id="skz-w6-139"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="QJl-Dc-uzE" id="me8-Ub-oXJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="keC-cB-BbB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2524.6376811594205" y="-1005.46875"/>
+            <point key="canvasLocation" x="2622" y="-1137"/>
         </scene>
         <!--Hosting Events View Controller-->
         <scene sceneID="XG3-eE-oQV">
@@ -2081,7 +2084,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="6tH-9q-8Tl">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="eventCell" id="6tH-9q-8Tl" customClass="HostEventCollectionViewCell" customModule="DJHelper" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="5.5" width="188" height="122.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ssd-gU-Fp6">
@@ -2137,8 +2140,17 @@
                                                 <constraint firstAttribute="bottom" secondItem="WYK-LF-ooJ" secondAttribute="bottom" id="Gkf-Kc-3uv"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="iai-pt-eyl" id="iWT-ZV-ttH"/>
+                                            <outlet property="eventNameLabel" destination="hKy-Sf-YQm" id="YEP-kn-rIa"/>
+                                            <outlet property="imageView" destination="fLZ-gT-XNY" id="Up7-Ai-KTh"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="ASy-KM-5fq" id="FhJ-QS-gfR"/>
+                                    <outlet property="delegate" destination="ASy-KM-5fq" id="EO0-h7-67M"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -2149,10 +2161,13 @@
                             <constraint firstAttribute="trailing" secondItem="NQk-WG-4UI" secondAttribute="trailing" id="kCT-mr-8mF"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="NQk-WG-4UI" id="FS4-rA-Ekh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XXZ-8e-BA7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2526.0869565217395" y="-871.54017857142856"/>
+            <point key="canvasLocation" x="2622" y="-900"/>
         </scene>
         <!--Past Events View Controller-->
         <scene sceneID="l23-8q-Toz">
@@ -2172,7 +2187,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="30z-ti-9JV">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="eventCell" id="30z-ti-9JV" customClass="HostEventCollectionViewCell" customModule="DJHelper" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="5.5" width="188" height="122.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="R5N-dY-H4g">
@@ -2228,8 +2243,17 @@
                                                 <constraint firstItem="qfx-5P-eeO" firstAttribute="leading" secondItem="R5N-dY-H4g" secondAttribute="leading" id="mig-wH-Us3"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="umG-JM-eE4" id="sDh-pw-NZ1"/>
+                                            <outlet property="eventNameLabel" destination="Msr-LQ-Bce" id="J9H-8j-G8s"/>
+                                            <outlet property="imageView" destination="rJP-bI-oRp" id="H2L-1m-Kcl"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="qUo-pe-9FW" id="2Zr-zc-0OH"/>
+                                    <outlet property="delegate" destination="qUo-pe-9FW" id="lgn-XI-Gg6"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -2240,10 +2264,13 @@
                             <constraint firstAttribute="trailing" secondItem="C7A-ci-SuC" secondAttribute="trailing" id="fE8-iO-Gr2"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="C7A-ci-SuC" id="kU3-ae-zn0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NFo-5y-8JD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2526.0869565217395" y="-738.28125"/>
+            <point key="canvasLocation" x="2622" y="-673"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
