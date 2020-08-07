@@ -9,7 +9,11 @@
 import UIKit
 import CoreData
 
-class HostEventViewController: UIViewController {
+class HostEventViewController: UIViewController, newEventCreatedDelegate {
+    func loadNewEvent() {
+        fetchEventsFromServer()
+    }
+
 
     // MARK: - Instance Variables
     var currentHost: Host?
@@ -51,13 +55,14 @@ class HostEventViewController: UIViewController {
             newEventVC.eventController = self.eventController
             newEventVC.hostController = self.hostController
             newEventVC.currentHost = self.currentHost
+            newEventVC.delegate = self
             newEventVC.hostEventCount = self.upcomingEvents?.count ?? 0
         }
     }
 
     // MARK: - Private Methods
     ///We should be able to fetch from core data but I'm fetching from the server for testing.
-    private func fetchEventsFromServer() {
+    func fetchEventsFromServer() {
         guard let host = currentHost, let eventController = eventController else {
             print("Error on line: \(#line) in function: \(#function)\n")
             return
