@@ -18,7 +18,15 @@ class HostEventViewController: UIViewController {
     var isGuest: Bool?
     let todaysDate = Date().stringFromDate()
     var eventsHappeningNow: [Event]?
-    var upcomingEvents: [Event]?
+    var upcomingEvents: [Event]? {
+        didSet {
+            let barViewControllers = self.tabBarController?.viewControllers
+            guard let newEventNC = barViewControllers?[2] as? UINavigationController else { return }
+            if let newEventVC = newEventNC.viewControllers.first as? NewEventViewController {
+                newEventVC.hostEventCount = self.upcomingEvents?.count ?? 0
+            }
+        }
+    }
     var pastEvents: [Event]?
     var allEvents: [Event] = []
     var upcomingEventsVC = UpcomingEventsViewController()

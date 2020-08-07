@@ -145,13 +145,13 @@ class EventPageViewController: UIViewController, UISearchBarDelegate {
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "eventDetailsSegue" {
-            guard let eventDetailVC = segue.destination as? CreateEventViewController else { return }
-
-            eventDetailVC.currentHost = currentHost
-            eventDetailVC.event = event
-            eventDetailVC.eventController = eventController
-        }
+//        if segue.identifier == "eventDetailsSegue" {
+//            guard let eventDetailVC = segue.destination as? CreateEventViewController else { return }
+//
+//            eventDetailVC.currentHost = currentHost
+//            eventDetailVC.event = event
+//            eventDetailVC.eventController = eventController
+//        }
     }
 }
 

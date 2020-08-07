@@ -100,12 +100,12 @@ class HostEventsTableViewController: UIViewController {
      // MARK: - Navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
-        case "tempCreateEvent":
-            if let newEventVC = segue.destination as? CreateEventViewController {
-                newEventVC.hostController = hostController
-                newEventVC.currentHost = currentHost
-                newEventVC.eventController = eventController
-            }
+//        case "tempCreateEvent":
+//            if let newEventVC = segue.destination as? CreateEventViewController {
+//                newEventVC.hostController = hostController
+//                newEventVC.currentHost = currentHost
+//                newEventVC.eventController = eventController
+//            }
         case "showEventSegue":
             guard let newEventVC = segue.destination as? EventPageViewController, let index = tableView.indexPathForSelectedRow else {
                 print("Error on line: \(#line) in function: \(#function)\n")
