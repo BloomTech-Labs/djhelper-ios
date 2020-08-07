@@ -41,20 +41,15 @@ class UpcomingEventsViewController: UIViewController, UICollectionViewDelegate, 
         return cell
     }
 
-    // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "upcomingEventsDetailSegue" {
-            guard let eventDetailVC = segue.destination as? EventPlaylistViewController else { return }
-
-            guard let cell = sender as? UICollectionViewCell,
-                let indexPath = self.collectionView.indexPath(for: cell),
-                let upcomingEvents = upcomingEvents else { return }
-            eventDetailVC.event = upcomingEvents[indexPath.item]
-            eventDetailVC.modalPresentationStyle = .fullScreen
-            eventDetailVC.currentHost = currentHost
-            eventDetailVC.hostController = hostController
-            eventDetailVC.eventController = eventController
-            eventDetailVC.isGuest = false
-        }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let eventDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "EventDetailVC") as? EventPlaylistViewController,
+        let upcomingEvents = upcomingEvents else { return }
+        eventDetailVC.event = upcomingEvents[indexPath.item]
+        eventDetailVC.modalPresentationStyle = .fullScreen
+        eventDetailVC.currentHost = currentHost
+        eventDetailVC.hostController = hostController
+        eventDetailVC.eventController = eventController
+        eventDetailVC.isGuest = false
+        self.navigationController?.pushViewController(eventDetailVC, animated: true)
     }
 }
