@@ -129,6 +129,9 @@ class HostEventViewController: UIViewController, newEventCreatedDelegate {
         if segue.identifier == "UpcomingEventsSegue" {
             guard let destinationVC = segue.destination as? UpcomingEventsViewController else { return }
             self.upcomingEventsVC = destinationVC
+            destinationVC.currentHost = self.currentHost
+            destinationVC.eventController = self.eventController
+            destinationVC.hostController = self.hostController
         } else if segue.identifier == "PastEventsSegue" {
             guard let destinationVC = segue.destination as? PastEventsViewController else { return }
             self.pastEventsVC = destinationVC
