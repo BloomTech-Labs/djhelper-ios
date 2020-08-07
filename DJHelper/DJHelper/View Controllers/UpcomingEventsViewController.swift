@@ -43,7 +43,7 @@ class UpcomingEventsViewController: UIViewController, UICollectionViewDelegate, 
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "upcomingEventDetailSegue" {
+        if segue.identifier == "upcomingEventsDetailSegue" {
             guard let eventDetailVC = segue.destination as? EventPlaylistViewController else { return }
 
             guard let cell = sender as? UICollectionViewCell,
