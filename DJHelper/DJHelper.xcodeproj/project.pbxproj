@@ -162,6 +162,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B27E6BC24E20013006B4826 /* Playlist */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Playlist;
+			sourceTree = "<group>";
+		};
 		1B71118A24D2A33400BF4256 /* Xib */ = {
 			isa = PBXGroup;
 			children = (
@@ -301,6 +308,7 @@
 		4446F79F24763969005ACE10 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1B27E6BC24E20013006B4826 /* Playlist */,
 				447F53BF2476315200F706F1 /* DJHelper.xcdatamodeld */,
 				447F53C2247634EE00F706F1 /* CoreDataStack.swift */,
 				4446F7D9247DCAD8005ACE10 /* Bearer.swift */,
