@@ -7,6 +7,16 @@
 //
 
 import Foundation
+
+enum PlaylistError: Error {
+     case authorizationError(Error)
+       case noDataError
+       case encodeError(Error)
+       case decodeError(Error)
+       case noPlaylistOnServer(Error)
+       case otherError(Error)
+}
+
 class PlaylistController {
     
 }
