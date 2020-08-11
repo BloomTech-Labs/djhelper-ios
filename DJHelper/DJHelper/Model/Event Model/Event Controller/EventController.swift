@@ -51,7 +51,7 @@ class EventController {
         guard let bearer = Bearer.shared.token else {
             completion(.failure(.couldNotInitializeAnEvent))
             return
-        }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             }
 
         let authURL = baseURL.appendingPathComponent("auth")
         let eventURL = authURL.appendingPathComponent("event")

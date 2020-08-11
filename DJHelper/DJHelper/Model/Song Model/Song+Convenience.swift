@@ -11,10 +11,10 @@ import CoreData
 
 extension Song {
 
-    var songRepresentation: SongRepresentation? {
+    var songRepresentation: TrackRepresentation? {
         guard let artist = artist,
             let songName = songName else { return nil }
-        return SongRepresentation(artist: artist,
+        return TrackRepresentation(artist: artist,
                                   explicit: explicit,
                                   externalURL: (externalURL ?? URL(string: ""))!,
                                   songId: songId ?? "",
@@ -39,7 +39,7 @@ extension Song {
     self.upVotes = Int32(upVotes)
     }
 
-    @discardableResult convenience init?(songRepresentation: SongRepresentation,
+    @discardableResult convenience init?(songRepresentation: TrackRepresentation,
                                          context: NSManagedObjectContext) {
 
         self.init(artist: songRepresentation.artist,

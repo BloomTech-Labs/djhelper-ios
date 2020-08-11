@@ -33,7 +33,7 @@ class SongController {
     // based on the inputs and outputs and the various server requests.
 
     // MARK: - Fetch All Songs
-    func fetchAllSongsFromServer(completion: @escaping(Result<[SongRepresentation], EventErrors>) -> Void) {
+    func fetchAllSongsFromServer(completion: @escaping(Result<[TrackRepresentation], EventErrors>) -> Void) {
         let url = baseURL.appendingPathComponent("songs")
         let urlRequest = URLRequest(url: url)
 
@@ -59,7 +59,7 @@ class SongController {
 
             let decoder = JSONDecoder()
             do {
-                let songRepresentationArray = try decoder.decode([SongRepresentation].self,
+                let songRepresentationArray = try decoder.decode([TrackRepresentation].self,
                                                                  from: data)
                 completion(.success(songRepresentationArray))
             } catch {
@@ -74,7 +74,7 @@ class SongController {
     }
 
     // MARK: - Fetch Setlist for Event
-    func fetchSetlistFromServer(for event: Event, completion: @escaping(Result<[SongRepresentation], EventErrors>) -> Void) {
+    func fetchSetlistFromServer(for event: Event, completion: @escaping(Result<[TrackRepresentation], EventErrors>) -> Void) {
         let url = baseURL.appendingPathComponent("playlist").appendingPathComponent("\(event.eventID)")
         let urlRequest = URLRequest(url: url)
 
@@ -100,7 +100,7 @@ class SongController {
 
             let decoder = JSONDecoder()
             do {
-                let songRepresentationArray = try decoder.decode([SongRepresentation].self,
+                let songRepresentationArray = try decoder.decode([TrackRepresentation].self,
                                                                  from: data)
                 completion(.success(songRepresentationArray))
             } catch {
@@ -115,7 +115,7 @@ class SongController {
     }
 
     // MARK: - Search for Song
-    func searchForSong(withSearchTerm search: String, completion: @escaping(Result<[SongRepresentation], SongError>) -> Void) {
+    func searchForSong(withSearchTerm search: String, completion: @escaping(Result<[TrackRepresentation], SongError>) -> Void) {
         let url = baseURL.appendingPathComponent("track").appendingPathComponent("\(search)")
         let urlRequest = URLRequest(url: url)
 
@@ -141,7 +141,7 @@ class SongController {
 
             let decoder = JSONDecoder()
             do {
-                let songRepresentationArray = Array(try decoder.decode([String: SongRepresentation].self,
+                let songRepresentationArray = Array(try decoder.decode([String: TrackRepresentation].self,
                     from: data).values)
                 completion(.success(songRepresentationArray))
             } catch {
