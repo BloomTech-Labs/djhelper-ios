@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Playlist {
+struct Playlist: Codable {
     let id: Int
     //if we have problems maybe change it to eventId.
     let eventID: Int
