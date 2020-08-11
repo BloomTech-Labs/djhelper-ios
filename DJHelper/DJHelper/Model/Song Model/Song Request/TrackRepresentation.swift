@@ -25,6 +25,6 @@ struct TrackRepresentation: Codable {
     var externalURL: URL
     var songId: String
     var songName: String
-    var preview: String
-    var image: URL
+    var preview: String?
+    var image: URL?
 }
