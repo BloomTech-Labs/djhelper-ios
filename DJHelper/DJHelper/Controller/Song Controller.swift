@@ -160,7 +160,63 @@ class SongController {
     // MARK: - Delete Song from Playlist
 
     // MARK: - Add Song to Requests
+    func addSongToRequest(_ song: TrackRepresentation, completion: @escaping (Result<(), SongError>) -> Void) {
+    //put trackRepresntation in body of http
+        let url = baseURL.appendingPathComponent("track")
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = HTTPMethod.post.rawValue
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
+        let encoder = JSONEncoder()
+
+        do {
+            urlRequest.httpBody = try encoder.encode(song)
+        } catch  {
+            print("""
+                Error on line: \(#line) in function: \(#function)\n
+                Readable error: \(error.localizedDescription)\n Technical error: \(error)
+                """)
+            completion(.failure(.encodeError(error)))
+            return
+        }
+
+        dataLoader.loadData(from: urlRequest) { (data, response, error) in
+            if let response = response as? HTTPURLResponse {
+                print("HTTPResponse: \(response.statusCode) in function: \(#function)")
+            }
+
+            if let error = error {
+                print("""
+                    Error: \(error.localizedDescription) on line \(#line)
+                    in function: \(#function)\n Technical error: \(error)
+                    """)
+                DispatchQueue.main.async {
+                    completion(.failure(.otherError(error)))
+                }
+                return
+            }
+
+            guard let data = data else {
+                print("Error on line: \(#line) in function: \(#function)")
+                DispatchQueue.main.async {
+                    completion(.failure(.noDataError))
+                }
+                return
+            }
+
+            print("data returned from addingSongToRequest: \(String(describing: String(data: data, encoding: .utf8)))")
+            DispatchQueue.main.async {
+                completion(.success(()))
+            }
+        }
+    }
+
+    //MARK: - Fetch ALL Songs/Tracks from server
+    func fetchAllTracksFromRequestList(completion: @escaping (Result<[TrackRepresentation], SongError>) -> Void) {
+        let url = baseURL.appending
+    }
+    
+    
     // MARK: - Delete Song from Requests
 
     // MARK: - Upvote Song
