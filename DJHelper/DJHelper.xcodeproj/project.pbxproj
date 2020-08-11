@@ -22,6 +22,7 @@
 		1BA4A8C82486858D002A67E2 /* HelperExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA4A8C72486858D002A67E2 /* HelperExtensions.swift */; };
 		1BDBE284248508FC006DE77E /* HostRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDBE283248508FC006DE77E /* HostRegistration.swift */; };
 		1BDBE28624850CF3006DE77E /* HostRegistrationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDBE28524850CF3006DE77E /* HostRegistrationResponse.swift */; };
+		1BF6A47124E32EAD00519E82 /* TrackResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF6A47024E32EAD00519E82 /* TrackResponse.swift */; };
 		441CB84D2498500D00637CC0 /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441CB84C2498500D00637CC0 /* EventTests.swift */; };
 		441CB84F2499CE1E00637CC0 /* GuestLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441CB84E2499CE1E00637CC0 /* GuestLoginViewController.swift */; };
 		44214DE5248D6FF500D63B6A /* DJHelperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DE3248D676600D63B6A /* DJHelperUITests.swift */; };
@@ -95,6 +96,7 @@
 		1BA4A8C72486858D002A67E2 /* HelperExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperExtensions.swift; sourceTree = "<group>"; };
 		1BDBE283248508FC006DE77E /* HostRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRegistration.swift; sourceTree = "<group>"; };
 		1BDBE28524850CF3006DE77E /* HostRegistrationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRegistrationResponse.swift; sourceTree = "<group>"; };
+		1BF6A47024E32EAD00519E82 /* TrackResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackResponse.swift; sourceTree = "<group>"; };
 		441CB84C2498500D00637CC0 /* EventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
 		441CB84E2499CE1E00637CC0 /* GuestLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestLoginViewController.swift; sourceTree = "<group>"; };
 		44214DD8248D673800D63B6A /* DJHelperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DJHelperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -271,6 +273,14 @@
 			path = "Event Requests";
 			sourceTree = "<group>";
 		};
+		1BF6A46F24E32E8900519E82 /* Song Response */ = {
+			isa = PBXGroup;
+			children = (
+				1BF6A47024E32EAD00519E82 /* TrackResponse.swift */,
+			);
+			path = "Song Response";
+			sourceTree = "<group>";
+		};
 		44214DE2248D676600D63B6A /* DJHelperUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,6 +304,7 @@
 		44352AC524B770A700E449F2 /* Song Model */ = {
 			isa = PBXGroup;
 			children = (
+				1BF6A46F24E32E8900519E82 /* Song Response */,
 				44352AC624B7C4E300E449F2 /* Song+Convenience.swift */,
 				44352AC824B7C68B00E449F2 /* TrackRepresentation.swift */,
 			);
@@ -610,6 +621,7 @@
 				1BA4A8B4248577B1002A67E2 /* HostLogin.swift in Sources */,
 				44214DE7248D81AA00D63B6A /* CreateEventViewController.swift in Sources */,
 				4446F8252480CD32005ACE10 /* DJLoginViewController.swift in Sources */,
+				1BF6A47124E32EAD00519E82 /* TrackResponse.swift in Sources */,
 				1BA4A8C22485C152002A67E2 /* EventController.swift in Sources */,
 				1B71119024D2A6E400BF4256 /* HostEventViewController.swift in Sources */,
 				1B71119224D2A94D00BF4256 /* HostEventCollectionViewCell.swift in Sources */,
