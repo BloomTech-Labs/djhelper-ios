@@ -165,7 +165,7 @@ class SongController {
             print("Error on line: \(#line) in function: \(#function)\n")
             return
         }
-        
+    
     //put trackRepresntation in body of http
         let url = baseURL.appendingPathComponent("track")
         var urlRequest = URLRequest(url: url)
@@ -177,10 +177,7 @@ class SongController {
         do {
             urlRequest.httpBody = try encoder.encode(trackRepresntation)
         } catch {
-            print("""
-                Error on line: \(#line) in function: \(#function)\n
-                Readable error: \(error.localizedDescription)\n Technical error: \(error)
-                """)
+            print("Readable error: \(error.localizedDescription)\n Technical error: \(error)")
             completion(.failure(.encodeError(error)))
             return
         }
@@ -191,10 +188,7 @@ class SongController {
             }
 
             if let error = error {
-                print("""
-                    Error: \(error.localizedDescription) on line \(#line)
-                    in function: \(#function)\n Technical error: \(error)
-                    """)
+                print("Readable error: \(error.localizedDescription)\n Technical error: \(error)")
                 DispatchQueue.main.async {
                     completion(.failure(.otherError(error)))
                 }
@@ -210,7 +204,7 @@ class SongController {
             }
 
             let decoder = JSONDecoder()
-            
+
             do {
                 let track = try decoder.decode(TrackRequest.self, from: data)
                 DispatchQueue.main.async {
@@ -218,10 +212,7 @@ class SongController {
                 }
                 print("data returned from addingSongToRequest: \(String(describing: String(data: data, encoding: .utf8)))")
             } catch {
-                print("""
-                    Error on line: \(#line) in function: \(#function)\n
-                    Readable error: \(error.localizedDescription)\n Technical error: \(error)
-                    """)
+                print("Readable error: \(error.localizedDescription)\n Technical error: \(error)")
                 DispatchQueue.main.async {
                     completion(.failure(.decodeError(error)))
                 }
@@ -234,13 +225,13 @@ class SongController {
         let eventURL = baseURL.appendingPathComponent("event")
         let eventIdURL = eventURL.appendingPathComponent("\(forEventId)")
         let finalURL = eventIdURL.appendingPathComponent("tracks")
-        var urlRequest = URLRequest(url: finalURL)
+        let urlRequest = URLRequest(url: finalURL)
 
         dataLoader.loadData(from: urlRequest) { (data, response, error) in
             if let response = response as? HTTPURLResponse {
                 print("HTTPResponse: \(response.statusCode) in function: \(#function)")
             }
-            
+
             if let error = error {
                 print("""
                     Error: \(error.localizedDescription) on line \(#line)
@@ -251,13 +242,12 @@ class SongController {
                 }
                 return
             }
-            
+
             guard let data = data else {
                 print("Error on line: \(#line) in function: \(#function)")
                 DispatchQueue.main.async {
                     completion(.failure(.noDataError))
                 }
-
                 return
             }
 
@@ -268,16 +258,17 @@ class SongController {
                 let trackReps = try decoder.decode([TrackResponse].self, from: data)
                 var songArray: [Song] = []
                 for track in trackReps {
-                    let newSong = Song(artist: track.artist, externalURL: track.externalURL, songId: track.spotifyId, songName: track.songName, preview: track.preview, image: track.image)
+                    let newSong = Song(artist: track.artist,
+                                       externalURL: track.externalURL,
+                                       songId: track.spotifyId,
+                                       songName: track.songName,
+                                       preview: track.preview,
+                                       image: track.image)
                     songArray.append(newSong)
                 }
                 completion(.success(songArray))
-//                let songs = trackReps.compactMap { Song(}
             } catch {
-                print("""
-                    Error on line: \(#line) in function: \(#function)\n
-                    Readable error: \(error.localizedDescription)\n Technical error: \(error)
-                    """)
+                print("Readable error: \(error.localizedDescription)\n Technical error: \(error)")
                 DispatchQueue.main.async {
                     completion(.failure(.decodeError(error)))
                 }
@@ -288,7 +279,7 @@ class SongController {
 
     // MARK: - Delete Song from Requests
     func deleteTrackFromRequests(trackId: Int, completion: @escaping (Result<Bool, SongError>) -> Void) {
-        
+
         guard let bearer = Bearer.shared.token else {
             print("Error on line: \(#line) in function: \(#function)\n")
             //CHANGE ERROR
@@ -300,13 +291,12 @@ class SongController {
         let trackURL = authURL.appendingPathComponent("track")
         let trackIdURL = trackURL.appendingPathComponent("\(trackId)")
         var urlRequest = URLRequest(url: trackIdURL)
-        
+
         urlRequest.httpMethod = HTTPMethod.delete.rawValue
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.setValue("\(bearer)", forHTTPHeaderField: "Authorization")
         //nothing goes into the body
-        
-        
+
     }
 
     // MARK: - Upvote Song
