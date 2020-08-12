@@ -278,7 +278,6 @@
 		1BF6A46F24E32E8900519E82 /* Song Response */ = {
 			isa = PBXGroup;
 			children = (
-				1BF6A47024E32EAD00519E82 /* TrackRequest.swift */,
 				1BC33A6A24E383B000734519 /* TrackResponse.swift */,
 			);
 			path = "Song Response";
@@ -288,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				44352AC824B7C68B00E449F2 /* TrackRepresentation.swift */,
+				1BF6A47024E32EAD00519E82 /* TrackRequest.swift */,
 			);
 			path = "Song Request";
 			sourceTree = "<group>";
@@ -315,8 +315,8 @@
 		44352AC524B770A700E449F2 /* Song Model */ = {
 			isa = PBXGroup;
 			children = (
-				1BF6A46F24E32E8900519E82 /* Song Response */,
 				44352AC624B7C4E300E449F2 /* Song+Convenience.swift */,
+				1BF6A46F24E32E8900519E82 /* Song Response */,
 				1BF6A47224E346AD00519E82 /* Song Request */,
 			);
 			path = "Song Model";

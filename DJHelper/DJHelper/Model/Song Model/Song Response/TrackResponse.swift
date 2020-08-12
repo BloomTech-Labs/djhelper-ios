@@ -32,7 +32,7 @@ struct TrackResponse: Codable {
     var preview: String
     var image: URL
     var eventId: Int
-    
+
     enum CodingKeys: String, CodingKey {
         case trackId = "id"
         case spotifyId = "spotify_id"
@@ -44,7 +44,7 @@ struct TrackResponse: Codable {
         case image = "img"
         case eventId = "event_id"
     }
-    
+
     init(trackId: Int, spotifyId: String, songName: String, artist: String, externalURL: URL, isExplicit: Bool, preview: String, image: URL, eventId: Int) {
         self.trackId = trackId
         self.spotifyId = spotifyId
@@ -56,9 +56,9 @@ struct TrackResponse: Codable {
         self.image = image
         self.eventId = eventId
     }
-    
+
     //MARK: - CODABLE INITIALIZERS
-    
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         trackId = try container.decode(Int.self, forKey: .trackId)
@@ -71,7 +71,7 @@ struct TrackResponse: Codable {
         image = try container.decode(URL.self, forKey: .image)
         eventId = try container.decode(Int.self, forKey: .eventId)
     }
-    
+
     func encode(with encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(trackId, forKey: .trackId)

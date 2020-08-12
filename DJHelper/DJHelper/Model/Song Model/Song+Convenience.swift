@@ -20,10 +20,10 @@ extension Song {
                                   songId: songId ?? "",
                                   songName: songName)
     }
-    
-    var songToSetlist: TrackRequest? {
-        return TrackRequest(trackId: <#T##Int#>, spotifyId: <#T##String#>, songName: <#T##String#>, artist: <#T##String#>, externalURL: <#T##URL#>, isExplicit: <#T##Bool#>, preview: <#T##String#>, image: <#T##URL#>, eventId: <#T##Int#>)
-    }
+
+//    var songToSetlist: TrackRequest? {
+//        return TrackRequest(trackId: <#T##Int#>, spotifyId: <#T##String#>, songName: <#T##String#>, artist: <#T##String#>, externalURL: <#T##URL#>, isExplicit: <#T##Bool#>, preview: <#T##String#>, image: <#T##URL#>, eventId: <#T##Int#>)
+//    }
 
     @discardableResult convenience init(artist: String,
                                         explicit: Bool = true,
@@ -32,6 +32,8 @@ extension Song {
                                         songId: String?,
                                         songName: String,
                                         upVotes: Int = 0,
+                                        preview: String?,
+                                        image: URL?,
                                         context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
     self.init(context: context)
     self.artist = artist
@@ -41,8 +43,11 @@ extension Song {
     self.songId = songId
     self.songName = songName
     self.upVotes = Int32(upVotes)
+        self.preview = preview
+        self.image = image
     }
 
+    //TrackRep -> Song
     @discardableResult convenience init?(songRepresentation: TrackRepresentation,
                                          context: NSManagedObjectContext) {
 
@@ -50,6 +55,6 @@ extension Song {
                   explicit: songRepresentation.explicit,
                   externalURL: songRepresentation.externalURL,
                   songId: songRepresentation.songId,  // FIXME
-                  songName: songRepresentation.songName)
+            songName: songRepresentation.songName, preview: songRepresentation.preview, image: songRepresentation.image)
     }
 }
