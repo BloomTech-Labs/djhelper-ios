@@ -20,10 +20,27 @@ extension Song {
                                   songId: songId ?? "",
                                   songName: songName)
     }
-
-//    var songToSetlist: TrackRequest? {
-//        return TrackRequest(trackId: <#T##Int#>, spotifyId: <#T##String#>, songName: <#T##String#>, artist: <#T##String#>, externalURL: <#T##URL#>, isExplicit: <#T##Bool#>, preview: <#T##String#>, image: <#T##URL#>, eventId: <#T##Int#>)
-//    }
+//convert song into a trackRequest to send to server - this happens when the user taps the add button in the cells
+    var songToTrackRequest: TrackRequest? {
+        guard let songId = songId,
+        let artist = artist,
+        let songName = songName,
+        let externalURL = externalURL,
+        let preview = preview,
+        let image = image,
+            let eventId = event?.eventID
+        else {
+            print("Error on line: \(#line) in function: \(#function)\n")
+            return nil
+        }
+        return TrackRequest(spotifyId: songId,
+                            songName: songName,
+                            artist: artist,
+                            externalURL: externalURL, isExplicit: explicit,
+                            preview: preview,
+                            image: image,
+                            eventId: eventId)
+    }
 
     @discardableResult convenience init(artist: String,
                                         explicit: Bool = true,
