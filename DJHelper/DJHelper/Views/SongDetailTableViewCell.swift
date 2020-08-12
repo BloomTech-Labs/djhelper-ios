@@ -60,7 +60,13 @@ class SongDetailTableViewCell: UITableViewCell {
     }
 
     func addSongRequest(_ song: Song) {
-        // Insert network call here to request a song
+        guard let songController = songController else { return }
+
+        songController.addSongToRequest(song) { (result) in
+            // I think the addSongToRequest might need to be modified
+            // it takes a song, but we need to verify that the song
+            // that it's taking includes the correct trackID for the backend
+        }
     }
 
     func cancelSongRequest(_ song: Song) {
