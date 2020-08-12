@@ -8,7 +8,7 @@
 
 import Foundation
 
-///Struct is for when the dj wants to see which songs/tracks guests have requested.
+/// Struct is for when the dj wants to see which songs/tracks guests have requested.
 /*
  {
    "id": 3,
