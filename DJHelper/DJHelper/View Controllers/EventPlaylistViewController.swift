@@ -95,6 +95,9 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
 //        self.navigationController?.present(hostProfileVC, animated: true, completion: nil)
     }
 
+    @IBAction func shareEventButtonPressed(_ sender: UIBarButtonItem) {
+    }
+    
     // MARK: - Methods
     @objc func refreshSongData(_ sender: Any) {
         updateSongList()

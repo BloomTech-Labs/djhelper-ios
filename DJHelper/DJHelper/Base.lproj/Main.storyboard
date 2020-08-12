@@ -796,6 +796,9 @@
                                     <navigationItem id="hxG-Tj-nqX">
                                         <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.arrow.up" catalog="system" id="dkW-72-BpV">
                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <connections>
+                                                <action selector="shareEventButtonPressed:" destination="kQQ-kj-GmS" id="ArF-gQ-Nvf"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
