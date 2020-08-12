@@ -266,6 +266,12 @@ class SongController {
             do {
                 //turn the array of taskreps into songs
                 let trackReps = try decoder.decode([TrackResponse].self, from: data)
+                var songArray: [Song] = []
+                for track in trackReps {
+                    let newSong = Song(artist: track.artist, externalURL: track.externalURL, songId: track.spotifyId, songName: track.songName, preview: track.preview, image: track.image)
+                    songArray.append(newSong)
+                }
+                completion(.success(songArray))
 //                let songs = trackReps.compactMap { Song(}
             } catch {
                 print("""

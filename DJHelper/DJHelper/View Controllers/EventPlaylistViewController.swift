@@ -62,6 +62,18 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
     @IBAction func requestButtonSelected(_ sender: UIButton) {
         currentSongState = .requested
         updateViews()
+        guard let event = event else { return }
+        songController.fetchAllTracksFromRequestList(forEventId: Int(event.eventID)) { (result) in
+            switch result {
+            case let .success(requests):
+                DispatchQueue.main.async {
+                    self.requestedSongs = requests
+                    self.tableView.reloadData()
+                }
+            case let .failure(error):
+                print("Error in fetching all requested songs: \(error)")
+            }
+        }
     }
 
     @IBAction func setlistButtonSelected(_ sender: UIButton) {
@@ -226,16 +238,16 @@ extension EventPlaylistViewController: UITableViewDataSource {
         switch currentSongState {
         case .requested:
             let song = requestedSongs[indexPath.row]
+            cell.currentSongState = .requested
             cell.song = song
-            cell.currentSongState = self.currentSongState
         case .setListed:
             let song = setListedSongs[indexPath.row]
+            cell.currentSongState = .setListed
             cell.song = song
-            cell.currentSongState = self.currentSongState
         case .searched:
             let song = searchResults[indexPath.row]
+            cell.currentSongState = .searched
             cell.song = song
-            cell.currentSongState = self.currentSongState
         }
 
         return cell

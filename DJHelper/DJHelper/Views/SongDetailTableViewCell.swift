@@ -12,7 +12,7 @@ class SongDetailTableViewCell: UITableViewCell {
 
     var currentSongState: SongState? {
         didSet {
-            updateViews()
+//            updateViews()
         }
     }
 
