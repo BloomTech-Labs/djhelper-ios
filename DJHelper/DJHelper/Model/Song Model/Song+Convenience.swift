@@ -20,6 +20,10 @@ extension Song {
                                   songId: songId ?? "",
                                   songName: songName)
     }
+    
+    var songToSetlist: TrackRequest? {
+        return TrackRequest(trackId: <#T##Int#>, spotifyId: <#T##String#>, songName: <#T##String#>, artist: <#T##String#>, externalURL: <#T##URL#>, isExplicit: <#T##Bool#>, preview: <#T##String#>, image: <#T##URL#>, eventId: <#T##Int#>)
+    }
 
     @discardableResult convenience init(artist: String,
                                         explicit: Bool = true,

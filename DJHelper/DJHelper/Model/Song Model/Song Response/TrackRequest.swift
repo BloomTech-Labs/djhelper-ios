@@ -8,22 +8,8 @@
 
 import Foundation
 
-///Struct is for when the dj wants to see which songs/tracks guests have requested.
-/*
- {
-   "id": 3,
-   "spotify_id": "4v7SAP4KD96BFLWiCd1vF0",
-   "name": "Madonna",
-   "artist_name": "Drake",
-   "url": "https://open.spotify.com/track/4v7SAP4KD96BFLWiCd1vF0",
-   "isExplicit": true,
-   "preview": "http://bit.ly/2nXRRfX",
-   "img": "https://i.scdn.co/image/ab67616d00001e022090f4f6cc406e6d3c306733",
-   "event_id": 51
- }
- */
-struct TrackResponse: Codable {
-    var trackId: Int
+struct TrackRequest: Codable {
+    var trackId: Int //response includes this
     var spotifyId: String
     var songName: String
     var artist: String
