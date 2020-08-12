@@ -53,27 +53,30 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
         tableView.keyboardDismissMode = .onDrag
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshSongData(_:)), for: .valueChanged)
-
+        fetchRequestList()
         updateViews()
         updateSongList()
+    }
+    private func fetchRequestList() {
+        guard let event = event else { return }
+         songController.fetchAllTracksFromRequestList(forEventId: Int(event.eventID)) { (result) in
+             switch result {
+             case let .success(requests):
+                 DispatchQueue.main.async {
+                     self.requestedSongs = requests
+                     self.tableView.reloadData()
+                 }
+             case let .failure(error):
+                 print("Error in fetching all requested songs: \(error)")
+             }
+         }
     }
 
     // MARK: - Actions
     @IBAction func requestButtonSelected(_ sender: UIButton) {
         currentSongState = .requested
         updateViews()
-        guard let event = event else { return }
-        songController.fetchAllTracksFromRequestList(forEventId: Int(event.eventID)) { (result) in
-            switch result {
-            case let .success(requests):
-                DispatchQueue.main.async {
-                    self.requestedSongs = requests
-                    self.tableView.reloadData()
-                }
-            case let .failure(error):
-                print("Error in fetching all requested songs: \(error)")
-            }
-        }
+        fetchRequestList()
     }
 
     @IBAction func setlistButtonSelected(_ sender: UIButton) {
