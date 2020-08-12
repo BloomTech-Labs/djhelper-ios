@@ -265,7 +265,7 @@ class SongController {
 
             do {
                 //turn the array of taskreps into songs
-                let trackReps = try decoder.decode([TrackRepresentation].self, from: data)
+                let trackReps = try decoder.decode([TrackResponse].self, from: data)
 //                let songs = trackReps.compactMap { Song(}
             } catch {
                 print("""

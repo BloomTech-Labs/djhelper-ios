@@ -178,13 +178,6 @@
 			path = "Playlist Model";
 			sourceTree = "<group>";
 		};
-		1B71118A24D2A33400BF4256 /* Xib */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Xib;
-			sourceTree = "<group>";
-		};
 		1BA4A8B92485B004002A67E2 /* Host Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -405,7 +398,6 @@
 		447F53782475805D00F706F1 /* DJHelper */ = {
 			isa = PBXGroup;
 			children = (
-				1B71118A24D2A33400BF4256 /* Xib */,
 				4446F79F24763969005ACE10 /* Model */,
 				44BA393824BF9F93009E1680 /* Controller */,
 				4446F79E24763959005ACE10 /* Networking */,
