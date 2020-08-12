@@ -296,7 +296,21 @@ class SongController {
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.setValue("\(bearer)", forHTTPHeaderField: "Authorization")
         //nothing goes into the body
-
+        dataLoader.loadData(from: urlRequest) { (_, response, error) in
+            if let response = response as? HTTPURLResponse {
+                print("HTTPResponse: \(response.statusCode) in function: \(#function)")
+            }
+            
+            if let error = error {
+                print("""
+                    Error: \(error.localizedDescription) on line \(#line)
+                    in function: \(#function)\n Technical error: \(error)
+                    """)
+                completion(.failure(.otherError(error)))
+            }
+         // nothing comes back
+            completion(.success(true))
+        }
     }
 
     // MARK: - Upvote Song
