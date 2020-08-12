@@ -27,7 +27,9 @@
         <attribute name="artist" attributeType="String"/>
         <attribute name="explicit" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="externalURL" optional="YES" attributeType="URI"/>
+        <attribute name="image" optional="YES" attributeType="URI"/>
         <attribute name="inSetList" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="preview" optional="YES" attributeType="String"/>
         <attribute name="songId" optional="YES" attributeType="String"/>
         <attribute name="songID" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="songName" attributeType="String"/>
@@ -38,6 +40,6 @@
     <elements>
         <element name="Event" positionX="157.0234375" positionY="22.32421875" width="128" height="178"/>
         <element name="Host" positionX="-45" positionY="0" width="128" height="193"/>
-        <element name="Song" positionX="340.79296875" positionY="53.16015625" width="128" height="193"/>
+        <element name="Song" positionX="340.79296875" positionY="53.16015625" width="128" height="223"/>
     </elements>
 </model>

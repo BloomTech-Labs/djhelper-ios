@@ -166,7 +166,9 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
             case let .success(songResults):
                 DispatchQueue.main.async {
                     for song in songResults {
-                        let newSong = Song(artist: song.artist, externalURL: song.externalURL, songId: song.songId, songName: song.songName)
+                        let newSong = Song(artist: song.artist, externalURL: song.externalURL, songId: song.songId, songName: song.songName,
+                            preview: song.preview,
+                            image: song.image)
                         self.searchResults.append(newSong)
                     }
                     self.currentSongState = .searched
