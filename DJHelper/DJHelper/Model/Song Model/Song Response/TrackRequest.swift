@@ -7,9 +7,20 @@
 //
 
 import Foundation
-
+///Posting a track to request
+/*
+ {
+   "spotify_id": "4v7SAP4KD96BFLWiCd1vF0",
+   "name": "Madonna",
+   "artist_name": "Drake",
+   "url": "https://open.spotify.com/track/4v7SAP4KD96BFLWiCd1vF0",
+   "isExplicit": true,
+   "preview": "http://bit.ly/2nXRRfX",
+   "img": "https://i.scdn.co/image/ab67616d00001e022090f4f6cc406e6d3c306733",
+   "event_id": 51
+ }
+ */
 struct TrackRequest: Codable {
-    var trackId: Int //response includes this
     var spotifyId: String
     var songName: String
     var artist: String
@@ -20,7 +31,6 @@ struct TrackRequest: Codable {
     var eventId: Int
     
     enum CodingKeys: String, CodingKey {
-        case trackId = "id"
         case spotifyId = "spotify_id"
         case songName = "name"
         case artist = "artist_name"
@@ -31,8 +41,7 @@ struct TrackRequest: Codable {
         case eventId = "event_id"
     }
     
-    init(trackId: Int, spotifyId: String, songName: String, artist: String, externalURL: URL, isExplicit: Bool, preview: String, image: URL, eventId: Int) {
-        self.trackId = trackId
+    init(spotifyId: String, songName: String, artist: String, externalURL: URL, isExplicit: Bool, preview: String, image: URL, eventId: Int) {
         self.spotifyId = spotifyId
         self.songName = songName
         self.artist = artist
@@ -47,7 +56,6 @@ struct TrackRequest: Codable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        trackId = try container.decode(Int.self, forKey: .trackId)
         spotifyId = try container.decode(String.self, forKey: .spotifyId)
         songName = try container.decode(String.self, forKey: .songName)
         artist = try container.decode(String.self, forKey: .artist)
@@ -59,7 +67,6 @@ struct TrackRequest: Codable {
     }
     
     func encode(with encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(trackId, forKey: .trackId)
         try container.encode(spotifyId, forKey: .spotifyId)
         try container.encode(songName, forKey: .songName)
