@@ -271,18 +271,21 @@ extension EventPlaylistViewController: UITableViewDataSource {
             cell.currentSongState = .requested
             cell.songController = songController
             cell.eventID = event?.eventID ?? 0
+            cell.isGuest = self.isGuest
             cell.song = song
         case .setListed:
             let song = setListedSongs[indexPath.row]
             cell.currentSongState = .setListed
             cell.songController = songController
             cell.eventID = event?.eventID ?? 0
+            cell.isGuest = self.isGuest
             cell.song = song
         case .searched:
             let song = searchResults[indexPath.row]
             cell.currentSongState = .searched
             cell.songController = songController
             cell.eventID = event?.eventID ?? 0
+            cell.isGuest = self.isGuest
             cell.song = song
         }
 

@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 enum SongError: Error {
     case authorizationError(Error)
@@ -315,4 +316,39 @@ class SongController {
     }
 
     // MARK: - Upvote Song
+}
+
+    // TODO: Move the following code to the song controller. Here temporarily in order to stay out of other files
+extension SongController {
+    func fetchCoverArt(url: URL, completion: @escaping (Result<UIImage, SongError>) -> Void) {
+        let urlRequest = URLRequest(url: url)
+
+        dataLoader.loadData(from: urlRequest) { (possibleData, possibleResponse, possibleError) in
+            if let response = possibleResponse as? HTTPURLResponse {
+                print("HTTPResponse: \(response.statusCode) in function: \(#function)")
+            }
+
+            if let error = possibleError {
+                print("""
+                    Error: \(error.localizedDescription) on line \(#line)
+                    in function: \(#function)\nTechnical error: \(error)
+                    """)
+                completion(.failure(.otherError(error)))
+                return
+            }
+
+            guard let data = possibleData else {
+                print("Error on line: \(#line) in function: \(#function)")
+                completion(.failure(.noDataError))
+                return
+            }
+
+            if let image = UIImage(data: data) {
+                completion(.success(image))
+            } else {
+                print("Could not retrieve cover art image")
+                completion(.failure(.noDataError))
+            }
+        }
+    }
 }
