@@ -75,13 +75,17 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
 
     // MARK: - Actions
     @IBAction func requestButtonSelected(_ sender: UIButton) {
-        currentSongState = .requested
-        updateViews()
+        // when a guest is viewing, this is the request button
+        // when a host/DJ is viewing, this is the setlist button
+        isGuest ? (currentSongState = .requested) : (currentSongState = .setListed)
         fetchRequestList()
+        updateViews()
     }
 
     @IBAction func setlistButtonSelected(_ sender: UIButton) {
-        currentSongState = .setListed
+        // when a guest is viewing, this is the setlist button
+        // when a host/DJ is viewing, this is the request button
+        isGuest ? (currentSongState = .setListed) : (currentSongState = .requested)
         updateViews()
     }
 

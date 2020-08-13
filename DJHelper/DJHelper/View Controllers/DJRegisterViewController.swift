@@ -41,9 +41,16 @@ class DJRegisterViewController: ShiftableViewController {
 
     func setupButtons() {
         createAccountButton.colorTheme()
+        usernameTextField.textContentType = .username
         usernameTextField.textColor = UIColor(named: "customTextColor")
+        emailTextField.textContentType = .emailAddress
+        emailTextField.keyboardType = .emailAddress
         emailTextField.textColor = UIColor(named: "customTextColor")
         passwordTextField.textColor = UIColor(named: "customTextColor")
+        passwordTextField.textContentType = .password
+        passwordTextField.isSecureTextEntry = true
+        confirmTextField.textContentType = .password
+        confirmTextField.isSecureTextEntry = true
     }
 
     // Programmatically setting up the Sign In button in the view.
