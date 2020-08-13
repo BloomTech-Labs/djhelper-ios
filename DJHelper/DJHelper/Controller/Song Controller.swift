@@ -160,11 +160,12 @@ class SongController {
     // MARK: - Delete Song from Playlist
 
     // MARK: - Add Song to Requests
-    func addSongToRequest(_ song: Song, completion: @escaping (Result<TrackRequest, SongError>) -> Void) {
-        guard let trackRepresntation = song.songRepresentation else {
-            print("Error on line: \(#line) in function: \(#function)\n")
-            return
-        }
+
+    func addSongToRequest(_ song: TrackRequest, completion: @escaping (Result<TrackRequest, SongError>) -> Void) {
+//        guard let trackRepresntation = song.songRepresentation else {
+//            print("Error on line: \(#line) in function: \(#function)\n")
+//            return
+//        }
 
     //put trackRepresntation in body of http
         let url = baseURL.appendingPathComponent("track")
@@ -175,7 +176,7 @@ class SongController {
         let encoder = JSONEncoder()
 
         do {
-            urlRequest.httpBody = try encoder.encode(trackRepresntation)
+            urlRequest.httpBody = try encoder.encode(song)
         } catch {
             print("Readable error: \(error.localizedDescription)\n Technical error: \(error)")
             completion(.failure(.encodeError(error)))

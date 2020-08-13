@@ -16,6 +16,8 @@ class SongDetailTableViewCell: UITableViewCell {
         }
     }
     var songController: SongController?
+    var eventID: Int32 = 0
+    var trackRequestRepresentation: TrackRequest?
     var song: Song? {
         didSet {
             updateViews()
@@ -38,11 +40,15 @@ class SongDetailTableViewCell: UITableViewCell {
     }
 
     @IBAction func requestSong(_ sender: UIButton) {
-        guard let song = song else { return }
+        guard let song = song,
+            let requestedSongConstant: TrackRequest = song.songToTrackRequest  else { return }
+        trackRequestRepresentation = requestedSongConstant
+        trackRequestRepresentation!.eventId = eventID
+        print(trackRequestRepresentation)
         if addSongButton.isSelected {
-            addSongRequest(song)
+            cancelSongRequest(trackRequestRepresentation!)
         } else {
-            cancelSongRequest(song)
+            addSongRequest(trackRequestRepresentation!)
         }
         addSongButton.isSelected.toggle()
 
@@ -59,17 +65,20 @@ class SongDetailTableViewCell: UITableViewCell {
         upvoteSongButton.isSelected.toggle()
     }
 
-    func addSongRequest(_ song: Song) {
+    func addSongRequest(_ song: TrackRequest) {
         guard let songController = songController else { return }
 
         songController.addSongToRequest(song) { (result) in
-            // I think the addSongToRequest might need to be modified
-            // it takes a song, but we need to verify that the song
-            // that it's taking includes the correct trackID for the backend
+            switch result {
+            case .success:
+                break
+            case let .failure(error):
+                print("Error adding song request: \(error)")
+            }
         }
     }
 
-    func cancelSongRequest(_ song: Song) {
+    func cancelSongRequest(_ song: TrackRequest) {
         // Insert network call here to delete the existing request
     }
 
@@ -103,6 +112,9 @@ class SongDetailTableViewCell: UITableViewCell {
 
         songLabel.text = song.songName
         artistLabel.text = song.artist
+        if trackRequestRepresentation?.eventId == 0 {
+            addSongButton.isSelected = false
+        }
 
         switch currentSongState {
         case .requested:
@@ -128,7 +140,7 @@ class SongDetailTableViewCell: UITableViewCell {
 
     // TODO: Move the following code to the song controller. Here temporarily in order to stay out of other files
 extension SongController {
-    func fetchCoverArt(url: URL, completion: @escaping (Result<UIImage, SongError>) -> ()) {
+    func fetchCoverArt(url: URL, completion: @escaping (Result<UIImage, SongError>) -> Void) {
         let urlRequest = URLRequest(url: url)
 
         dataLoader.loadData(from: urlRequest) { (possibleData, possibleResponse, possibleError) in

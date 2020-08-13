@@ -27,8 +27,8 @@ extension Song {
         let songName = songName,
         let externalURL = externalURL,
         let preview = preview,
-        let image = image,
-            let eventId = event?.eventID
+        let image = image//,
+//        let eventId = event?.eventID   changed this line
         else {
             print("Error on line: \(#line) in function: \(#function)\n")
             return nil
@@ -39,7 +39,7 @@ extension Song {
                             externalURL: externalURL, isExplicit: explicit,
                             preview: preview,
                             image: image,
-                            eventId: eventId)
+                            eventId: event?.eventID ?? 0) // changed this line
     }
 
     @discardableResult convenience init(artist: String,
