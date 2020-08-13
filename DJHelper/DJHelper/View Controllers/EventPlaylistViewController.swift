@@ -44,6 +44,7 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
     @IBOutlet var timeLabel: UILabel!
     @IBOutlet var leftRequestSetlistButton: UIButton!
     @IBOutlet var rightRequestSetlistButton: UIButton!
+    @IBOutlet weak var shareButtonProperties: UIBarButtonItem!
 
     // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
@@ -53,27 +54,30 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
         tableView.keyboardDismissMode = .onDrag
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshSongData(_:)), for: .valueChanged)
-
+        fetchRequestList()
         updateViews()
         updateSongList()
+    }
+    private func fetchRequestList() {
+        guard let event = event else { return }
+         songController.fetchAllTracksFromRequestList(forEventId: Int(event.eventID)) { (result) in
+             switch result {
+             case let .success(requests):
+                 DispatchQueue.main.async {
+                     self.requestedSongs = requests
+                     self.tableView.reloadData()
+                 }
+             case let .failure(error):
+                 print("Error in fetching all requested songs: \(error)")
+             }
+         }
     }
 
     // MARK: - Actions
     @IBAction func requestButtonSelected(_ sender: UIButton) {
         currentSongState = .requested
         updateViews()
-        guard let event = event else { return }
-        songController.fetchAllTracksFromRequestList(forEventId: Int(event.eventID)) { (result) in
-            switch result {
-            case let .success(requests):
-                DispatchQueue.main.async {
-                    self.requestedSongs = requests
-                    self.tableView.reloadData()
-                }
-            case let .failure(error):
-                print("Error in fetching all requested songs: \(error)")
-            }
-        }
+        fetchRequestList()
     }
 
     @IBAction func setlistButtonSelected(_ sender: UIButton) {
@@ -92,11 +96,32 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
 //        self.navigationController?.present(hostProfileVC, animated: true, completion: nil)
     }
 
+    @IBAction func shareEventButtonPressed(_ sender: UIBarButtonItem) {
+        guard let passedInEvent = event, let eventDate = passedInEvent.eventDate else {
+            print("No event passed to the EventPlaylistVC.\nError on line: \(#line) in function: \(#function)\n")
+            return
+        }
+        guard eventDate > Date() else {
+            print("Event has already passed. Error on line: \(#line) in function: \(#function)\n")
+            return
+        }
+
+        print("eventId to pass with link: \(passedInEvent.eventID)")
+
+        let message = "Hey! Please check out this new event I created!"
+        let tempUrlToPass = URL(string: "djscheme://www.djhelper.com/guestLogin?eventId=\(passedInEvent.eventID)")!
+        let objectsToShare: [Any] = [message, tempUrlToPass]
+
+        let activityController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        present(activityController, animated: true, completion: nil)
+    }
+
     // MARK: - Methods
     @objc func refreshSongData(_ sender: Any) {
         updateSongList()
     }
 
+    
     func updateSongList() {
         // call to the server for songs in event playlist or requested songs
         // set the returned results to some variable
@@ -124,6 +149,11 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
             let time = timeToString(with: eventDate)
             dateLabel.textColor = UIColor(named: "PurpleColor")
             dateLabel.text = String("\(longDate) ▪︎ \(time)")
+            if eventDate > Date() {
+                shareButtonProperties.isEnabled = true
+            } else {
+                shareButtonProperties.isEnabled = false
+            }
         }
 
         let buttonTitle = NSMutableAttributedString(string: "\(currentHost.name ?? "EventHost")", attributes: [

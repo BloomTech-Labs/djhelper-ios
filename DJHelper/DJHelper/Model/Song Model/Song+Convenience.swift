@@ -74,5 +74,5 @@ extension Song {
                   songId: songRepresentation.songId,  // FIXME
             songName: songRepresentation.songName, preview: songRepresentation.preview, image: songRepresentation.image)
     }
-    
+
 }

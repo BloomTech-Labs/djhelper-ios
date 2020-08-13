@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Struct is for when the dj wants to see which songs/tracks guests have requested.
+// Struct is for when the dj wants to see which songs/tracks guests have requested.
 /*
  {
    "id": 3,
@@ -45,7 +45,16 @@ struct TrackResponse: Codable {
         case eventId = "event_id"
     }
 
-    init(trackId: Int, spotifyId: String, songName: String, artist: String, externalURL: URL, isExplicit: Bool, preview: String, image: URL, eventId: Int) {
+    init(trackId: Int,
+         spotifyId: String,
+         songName: String,
+         artist: String,
+         externalURL: URL,
+         isExplicit: Bool,
+         preview: String,
+         image: URL,
+         eventId: Int) {
+
         self.trackId = trackId
         self.spotifyId = spotifyId
         self.songName = songName
@@ -57,7 +66,7 @@ struct TrackResponse: Codable {
         self.eventId = eventId
     }
 
-    //MARK: - CODABLE INITIALIZERS
+    // MARK: - CODABLE INITIALIZERS
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
