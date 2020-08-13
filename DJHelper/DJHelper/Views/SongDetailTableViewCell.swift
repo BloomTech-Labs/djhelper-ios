@@ -15,7 +15,9 @@ class SongDetailTableViewCell: UITableViewCell {
 //            updateViews()
         }
     }
-
+    var songController: SongController?
+    var eventID: Int32 = 0
+    var trackRequestRepresentation: TrackRequest?
     var song: Song? {
         didSet {
             updateViews()
@@ -38,11 +40,15 @@ class SongDetailTableViewCell: UITableViewCell {
     }
 
     @IBAction func requestSong(_ sender: UIButton) {
-        guard let song = song else { return }
+        guard let song = song,
+            let requestedSongConstant: TrackRequest = song.songToTrackRequest  else { return }
+        trackRequestRepresentation = requestedSongConstant
+        trackRequestRepresentation!.eventId = eventID
+        print(trackRequestRepresentation)
         if addSongButton.isSelected {
-            addSongRequest(song)
+            cancelSongRequest(trackRequestRepresentation!)
         } else {
-            cancelSongRequest(song)
+            addSongRequest(trackRequestRepresentation!)
         }
         addSongButton.isSelected.toggle()
 
@@ -59,11 +65,20 @@ class SongDetailTableViewCell: UITableViewCell {
         upvoteSongButton.isSelected.toggle()
     }
 
-    func addSongRequest(_ song: Song) {
-        // Insert network call here to request a song
+    func addSongRequest(_ song: TrackRequest) {
+        guard let songController = songController else { return }
+
+        songController.addSongToRequest(song) { (result) in
+            switch result {
+            case .success:
+                break
+            case let .failure(error):
+                print("Error adding song request: \(error)")
+            }
+        }
     }
 
-    func cancelSongRequest(_ song: Song) {
+    func cancelSongRequest(_ song: TrackRequest) {
         // Insert network call here to delete the existing request
     }
 
@@ -76,11 +91,30 @@ class SongDetailTableViewCell: UITableViewCell {
     }
 
     func updateViews() {
-        guard let song = song else { return }
+        guard let song = song,
+        let songController = songController else { return }
 
-        coverArtImageView.image = #imageLiteral(resourceName: "musicSymbol")
+        // TODO: Move this network call from the cell
+        if let coverArtURL = song.image {
+            songController.fetchCoverArt(url: coverArtURL) { (result) in
+                switch result {
+                case let .success(image):
+                    DispatchQueue.main.async {
+                        self.coverArtImageView.image = image
+                    }
+                case .failure:
+                    DispatchQueue.main.async {
+                        self.coverArtImageView.image = #imageLiteral(resourceName: "musicSymbol")
+                    }
+                }
+            }
+        }
+
         songLabel.text = song.songName
         artistLabel.text = song.artist
+        if trackRequestRepresentation?.eventId == 0 {
+            addSongButton.isSelected = false
+        }
 
         switch currentSongState {
         case .requested:
@@ -100,6 +134,41 @@ class SongDetailTableViewCell: UITableViewCell {
             voteCountLabel.isHidden = true
             upvoteSongButton.isHidden = true
             addSongButton.isHidden = false
+        }
+    }
+}
+
+    // TODO: Move the following code to the song controller. Here temporarily in order to stay out of other files
+extension SongController {
+    func fetchCoverArt(url: URL, completion: @escaping (Result<UIImage, SongError>) -> Void) {
+        let urlRequest = URLRequest(url: url)
+
+        dataLoader.loadData(from: urlRequest) { (possibleData, possibleResponse, possibleError) in
+            if let response = possibleResponse as? HTTPURLResponse {
+                print("HTTPResponse: \(response.statusCode) in function: \(#function)")
+            }
+
+            if let error = possibleError {
+                print("""
+                    Error: \(error.localizedDescription) on line \(#line)
+                    in function: \(#function)\nTechnical error: \(error)
+                    """)
+                completion(.failure(.otherError(error)))
+                return
+            }
+
+            guard let data = possibleData else {
+                print("Error on line: \(#line) in function: \(#function)")
+                completion(.failure(.noDataError))
+                return
+            }
+
+            if let image = UIImage(data: data) {
+                completion(.success(image))
+            } else {
+                print("Could not retrieve cover art image")
+                completion(.failure(.noDataError))
+            }
         }
     }
 }
