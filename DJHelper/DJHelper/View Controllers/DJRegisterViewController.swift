@@ -44,6 +44,7 @@ class DJRegisterViewController: ShiftableViewController {
         usernameTextField.textContentType = .username
         usernameTextField.textColor = UIColor(named: "customTextColor")
         emailTextField.textContentType = .emailAddress
+        emailTextField.keyboardType = .emailAddress
         emailTextField.textColor = UIColor(named: "customTextColor")
         passwordTextField.textColor = UIColor(named: "customTextColor")
         passwordTextField.textContentType = .password
