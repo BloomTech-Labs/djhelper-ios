@@ -146,4 +146,47 @@ class SongDetailTableViewCell: UITableViewCell {
             addSongButton.isHidden = false
         }
     }
+
+    // MARK: - Updateviews Methods
+    /// Guest should see request list and be able to upvote the song and see it's vote count
+    func updateGuestRequestsViews() {
+        voteCountLabel.isHidden = false
+        upvoteSongButton.isHidden = false
+        addSongButton.isHidden = true
+    }
+
+    /// Hosts should be able to see votes and add/remove to setlist
+    func updateHostRequestsViews() {
+        addSongButton.isHidden = false
+        upvoteSongButton.isHidden = true
+        voteCountLabel.isHidden = false
+    }
+
+    /// Guest should only be able to see the song on the setlist and it's voteCount
+    func updateGuestSetlistViews() {
+    voteCountLabel.isHidden = false
+    upvoteSongButton.isHidden = true
+    addSongButton.isHidden = true
+    }
+
+    /// Host should be able to see votes of song on setlist and remove it from list
+    func updateHostSetlistViews() {
+        addSongButton.isHidden = true
+        upvoteSongButton.isHidden = true
+        voteCountLabel.isHidden = false
+    }
+
+    ///Guest should be able to only add the song to the request list
+    func updateGuestSearchViews() {
+        addSongButton.isHidden = false
+        upvoteSongButton.isHidden = true
+        voteCountLabel.isHidden = true
+    }
+
+    /// Host should be able to search for a song and add it to the SetList
+    func updateHostSearchSongViews() {
+        addSongButton.isHidden = false
+        upvoteSongButton.isHidden = true
+        voteCountLabel.isHidden = true
+    }
 }
