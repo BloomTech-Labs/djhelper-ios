@@ -43,6 +43,7 @@ class SongDetailTableViewCell: UITableViewCell {
     }
 
     @IBAction func requestSong(_ sender: UIButton) {
+        print("requestSong button pressed")
         guard let song = song,
             let requestedSongConstant: TrackRequest = song.songToTrackRequest  else { return }
         trackRequestRepresentation = requestedSongConstant
@@ -74,14 +75,20 @@ class SongDetailTableViewCell: UITableViewCell {
         guard let songController = songController else { return }
 
         //call this function if its the guest - the host doesn't add song to request list, he adds it to the playlist
-        songController.addSongToRequest(song) { (result) in
-            switch result {
-            case .success:
-                break
-            case let .failure(error):
-                print("Error adding song request: \(error)")
+        if isGuest == true {
+            songController.addSongToRequest(song) { (result) in
+                switch result {
+                case .success:
+                    break
+                case let .failure(error):
+                    print("Error adding song request: \(error)")
+                }
             }
+        } else {
+            //host adding it to the setList
+//            songController.addson
         }
+
     }
 
     func cancelSongRequest(_ song: TrackRequest) {
@@ -100,7 +107,7 @@ class SongDetailTableViewCell: UITableViewCell {
         guard let song = song,
         let songController = songController else { return }
         // for the dj view the dj should see the plus button in the cell and consequently adds that song to the setlist
-        
+
         // TODO: Move this network call from the cell
         if let coverArtURL = song.image {
             songController.fetchCoverArt(url: coverArtURL) { (result) in

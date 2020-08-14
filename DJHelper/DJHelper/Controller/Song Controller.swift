@@ -156,8 +156,8 @@ class SongController {
         }
     }
 
-    // MARK: - Add Song (TrackResponse) to Playlist
-    func addTrackRequestToPlaylist(track: TrackResponse, completion: @escaping (Result<(), SongError>) -> Void) {
+    // MARK: - Add Songto Playlist
+    func addSongToPlaylist(song: TrackResponse, completion: @escaping (Result<(), SongError>) -> Void) {
 
         guard let bearer = Bearer.shared.token else {
             print("Error on line: \(#line) in function: \(#function)\n")
@@ -169,7 +169,7 @@ class SongController {
         let authURL = baseURL.appendingPathComponent("auth")
         let trackURL = authURL.appendingPathComponent("track")
         let moveURL = trackURL.appendingPathComponent("move")
-        let trackIdURL = moveURL.appendingPathComponent("\(track.trackId)")
+        let trackIdURL = moveURL.appendingPathComponent("\(song.trackId)")
 
         var urlRequest = URLRequest(url: trackIdURL)
         urlRequest.httpMethod = HTTPMethod.post.rawValue
@@ -178,7 +178,7 @@ class SongController {
 
         let encoder = JSONEncoder()
         do {
-            urlRequest.httpBody = try encoder.encode(track)
+            urlRequest.httpBody = try encoder.encode(song)
         } catch {
             print("Error on line: \(#line) in function: \(#function)\nReadable error: \(error.localizedDescription)\n Technical error: \(error)")
         }
