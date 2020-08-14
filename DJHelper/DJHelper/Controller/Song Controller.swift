@@ -179,7 +179,7 @@ class SongController {
         let encoder = JSONEncoder()
         do {
             urlRequest.httpBody = try encoder.encode(track)
-        } catch  {
+        } catch {
             print("Error on line: \(#line) in function: \(#function)\nReadable error: \(error.localizedDescription)\n Technical error: \(error)")
         }
 
@@ -202,6 +202,48 @@ class SongController {
         }
     }
     // MARK: - Delete Song from Playlist
+    func deleteSongFromPlaylist(track: TrackResponse, completion: @escaping (Result<(), SongError>) -> Void) {
+         guard let bearer = Bearer.shared.token else {
+             print("Error on line: \(#line) in function: \(#function)\n")
+             //CHANGE ERROR
+             completion(.failure(.noEventsInServerOrCoreData))
+             return
+             }
+
+         let authURL = baseURL.appendingPathComponent("auth")
+         let trackURL = authURL.appendingPathComponent("track")
+         let trackIdURL = trackURL.appendingPathComponent("\(track.trackId)")
+
+         var urlRequest = URLRequest(url: trackIdURL)
+         urlRequest.httpMethod = HTTPMethod.delete.rawValue
+         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+         urlRequest.setValue("\(bearer)", forHTTPHeaderField: "Authorization")
+
+         let encoder = JSONEncoder()
+         do {
+             urlRequest.httpBody = try encoder.encode(track)
+         } catch {
+             print("Error on line: \(#line) in function: \(#function)\nReadable error: \(error.localizedDescription)\n Technical error: \(error)")
+         }
+
+         dataLoader.loadData(from: urlRequest) { (data, response, error) in
+             if let response = response as? HTTPURLResponse {
+                 print("HTTPResponse: \(response.statusCode) in function: \(#function)")
+             }
+
+             if let error = error {
+                 print("Error: \(error.localizedDescription) on line \(#line) in function: \(#function)\n Technical error: \(error)")
+                 completion(.failure(.otherError(error)))
+             }
+
+             guard let _ = data else {
+                 print("Error on line: \(#line) in function: \(#function)")
+                 completion(.failure(.noDataError))
+                 return
+             }
+             completion(.success(()))
+         }
+     }
 
     // MARK: - Add Song to Requests
 
