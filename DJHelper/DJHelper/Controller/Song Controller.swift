@@ -156,8 +156,51 @@ class SongController {
         }
     }
 
-    // MARK: - Add Song to Playlist
+    // MARK: - Add Song (TrackResponse) to Playlist
+    func addTrackRequestToPlaylist(track: TrackResponse, completion: @escaping (Result<(), SongError>) -> Void) {
 
+        guard let bearer = Bearer.shared.token else {
+            print("Error on line: \(#line) in function: \(#function)\n")
+            //CHANGE ERROR
+            completion(.failure(.noEventsInServerOrCoreData))
+            return
+            }
+
+        let authURL = baseURL.appendingPathComponent("auth")
+        let trackURL = authURL.appendingPathComponent("track")
+        let moveURL = trackURL.appendingPathComponent("move")
+        let trackIdURL = moveURL.appendingPathComponent("\(track.trackId)")
+
+        var urlRequest = URLRequest(url: trackIdURL)
+        urlRequest.httpMethod = HTTPMethod.post.rawValue
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue("\(bearer)", forHTTPHeaderField: "Authorization")
+
+        let encoder = JSONEncoder()
+        do {
+            urlRequest.httpBody = try encoder.encode(track)
+        } catch  {
+            print("Error on line: \(#line) in function: \(#function)\nReadable error: \(error.localizedDescription)\n Technical error: \(error)")
+        }
+
+        dataLoader.loadData(from: urlRequest) { (data, response, error) in
+            if let response = response as? HTTPURLResponse {
+                print("HTTPResponse: \(response.statusCode) in function: \(#function)")
+            }
+
+            if let error = error {
+                print("Error: \(error.localizedDescription) on line \(#line) in function: \(#function)\n Technical error: \(error)")
+                completion(.failure(.otherError(error)))
+            }
+
+            guard let _ = data else {
+                print("Error on line: \(#line) in function: \(#function)")
+                completion(.failure(.noDataError))
+                return
+            }
+            completion(.success(()))
+        }
+    }
     // MARK: - Delete Song from Playlist
 
     // MARK: - Add Song to Requests
@@ -224,7 +267,7 @@ class SongController {
 
     // MARK: - Fetch ALL Songs/Tracks from server
     // TODO: - COMPLETE WITH AN ARRAY OF TASKRESPONSE
-    func fetchAllTracksFromRequestList(forEventId: Int, completion: @escaping (Result<[TrackResponse], SongError>) -> Void) {
+    func fetchAllTracksFromRequestList(forEventId: Int, completion: @escaping (Result<[Song], SongError>) -> Void) {
         let eventURL = baseURL.appendingPathComponent("event")
         let eventIdURL = eventURL.appendingPathComponent("\(forEventId)")
         let finalURL = eventIdURL.appendingPathComponent("tracks")
@@ -260,17 +303,17 @@ class SongController {
                 //turn the array of taskreps into songs
                 // TODO: - DO NOT TURN TASKRESPONSE INTO SONG
                 let trackResponses = try decoder.decode([TrackResponse].self, from: data)
-//                var songArray: [Song] = []
-//                for track in trackReps {
-//                    let newSong = Song(artist: track.artist,
-//                                       externalURL: track.externalURL,
-//                                       songId: track.spotifyId,
-//                                       songName: track.songName,
-//                                       preview: track.preview,
-//                                       image: track.image)
-//                    songArray.append(newSong)
-//                }
-                completion(.success(trackResponses))
+                var songArray: [Song] = []
+                for track in trackResponses {
+                    let newSong = Song(artist: track.artist,
+                                       externalURL: track.externalURL,
+                                       songId: track.spotifyId,
+                                       songName: track.songName,
+                                       preview: track.preview,
+                                       image: track.image)
+                    songArray.append(newSong)
+                }
+                completion(.success(songArray))
             } catch {
                 print("Readable error: \(error.localizedDescription)\n Technical error: \(error)")
                 DispatchQueue.main.async {

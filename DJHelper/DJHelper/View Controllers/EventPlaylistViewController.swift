@@ -28,8 +28,8 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
     let activityIndicatorView = UIActivityIndicatorView(style: .large)
     var isGuest: Bool = false
     // TODO: TURN REQUESTED SONGS INTO TRACKRESPONSES
-     var requestedSongs: [TrackResponse] = []
-//    var requestedSongs: [Song] = []
+//     var requestedSongs: [TrackResponse] = []
+    var requestedSongs: [Song] = []
     var setListedSongs: [Song] = []
     var searchResults: [Song] = []
     var myAlert = CustomAlert()

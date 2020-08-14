@@ -63,6 +63,7 @@ class SongDetailTableViewCell: UITableViewCell {
     }
 
     @IBAction func upvoteSong(_ sender: UIButton) {
+        print("upvote song button pressed")
         guard let song = song else { return }
         if upvoteSongButton.isSelected {
             addUpvoteSong(song)
@@ -74,8 +75,10 @@ class SongDetailTableViewCell: UITableViewCell {
     }
 
     func addSongRequest(_ song: TrackRequest) {
+        print("add song button pressed")
         guard let songController = songController else { return }
 
+        //call this function if its the guest - the host doesn't add song to request list, he adds it to the playlist
         songController.addSongToRequest(song) { (result) in
             switch result {
             case .success:
