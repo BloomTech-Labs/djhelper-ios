@@ -27,6 +27,7 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
     var currentSongState: SongState = .requested
     let activityIndicatorView = UIActivityIndicatorView(style: .large)
     var isGuest: Bool = false
+    // TODO: TURN REQUESTED SONGS INTO TRACKRESPONSES
     var requestedSongs: [Song] = []
     var setListedSongs: [Song] = []
     var searchResults: [Song] = []
@@ -64,6 +65,7 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
              switch result {
              case let .success(requests):
                  DispatchQueue.main.async {
+                    // TODO: - CHANGE REQUESTED SONGS TO TRACKRESPONSES
                      self.requestedSongs = requests
                      self.tableView.reloadData()
                  }
@@ -258,6 +260,7 @@ extension EventPlaylistViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch currentSongState {
         case .requested:
+            // TODO: - TRACK RESPONSE.COUNT
             return requestedSongs.count
         case .setListed:
             return setListedSongs.count
@@ -271,11 +274,13 @@ extension EventPlaylistViewController: UITableViewDataSource {
 
         switch currentSongState {
         case .requested:
+            // TODO: - TRACK RESPONSES
             let song = requestedSongs[indexPath.row]
             cell.currentSongState = .requested
             cell.songController = songController
             cell.eventID = event?.eventID ?? 0
             cell.isGuest = self.isGuest
+            // TODO: - cell.trackId = requestedTrack.trackId
             cell.song = song
         case .setListed:
             let song = setListedSongs[indexPath.row]

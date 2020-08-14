@@ -223,7 +223,8 @@ class SongController {
     }
 
     // MARK: - Fetch ALL Songs/Tracks from server
-    func fetchAllTracksFromRequestList(forEventId: Int, completion: @escaping (Result<[Song], SongError>) -> Void) {
+    // TODO: - COMPLETE WITH AN ARRAY OF TASKRESPONSE
+    func fetchAllTracksFromRequestList(forEventId: Int, completion: @escaping (Result<[TrackResponse], SongError>) -> Void) {
         let eventURL = baseURL.appendingPathComponent("event")
         let eventIdURL = eventURL.appendingPathComponent("\(forEventId)")
         let finalURL = eventIdURL.appendingPathComponent("tracks")
@@ -257,18 +258,19 @@ class SongController {
 
             do {
                 //turn the array of taskreps into songs
-                let trackReps = try decoder.decode([TrackResponse].self, from: data)
-                var songArray: [Song] = []
-                for track in trackReps {
-                    let newSong = Song(artist: track.artist,
-                                       externalURL: track.externalURL,
-                                       songId: track.spotifyId,
-                                       songName: track.songName,
-                                       preview: track.preview,
-                                       image: track.image)
-                    songArray.append(newSong)
-                }
-                completion(.success(songArray))
+                // TODO: - DO NOT TURN TASKRESPONSE INTO SONG
+                let trackResponses = try decoder.decode([TrackResponse].self, from: data)
+//                var songArray: [Song] = []
+//                for track in trackReps {
+//                    let newSong = Song(artist: track.artist,
+//                                       externalURL: track.externalURL,
+//                                       songId: track.spotifyId,
+//                                       songName: track.songName,
+//                                       preview: track.preview,
+//                                       image: track.image)
+//                    songArray.append(newSong)
+//                }
+                completion(.success(trackResponses))
             } catch {
                 print("Readable error: \(error.localizedDescription)\n Technical error: \(error)")
                 DispatchQueue.main.async {
@@ -302,7 +304,7 @@ class SongController {
             if let response = response as? HTTPURLResponse {
                 print("HTTPResponse: \(response.statusCode) in function: \(#function)")
             }
-            
+
             if let error = error {
                 print("""
                     Error: \(error.localizedDescription) on line \(#line)
@@ -318,7 +320,6 @@ class SongController {
     // MARK: - Upvote Song
 }
 
-    // TODO: Move the following code to the song controller. Here temporarily in order to stay out of other files
 extension SongController {
     func fetchCoverArt(url: URL, completion: @escaping (Result<UIImage, SongError>) -> Void) {
         let urlRequest = URLRequest(url: url)
