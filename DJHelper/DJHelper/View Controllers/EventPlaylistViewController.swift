@@ -28,7 +28,7 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
     let activityIndicatorView = UIActivityIndicatorView(style: .large)
     var isGuest: Bool = false
     // TODO: TURN REQUESTED SONGS INTO TRACKRESPONSES
-    var trackResponsesForHost: [TrackResponse] = []
+//    var trackResponsesForHost: [TrackResponse] = []
     var requestedSongs: [Song] = []
     var setListedSongs: [Song] = []
     var searchResults: [Song] = []
@@ -60,10 +60,10 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
         updateViews()
         updateSongList()
     }
+
     private func fetchRequestList() {
         guard let event = event else { return }
         //Guest view: Should return a Song model for upvoting
-        if isGuest {
             print("is guest")
             songController.fetchAllTracksFromRequestList(forEventId: Int(event.eventID)) { (result) in
                 switch result {
@@ -77,21 +77,6 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
                     print("Error in fetching all requested songs: \(error)")
                 }
             }
-        } else {
-            //Host View: Should return trackResponse so that if the host wants to add it to the setlist it can via trackId
-            //Another way to do this is to add a property to the song model so that we can initialize it with the trackId
-            print("is host")
-//            songController.getTracksFromRequestList(forEventId: Int(event.eventID)) { (result) in
-//                switch result {
-//                case let .success(trackResponses):
-//                    DispatchQueue.main.async {
-//                        self.trackResponsesForHost = trackResponses
-//                        self.tableView.reloadData()
-//                    }
-//                }
-//            }
-        }
-
     }
 
     // MARK: - Actions
@@ -162,6 +147,7 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
     }
 
     private func updateViews() {
+        // TODO: - defaults to currentHost holding value -shouldn't happen
         guard let event = event,
             let currentHost = currentHost else { return }
 
@@ -173,13 +159,8 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
             let time = timeToString(with: eventDate)
             dateLabel.textColor = UIColor(named: "PurpleColor")
             dateLabel.text = String("\(longDate) ▪︎ \(time)")
-            if eventDate > Date() {
-                shareButtonProperties.isEnabled = true
-            } else {
-                shareButtonProperties.isEnabled = false
-            }
         }
-
+ 
         let buttonTitle = NSMutableAttributedString(string: "\(currentHost.name ?? "EventHost")", attributes: [
             NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 14)!,
             NSAttributedString.Key.foregroundColor: UIColor.systemBlue
@@ -214,9 +195,11 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
         if isGuest {
             self.leftRequestSetlistButton.setAttributedTitle(requestButtonTitle, for: .normal)
             self.rightRequestSetlistButton.setAttributedTitle(setlistButtonTitle, for: .normal)
+            self.shareButtonProperties.isEnabled = false
         } else {
             self.leftRequestSetlistButton.setAttributedTitle(setlistButtonTitle, for: .normal)
             self.rightRequestSetlistButton.setAttributedTitle(requestButtonTitle, for: .normal)
+            self.shareButtonProperties.isEnabled = true
         }
         tableView.reloadData()
     }

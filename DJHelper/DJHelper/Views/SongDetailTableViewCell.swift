@@ -130,6 +130,7 @@ class SongDetailTableViewCell: UITableViewCell {
 
         switch currentSongState {
         case .requested:
+            //if guest { upvote} else { add to playlist or delete from requestList}
             voteCountLabel.isHidden = false
             // on song states where voteCountLabel is visible, network call to update the vote count?
             addSongButton.isHidden = true
@@ -139,10 +140,12 @@ class SongDetailTableViewCell: UITableViewCell {
             addSongButton.isHidden = true
             upvoteSongButton.isHidden = false
         case .setListed:
+            //if guest {} else { delete from setlist}
             voteCountLabel.isHidden = false
             upvoteSongButton.isHidden = true
             addSongButton.isHidden = true
         case .searched:
+            //if guest {} else { add to setlist}
             voteCountLabel.isHidden = true
             upvoteSongButton.isHidden = true
             addSongButton.isHidden = false

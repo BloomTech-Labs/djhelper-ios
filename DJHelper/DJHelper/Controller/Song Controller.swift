@@ -309,55 +309,6 @@ class SongController {
     }
 
     // MARK: - Fetch ALL Songs/Tracks from server
-    /// This completes with TrackResponses
-    func getTracksFromRequestList(forEventId: Int, completion: @escaping (Result<[TrackResponse], SongError>) -> Void) {
-        let eventURL = baseURL.appendingPathComponent("event")
-        let eventIdURL = eventURL.appendingPathComponent("\(forEventId)")
-        let finalURL = eventIdURL.appendingPathComponent("tracks")
-        let urlRequest = URLRequest(url: finalURL)
-
-        dataLoader.loadData(from: urlRequest) { (data, response, error) in
-            if let response = response as? HTTPURLResponse {
-                print("HTTPResponse: \(response.statusCode) in function: \(#function)")
-            }
-
-            if let error = error {
-                print("""
-                    Error: \(error.localizedDescription) on line \(#line)
-                    in function: \(#function)\n Technical error: \(error)
-                    """)
-                DispatchQueue.main.async {
-                    completion(.failure(.otherError(error)))
-                }
-                return
-            }
-
-            guard let data = data else {
-                print("Error on line: \(#line) in function: \(#function)")
-                DispatchQueue.main.async {
-                    completion(.failure(.noDataError))
-                }
-                return
-            }
-
-            let decoder = JSONDecoder()
-
-            do {
-                //turn the array of taskreps into songs
-                // TODO: - DO NOT TURN TASKRESPONSE INTO SONG
-                let trackResponses = try decoder.decode([TrackResponse].self, from: data)
-                completion(.success(trackResponses))
-            } catch {
-                print("Readable error: \(error.localizedDescription)\n Technical error: \(error)")
-                DispatchQueue.main.async {
-                    completion(.failure(.decodeError(error)))
-                }
-                return
-            }
-        }
-    }
-    
-    // TODO: - COMPLETE WITH AN ARRAY OF Song
     /// This completes with Song
     func fetchAllTracksFromRequestList(forEventId: Int, completion: @escaping (Result<[Song], SongError>) -> Void) {
         let eventURL = baseURL.appendingPathComponent("event")
@@ -393,7 +344,6 @@ class SongController {
 
             do {
                 //turn the array of taskreps into songs
-                // TODO: - DO NOT TURN TASKRESPONSE INTO SONG
                 let trackResponses = try decoder.decode([TrackResponse].self, from: data)
                 var songArray: [Song] = []
                 for track in trackResponses {
