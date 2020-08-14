@@ -18,6 +18,11 @@ class SongDetailTableViewCell: UITableViewCell {
     var songController: SongController?
     var eventID: Int32 = 0
     var trackRequestRepresentation: TrackRequest?
+    var trackResponse: TrackResponse? {
+        didSet {
+            print("passed the trackResponse successfully into the custom cell")
+        }
+    }
     var song: Song? {
         didSet {
             updateViews()
