@@ -125,34 +125,36 @@ class SongDetailTableViewCell: UITableViewCell {
 
         switch currentSongState {
         case .requested:
-            //if guest { upvote} else { add to playlist or delete from requestList}
-            voteCountLabel.isHidden = false
-            // on song states where voteCountLabel is visible, network call to update the vote count?
-            addSongButton.isHidden = true
-            upvoteSongButton.isHidden = false
+            if isGuest == true {
+                updateGuestRequestsViews()
+            } else {
+                updateHostRequestsViews()
+            }
         case .none:
             voteCountLabel.isHidden = false
             addSongButton.isHidden = true
             upvoteSongButton.isHidden = false
         case .setListed:
-            //if guest {} else { delete from setlist}
-            voteCountLabel.isHidden = false
-            upvoteSongButton.isHidden = true
-            addSongButton.isHidden = true
+            if isGuest == true {
+                updateGuestSetlistViews()
+            } else {
+                updateHostSetlistViews()
+            }
         case .searched:
-            //if guest {} else { add to setlist}
-            voteCountLabel.isHidden = true
-            upvoteSongButton.isHidden = true
-            addSongButton.isHidden = false
+            if isGuest == true {
+                updateGuestSearchViews()
+            } else {
+                updateHostSearchViews()
+            }
         }
     }
 
     // MARK: - Updateviews Methods
     /// Guest should see request list and be able to upvote the song and see it's vote count
     func updateGuestRequestsViews() {
-        voteCountLabel.isHidden = false
-        upvoteSongButton.isHidden = false
         addSongButton.isHidden = true
+        upvoteSongButton.isHidden = false
+        voteCountLabel.isHidden = false
     }
 
     /// Hosts should be able to see votes and add/remove to setlist
@@ -184,7 +186,7 @@ class SongDetailTableViewCell: UITableViewCell {
     }
 
     /// Host should be able to search for a song and add it to the SetList
-    func updateHostSearchSongViews() {
+    func updateHostSearchViews() {
         addSongButton.isHidden = false
         upvoteSongButton.isHidden = true
         voteCountLabel.isHidden = true
