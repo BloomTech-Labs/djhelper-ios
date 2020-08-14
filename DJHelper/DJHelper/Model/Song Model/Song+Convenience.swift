@@ -51,6 +51,7 @@ extension Song {
                                         upVotes: Int = 0,
                                         preview: String?,
                                         image: URL?,
+                                        songID: Int32 = 0,
                                         context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
     self.init(context: context)
     self.artist = artist
@@ -62,6 +63,7 @@ extension Song {
     self.upVotes = Int32(upVotes)
         self.preview = preview
         self.image = image
+        self.songID = songID
     }
 
     //TrackRep -> Song

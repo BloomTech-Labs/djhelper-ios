@@ -357,7 +357,7 @@ class SongController {
         }
     }
     
-    // TODO: - COMPLETE WITH AN ARRAY OF TASKRESPONSE
+    // TODO: - COMPLETE WITH AN ARRAY OF Song
     /// This completes with Song
     func fetchAllTracksFromRequestList(forEventId: Int, completion: @escaping (Result<[Song], SongError>) -> Void) {
         let eventURL = baseURL.appendingPathComponent("event")
@@ -402,7 +402,8 @@ class SongController {
                                        songId: track.spotifyId,
                                        songName: track.songName,
                                        preview: track.preview,
-                                       image: track.image)
+                                       image: track.image,
+                                       songID: track.trackId)
                     songArray.append(newSong)
                 }
                 completion(.success(songArray))

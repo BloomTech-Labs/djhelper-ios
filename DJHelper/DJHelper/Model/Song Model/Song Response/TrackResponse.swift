@@ -23,7 +23,7 @@ import Foundation
  }
  */
 struct TrackResponse: Codable {
-    var trackId: Int
+    var trackId: Int32
     var spotifyId: String
     var songName: String
     var artist: String
@@ -47,7 +47,7 @@ struct TrackResponse: Codable {
         case votes
     }
 
-    init(trackId: Int,
+    init(trackId: Int32,
          spotifyId: String,
          songName: String,
          artist: String,
@@ -74,7 +74,7 @@ struct TrackResponse: Codable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        trackId = try container.decode(Int.self, forKey: .trackId)
+        trackId = try container.decode(Int32.self, forKey: .trackId)
         spotifyId = try container.decode(String.self, forKey: .spotifyId)
         songName = try container.decode(String.self, forKey: .songName)
         artist = try container.decode(String.self, forKey: .artist)
