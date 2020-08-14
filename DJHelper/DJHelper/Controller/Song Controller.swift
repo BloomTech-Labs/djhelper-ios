@@ -212,7 +212,8 @@ class SongController {
 
          let authURL = baseURL.appendingPathComponent("auth")
          let trackURL = authURL.appendingPathComponent("track")
-         let trackIdURL = trackURL.appendingPathComponent("\(track.trackId)")
+        let playlistURL = trackURL.appendingPathComponent("playlist")
+         let trackIdURL = playlistURL.appendingPathComponent("\(track.trackId)")
 
          var urlRequest = URLRequest(url: trackIdURL)
          urlRequest.httpMethod = HTTPMethod.delete.rawValue
