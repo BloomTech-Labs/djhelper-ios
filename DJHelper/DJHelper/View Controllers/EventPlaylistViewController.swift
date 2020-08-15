@@ -201,6 +201,24 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
         }
         tableView.reloadData()
     }
+    
+    func fetchSetlist(for event: Event) {
+        songController.fetchSetlistFromServer(for: event) { (results) in
+            switch results {
+            case let .success(trackRep):
+                DispatchQueue.main.async {
+//                    self.t
+                }
+            case let .failure(error):
+                DispatchQueue.main.async {
+                    print("""
+                        Error on line: \(#line) in function: \(#function)\n
+                        Readable error: \(error.localizedDescription)\n Technical error: \(error)
+                        """)
+                }
+            }
+        }
+    }
 
     // MARK: - Search for Song
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
