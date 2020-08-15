@@ -74,10 +74,12 @@ class SongController {
         }
     }
 
-    // MARK: - Fetch Setlist for Event
+    // MARK: - Fetch Setlist for Event -- json we get back looks like TrackResponse vs Representation
     func fetchSetlistFromServer(for event: Event, completion: @escaping(Result<[TrackRepresentation], EventErrors>) -> Void) {
-        let url = baseURL.appendingPathComponent("playlist").appendingPathComponent("\(event.eventID)")
-        let urlRequest = URLRequest(url: url)
+        let eventURL = baseURL.appendingPathComponent("event")
+        let eventIdURL = eventURL.appendingPathComponent("\(event.eventID)")
+        let playlistURL = eventIdURL.appendingPathComponent("playlist")
+        let urlRequest = URLRequest(url: playlistURL)
 
         dataLoader.loadData(from: urlRequest) { possibleData, possibleResponse, possibleError in
             if let response = possibleResponse as? HTTPURLResponse {
@@ -115,7 +117,7 @@ class SongController {
         }
     }
 
-    // MARK: - Search for Song
+    // MARK: - Search for Song - doesn't return trackId
     func searchForSong(withSearchTerm search: String, completion: @escaping(Result<[TrackRepresentation], SongError>) -> Void) {
         let url = baseURL.appendingPathComponent("track").appendingPathComponent("\(search)")
         let urlRequest = URLRequest(url: url)
@@ -252,7 +254,7 @@ class SongController {
      }
 
     // MARK: - Add Song to Requests
-
+    // TODO: - Maybe we should return a TrackResponse based on the json we get back
     func addSongToRequest(_ song: TrackRequest, completion: @escaping (Result<TrackRequest, SongError>) -> Void) {
 //        guard let trackRepresntation = song.songRepresentation else {
 //            print("Error on line: \(#line) in function: \(#function)\n")

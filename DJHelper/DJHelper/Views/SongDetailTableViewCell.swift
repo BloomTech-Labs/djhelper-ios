@@ -85,8 +85,16 @@ class SongDetailTableViewCell: UITableViewCell {
                 }
             }
         } else {
-            //host adding it to the setList
-//            songController.addson
+            //host adding searchSong to the setList
+//            songController.addSongToPlaylist(song: song) { (result) in
+//                switch result {
+//                case .success:
+//                    break
+//                case let .failure(error):
+//                    print("Error adding song request: \(error)")
+//                }
+//            }
+            //host adding requested track to setlist
         }
 
     }
