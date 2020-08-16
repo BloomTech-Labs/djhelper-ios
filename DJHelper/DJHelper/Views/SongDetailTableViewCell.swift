@@ -42,6 +42,12 @@ class SongDetailTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        addSongButton.isSelected = false
+    }
+
     @IBAction func requestSong(_ sender: UIButton) {
         guard let song = song,
             let requestedSongConstant: TrackRequest = song.songToTrackRequest  else { return }
