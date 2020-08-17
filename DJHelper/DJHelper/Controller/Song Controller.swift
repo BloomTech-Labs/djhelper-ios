@@ -108,6 +108,7 @@ class SongController {
                     let newSong = Song(artist: track.artist, externalURL: track.externalURL, songId: track.spotifyId, songName: track.songName, preview: track.preview, image: track.image, songID: track.trackId)
                     songs.append(newSong)
                 }
+                print("print songs in setlist: \(songs.count) on line: \(#line)")
                 completion(.success(songs))
             } catch {
                 print("""
@@ -204,7 +205,7 @@ class SongController {
         }
     }
 
-    // MARK: - Add Songto Playlist
+    // MARK: - Add Song to Playlist
     func addSongToPlaylist(song: Song, completion: @escaping (Result<(), SongError>) -> Void) {
 
         guard let bearer = Bearer.shared.token else {
@@ -218,7 +219,7 @@ class SongController {
             print("Error on line: \(#line) in function: \(#function)\n")
             return
         }
-
+        print("TrackResponse to add song to setlist: \(trackResponse)")
         let authURL = baseURL.appendingPathComponent("auth")
         let trackURL = authURL.appendingPathComponent("track")
         let moveURL = trackURL.appendingPathComponent("move")
@@ -236,7 +237,7 @@ class SongController {
             print("Error on line: \(#line) in function: \(#function)\nReadable error: \(error.localizedDescription)\n Technical error: \(error)")
         }
 
-        dataLoader.loadData(from: urlRequest) { (data, response, error) in
+        dataLoader.loadData(from: urlRequest) { (_, response, error) in
             if let response = response as? HTTPURLResponse {
                 print("HTTPResponse: \(response.statusCode) in function: \(#function)")
             }
@@ -246,11 +247,12 @@ class SongController {
                 completion(.failure(.otherError(error)))
             }
 
-            guard let _ = data else {
-                print("Error on line: \(#line) in function: \(#function)")
-                completion(.failure(.noDataError))
-                return
-            }
+//            guard let data = data else {
+//                print("Error on line: \(#line) in function: \(#function)")
+//                completion(.failure(.noDataError))
+//                return
+//            }
+//            print(" Data we get back from posting song to setlist\(String(data: data, encoding: .utf8))")
             completion(.success(()))
         }
     }

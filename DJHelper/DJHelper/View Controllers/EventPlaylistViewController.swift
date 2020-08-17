@@ -58,17 +58,19 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
         updateViews()
         updateSongList()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
 
     private func fetchRequestList() {
         guard let event = event else { return }
         //Guest view: Should return a Song model for upvoting
-            print("is guest")
             songController.fetchAllTracksFromRequestList(forEventId: Int(event.eventID)) { (result) in
                 switch result {
-                case let .success(requests):
+                case let .success(requestedSongs):
                     DispatchQueue.main.async {
-                        // TODO: - CHANGE REQUESTED SONGS TO TRACKRESPONSES
-                        self.requestedSongs = requests
+                        self.requestedSongs = requestedSongs
                         self.tableView.reloadData()
                     }
                 case let .failure(error):
@@ -81,6 +83,7 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
     @IBAction func requestButtonSelected(_ sender: UIButton) {
         // when a guest is viewing, this is the request button
         // when a host/DJ is viewing, this is the setlist button
+        print("request button pressed as guest: \(isGuest)")
         isGuest ? (currentSongState = .requested) : (currentSongState = .setListed)
         fetchRequestList()
         updateViews()
@@ -89,13 +92,14 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
     @IBAction func setlistButtonSelected(_ sender: UIButton) {
         // when a guest is viewing, this is the setlist button
         // when a host/DJ is viewing, this is the request button
+        print("setlist button pressed as guest: \(isGuest)")
         isGuest ? (currentSongState = .setListed) : (currentSongState = .requested)
+        fetchSetlist()
         updateViews()
     }
 
     @IBAction func viewHostDetail(_ sender: UIButton) {
         guard let currentHost = currentHost else { return }
-
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         let hostProfileVC = storyboard.instantiateViewController(identifier: "HostProfile") as! HostProfileViewController
         hostProfileVC.currentHost = currentHost
@@ -201,13 +205,19 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
         }
         tableView.reloadData()
     }
-    
-    func fetchSetlist(for event: Event) {
+
+    func fetchSetlist() {
+        guard let event = event else {
+            print("Error on line: \(#line) in function: \(#function)\n")
+            return
+        }
         songController.fetchSetlistFromServer(for: event) { (results) in
             switch results {
-            case let .success(trackRep):
+            case let .success(songs):
                 DispatchQueue.main.async {
-//                    self.t
+                    print("songs returned from fetchsetlistfromserver: \(songs.count)")
+                    self.setListedSongs = songs
+                    self.tableView.reloadData()
                 }
             case let .failure(error):
                 DispatchQueue.main.async {

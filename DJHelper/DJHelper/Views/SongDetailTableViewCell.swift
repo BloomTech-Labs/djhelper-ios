@@ -48,11 +48,16 @@ class SongDetailTableViewCell: UITableViewCell {
             let requestedSongConstant: TrackRequest = song.songToTrackRequest  else { return }
         trackRequestRepresentation = requestedSongConstant
         trackRequestRepresentation!.eventId = eventID
-        print(trackRequestRepresentation)
+        print("trackRequestRepresentation: \(trackRequestRepresentation) on line: \(#line)")
         if addSongButton.isSelected {
             cancelSongRequest(trackRequestRepresentation!)
         } else {
-            addSongRequest(trackRequestRepresentation!)
+            //this is where you check to see if it is guest or not to add to set list or requestList
+            if isGuest == true {
+                guestAddsSongToRequestList(trackRequestRepresentation!)
+            } else {
+                hostAddsSongToPlaylist(song)
+            }
         }
         addSongButton.isSelected.toggle()
 
@@ -70,12 +75,11 @@ class SongDetailTableViewCell: UITableViewCell {
         upvoteSongButton.isSelected.toggle()
     }
 
-    func addSongRequest(_ song: TrackRequest) {
-        print("add song button pressed")
+    func guestAddsSongToRequestList(_ song: TrackRequest) {
+        print("guest added song to request list")
         guard let songController = songController else { return }
 
         //call this function if its the guest - the host doesn't add song to request list, he adds it to the playlist
-        if isGuest == true {
             songController.addSongToRequest(song) { (result) in
                 switch result {
                 case .success:
@@ -84,19 +88,21 @@ class SongDetailTableViewCell: UITableViewCell {
                     print("Error adding song request: \(error)")
                 }
             }
-        } else {
-            //host adding searchSong to the setList
-//            songController.addSongToPlaylist(song: song) { (result) in
-//                switch result {
-//                case .success:
-//                    break
-//                case let .failure(error):
-//                    print("Error adding song request: \(error)")
-//                }
-//            }
-            //host adding requested track to setlist
-        }
+    }
 
+    func hostAddsSongToPlaylist(_ song: Song) {
+        songController?.addSongToPlaylist(song: song, completion: { (results) in
+            switch results {
+            case let .success((success)):
+
+                print("Host successfully added requested song to playlist: \(success)")
+            case let .failure(error):
+                print("""
+                    Error on line: \(#line) in function: \(#function)\n
+                    Readable error: \(error.localizedDescription)\n Technical error: \(error)
+                    """)
+            }
+        })
     }
 
     func cancelSongRequest(_ song: TrackRequest) {
@@ -188,6 +194,7 @@ class SongDetailTableViewCell: UITableViewCell {
 
     /// Host should be able to see votes of song on setlist and remove it from list
     func updateHostSetlistViews() {
+        print("host setlist shouldnt show add button")
         addSongButton.isHidden = true
         upvoteSongButton.isHidden = true
         voteCountLabel.isHidden = false
