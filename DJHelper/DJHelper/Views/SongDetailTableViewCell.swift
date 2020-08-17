@@ -71,6 +71,7 @@ class SongDetailTableViewCell: UITableViewCell {
             }
         }
         addSongButton.isSelected.toggle()
+        self.song?.inSetList.toggle()
 
     }
 
@@ -161,6 +162,13 @@ class SongDetailTableViewCell: UITableViewCell {
         if trackRequestRepresentation?.eventId == 0 {
             addSongButton.isSelected = false
         }
+
+        if song.inSetList {
+            addSongButton.isSelected = true
+        } else {
+            addSongButton.isSelected = false
+        }
+
 
         switch currentSongState {
         case .requested:
