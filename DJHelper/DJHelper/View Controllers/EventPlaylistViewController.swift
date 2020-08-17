@@ -277,6 +277,8 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
     }
 
     // MARK: - Load Cover Art Image
+    // loadImage uses block operations to fetch cover art images on a background queue
+    // and then stores the data in a cache for more responsive scrolling with large numbers of images
     func loadImage(for songCell: SongDetailTableViewCell, forItemAt indexPath: IndexPath) {
 
         var currentSong = Song()

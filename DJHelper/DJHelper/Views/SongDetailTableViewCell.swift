@@ -91,7 +91,10 @@ class SongDetailTableViewCell: UITableViewCell {
         print("guest added song to request list")
         guard let songController = songController else { return }
 
-        //call this function if its the guest - the host doesn't add song to request list, he adds it to the playlist
+        //call this function if its the guest
+        // also call it as an intermediate step when the host is moving a song
+        // from the search results list to the set list -- if the song state is .searched
+        // then it completes the second step of adding the song to the playlist
             songController.addSongToRequest(song) { (result) in
                 switch result {
                 case let .success(trackresponse):
@@ -163,6 +166,7 @@ class SongDetailTableViewCell: UITableViewCell {
             addSongButton.isSelected = false
         }
 
+        // Setting the status of the cell's button after the cell is reused by the table view
         if song.inSetList {
             addSongButton.isSelected = true
         } else {
@@ -196,6 +200,7 @@ class SongDetailTableViewCell: UITableViewCell {
         }
     }
 
+    // setImage is called from outside the cell to set the album artwork image
     func setImage(_ image: UIImage?) {
         coverArtImageView.image = image
     }
