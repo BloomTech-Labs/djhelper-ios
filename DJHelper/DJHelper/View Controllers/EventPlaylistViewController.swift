@@ -84,18 +84,30 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
         // when a guest is viewing, this is the request button
         // when a host/DJ is viewing, this is the setlist button
         print("request button pressed as guest: \(isGuest)")
-        isGuest ? (currentSongState = .requested) : (currentSongState = .setListed)
-        fetchRequestList()
-        updateViews()
+        if isGuest {
+            currentSongState = .requested
+            fetchRequestList()
+            updateViews()
+        } else {
+            currentSongState = .setListed
+            fetchSetlist()
+            updateViews()
+        }
     }
 
     @IBAction func setlistButtonSelected(_ sender: UIButton) {
         // when a guest is viewing, this is the setlist button
         // when a host/DJ is viewing, this is the request button
         print("setlist button pressed as guest: \(isGuest)")
-        isGuest ? (currentSongState = .setListed) : (currentSongState = .requested)
-        fetchSetlist()
-        updateViews()
+        if isGuest {
+            currentSongState = .setListed
+            fetchSetlist()
+            updateViews()
+        } else {
+            currentSongState = .requested
+            fetchRequestList()
+            updateViews()
+        }
     }
 
     @IBAction func viewHostDetail(_ sender: UIButton) {
@@ -232,7 +244,8 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
 
     // MARK: - Search for Song
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let searchTerm = searchBar.text,
+        guard let event = event,
+            let searchTerm = searchBar.text,
             searchTerm != "" else { return }
         searchResults = []
         self.activityIndicator(activityIndicatorView: activityIndicatorView, shouldStart: true)
@@ -244,6 +257,7 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
                         let newSong = Song(artist: song.artist, externalURL: song.externalURL, songId: song.songId, songName: song.songName,
                                            preview: song.preview,
                                            image: song.image)
+                        newSong.event = event
                         self.searchResults.append(newSong)
                     }
                     self.currentSongState = .searched

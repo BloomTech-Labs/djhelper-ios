@@ -62,7 +62,12 @@ class SongDetailTableViewCell: UITableViewCell {
             if isGuest == true {
                 guestAddsSongToRequestList(trackRequestRepresentation!)
             } else {
-                hostAddsSongToPlaylist(song)
+                guard let currentSongState = currentSongState else { return }
+                if currentSongState == .searched {
+                    guestAddsSongToRequestList(trackRequestRepresentation!)
+                } else {
+                    hostAddsSongToPlaylist(song)
+                }
             }
         }
         addSongButton.isSelected.toggle()
@@ -88,8 +93,14 @@ class SongDetailTableViewCell: UITableViewCell {
         //call this function if its the guest - the host doesn't add song to request list, he adds it to the playlist
             songController.addSongToRequest(song) { (result) in
                 switch result {
-                case .success:
-                    break
+                case let .success(trackresponse):
+                    guard let songState = self.currentSongState else { return }
+                    if songState == .searched {
+                        guard self.song != nil else { return }
+                        var song = self.song
+                        song?.songID = trackresponse.trackId
+                        self.hostAddsSongToPlaylist(song!)
+                    }
                 case let .failure(error):
                     print("Error adding song request: \(error)")
                 }

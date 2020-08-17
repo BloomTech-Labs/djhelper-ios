@@ -303,7 +303,7 @@ class SongController {
 
     // MARK: - Add Song to Requests
     // TODO: - Maybe we should return a TrackResponse based on the json we get back
-    func addSongToRequest(_ song: TrackRequest, completion: @escaping (Result<TrackRequest, SongError>) -> Void) {
+    func addSongToRequest(_ song: TrackRequest, completion: @escaping (Result<TrackResponse, SongError>) -> Void) {
 //        guard let trackRepresntation = song.songRepresentation else {
 //            print("Error on line: \(#line) in function: \(#function)\n")
 //            return
@@ -349,7 +349,7 @@ class SongController {
             let decoder = JSONDecoder()
 
             do {
-                let track = try decoder.decode(TrackRequest.self, from: data)
+                let track = try decoder.decode(TrackResponse.self, from: data)
                 DispatchQueue.main.async {
                     completion(.success(track))
                 }
