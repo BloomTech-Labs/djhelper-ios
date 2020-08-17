@@ -31,7 +31,7 @@
         <attribute name="inSetList" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="preview" optional="YES" attributeType="String"/>
         <attribute name="songId" optional="YES" attributeType="String"/>
-        <attribute name="songID" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="songID" optional="YES" attributeType="Integer 32" usesScalarValueType="YES"/>
         <attribute name="songName" attributeType="String"/>
         <attribute name="upVotes" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="voted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>

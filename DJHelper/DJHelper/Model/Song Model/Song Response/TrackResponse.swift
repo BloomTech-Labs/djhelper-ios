@@ -23,7 +23,7 @@ import Foundation
  }
  */
 struct TrackResponse: Codable {
-    var trackId: Int
+    var trackId: Int32
     var spotifyId: String
     var songName: String
     var artist: String
@@ -32,6 +32,7 @@ struct TrackResponse: Codable {
     var preview: String
     var image: URL
     var eventId: Int
+    var votes: String
 
     enum CodingKeys: String, CodingKey {
         case trackId = "id"
@@ -43,9 +44,10 @@ struct TrackResponse: Codable {
         case preview
         case image = "img"
         case eventId = "event_id"
+        case votes
     }
 
-    init(trackId: Int,
+    init(trackId: Int32,
          spotifyId: String,
          songName: String,
          artist: String,
@@ -53,7 +55,8 @@ struct TrackResponse: Codable {
          isExplicit: Bool,
          preview: String,
          image: URL,
-         eventId: Int) {
+         eventId: Int,
+         votes: String) {
 
         self.trackId = trackId
         self.spotifyId = spotifyId
@@ -64,13 +67,14 @@ struct TrackResponse: Codable {
         self.preview = preview
         self.image = image
         self.eventId = eventId
+        self.votes = votes
     }
 
     // MARK: - CODABLE INITIALIZERS
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        trackId = try container.decode(Int.self, forKey: .trackId)
+        trackId = try container.decode(Int32.self, forKey: .trackId)
         spotifyId = try container.decode(String.self, forKey: .spotifyId)
         songName = try container.decode(String.self, forKey: .songName)
         artist = try container.decode(String.self, forKey: .artist)
@@ -79,6 +83,7 @@ struct TrackResponse: Codable {
         preview = try container.decode(String.self, forKey: .preview)
         image = try container.decode(URL.self, forKey: .image)
         eventId = try container.decode(Int.self, forKey: .eventId)
+        votes = try container.decode(String.self, forKey: .votes)
     }
 
     func encode(with encoder: Encoder) throws {
@@ -92,5 +97,6 @@ struct TrackResponse: Codable {
         try container.encode(preview, forKey: .preview)
         try container.encode(image, forKey: .image)
         try container.encode(eventId, forKey: .eventId)
+        try container.encode(votes, forKey: .votes)
     }
 }
