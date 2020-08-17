@@ -11,6 +11,22 @@ import CoreData
 
 extension Song {
 
+    ///Convert Song into TrackResponse so that we can make network calls with it
+    var songToTrackResponse: TrackResponse? {
+        guard let spotifyId = songId,
+        let songName = songName,
+        let artist = artist,
+        let externalURL = externalURL,
+        let preview = preview,
+        let image = image
+        else {
+            print("Error on line: \(#line) in function: \(#function)\n")
+            return nil
+        }
+
+        return TrackResponse(trackId: songID, spotifyId: spotifyId, songName: songName, artist: artist, externalURL: externalURL, isExplicit: explicit, preview: preview, image: image, eventId: Int(event?.eventID ?? 0), votes: String(upVotes))
+    }
+
     var songRepresentation: TrackRepresentation? {
         guard let artist = artist,
             let songName = songName else { return nil }
@@ -36,7 +52,8 @@ extension Song {
         return TrackRequest(spotifyId: songId,
                             songName: songName,
                             artist: artist,
-                            externalURL: externalURL, isExplicit: explicit,
+                            externalURL: externalURL,
+                            isExplicit: explicit,
                             preview: preview,
                             image: image,
                             eventId: event?.eventID ?? 0) // changed this line
@@ -51,6 +68,7 @@ extension Song {
                                         upVotes: Int = 0,
                                         preview: String?,
                                         image: URL?,
+                                        songID: Int32 = 0,
                                         context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
     self.init(context: context)
     self.artist = artist
@@ -62,6 +80,7 @@ extension Song {
     self.upVotes = Int32(upVotes)
         self.preview = preview
         self.image = image
+        self.songID = songID
     }
 
     //TrackRep -> Song
