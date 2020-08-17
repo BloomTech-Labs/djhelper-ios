@@ -139,21 +139,22 @@ class SongDetailTableViewCell: UITableViewCell {
         let songController = songController else { return }
         // for the dj view the dj should see the plus button in the cell and consequently adds that song to the setlist
 
-        // TODO: Move this network call from the cell
-        if let coverArtURL = song.image {
-            songController.fetchCoverArt(url: coverArtURL) { (result) in
-                switch result {
-                case let .success(image):
-                    DispatchQueue.main.async {
-                        self.coverArtImageView.image = image
-                    }
-                case .failure:
-                    DispatchQueue.main.async {
-                        self.coverArtImageView.image = #imageLiteral(resourceName: "musicSymbol")
-                    }
-                }
-            }
-        }
+        // This was the code to get cover art before implementing the ConcurrentOperation class
+        // I'm saving this code just in case, because I'm not 100% comfortable with the concurrent operations.
+//        if let coverArtURL = song.image {
+//            songController.fetchCoverArt(url: coverArtURL) { (result) in
+//                switch result {
+//                case let .success(image):
+//                    DispatchQueue.main.async {
+//                        self.coverArtImageView.image = image
+//                    }
+//                case .failure:
+//                    DispatchQueue.main.async {
+//                        self.coverArtImageView.image = #imageLiteral(resourceName: "musicSymbol")
+//                    }
+//                }
+//            }
+//        }
 
         songLabel.text = song.songName
         artistLabel.text = song.artist
@@ -185,6 +186,10 @@ class SongDetailTableViewCell: UITableViewCell {
                 updateHostSearchViews()
             }
         }
+    }
+
+    func setImage(_ image: UIImage?) {
+        coverArtImageView.image = image
     }
 
     // MARK: - Updateviews Methods

@@ -31,6 +31,9 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
     var setListedSongs: [Song] = []
     var searchResults: [Song] = []
     var myAlert = CustomAlert()
+    private var operations = [String : Operation]()
+    private let cache = Cache<String, Data>()
+    private let photoFetchQueue = OperationQueue()
     private let refreshControl = UIRefreshControl()
 
     // MARK: - Outlets
@@ -273,6 +276,64 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
         }
     }
 
+    // MARK: - Load Cover Art Image
+    func loadImage(for songCell: SongDetailTableViewCell, forItemAt indexPath: IndexPath) {
+
+        var currentSong = Song()
+
+        switch currentSongState {
+        case .requested:
+            currentSong = requestedSongs[indexPath.row]
+        case .setListed:
+            currentSong = setListedSongs[indexPath.row]
+        case .searched:
+            currentSong = searchResults[indexPath.row]
+        }
+
+        guard let songId = currentSong.songId else { return }
+        if let coverArtData = cache.value(for: songId),
+            let image = UIImage(data: coverArtData) {
+            songCell.setImage(image)
+            self.tableView.reloadRows(at: [indexPath], with: .automatic)
+            return
+        }
+
+        let fetchOp = FetchMediaOperation(song: currentSong, songController: songController)
+        let cacheOp = BlockOperation {
+            if let data = fetchOp.mediaData {
+                self.cache.cache(value: data, for: songId)
+                DispatchQueue.main.async {
+                    self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                }
+            }
+        }
+
+        let completionOp = BlockOperation {
+            defer { self.operations.removeValue(forKey: songId) }
+
+            if let currentIndexPath = self.tableView.indexPath(for: songCell),
+                currentIndexPath != indexPath {
+                print("Got image for a now-reused cell")
+                return
+            }
+
+            if let data = fetchOp.mediaData {
+                songCell.setImage(UIImage(data: data))
+                self.tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
+        }
+
+        cacheOp.addDependency(fetchOp)
+        completionOp.addDependency(fetchOp)
+
+        photoFetchQueue.addOperation(fetchOp)
+        photoFetchQueue.addOperation(cacheOp)
+        OperationQueue.main.addOperation(completionOp)
+
+        operations[songId] = fetchOp
+
+    }
+
     func longDateToString(with date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "EEE, MMM d, yyyy"
@@ -320,6 +381,7 @@ extension EventPlaylistViewController: UITableViewDataSource {
             cell.eventID = event?.eventID ?? 0
             cell.isGuest = self.isGuest
             cell.song = song
+            loadImage(for: cell, forItemAt: indexPath)
         case .setListed:
             let song = setListedSongs[indexPath.row]
             cell.currentSongState = .setListed
@@ -327,6 +389,7 @@ extension EventPlaylistViewController: UITableViewDataSource {
             cell.eventID = event?.eventID ?? 0
             cell.isGuest = self.isGuest
             cell.song = song
+            loadImage(for: cell, forItemAt: indexPath)
         case .searched:
             let song = searchResults[indexPath.row]
             cell.currentSongState = .searched
@@ -334,6 +397,7 @@ extension EventPlaylistViewController: UITableViewDataSource {
             cell.eventID = event?.eventID ?? 0
             cell.isGuest = self.isGuest
             cell.song = song
+            loadImage(for: cell, forItemAt: indexPath)
         }
         return cell
     }
