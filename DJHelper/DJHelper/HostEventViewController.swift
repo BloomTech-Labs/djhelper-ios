@@ -21,7 +21,15 @@ class HostEventViewController: UIViewController, newEventCreatedDelegate {
     var hostController: HostController?
     var isGuest: Bool?
     let todaysDate = Date().stringFromDate()
-    var eventsHappeningNow: [Event]?
+    var eventsHappeningNow: [Event]? {
+        didSet {
+            happeningNowImageView.image = #imageLiteral(resourceName: "event-default")
+            guard let currentEvents = eventsHappeningNow else { return }
+            let currentEvent = currentEvents.first
+            happeningNowTitleLabel.text = currentEvent?.name
+            happeningNowDateLabel.text = currentEvent?.eventDate?.stringFromDate()
+        }
+    }
     var upcomingEvents: [Event]? {
         didSet {
             let barViewControllers = self.tabBarController?.viewControllers
@@ -38,9 +46,9 @@ class HostEventViewController: UIViewController, newEventCreatedDelegate {
     var hostingEventsVC = HostingEventsViewController()
 
     // MARK: - IBOutlets
-//    @IBOutlet weak var upcomingShowsCollectionView: UICollectionView!
-//    @IBOutlet weak var hostingEventCollectionView: UICollectionView!
-//    @IBOutlet weak var pastEventsCollectionView: UICollectionView!
+    @IBOutlet var happeningNowImageView: UIImageView!
+    @IBOutlet var happeningNowDateLabel: UILabel!
+    @IBOutlet var happeningNowTitleLabel: UILabel!
 
     // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
@@ -58,6 +66,21 @@ class HostEventViewController: UIViewController, newEventCreatedDelegate {
             newEventVC.delegate = self
             newEventVC.hostEventCount = self.upcomingEvents?.count ?? 0
         }
+    }
+
+    @IBAction func happeningNowButton(_ sender: UIButton) {
+        guard let currentEvents = eventsHappeningNow else { return }
+        let currentEvent = currentEvents.first
+
+        guard let eventDetailVC = self.storyboard?.instantiateViewController(identifier: "EventDetailVC") as? EventPlaylistViewController else { return }
+
+        eventDetailVC.event = currentEvent
+        eventDetailVC.modalPresentationStyle = .fullScreen
+        eventDetailVC.currentHost = currentHost
+        eventDetailVC.hostController = hostController
+        eventDetailVC.eventController = eventController
+        eventDetailVC.isGuest = false
+        self.navigationController?.pushViewController(eventDetailVC, animated: true)
     }
 
     // MARK: - Private Methods
@@ -99,7 +122,8 @@ class HostEventViewController: UIViewController, newEventCreatedDelegate {
     }
 
     private func sortEvents(events: [Event]) {
-        eventsHappeningNow = events.filter { $0.eventDate == Date() }
+        // This says that the event date is less than right now but also greater than 5 hours ago
+        eventsHappeningNow = events.filter { $0.eventDate! < Date() && $0.eventDate! > Date().addingTimeInterval(-18000) }
 
         pastEvents = events.filter { $0.eventDate! < Date() }
         pastEventsVC.pastEvents = self.pastEvents
@@ -107,6 +131,7 @@ class HostEventViewController: UIViewController, newEventCreatedDelegate {
         upcomingEvents = events.filter { $0.eventDate! > Date() }
         upcomingEventsVC.upcomingEvents = self.upcomingEvents
 
+        allEvents = []
         if let upcomingEvents = upcomingEvents {
             for event in upcomingEvents {
                 allEvents.append(event)
