@@ -49,6 +49,7 @@ class CustomAlert {
 
         titleLabel.text = title
         titleLabel.textAlignment = .center
+        titleLabel.textColor = .black
 
         alertView.addSubview(titleLabel)
 
@@ -79,8 +80,9 @@ class CustomAlert {
         messageLabel.numberOfLines = 0
         messageLabel.text = message
         messageLabel.font = UIFont(name: "Palatino", size: 18)
-        messageLabel.textAlignment = .left
+        messageLabel.textAlignment = .center
         messageLabel.lineBreakMode = .byWordWrapping
+        messageLabel.textColor = .black
 
         alertView.addSubview(messageLabel)
 
@@ -89,7 +91,7 @@ class CustomAlert {
             [messageLabel.leadingAnchor.constraint(equalTo: alertView.leadingAnchor),
              messageLabel.trailingAnchor.constraint(equalTo: alertView.trailingAnchor),
              messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: -60),
-             messageLabel.bottomAnchor.constraint(equalTo: button.topAnchor, constant: 10)]
+             messageLabel.bottomAnchor.constraint(equalTo: button.topAnchor, constant: 50)]
         )
     }
 
