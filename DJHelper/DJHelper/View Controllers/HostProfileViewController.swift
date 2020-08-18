@@ -103,10 +103,24 @@ class HostProfileViewController: ShiftableViewController {
         bioTextView.text = host.bio
 
         if isGuest {
-            saveButton.tintColor = UIColor.clear
-            pageTitle.title = "\(currentHost?.name ?? "DJ")'s Profile"
+            updateViewsForGuest()
+//            saveButton.tintColor = UIColor.clear
+//            pageTitle.title = "\(currentHost?.name ?? "DJ")'s Profile"
         } else {
             pageTitle.title = "Update Profile"
         }
+    }
+
+    private func updateViewsForGuest() {
+        print("guest view should not be able to edit textfields")
+            saveButton.tintColor = UIColor.clear
+            pageTitle.title = "\(currentHost?.name ?? "DJ")'s Profile"
+            usernameTextField.isEnabled = false
+            nameTextField.isEnabled = false
+            emailTextField.isEnabled = false
+            phoneTextField.isEnabled = false
+            websiteTextField.isEnabled = false
+            profilePicTextField.isEnabled = false
+            bioTextView.isEditable = false
     }
 }
