@@ -82,6 +82,7 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
             }
     }
 
+    
     // MARK: - Actions
     @IBAction func requestButtonSelected(_ sender: UIButton) {
         // when a guest is viewing, this is the request button
@@ -402,5 +403,43 @@ extension EventPlaylistViewController: UITableViewDataSource {
             loadImage(for: cell, forItemAt: indexPath)
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if isGuest == false {
+            if editingStyle == .delete {
+                switch currentSongState {
+                       case .requested:
+                           let song = requestedSongs[indexPath.row]
+                    
+                       case .setListed:
+                           let song = setListedSongs[indexPath.row]
+                           
+                       case .searched:
+                           let song = searchResults[indexPath.row]
+                           
+                       }
+            }
+            
+        }
+    }
+    func deleteTrackFromRequestList(song: Song) {
+        songController.deleteTrackFromRequests(trackId: Int(song.songID)) { (results) in
+            switch results {
+            case let .success(success):
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    print("success: \(success)")
+                }
+            case let .failure(error):
+                print("""
+                    Error on line: \(#line) in function: \(#function)\n
+                    Readable error: \(error.localizedDescription)\n Technical error: \(error)
+                    """)
+                DispatchQueue.main.async {
+                    self.myAlert.showAlert(with: error.localizedDescription, message: error., on: self)
+                }
+            }
+        }
     }
 }
