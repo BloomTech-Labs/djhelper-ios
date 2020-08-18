@@ -82,6 +82,10 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
             }
     }
 
+    ///To dismiss the custom alert
+    @objc func dismissAlert() {
+        myAlert.dismissAlert()
+    }
     
     // MARK: - Actions
     @IBAction func requestButtonSelected(_ sender: UIButton) {
