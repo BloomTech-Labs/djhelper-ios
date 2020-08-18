@@ -899,7 +899,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l9H-G3-Enp">
-                                                    <rect key="frame" x="348" y="53" width="32.5" height="33.5"/>
+                                                    <rect key="frame" x="348" y="57" width="32.5" height="33.5"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="0">
                                                             <attributes>
@@ -926,7 +926,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rTK-um-i2C">
-                                                    <rect key="frame" x="344" y="30" width="40" height="40"/>
+                                                    <rect key="frame" x="344" y="21" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="40" id="Abq-hV-V7O"/>
                                                         <constraint firstAttribute="height" constant="40" id="C33-wB-V7I"/>
@@ -949,10 +949,10 @@
                                             <constraints>
                                                 <constraint firstItem="E9l-8l-QIB" firstAttribute="leading" secondItem="hrd-Rw-ozD" secondAttribute="trailing" constant="15" id="6yE-xj-i0r"/>
                                                 <constraint firstItem="OgA-hi-V87" firstAttribute="top" secondItem="DPP-LV-kno" secondAttribute="topMargin" constant="2" id="Ab6-RP-uQV"/>
-                                                <constraint firstItem="l9H-G3-Enp" firstAttribute="top" secondItem="OgA-hi-V87" secondAttribute="bottom" id="AtY-ZH-vFk"/>
+                                                <constraint firstItem="l9H-G3-Enp" firstAttribute="top" secondItem="OgA-hi-V87" secondAttribute="bottom" constant="4" id="AtY-ZH-vFk"/>
                                                 <constraint firstItem="l9H-G3-Enp" firstAttribute="centerX" secondItem="OgA-hi-V87" secondAttribute="centerX" id="JRP-Uj-ChG"/>
                                                 <constraint firstItem="hrd-Rw-ozD" firstAttribute="centerY" secondItem="DPP-LV-kno" secondAttribute="centerY" id="bPY-zc-Amx"/>
-                                                <constraint firstItem="rTK-um-i2C" firstAttribute="centerY" secondItem="DPP-LV-kno" secondAttribute="centerY" id="bgQ-7a-Kn1"/>
+                                                <constraint firstItem="rTK-um-i2C" firstAttribute="centerY" secondItem="DPP-LV-kno" secondAttribute="centerY" constant="-9" id="bgQ-7a-Kn1"/>
                                                 <constraint firstItem="hrd-Rw-ozD" firstAttribute="leading" secondItem="DPP-LV-kno" secondAttribute="leading" constant="20" id="e0n-xI-AHe"/>
                                                 <constraint firstItem="OgA-hi-V87" firstAttribute="trailing" secondItem="DPP-LV-kno" secondAttribute="trailingMargin" constant="-10" id="kyy-u7-l46"/>
                                                 <constraint firstItem="rTK-um-i2C" firstAttribute="leading" secondItem="E9l-8l-QIB" secondAttribute="trailing" constant="25" id="wBy-in-Tp4"/>
@@ -1406,7 +1406,7 @@
                                                                 <color key="textColor" name="PurpleColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uye-cI-5qp">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No events happening now" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Uye-cI-5qp">
                                                                 <rect key="frame" x="0.0" y="26" width="225" height="18"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                                 <color key="textColor" name="customTextColor"/>

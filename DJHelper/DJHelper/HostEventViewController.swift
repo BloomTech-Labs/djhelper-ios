@@ -24,10 +24,14 @@ class HostEventViewController: UIViewController, newEventCreatedDelegate {
     var eventsHappeningNow: [Event]? {
         didSet {
             happeningNowImageView.image = #imageLiteral(resourceName: "event-default")
-            guard let currentEvents = eventsHappeningNow else { return }
-            let currentEvent = currentEvents.first
-            happeningNowTitleLabel.text = currentEvent?.name
-            happeningNowDateLabel.text = currentEvent?.eventDate?.stringFromDate()
+            guard let currentEvents = eventsHappeningNow,
+                let currentEvent = currentEvents.first else {
+                    happeningNowDateLabel.text = "No events happening right now"
+                    happeningNowTitleLabel.text = ""
+                    return
+            }
+            happeningNowTitleLabel.text = currentEvent.name
+            happeningNowDateLabel.text = currentEvent.eventDate?.stringFromDate()
         }
     }
     var upcomingEvents: [Event]? {
@@ -69,8 +73,8 @@ class HostEventViewController: UIViewController, newEventCreatedDelegate {
     }
 
     @IBAction func happeningNowButton(_ sender: UIButton) {
-        guard let currentEvents = eventsHappeningNow else { return }
-        let currentEvent = currentEvents.first
+        guard let currentEvents = eventsHappeningNow,
+            let currentEvent = currentEvents.first else { return }
 
         guard let eventDetailVC = self.storyboard?.instantiateViewController(identifier: "EventDetailVC") as? EventPlaylistViewController else { return }
 
