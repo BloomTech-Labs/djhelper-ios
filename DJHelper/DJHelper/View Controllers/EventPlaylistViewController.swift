@@ -60,7 +60,11 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
         fetchRequestList()
         updateViews()
         updateSongList()
+
+        let tapToDismiss = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tapToDismiss)
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
