@@ -10,11 +10,8 @@ import UIKit
 
 class SongDetailTableViewCell: UITableViewCell {
 
-    var currentSongState: SongState? {
-        didSet {
-//            updateViews()
-        }
-    }
+    // MARK: - Properties
+    var currentSongState: SongState?
     var songController: SongController?
     var eventID: Int32 = 0
     var trackRequestRepresentation: TrackRequest?
@@ -23,10 +20,9 @@ class SongDetailTableViewCell: UITableViewCell {
             updateViews()
         }
     }
-    var isGuest: Bool? {
-        didSet {
-        }
-    }
+    var isGuest: Bool?
+
+    // MARK: - Outlets
     @IBOutlet var songLabel: UILabel!
     @IBOutlet var artistLabel: UILabel!
     @IBOutlet var coverArtImageView: UIImageView!
@@ -48,6 +44,7 @@ class SongDetailTableViewCell: UITableViewCell {
         addSongButton.isSelected = false
     }
 
+    // MARK: - Actions
     @IBAction func requestSong(_ sender: UIButton) {
         print("requestSong button pressed")
         guard let song = song,
@@ -87,6 +84,7 @@ class SongDetailTableViewCell: UITableViewCell {
         upvoteSongButton.isSelected.toggle()
     }
 
+    // MARK: - Methods
     func guestAddsSongToRequestList(_ song: TrackRequest) {
         print("guest added song to request list")
         guard let songController = songController else { return }
@@ -138,27 +136,11 @@ class SongDetailTableViewCell: UITableViewCell {
         // Insert network call here to cancel the upvote request
     }
 
+    // MARK: - Update Views
     func updateViews() {
         guard let song = song,
         let songController = songController else { return }
         // for the dj view the dj should see the plus button in the cell and consequently adds that song to the setlist
-
-        // This was the code to get cover art before implementing the ConcurrentOperation class
-        // I'm saving this code just in case, because I'm not 100% comfortable with the concurrent operations.
-//        if let coverArtURL = song.image {
-//            songController.fetchCoverArt(url: coverArtURL) { (result) in
-//                switch result {
-//                case let .success(image):
-//                    DispatchQueue.main.async {
-//                        self.coverArtImageView.image = image
-//                    }
-//                case .failure:
-//                    DispatchQueue.main.async {
-//                        self.coverArtImageView.image = #imageLiteral(resourceName: "musicSymbol")
-//                    }
-//                }
-//            }
-//        }
 
         songLabel.text = song.songName
         artistLabel.text = song.artist
@@ -172,7 +154,6 @@ class SongDetailTableViewCell: UITableViewCell {
         } else {
             addSongButton.isSelected = false
         }
-
 
         switch currentSongState {
         case .requested:
