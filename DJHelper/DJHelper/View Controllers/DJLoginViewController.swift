@@ -28,7 +28,6 @@ class DJLoginViewController: ShiftableViewController {
     // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupButtons()
 
         let tapToDismiss = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))

@@ -35,9 +35,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
           print("eventID = \(eventInt32)")
 
           if scheme == "djscheme" {
-              let storyboard = UIStoryboard(name: "Main", bundle: .main)
-              let guestLoginVC = storyboard.instantiateViewController(withIdentifier: "guestLoginVC") as! GuestLoginViewController
-                  guestLoginVC.eventID = eventInt32
+            let eventController = EventController()
+            let hostController = HostController()
+            let storyboard = UIStoryboard(name: "Main", bundle: .main)
+            let guestLoginVC = storyboard.instantiateViewController(withIdentifier: "guestLoginVC") as! GuestLoginViewController
+            guestLoginVC.eventID = eventInt32
+            guestLoginVC.eventController = eventController
+            guestLoginVC.hostController = hostController
               window?.rootViewController = guestLoginVC
           } else {
             print("scheme does not match our 'djscheme' scheme")
@@ -97,7 +101,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let hostController = HostController()
             let storyboard = UIStoryboard(name: "Main", bundle: .main)
             let guestLoginVC = storyboard.instantiateViewController(withIdentifier: "guestLoginVC") as! GuestLoginViewController
-                guestLoginVC.eventID = eventInt32
+            guestLoginVC.eventID = eventInt32
             guestLoginVC.eventController = eventController
             guestLoginVC.hostController = hostController
             window?.rootViewController = guestLoginVC

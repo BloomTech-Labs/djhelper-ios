@@ -17,10 +17,17 @@ class GuestLoginViewController: ShiftableViewController {
             updateView()
         }
     }
+
     var currentHost: Host?
     var allHosts: [Host]?
     var allEvents: [Event]?
-    var event: Event?
+    var event: Event? {
+        didSet {
+            //fetch dj for said event - called in the didset
+            self.setHost()
+        }
+    }
+
     var isGuest: Bool?
     var eventController: EventController?
     var hostController: HostController?
@@ -33,28 +40,7 @@ class GuestLoginViewController: ShiftableViewController {
     // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        hostController?.fetchAllHostsFromServer(completion: { (results) in
-            switch results {
-            case let .success(hosts):
-                DispatchQueue.main.async {
-                    self.allHosts = hosts
-                }
-            case let .failure(error):
-                print("Error fetching all hosts from server: \(error)")
-            }
-        })
-
-        eventController?.fetchAllEventsFromServer(completion: { (results) in
-            switch results {
-            case let .success(events):
-                DispatchQueue.main.async {
-                    self.allEvents = events
-                }
-            case let .failure(error):
-                print("Error fetching all events from server: \(error)")
-            }
-        })
-
+        updateView()
         setupButtons()
         setUpSubviews()
         eventCodeTextField.delegate = self
@@ -68,27 +54,6 @@ class GuestLoginViewController: ShiftableViewController {
     // viewDidLoad, they are called before the scene delegate navigates here.
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        hostController?.fetchAllHostsFromServer(completion: { (results) in
-            switch results {
-            case let .success(hosts):
-                DispatchQueue.main.async {
-                    self.allHosts = hosts
-                }
-            case let .failure(error):
-                print("Error fetching all hosts from server: \(error)")
-            }
-        })
-
-        eventController?.fetchAllEventsFromServer(completion: { (results) in
-            switch results {
-            case let .success(events):
-                DispatchQueue.main.async {
-                    self.allEvents = events
-                }
-            case let .failure(error):
-                print("Error fetching all events from server: \(error)")
-            }
-        })
     }
 
     private func updateView() {
@@ -96,8 +61,9 @@ class GuestLoginViewController: ShiftableViewController {
             print("Error on line: \(#line) in function: \(#function)\n")
             return
         }
+
         eventCodeTextField.text = "\(eventID)"
-        eventCodeTextField.textColor = .black
+        eventCodeTextField.textColor = .white
         self.view.backgroundColor = .cyan
 
     }
@@ -110,45 +76,69 @@ class GuestLoginViewController: ShiftableViewController {
     // and make the associated host the current host
     // and set a boolean "guest" property to true
     // if not present, present an error alert
+    func setHost() {
+        guard let event = event else {
+            print("Error on line: \(#line) in function: \(#function)\n")
+            return
+        }
+
+        hostController?.fetchHostFromServer(with: event.hostID, completion: { (result) in
+            switch result {
+            case let .success(host):
+                self.currentHost = host
+                print("this is the currentHost: \(self.currentHost?.name)")
+                DispatchQueue.main.async {
+                    // Perform segue to eventPlaylistViewController
+                    self.performSegue(withIdentifier: "EventPlaylistSegue", sender: self)
+                }
+            case let .failure(error):
+                print("this is the error: \(error)")
+                DispatchQueue.main.async {
+                    self.customAlert.showAlert(with: "Network call error: no host for event", message: error.localizedDescription, on: self)
+                }
+            }
+        })
+    }
 
     @IBAction func viewEvents(_ sender: UIButton) {
         print("view event button pressed.")
+        // check to see if there is something in the textbox
         guard let eventCode = eventCodeTextField.text,
-            !eventCode.isEmpty,
-        let allEvents = allEvents,
-        let allHosts = allHosts else { return }
+            !eventCode.isEmpty else {
+                self.view.backgroundColor = .red
+                return
+        }
 
-        // Check that the text entered is convertible to Int
-        guard let intEventCode = Int(eventCode) else {
+        guard let eventId = eventID else {
+            self.view.backgroundColor = .red
             let inputAlert = CustomAlert()
             inputAlert.showAlert(with: "Invalid Entry",
                                  message: "The event code must be a whole number only. Please check the input and try again.",
                                  on: self)
+            self.view.backgroundColor = .yellow
             return
         }
 
-        let matchingEventIDs = allEvents.filter { $0.eventID == intEventCode }
-        if let matchingEvent = matchingEventIDs.first {
-            self.event = matchingEvent
-            let matchingHostID = matchingEvent.hostID
-            let matchingHosts = allHosts.filter { $0.identifier == matchingHostID }
-            if let matchingHost = matchingHosts.first {
-                self.currentHost = matchingHost
-                self.event?.host = matchingHost
-            }
-            self.isGuest = true
-
-            // Perform segue to eventPlaylistViewController
-            performSegue(withIdentifier: "EventPlaylistSegue", sender: self)
-
-        } else {
-//            let unmatchedEventAlert = CustomAlert()
-                                    customAlert.showAlert(with: "Event Not Found",
-                                                                  message: "There was no event found with the code. Please verify the code and try again.",
-                                                                  on: self)
+        guard let eventController = eventController else {
+            print("Error on line: \(#line) in function: \(#function)\n")
+            self.view.backgroundColor = .magenta
+            return
         }
-    }
 
+        //fetch event based on the eventId in the textfield
+        eventController.fetchEvent(withEventID: eventId, completion: { (results) in
+            switch results {
+            case let .success(event):
+                self.event = event
+            case let .failure(error):
+                print("error: \(error)")
+                DispatchQueue.main.async {
+                    self.customAlert.showAlert(with: "Network call error fetching event", message: error.localizedDescription, on: self)
+                }
+            }
+        })
+    }
+    
     @objc func dismissAlert() {
         customAlert.dismissAlert()
     }
