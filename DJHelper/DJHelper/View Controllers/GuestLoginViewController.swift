@@ -20,7 +20,11 @@ class GuestLoginViewController: ShiftableViewController {
     var currentHost: Host?
     var allHosts: [Host]?
     var allEvents: [Event]?
-    var event: Event?
+    var event: Event? {
+        didSet {
+            self.view.backgroundColor = .blue
+        }
+    }
     var isGuest: Bool?
     var eventController: EventController?
     var hostController: HostController?
@@ -114,12 +118,18 @@ class GuestLoginViewController: ShiftableViewController {
     @IBAction func viewEvents(_ sender: UIButton) {
         print("view event button pressed.")
         guard let eventCode = eventCodeTextField.text,
-            !eventCode.isEmpty,
-        let allEvents = allEvents,
-        let allHosts = allHosts else { return }
+            !eventCode.isEmpty else {
+                self.view.backgroundColor = .yellow
+                return
+        }
+        guard let allEvents = allEvents else { self.view.backgroundColor = .orange ; return }
+        guard let allHosts = allHosts else {
+            self.view.backgroundColor = .red
+            return }
 
         // Check that the text entered is convertible to Int
         guard let intEventCode = Int(eventCode) else {
+            self.view.backgroundColor = .darkGray
             let inputAlert = CustomAlert()
             inputAlert.showAlert(with: "Invalid Entry",
                                  message: "The event code must be a whole number only. Please check the input and try again.",
