@@ -63,8 +63,6 @@ class GuestLoginViewController: ShiftableViewController {
         }
 
         eventCodeTextField.text = "\(eventID)"
-        eventCodeTextField.textColor = .white
-        self.view.backgroundColor = .cyan
 
     }
 
@@ -109,7 +107,7 @@ class GuestLoginViewController: ShiftableViewController {
                 return
         }
 
-        guard let eventId = eventID else {
+        guard let eventId = Int(eventCode) else {
             self.view.backgroundColor = .red
             let inputAlert = CustomAlert()
             inputAlert.showAlert(with: "Invalid Entry",
@@ -126,7 +124,7 @@ class GuestLoginViewController: ShiftableViewController {
         }
 
         //fetch event based on the eventId in the textfield
-        eventController.fetchEvent(withEventID: eventId, completion: { (results) in
+        eventController.fetchEvent(withEventID: Int32(eventId), completion: { (results) in
             switch results {
             case let .success(event):
                 self.event = event
