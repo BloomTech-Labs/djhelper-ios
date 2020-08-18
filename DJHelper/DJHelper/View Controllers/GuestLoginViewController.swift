@@ -136,7 +136,7 @@ class GuestLoginViewController: ShiftableViewController {
             }
         })
     }
-    
+
     @objc func dismissAlert() {
         customAlert.dismissAlert()
     }
