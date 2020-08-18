@@ -31,6 +31,54 @@ class HostController {
         self.dataLoader = dataLoader
     }
 
+    // MARK: - Fetch Host
+    func fetchHostFromServer(with Id: Int, completion: @escaping (Result<Host, HostErrors>) -> Void) {
+            let url = baseURL.appendingPathComponent("dj")
+        let finalURL = url.appendingPathComponent("\(Id)")
+            let urlRequest = URLRequest(url: finalURL)
+
+            dataLoader.loadData(from: urlRequest) { (data, response, error) in
+                if let response = response as? HTTPURLResponse {
+                    print("HTTPResponse: \(response.statusCode) in function: \(#function)")
+                }
+
+                if let error = error {
+                    print("""
+                        Error: \(error.localizedDescription) on line \(#line)
+                        in function: \(#function)\n Technical error: \(error)
+                        """)
+                    completion(.failure(.unknownError(error)))
+                }
+
+                guard let data = data else {
+                    print("Error on line: \(#line) in function: \(#function)")
+                    completion(.failure(.noDataError))
+                    return
+                }
+
+                let decoder = JSONDecoder()
+
+                do {
+    //                let printableData = String(data: data, encoding: .utf8)
+    //                print(printableData)
+                    let hostRep = try decoder.decode(HostRepresentation.self, from: data)
+                    guard let host = Host(hostRepresnetation: hostRep) else {
+                        print("Error on line: \(#line) in function: \(#function)\n")
+                        completion(.failure(.noDataError))
+                        return
+                    }
+                    completion(.success(host))
+                } catch {
+                    print("""
+                        Error on line: \(#line) in function: \(#function)\n
+                        Readable error: \(error.localizedDescription)\n Technical error: \(error)
+                        """)
+                    completion(.failure(.unknownError(error)))
+                }
+            }
+        }
+
+
     // MARK: - Fetch All Hosts
     func fetchAllHostsFromServer(completion: @escaping (Result<[Host], HostErrors>) -> Void) {
         let url = baseURL.appendingPathComponent("djs")
