@@ -432,7 +432,7 @@ extension EventPlaylistViewController: UITableViewDataSource {
             switch results {
             case let .success(success):
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                    self.fetchRequestList()
                     print("success: \(success)")
                 }
             case let .failure(error):
@@ -452,7 +452,7 @@ extension EventPlaylistViewController: UITableViewDataSource {
             switch results {
             case let .success(success):
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                    self.fetchSetlist()
                     print("success: \(success)")
                 }
             case let .failure(error):
