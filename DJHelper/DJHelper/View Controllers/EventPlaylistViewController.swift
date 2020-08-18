@@ -17,7 +17,7 @@ enum SongState {
 }
 
 class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate {
-
+    
     // MARK: - Properties
     var event: Event?
     var currentHost: Host?
@@ -35,7 +35,7 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
     private let cache = Cache<String, Data>()
     private let photoFetchQueue = OperationQueue()
     private let refreshControl = UIRefreshControl()
-
+    
     // MARK: - Outlets
     @IBOutlet var tableView: UITableView!
     @IBOutlet var searchBar: UISearchBar!
@@ -48,11 +48,11 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
     @IBOutlet var leftRequestSetlistButton: UIButton!
     @IBOutlet var rightRequestSetlistButton: UIButton!
     @IBOutlet weak var shareButtonProperties: UIBarButtonItem!
-
+    
     // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         searchBar.delegate = self
         tableView.keyboardDismissMode = .onDrag
         tableView.refreshControl = refreshControl
@@ -65,23 +65,23 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
-
+    
     private func fetchRequestList() {
         guard let event = event else { return }
         //Guest view: Should return a Song model for upvoting
-            songController.fetchAllTracksFromRequestList(forEventId: Int(event.eventID)) { (result) in
-                switch result {
-                case let .success(requestedSongs):
-                    DispatchQueue.main.async {
-                        self.requestedSongs = requestedSongs
-                        self.tableView.reloadData()
-                    }
-                case let .failure(error):
-                    print("Error in fetching all requested songs: \(error)")
+        songController.fetchAllTracksFromRequestList(forEventId: Int(event.eventID)) { (result) in
+            switch result {
+            case let .success(requestedSongs):
+                DispatchQueue.main.async {
+                    self.requestedSongs = requestedSongs
+                    self.tableView.reloadData()
                 }
+            case let .failure(error):
+                print("Error in fetching all requested songs: \(error)")
             }
+        }
     }
-
+    
     ///To dismiss the custom alert
     @objc func dismissAlert() {
         myAlert.dismissAlert()
@@ -102,7 +102,7 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
             updateViews()
         }
     }
-
+    
     @IBAction func setlistButtonSelected(_ sender: UIButton) {
         // when a guest is viewing, this is the setlist button
         // when a host/DJ is viewing, this is the request button
@@ -117,7 +117,7 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
             updateViews()
         }
     }
-
+    
     @IBAction func viewHostDetail(_ sender: UIButton) {
         guard let currentHost = currentHost else { return }
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
@@ -127,7 +127,7 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
         present(hostProfileVC, animated: true, completion: nil)
         //        self.navigationController?.present(hostProfileVC, animated: true, completion: nil)
     }
-
+    
     @IBAction func shareEventButtonPressed(_ sender: UIBarButtonItem) {
         guard let passedInEvent = event, let eventDate = passedInEvent.eventDate else {
             print("No event passed to the EventPlaylistVC.\nError on line: \(#line) in function: \(#function)\n")
@@ -137,22 +137,22 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
             print("Event has already passed. Error on line: \(#line) in function: \(#function)\n")
             return
         }
-
+        
         print("eventId to pass with link: \(passedInEvent.eventID)")
-
+        
         let message = "Hey! Please check out this new event I created!"
         let tempUrlToPass = URL(string: "djscheme://www.djhelper.com/guestLogin?eventId=\(passedInEvent.eventID)")!
         let objectsToShare: [Any] = [message, tempUrlToPass]
-
+        
         let activityController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         present(activityController, animated: true, completion: nil)
     }
-
+    
     // MARK: - Methods
     @objc func refreshSongData(_ sender: Any) {
         updateSongList()
     }
-
+    
     func updateSongList() {
         // call to the server for songs in event playlist or requested songs
         // set the returned results to some variable
@@ -167,28 +167,28 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
         }
         self.refreshControl.endRefreshing()
     }
-
+    
     private func updateViews() {
         // TODO: - defaults to currentHost holding value -shouldn't happen
         guard let event = event,
             let currentHost = currentHost else { return }
-
+        
         eventNameLabel.text = event.name
         eventDescriptionLabel.text = event.eventDescription
-
+        
         if let eventDate = event.eventDate {
             let longDate = longDateToString(with: eventDate)
             let time = timeToString(with: eventDate)
             dateLabel.textColor = UIColor(named: "PurpleColor")
             dateLabel.text = String("\(longDate) ▪︎ \(time)")
         }
- 
+        
         let buttonTitle = NSMutableAttributedString(string: "\(currentHost.name ?? "EventHost")", attributes: [
             NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 14)!,
             NSAttributedString.Key.foregroundColor: UIColor.systemBlue
         ])
         hostNameButton.setAttributedTitle(buttonTitle, for: .normal)
-
+        
         // udpateViews() should also swap the location of the
         // Setlist and Requests buttons based on the value of isGuest
         let requestButtonTitle = NSMutableAttributedString(string: "Requests", attributes: [
@@ -202,7 +202,7 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
                 }
             }()
         ])
-
+        
         let setlistButtonTitle = NSMutableAttributedString(string: "Setlist", attributes: [
             NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 18)!,
             NSAttributedString.Key.foregroundColor: {
@@ -225,7 +225,7 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
         }
         tableView.reloadData()
     }
-
+    
     func fetchSetlist() {
         guard let event = event else {
             print("Error on line: \(#line) in function: \(#function)\n")
@@ -249,7 +249,7 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
             }
         }
     }
-
+    
     // MARK: - Search for Song
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let event = event,
@@ -280,14 +280,14 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
             }
         }
     }
-
+    
     // MARK: - Load Cover Art Image
     // loadImage uses block operations to fetch cover art images on a background queue
     // and then stores the data in a cache for more responsive scrolling with large numbers of images
     func loadImage(for songCell: SongDetailTableViewCell, forItemAt indexPath: IndexPath) {
-
+        
         var currentSong = Song()
-
+        
         switch currentSongState {
         case .requested:
             currentSong = requestedSongs[indexPath.row]
@@ -296,7 +296,7 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
         case .searched:
             currentSong = searchResults[indexPath.row]
         }
-
+        
         guard let songId = currentSong.songId else { return }
         if let coverArtData = cache.value(for: songId),
             let image = UIImage(data: coverArtData) {
@@ -304,7 +304,7 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
             self.tableView.reloadRows(at: [indexPath], with: .automatic)
             return
         }
-
+        
         let fetchOp = FetchMediaOperation(song: currentSong, songController: songController)
         let cacheOp = BlockOperation {
             if let data = fetchOp.mediaData {
@@ -314,39 +314,39 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
                 }
             }
         }
-
+        
         let completionOp = BlockOperation {
             defer { self.operations.removeValue(forKey: songId) }
-
+            
             if let currentIndexPath = self.tableView.indexPath(for: songCell),
                 currentIndexPath != indexPath {
                 print("Got image for a now-reused cell")
                 return
             }
-
+            
             if let data = fetchOp.mediaData {
                 songCell.setImage(UIImage(data: data))
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
             }
         }
-
+        
         cacheOp.addDependency(fetchOp)
         completionOp.addDependency(fetchOp)
-
+        
         photoFetchQueue.addOperation(fetchOp)
         photoFetchQueue.addOperation(cacheOp)
         OperationQueue.main.addOperation(completionOp)
-
+        
         operations[songId] = fetchOp
-
+        
     }
-
+    
     func longDateToString(with date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "EEE, MMM d, yyyy"
         return formatter.string(from: date)
     }
-
+    
     func timeToString(with date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "h:mm a"
@@ -365,7 +365,7 @@ extension EventPlaylistViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch currentSongState {
         case .requested:
@@ -376,10 +376,10 @@ extension EventPlaylistViewController: UITableViewDataSource {
             return searchResults.count
         }
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as? SongDetailTableViewCell else { return UITableViewCell() }
-
+        
         switch currentSongState {
         case .requested:
             let song = requestedSongs[indexPath.row]
@@ -408,26 +408,26 @@ extension EventPlaylistViewController: UITableViewDataSource {
         }
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if isGuest == false {
             if editingStyle == .delete {
+
                 switch currentSongState {
-                       case .requested:
-                           let song = requestedSongs[indexPath.row]
-                        deleteTrackFromRequestList(song: song)
-                       case .setListed:
-                           let song = setListedSongs[indexPath.row]
-                           
-                       case .searched:
-                           let song = searchResults[indexPath.row]
-                           
-                       }
+                case .requested:
+                    let song = requestedSongs[indexPath.row]
+                    deleteTrackFromRequestList(song: song)
+                case .setListed:
+                    let song = setListedSongs[indexPath.row]
+                    deleteSongFromSetlist(song: song)
+                case .searched:
+                    break
+                }
             }
-            
+
         }
     }
-    
+
     func deleteTrackFromRequestList(song: Song) {
         songController.deleteTrackFromRequests(trackId: Int(song.songID)) { (results) in
             switch results {
@@ -447,9 +447,9 @@ extension EventPlaylistViewController: UITableViewDataSource {
             }
         }
     }
-    
+
     func deleteSongFromSetlist(song: Song) {
-        songController.deleteSongFromPlaylist(trackId: Int(song.songID)) { (results) in
+        songController.deleteSongFromPlaylist(song: song) { (results) in
             switch results {
             case let .success(success):
                 DispatchQueue.main.async {
@@ -462,8 +462,9 @@ extension EventPlaylistViewController: UITableViewDataSource {
                     Readable error: \(error.localizedDescription)\n Technical error: \(error)
                     """)
                 DispatchQueue.main.async {
-                    self.myAlert.showAlert(with: "Error deleting song from Request List", message: error.localizedDescription, on: self)
+                    self.myAlert.showAlert(with: "Error deleting song from Set List", message: error.localizedDescription, on: self)
                 }
             }
         }
+    }
 }
