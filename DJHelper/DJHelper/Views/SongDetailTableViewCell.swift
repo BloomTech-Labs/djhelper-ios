@@ -42,6 +42,12 @@ class SongDetailTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        addSongButton.isSelected = false
+    }
+
     @IBAction func requestSong(_ sender: UIButton) {
         print("requestSong button pressed")
         guard let song = song,
@@ -56,10 +62,16 @@ class SongDetailTableViewCell: UITableViewCell {
             if isGuest == true {
                 guestAddsSongToRequestList(trackRequestRepresentation!)
             } else {
-                hostAddsSongToPlaylist(song)
+                guard let currentSongState = currentSongState else { return }
+                if currentSongState == .searched {
+                    guestAddsSongToRequestList(trackRequestRepresentation!)
+                } else {
+                    hostAddsSongToPlaylist(song)
+                }
             }
         }
         addSongButton.isSelected.toggle()
+        self.song?.inSetList.toggle()
 
     }
 
@@ -79,11 +91,20 @@ class SongDetailTableViewCell: UITableViewCell {
         print("guest added song to request list")
         guard let songController = songController else { return }
 
-        //call this function if its the guest - the host doesn't add song to request list, he adds it to the playlist
+        //call this function if its the guest
+        // also call it as an intermediate step when the host is moving a song
+        // from the search results list to the set list -- if the song state is .searched
+        // then it completes the second step of adding the song to the playlist
             songController.addSongToRequest(song) { (result) in
                 switch result {
-                case .success:
-                    break
+                case let .success(trackresponse):
+                    guard let songState = self.currentSongState else { return }
+                    if songState == .searched {
+                        guard self.song != nil else { return }
+                        var song = self.song
+                        song?.songID = trackresponse.trackId
+                        self.hostAddsSongToPlaylist(song!)
+                    }
                 case let .failure(error):
                     print("Error adding song request: \(error)")
                 }
@@ -122,27 +143,36 @@ class SongDetailTableViewCell: UITableViewCell {
         let songController = songController else { return }
         // for the dj view the dj should see the plus button in the cell and consequently adds that song to the setlist
 
-        // TODO: Move this network call from the cell
-        if let coverArtURL = song.image {
-            songController.fetchCoverArt(url: coverArtURL) { (result) in
-                switch result {
-                case let .success(image):
-                    DispatchQueue.main.async {
-                        self.coverArtImageView.image = image
-                    }
-                case .failure:
-                    DispatchQueue.main.async {
-                        self.coverArtImageView.image = #imageLiteral(resourceName: "musicSymbol")
-                    }
-                }
-            }
-        }
+        // This was the code to get cover art before implementing the ConcurrentOperation class
+        // I'm saving this code just in case, because I'm not 100% comfortable with the concurrent operations.
+//        if let coverArtURL = song.image {
+//            songController.fetchCoverArt(url: coverArtURL) { (result) in
+//                switch result {
+//                case let .success(image):
+//                    DispatchQueue.main.async {
+//                        self.coverArtImageView.image = image
+//                    }
+//                case .failure:
+//                    DispatchQueue.main.async {
+//                        self.coverArtImageView.image = #imageLiteral(resourceName: "musicSymbol")
+//                    }
+//                }
+//            }
+//        }
 
         songLabel.text = song.songName
         artistLabel.text = song.artist
         if trackRequestRepresentation?.eventId == 0 {
             addSongButton.isSelected = false
         }
+
+        // Setting the status of the cell's button after the cell is reused by the table view
+        if song.inSetList {
+            addSongButton.isSelected = true
+        } else {
+            addSongButton.isSelected = false
+        }
+
 
         switch currentSongState {
         case .requested:
@@ -168,6 +198,11 @@ class SongDetailTableViewCell: UITableViewCell {
                 updateHostSearchViews()
             }
         }
+    }
+
+    // setImage is called from outside the cell to set the album artwork image
+    func setImage(_ image: UIImage?) {
+        coverArtImageView.image = image
     }
 
     // MARK: - Updateviews Methods

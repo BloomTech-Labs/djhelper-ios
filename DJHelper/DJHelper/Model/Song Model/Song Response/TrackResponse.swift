@@ -32,7 +32,7 @@ struct TrackResponse: Codable {
     var preview: String
     var image: URL
     var eventId: Int
-    var votes: String
+    var votes: String?
 
     enum CodingKeys: String, CodingKey {
         case trackId = "id"
@@ -56,7 +56,7 @@ struct TrackResponse: Codable {
          preview: String,
          image: URL,
          eventId: Int,
-         votes: String) {
+         votes: String? = "0") {
 
         self.trackId = trackId
         self.spotifyId = spotifyId

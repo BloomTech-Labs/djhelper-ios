@@ -31,6 +31,9 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
     var setListedSongs: [Song] = []
     var searchResults: [Song] = []
     var myAlert = CustomAlert()
+    private var operations = [String : Operation]()
+    private let cache = Cache<String, Data>()
+    private let photoFetchQueue = OperationQueue()
     private let refreshControl = UIRefreshControl()
 
     // MARK: - Outlets
@@ -84,18 +87,30 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
         // when a guest is viewing, this is the request button
         // when a host/DJ is viewing, this is the setlist button
         print("request button pressed as guest: \(isGuest)")
-        isGuest ? (currentSongState = .requested) : (currentSongState = .setListed)
-        fetchRequestList()
-        updateViews()
+        if isGuest {
+            currentSongState = .requested
+            fetchRequestList()
+            updateViews()
+        } else {
+            currentSongState = .setListed
+            fetchSetlist()
+            updateViews()
+        }
     }
 
     @IBAction func setlistButtonSelected(_ sender: UIButton) {
         // when a guest is viewing, this is the setlist button
         // when a host/DJ is viewing, this is the request button
         print("setlist button pressed as guest: \(isGuest)")
-        isGuest ? (currentSongState = .setListed) : (currentSongState = .requested)
-        fetchSetlist()
-        updateViews()
+        if isGuest {
+            currentSongState = .setListed
+            fetchSetlist()
+            updateViews()
+        } else {
+            currentSongState = .requested
+            fetchRequestList()
+            updateViews()
+        }
     }
 
     @IBAction func viewHostDetail(_ sender: UIButton) {
@@ -232,7 +247,8 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
 
     // MARK: - Search for Song
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let searchTerm = searchBar.text,
+        guard let event = event,
+            let searchTerm = searchBar.text,
             searchTerm != "" else { return }
         searchResults = []
         self.activityIndicator(activityIndicatorView: activityIndicatorView, shouldStart: true)
@@ -244,6 +260,7 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
                         let newSong = Song(artist: song.artist, externalURL: song.externalURL, songId: song.songId, songName: song.songName,
                                            preview: song.preview,
                                            image: song.image)
+                        newSong.event = event
                         self.searchResults.append(newSong)
                     }
                     self.currentSongState = .searched
@@ -257,6 +274,66 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
                 }
             }
         }
+    }
+
+    // MARK: - Load Cover Art Image
+    // loadImage uses block operations to fetch cover art images on a background queue
+    // and then stores the data in a cache for more responsive scrolling with large numbers of images
+    func loadImage(for songCell: SongDetailTableViewCell, forItemAt indexPath: IndexPath) {
+
+        var currentSong = Song()
+
+        switch currentSongState {
+        case .requested:
+            currentSong = requestedSongs[indexPath.row]
+        case .setListed:
+            currentSong = setListedSongs[indexPath.row]
+        case .searched:
+            currentSong = searchResults[indexPath.row]
+        }
+
+        guard let songId = currentSong.songId else { return }
+        if let coverArtData = cache.value(for: songId),
+            let image = UIImage(data: coverArtData) {
+            songCell.setImage(image)
+            self.tableView.reloadRows(at: [indexPath], with: .automatic)
+            return
+        }
+
+        let fetchOp = FetchMediaOperation(song: currentSong, songController: songController)
+        let cacheOp = BlockOperation {
+            if let data = fetchOp.mediaData {
+                self.cache.cache(value: data, for: songId)
+                DispatchQueue.main.async {
+                    self.tableView.reloadRows(at: [indexPath], with: .automatic)
+                }
+            }
+        }
+
+        let completionOp = BlockOperation {
+            defer { self.operations.removeValue(forKey: songId) }
+
+            if let currentIndexPath = self.tableView.indexPath(for: songCell),
+                currentIndexPath != indexPath {
+                print("Got image for a now-reused cell")
+                return
+            }
+
+            if let data = fetchOp.mediaData {
+                songCell.setImage(UIImage(data: data))
+                self.tableView.reloadRows(at: [indexPath], with: .automatic)
+            }
+        }
+
+        cacheOp.addDependency(fetchOp)
+        completionOp.addDependency(fetchOp)
+
+        photoFetchQueue.addOperation(fetchOp)
+        photoFetchQueue.addOperation(cacheOp)
+        OperationQueue.main.addOperation(completionOp)
+
+        operations[songId] = fetchOp
+
     }
 
     func longDateToString(with date: Date) -> String {
@@ -306,6 +383,7 @@ extension EventPlaylistViewController: UITableViewDataSource {
             cell.eventID = event?.eventID ?? 0
             cell.isGuest = self.isGuest
             cell.song = song
+            loadImage(for: cell, forItemAt: indexPath)
         case .setListed:
             let song = setListedSongs[indexPath.row]
             cell.currentSongState = .setListed
@@ -313,6 +391,7 @@ extension EventPlaylistViewController: UITableViewDataSource {
             cell.eventID = event?.eventID ?? 0
             cell.isGuest = self.isGuest
             cell.song = song
+            loadImage(for: cell, forItemAt: indexPath)
         case .searched:
             let song = searchResults[indexPath.row]
             cell.currentSongState = .searched
@@ -320,6 +399,7 @@ extension EventPlaylistViewController: UITableViewDataSource {
             cell.eventID = event?.eventID ?? 0
             cell.isGuest = self.isGuest
             cell.song = song
+            loadImage(for: cell, forItemAt: indexPath)
         }
         return cell
     }

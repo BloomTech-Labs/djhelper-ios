@@ -45,6 +45,8 @@
 		4446F8272480D792005ACE10 /* DJRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F8262480D792005ACE10 /* DJRegisterViewController.swift */; };
 		446F55A224DB9D860030F66F /* HostingEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F55A124DB9D860030F66F /* HostingEventsViewController.swift */; };
 		446F55A424DB9D930030F66F /* PastEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F55A324DB9D930030F66F /* PastEventsViewController.swift */; };
+		446F55A624EB31830030F66F /* ConcurrentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F55A524EB31830030F66F /* ConcurrentOperation.swift */; };
+		446F55A824EB33840030F66F /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F55A724EB33840030F66F /* Cache.swift */; };
 		447F537A2475805E00F706F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F53792475805E00F706F1 /* AppDelegate.swift */; };
 		447F537C2475805E00F706F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F537B2475805E00F706F1 /* SceneDelegate.swift */; };
 		447F537E2475805E00F706F1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F537D2475805E00F706F1 /* ViewController.swift */; };
@@ -121,6 +123,8 @@
 		4446F8262480D792005ACE10 /* DJRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJRegisterViewController.swift; sourceTree = "<group>"; };
 		446F55A124DB9D860030F66F /* HostingEventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingEventsViewController.swift; sourceTree = "<group>"; };
 		446F55A324DB9D930030F66F /* PastEventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastEventsViewController.swift; sourceTree = "<group>"; };
+		446F55A524EB31830030F66F /* ConcurrentOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentOperation.swift; sourceTree = "<group>"; };
+		446F55A724EB33840030F66F /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		447F53762475805D00F706F1 /* DJHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		447F53792475805E00F706F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		447F537B2475805E00F706F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -299,6 +303,8 @@
 				1BA4A8C72486858D002A67E2 /* HelperExtensions.swift */,
 				44214DF02491952100D63B6A /* ShiftableViewController.swift */,
 				1B3D9BBA2492FC6700E8625C /* CustomAlert.swift */,
+				446F55A524EB31830030F66F /* ConcurrentOperation.swift */,
+				446F55A724EB33840030F66F /* Cache.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -624,6 +630,7 @@
 				1BF6A47124E32EAD00519E82 /* TrackRequest.swift in Sources */,
 				1BA4A8C22485C152002A67E2 /* EventController.swift in Sources */,
 				1B71119024D2A6E400BF4256 /* HostEventViewController.swift in Sources */,
+				446F55A824EB33840030F66F /* Cache.swift in Sources */,
 				1B71119224D2A94D00BF4256 /* HostEventCollectionViewCell.swift in Sources */,
 				4446F799247638D4005ACE10 /* HTTPMethod.swift in Sources */,
 				441CB84F2499CE1E00637CC0 /* GuestLoginViewController.swift in Sources */,
@@ -636,6 +643,7 @@
 				447F537C2475805E00F706F1 /* SceneDelegate.swift in Sources */,
 				44214DEB248F2CA000D63B6A /* EventPlaylistViewController.swift in Sources */,
 				1B3D9BBB2492FC6700E8625C /* CustomAlert.swift in Sources */,
+				446F55A624EB31830030F66F /* ConcurrentOperation.swift in Sources */,
 				1BDBE284248508FC006DE77E /* HostRegistration.swift in Sources */,
 				4446F7DA247DCAD8005ACE10 /* Bearer.swift in Sources */,
 				4446F7D6247DC51F005ACE10 /* Host+Convenience.swift in Sources */,
