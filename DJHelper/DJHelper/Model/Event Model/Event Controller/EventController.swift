@@ -187,7 +187,7 @@ class EventController {
     }
 
     // MARK: - Fetch Specific Event from server
-    func fetchEvent(withEventID id: Int, completion: @escaping(Result<Bool, EventErrors>) -> Void) {
+    func fetchEvent(withEventID id: Int32, completion: @escaping(Result<Event, EventErrors>) -> Void) {
         let url = baseURL.appendingPathComponent("event")
         let finalURL = url.appendingPathComponent("\(id)")
         let urlRequest = URLRequest(url: finalURL)
@@ -217,7 +217,12 @@ class EventController {
             do {
                 let eventRep = try decoder.decode(EventRepresentation.self, from: data)
                 print("event: \(eventRep.name)\n, ID\(eventRep.eventID)\n hostID: \(eventRep.hostID)")
-                completion(.success(true))
+                guard let returnedEvent = Event(eventRepresentation: eventRep) else {
+                    print("Error on line: \(#line) in function: \(#function)\n")
+                    completion(.failure(.couldNotInitializeAnEvent))
+                    return
+                }
+                completion(.success(returnedEvent))
 
             } catch {
                  print("""

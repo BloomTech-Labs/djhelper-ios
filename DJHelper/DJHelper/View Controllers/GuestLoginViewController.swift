@@ -20,11 +20,7 @@ class GuestLoginViewController: ShiftableViewController {
     var currentHost: Host?
     var allHosts: [Host]?
     var allEvents: [Event]?
-    var event: Event? {
-        didSet {
-            self.view.backgroundColor = .blue
-        }
-    }
+    var event: Event?
     var isGuest: Bool?
     var eventController: EventController?
     var hostController: HostController?
@@ -83,18 +79,32 @@ class GuestLoginViewController: ShiftableViewController {
             }
         })
 
-        eventController?.fetchAllEventsFromServer(completion: { (results) in
+        unwrapEventIdAndFetchIt()
+//        eventController?.fetchAllEventsFromServer(completion: { (results) in
+//            switch results {
+//            case let .success(events):
+//                DispatchQueue.main.async {
+//                    self.allEvents = events
+//                }
+//            case let .failure(error):
+//                print("Error fetching all events from server: \(error)")
+//            }
+//        })
+    }
+    func unwrapEventIdAndFetchIt() {
+        guard let eventId = eventID else {
+            print("Error on line: \(#line) in function: \(#function)\n")
+            return
+        }
+        eventController?.fetchEvent(withEventID: eventId, completion: { (results) in
             switch results {
-            case let .success(events):
-                DispatchQueue.main.async {
-                    self.allEvents = events
-                }
+            case let .success(event):
+                self.event = event
             case let .failure(error):
-                print("Error fetching all events from server: \(error)")
+                print("error: \(error)")
             }
         })
     }
-
     private func updateView() {
         guard let eventID = eventID else {
             print("Error on line: \(#line) in function: \(#function)\n")
@@ -114,7 +124,13 @@ class GuestLoginViewController: ShiftableViewController {
     // and make the associated host the current host
     // and set a boolean "guest" property to true
     // if not present, present an error alert
-
+    func setHost() {
+        guard let event = event else {
+            print("Error on line: \(#line) in function: \(#function)\n")
+            return
+        }
+        
+    }
     @IBAction func viewEvents(_ sender: UIButton) {
         print("view event button pressed.")
         guard let eventCode = eventCodeTextField.text,
@@ -122,7 +138,7 @@ class GuestLoginViewController: ShiftableViewController {
                 self.view.backgroundColor = .yellow
                 return
         }
-        guard let allEvents = allEvents else { self.view.backgroundColor = .orange ; return }
+        /*guard let allEvents = allEvents else { self.view.backgroundColor = .orange ; return }*/
         guard let allHosts = allHosts else {
             self.view.backgroundColor = .red
             return }
@@ -136,27 +152,27 @@ class GuestLoginViewController: ShiftableViewController {
                                  on: self)
             return
         }
-
-        let matchingEventIDs = allEvents.filter { $0.eventID == intEventCode }
-        if let matchingEvent = matchingEventIDs.first {
-            self.event = matchingEvent
-            let matchingHostID = matchingEvent.hostID
-            let matchingHosts = allHosts.filter { $0.identifier == matchingHostID }
-            if let matchingHost = matchingHosts.first {
-                self.currentHost = matchingHost
-                self.event?.host = matchingHost
-            }
-            self.isGuest = true
-
-            // Perform segue to eventPlaylistViewController
-            performSegue(withIdentifier: "EventPlaylistSegue", sender: self)
-
-        } else {
-//            let unmatchedEventAlert = CustomAlert()
-                                    customAlert.showAlert(with: "Event Not Found",
-                                                                  message: "There was no event found with the code. Please verify the code and try again.",
-                                                                  on: self)
-        }
+        
+//        let matchingEventIDs = allEvents.filter { $0.eventID == intEventCode }
+//        if let matchingEvent = matchingEventIDs.first {
+//            self.event = matchingEvent
+//            let matchingHostID = matchingEvent.hostID
+//            let matchingHosts = allHosts.filter { $0.identifier == matchingHostID }
+//            if let matchingHost = matchingHosts.first {
+//                self.currentHost = matchingHost
+//                self.event?.host = matchingHost
+//            }
+//            self.isGuest = true
+//
+//            // Perform segue to eventPlaylistViewController
+//            performSegue(withIdentifier: "EventPlaylistSegue", sender: self)
+//
+//        } else {
+////            let unmatchedEventAlert = CustomAlert()
+//                                    customAlert.showAlert(with: "Event Not Found",
+//                                                                  message: "There was no event found with the code. Please verify the code and try again.",
+//                                                                  on: self)
+//        }
     }
 
     @objc func dismissAlert() {
