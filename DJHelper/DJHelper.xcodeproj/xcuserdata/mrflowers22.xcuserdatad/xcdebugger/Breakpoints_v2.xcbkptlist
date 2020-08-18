@@ -39,16 +39,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "36E31365-61DB-437C-9418-5612A3AA9C34"
+            uuid = "A4E82E4A-D5B6-4D96-9E3D-CBDC633B3B31"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DJHelper/Views/SongDetailTableViewCell.swift"
+            filePath = "DJHelper/View Controllers/GuestLoginViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "prepareForReuse()"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "viewEvents(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
