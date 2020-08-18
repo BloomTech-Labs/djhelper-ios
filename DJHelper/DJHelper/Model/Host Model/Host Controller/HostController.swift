@@ -32,7 +32,7 @@ class HostController {
     }
 
     // MARK: - Fetch Host
-    func fetchHostFromServer(with Id: Int, completion: @escaping (Result<Host, HostErrors>) -> Void) {
+    func fetchHostFromServer(with Id: Int32, completion: @escaping (Result<Host, HostErrors>) -> Void) {
             let url = baseURL.appendingPathComponent("dj")
         let finalURL = url.appendingPathComponent("\(Id)")
             let urlRequest = URLRequest(url: finalURL)

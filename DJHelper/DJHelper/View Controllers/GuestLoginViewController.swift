@@ -20,7 +20,11 @@ class GuestLoginViewController: ShiftableViewController {
     var currentHost: Host?
     var allHosts: [Host]?
     var allEvents: [Event]?
-    var event: Event?
+    var event: Event? {
+        didSet {
+            self.setHost()
+        }
+    }
     var isGuest: Bool?
     var eventController: EventController?
     var hostController: HostController?
@@ -80,16 +84,7 @@ class GuestLoginViewController: ShiftableViewController {
         })
 
         unwrapEventIdAndFetchIt()
-//        eventController?.fetchAllEventsFromServer(completion: { (results) in
-//            switch results {
-//            case let .success(events):
-//                DispatchQueue.main.async {
-//                    self.allEvents = events
-//                }
-//            case let .failure(error):
-//                print("Error fetching all events from server: \(error)")
-//            }
-//        })
+
     }
     func unwrapEventIdAndFetchIt() {
         guard let eventId = eventID else {
@@ -129,7 +124,15 @@ class GuestLoginViewController: ShiftableViewController {
             print("Error on line: \(#line) in function: \(#function)\n")
             return
         }
-        
+        hostController?.fetchHostFromServer(with: event.hostID, completion: { (result) in
+            switch result {
+            case let .success(host):
+                self.currentHost = host
+                print("this is the currentHost: \(self.currentHost?.name)")
+            case let .failure(error):
+                print("this is the error: \(error)")
+            }
+        })
     }
     @IBAction func viewEvents(_ sender: UIButton) {
         print("view event button pressed.")
