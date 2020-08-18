@@ -415,7 +415,7 @@ extension EventPlaylistViewController: UITableViewDataSource {
                 switch currentSongState {
                        case .requested:
                            let song = requestedSongs[indexPath.row]
-                    
+                        deleteTrackFromRequestList(song: song)
                        case .setListed:
                            let song = setListedSongs[indexPath.row]
                            
@@ -427,6 +427,7 @@ extension EventPlaylistViewController: UITableViewDataSource {
             
         }
     }
+    
     func deleteTrackFromRequestList(song: Song) {
         songController.deleteTrackFromRequests(trackId: Int(song.songID)) { (results) in
             switch results {
@@ -441,9 +442,28 @@ extension EventPlaylistViewController: UITableViewDataSource {
                     Readable error: \(error.localizedDescription)\n Technical error: \(error)
                     """)
                 DispatchQueue.main.async {
-                    self.myAlert.showAlert(with: error.localizedDescription, message: error., on: self)
+                    self.myAlert.showAlert(with: "Error deleting song from Request List", message: error.localizedDescription, on: self)
                 }
             }
         }
     }
+    
+    func deleteSongFromSetlist(song: Song) {
+        songController.deleteSongFromPlaylist(trackId: Int(song.songID)) { (results) in
+            switch results {
+            case let .success(success):
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    print("success: \(success)")
+                }
+            case let .failure(error):
+                print("""
+                    Error on line: \(#line) in function: \(#function)\n
+                    Readable error: \(error.localizedDescription)\n Technical error: \(error)
+                    """)
+                DispatchQueue.main.async {
+                    self.myAlert.showAlert(with: "Error deleting song from Request List", message: error.localizedDescription, on: self)
+                }
+            }
+        }
 }

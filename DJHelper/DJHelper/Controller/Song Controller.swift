@@ -257,18 +257,22 @@ class SongController {
         }
     }
     // MARK: - Delete Song from Playlist
-    func deleteSongFromPlaylist(track: TrackResponse, completion: @escaping (Result<(), SongError>) -> Void) {
+    func deleteSongFromPlaylist(song: Song, completion: @escaping (Result<(), SongError>) -> Void) {
          guard let bearer = Bearer.shared.token else {
              print("Error on line: \(#line) in function: \(#function)\n")
              //CHANGE ERROR
              completion(.failure(.noEventsInServerOrCoreData))
              return
              }
-
+        guard let trackResponse = song.songToTrackResponse else {
+            print("Error on line: \(#line) in function: \(#function)\n")
+            return
+        }
+        
          let authURL = baseURL.appendingPathComponent("auth")
          let trackURL = authURL.appendingPathComponent("track")
         let playlistURL = trackURL.appendingPathComponent("playlist")
-         let trackIdURL = playlistURL.appendingPathComponent("\(track.trackId)")
+         let trackIdURL = playlistURL.appendingPathComponent("\(trackResponse.trackId)")
 
          var urlRequest = URLRequest(url: trackIdURL)
          urlRequest.httpMethod = HTTPMethod.delete.rawValue
@@ -277,7 +281,7 @@ class SongController {
 
          let encoder = JSONEncoder()
          do {
-             urlRequest.httpBody = try encoder.encode(track)
+             urlRequest.httpBody = try encoder.encode(trackResponse)
          } catch {
              print("Error on line: \(#line) in function: \(#function)\nReadable error: \(error.localizedDescription)\n Technical error: \(error)")
          }
