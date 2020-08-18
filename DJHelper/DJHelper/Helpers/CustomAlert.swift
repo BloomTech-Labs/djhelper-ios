@@ -81,7 +81,8 @@ class CustomAlert {
         messageLabel.font = UIFont(name: "Palatino", size: 18)
         messageLabel.textAlignment = .left
         messageLabel.lineBreakMode = .byWordWrapping
-
+        messageLabel.textColor = .black
+        
         alertView.addSubview(messageLabel)
 
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
