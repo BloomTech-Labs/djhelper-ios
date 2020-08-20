@@ -37,55 +37,37 @@ You can find the deployed project at https://www.dj-helper.com.
 
 DJ Helper is a tool used for planning the music playlist at an event. Whether it's a gettogether with a few friends, a party with many guests, or a large gathering such as a wedding, DJ Helper makes the music selection a fun and social process for all involved.
 
-The person orgaining the playlist can get things started by putting a few songs on a playlist and then sending a link to guests to get additional song requests.  Guests can see the playlist, request songs of their own, and see requests submitted by other guests. If the guest sees a song they like on the request list, they can click to upvote that song. Sorting by upvotes, the playlist organizer can easily see which songs would be most enjoyed by their guests.  Based on songs requested, DJ Helper can also recommend similar songs to give the host an even better chance on making a playlist that will delight their guests.
+The person organizing the playlist can get things started by putting a few songs on a playlist and then sending a link to guests to get additional song requests.  Guests can see the playlist, request songs of their own, and see requests submitted by other guests. If the guest sees a song they like on the request list, they can click to upvote that song. Sorting by upvotes, the playlist organizer can easily see which songs would be most enjoyed by their guests.  Based on songs requested, DJ Helper can also recommend similar songs to give the host an even better chance on making a playlist that will delight their guests.
 
 ![](header.png)
 
 ### Features
 
--    Feature 1
--    Feature 2
--    Feature 3
--    Feature 4
--    Feature 5
-
-### Authentication API here
-
-🚫Replace text below with a description of the API
-
-Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
-
-### Payment API here
-
-🚫Replace text below with a description of the API
-
-This is the way you take out your frustrations. Get away from those little Christmas tree things we used to make in school. Isn't it fantastic that you can change your mind and create all these happy things? Everything's not great in life, but we can still find beauty in it.
-
-### Misc API here
-
-🚫Replace text below with a description of the API
-
-You can do anything your heart can imagine. In life you need colors. This is where you take out all your hostilities and frustrations. It's better than kicking the puppy dog around and all that so. I'm sort of a softy, I couldn't shoot Bambi except with a camera. Trees get lonely too, so we'll give him a little friend. We'll lay all these little funky little things in there.
-
-### Misc API here
-
-🚫Replace text below with a description of the API
-
-When you do it your way you can go anywhere you choose. Let your heart take you to wherever you want to be. If I paint something, I don't want to have to explain what it is. A tree needs to be your friend if you're going to paint him. That's a son of a gun of a cloud. Even the worst thing we can do here is good.
-
-### Misc API here
-
-🚫Replace text below with a description of the API
-
-Volunteering your time; it pays you and your whole community fantastic dividends. Maybe there's a happy little waterfall happening over here. You can spend all day playing with mountains. We don't have to be committed. We are just playing here. You have freedom here. The only guide is your heart. It's cold, but it's beautiful.
+-    DJ/Host can create a new account and log on
+-    DJ/Host can create a new event with title, description, notes, and date & time
+-    DJ/Host main landing screen shows their upcoming events, past events, all events they are hosting and current event, if any
+-    DJ/Host can edit their profile
+-    DJ/Host can search for songs and add to the setlist
+-    DJ/Host can forward an invitation link for the event to other people
+-    Those who receive the invitation (guests) can click on the link and the app will open to that event
+-    Guests can view the event information and DJ/Host profile
+-    Guests can view the current setlist
+-    Guests can view the request list of the songs requests by other guests or themselves
+-    Guests can search for, and request, songs
+-    Guests can upvote songs on the request list that they would also like to hear (not yet implemented)
+-    DJ/Host can view the current request list and the upvote count (not yet implemented) for each song
+-    DJ/Host can move a song from the request list to the setlist
+-    DJ/Host can delete songs from the request list or the setlist
+-    DJ/Host can delete events from the event list (not yet implemented)
+-    Guests can create an account (not yet implemented)
+-    DJ/Host can add a custom image to each event (not yet implemented)
 
 ## Requirements
 
 🚫 These are examples, make sure this matches your project's requirements
 
--   iOS 8.0+
--   Xcode 7.3
--   Cocoa Pods
+-   iOS 13.0
+-   Xcode 11.0
 
 ## Contributing
 
