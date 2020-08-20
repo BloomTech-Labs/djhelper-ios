@@ -70,6 +70,7 @@ class HostEventViewController: UIViewController, newEventCreatedDelegate {
             newEventVC.delegate = self
             newEventVC.hostEventCount = self.upcomingEvents?.count ?? 0
         }
+        happeningNowDateLabel.text = "No events happening right now"
     }
 
     @IBAction func happeningNowButton(_ sender: UIButton) {
