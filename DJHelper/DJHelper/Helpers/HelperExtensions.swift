@@ -8,45 +8,46 @@
 
 import UIKit
 
+// MARK: - Date Related Extensions
+
+// Format dates into strings for most UI label elements
 extension Date {
     func stringFromDate() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "M/d/yyyy h:mm a"
-//                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-//        formatter.dateStyle = .short
         return formatter.string(from: self)
     }
 }
 
+// Format dates into a string for the backend
 extension Date {
     func jsonStringFromDate() -> String {
         let formatter = DateFormatter()
-        //        formatter.dateFormat = "M/d/yyyy h:mm a"
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        //        formatter.dateStyle = .short
         return formatter.string(from: self)
     }
 }
 
+// Format JSON strings from the backend into dates
 extension String {
     func dateFromString() -> Date? {
         let formatter = DateFormatter()
-//        formatter.dateFormat = "M/d/yyyy h:mm a"
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-//        formatter.dateStyle = .short
         return formatter.date(from: self)
     }
 }
 
+// Format certain date strings used in the app back into dates
 extension String {
     func eventDateFromString() -> Date? {
         let formatter = DateFormatter()
         formatter.dateFormat = "M/d/yyyy h:mm a"
-//        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         return formatter.date(from: self)
     }
 }
 
+// MARK: - UIVew Shake
+// This extension was created to shake the view but is not curently used
 extension UIView {
     func shake() {
         UIView.animate(withDuration: 0.3, delay: 0.0,
@@ -63,6 +64,8 @@ extension UIView {
     }
 }
 
+// MARK: - UIButton
+// Sets the color theme for the buttons used in the UI
 extension UIButton {
      func colorTheme() {
         let button = self
@@ -73,8 +76,9 @@ extension UIButton {
     }
 }
 
+// MARK: - Activity Indicator
+// Used whenever there may be a delay from the user tap to a UI response (spinning wheel indicator)
 extension UIViewController {
-
     func alertController(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default)
@@ -90,6 +94,8 @@ extension UIViewController {
     }
 }
 
+// MARK: - EventController Extensions
+// Created to delete events but not currently used
 extension EventController {
     func deleteEvent(for event: Event) {
         let moc = CoreDataStack.shared.mainContext
