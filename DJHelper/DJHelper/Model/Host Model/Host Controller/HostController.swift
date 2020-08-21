@@ -32,9 +32,19 @@ class HostController {
     }
 
     // MARK: - Fetch Host
-    func fetchHostFromServer(with Id: Int32, completion: @escaping (Result<Host, HostErrors>) -> Void) {
-            let url = baseURL.appendingPathComponent("dj")
-        let finalURL = url.appendingPathComponent("\(Id)")
+
+    /**
+     This method makes a network call to fetch a Host object from the server and completes with a Host object or HostErrors Enum
+    
+     - Parameter Id: To be used to append the url to identify the specific Host on the server
+     - Parameter completion: Completes with Host object or HostErrors Enum.
+     */
+
+    func fetchHostFromServer(with Id: Int32,
+                             completion: @escaping (Result<Host, HostErrors>) -> Void) {
+
+        let url = baseURL.appendingPathComponent("dj")
+            let finalURL = url.appendingPathComponent("\(Id)")
             let urlRequest = URLRequest(url: finalURL)
 
             dataLoader.loadData(from: urlRequest) { (data, response, error) in
