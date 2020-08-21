@@ -426,6 +426,14 @@ class SongController {
     }
 
     // MARK: - Delete Song from Requests
+
+    /**
+     This method makes a network call to delete a specific song on the request list stored on the server and completes with void or SongError Enum.
+    
+     - Parameter trackId: trackId to append the url identifiying specific track to delete from request list on the server
+     - Parameter completion: ompletes with void or SongError Enum
+     */
+
     func deleteTrackFromRequests(trackId: Int, completion: @escaping (Result<Bool, SongError>) -> Void) {
 
         guard let bearer = Bearer.shared.token else {
