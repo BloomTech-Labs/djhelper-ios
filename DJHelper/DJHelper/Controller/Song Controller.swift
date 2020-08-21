@@ -82,7 +82,14 @@ class SongController {
         }
     }
 
-    func fetchSetlistFromServer(for event: Event, completion: @escaping(Result<[Song], EventErrors>) -> Void) {
+    /**
+     This method makes a network call to fetch a setlist for a specific Event object from the server and completes with an array of Song objects or SongError Enum.
+    
+     - Parameter event: To be used to get the ID to append the url to identify the specific Event on the server
+     - Parameter completion: completes with an array of Song objects or SongError Enum.
+     */
+
+    func fetchSetlistFromServer(for event: Event, completion: @escaping(Result<[Song], SongError>) -> Void) {
         let eventURL = baseURL.appendingPathComponent("event")
         let eventIdURL = eventURL.appendingPathComponent("\(event.eventID)")
         let playlistURL = eventIdURL.appendingPathComponent("playlist")
