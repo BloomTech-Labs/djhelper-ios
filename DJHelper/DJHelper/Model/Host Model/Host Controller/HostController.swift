@@ -194,7 +194,14 @@ class HostController {
     }
 
     // MARK: - Log In Existing Host
-    // the server returns the host properties along with the generated bearer token
+
+    /**
+     This method takes the information from the HostLogin object and makes a network call to allow a Host to login and completes with a HostLoginResponse object or HostErrors Enum
+     - Note: the server returns the host properties along with the generated bearer token
+     - Parameter host: HostLogin object to be encoded in the body of the urlRequest.
+     - Parameter completion: Completes with HostLoginResponse object or HostErrors Enum.
+     */
+
     func logIn(with host: HostLogin, completion: @escaping (Result<HostLoginResponse, HostErrors>) -> Void) {
         //take the host and turn in into a host login
         let hostLogin = host
