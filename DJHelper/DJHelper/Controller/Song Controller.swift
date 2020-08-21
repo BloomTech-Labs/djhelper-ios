@@ -360,7 +360,14 @@ class SongController {
     }
 
     // MARK: - Fetch ALL Songs/Tracks from server
-    /// This completes with Song
+
+    /**
+     This method makes a network call to fetch all songs on the request list on the server for a specific event and completes with an array of Song objects or SongError Enum.
+    
+     - Parameter forEventId: EventID to append the url identifiying specific Event to fetch all songs on request list
+     - Parameter completion: completes with an array of Song objects or SongError Enum
+     */
+
     func fetchAllTracksFromRequestList(forEventId: Int, completion: @escaping (Result<[Song], SongError>) -> Void) {
         let eventURL = baseURL.appendingPathComponent("event")
         let eventIdURL = eventURL.appendingPathComponent("\(forEventId)")
