@@ -178,6 +178,14 @@ class SongController {
     }
 
     // MARK: - Add Song to Playlist
+
+    /**
+     This method makes a network call to add a specific Song object to a setlist and completes with void or SongError Enum.
+    
+     - Parameter song: To be used to get the SongID to append the url to for the network call
+     - Parameter completion: completes with void or SongError Enum.
+     */
+
     func addSongToPlaylist(song: Song, completion: @escaping (Result<(), SongError>) -> Void) {
 
         guard let bearer = Bearer.shared.token else {
