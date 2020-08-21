@@ -90,6 +90,13 @@ class HostController {
 
 
     // MARK: - Fetch All Hosts
+
+    /**
+     This method makes a network call to fetch all Host objects on the server and completes with an array of Host objects or HostErrors Enum
+    
+     - Parameter completion: Completes with an array of Host objects or HostErrors Enum.
+     */
+
     func fetchAllHostsFromServer(completion: @escaping (Result<[Host], HostErrors>) -> Void) {
         let url = baseURL.appendingPathComponent("djs")
         let urlRequest = URLRequest(url: url)
