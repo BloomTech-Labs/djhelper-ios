@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B27E6BE24E20041006B4826 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B27E6BD24E20041006B4826 /* Playlist.swift */; };
 		1B323D3A248422210065D94C /* HostRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B323D39248422210065D94C /* HostRepresentation.swift */; };
 		1B3D9BBB2492FC6700E8625C /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D9BBA2492FC6700E8625C /* CustomAlert.swift */; };
 		1B3D9BBD24931BA800E8625C /* EventPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D9BBC24931BA800E8625C /* EventPageViewController.swift */; };
@@ -82,7 +81,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1B27E6BD24E20041006B4826 /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
 		1B323D39248422210065D94C /* HostRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRepresentation.swift; sourceTree = "<group>"; };
 		1B3D9BBA2492FC6700E8625C /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		1B3D9BBC24931BA800E8625C /* EventPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EventPageViewController.swift; path = DJHelper/EventPageViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -173,7 +171,6 @@
 		1B27E6BC24E20013006B4826 /* Playlist Model */ = {
 			isa = PBXGroup;
 			children = (
-				1B27E6BD24E20041006B4826 /* Playlist.swift */,
 			);
 			path = "Playlist Model";
 			sourceTree = "<group>";
@@ -630,7 +627,6 @@
 				1B71119224D2A94D00BF4256 /* HostEventCollectionViewCell.swift in Sources */,
 				4446F799247638D4005ACE10 /* HTTPMethod.swift in Sources */,
 				441CB84F2499CE1E00637CC0 /* GuestLoginViewController.swift in Sources */,
-				1B27E6BE24E20041006B4826 /* Playlist.swift in Sources */,
 				1BA4A8C42485F27A002A67E2 /* EventAuthRequest.swift in Sources */,
 				44A025BD24D25A0500BFB762 /* SongDetailTableViewCell.swift in Sources */,
 				447F537A2475805E00F706F1 /* AppDelegate.swift in Sources */,
