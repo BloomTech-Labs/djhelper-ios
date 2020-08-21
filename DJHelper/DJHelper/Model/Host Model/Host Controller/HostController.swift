@@ -139,8 +139,6 @@ class HostController {
     }
 
     // MARK: - Register New Host
-    // the server returns the host properties along with the generated ID
-
     /**
      This method makes a network call to register or save a Host object to the server and completes with a HostRegistrationResponse object or HostErrors Enum
     
@@ -244,6 +242,14 @@ class HostController {
     }
 
     // MARK: - Update Existing Host
+
+    /**
+     This method makes a network call to update a Host object on the server and saves it to core data if it completes with a Host object.
+    
+     - Parameter host: Host to be updated on the server and saved to core data accordingly.
+     - Parameter completion: Completes with HostUpdate object or HostErrors Enum.
+     */
+
     func updateHost(with host: Host, completion: @escaping (Result<HostUpdate, HostErrors>) -> Void) {
         guard let hostRepresentation = host.hostUpdate else { return }
         guard let bearer = Bearer.shared.token else {
