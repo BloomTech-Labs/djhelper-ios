@@ -431,7 +431,7 @@ class SongController {
      This method makes a network call to delete a specific song on the request list stored on the server and completes with void or SongError Enum.
     
      - Parameter trackId: trackId to append the url identifiying specific track to delete from request list on the server
-     - Parameter completion: ompletes with void or SongError Enum
+     - Parameter completion: completes with void or SongError Enum
      */
 
     func deleteTrackFromRequests(trackId: Int, completion: @escaping (Result<Bool, SongError>) -> Void) {
@@ -473,6 +473,14 @@ class SongController {
 }
 
 extension SongController {
+
+    /**
+     This method makes a network call to fetch URL for a song's cover art and completes with an UIImage or SongError Enum.
+    
+     - Parameter url: URL to use to create URLRequest for the network call. Returns data that we can use to initialize an UIImage
+     - Parameter completion: completes with an UIImage or SongError Enum.
+     */
+
     func fetchCoverArt(url: URL, completion: @escaping (Result<UIImage, SongError>) -> Void) {
         let urlRequest = URLRequest(url: url)
 
