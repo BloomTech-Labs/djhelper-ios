@@ -56,10 +56,11 @@ class EventController {
             print("Error on line: \(#line) in function: \(#function)\n")
             return
         }
+
         guard let bearer = Bearer.shared.token else {
             completion(.failure(.couldNotInitializeAnEvent))
             return
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             }
+        }
 
         let authURL = baseURL.appendingPathComponent("auth")
         let eventURL = authURL.appendingPathComponent("event")
@@ -130,6 +131,13 @@ class EventController {
             }
         }
     }
+
+    /**
+     This method updates an Event object and saves it to core data
+    
+     - Parameter event: Event object to be updated and saved to core data
+     - Parameter withEventRep: Representation of an Event returned from the server. Any remote changes will be assigned to an Event object and saved locally.
+     */
 
     func update(event: Event, withEventRep eventRep: EventRepresentation) {
         event.name = eventRep.name
