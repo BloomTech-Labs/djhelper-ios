@@ -162,6 +162,13 @@ class EventController {
     }
 
     // MARK: - FETCH ALL EVENTS
+
+    /**
+     This method fetches every EventRepresentations from the server and completes with an array of Event objects.
+
+     - Parameter completion: Completes with an array of Event objects or EventErrors Enum.
+     */
+
     func fetchAllEventsFromServer(completion: @escaping(Result<[Event], EventErrors>) -> Void) {
         let url = baseURL.appendingPathComponent("events")
         let urlRequest = URLRequest(url: url)
