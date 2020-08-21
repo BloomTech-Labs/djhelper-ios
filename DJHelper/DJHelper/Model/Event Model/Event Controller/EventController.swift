@@ -322,6 +322,13 @@ class EventController {
         }
     }
 
+    /**
+     This method updates Event object on server and then saves it to core data
+    
+     - Parameter events: EventRepresentation objects to be updated and saved to core data
+     - Parameter withHost: Host associated with objects 
+     */
+
     func updateEventsFromServer(events eventRespresentations: [EventRepresentation], withHost host: Host) throws {
         let eventsWithHost = eventRespresentations.filter { $0.hostID == host.identifier }
         let eventIdentifiers = eventsWithHost.compactMap { $0.eventID }
