@@ -382,7 +382,14 @@ class EventController {
     }
 
     // MARK: - AUTHORIZE AN EVENT
-    ///The server returns an object with the event data
+
+    /**
+     This method makes a network call to create and save an Event object on server and completes with EventRepresentation and EventErrors
+    
+     - Parameter event: Event object to be stored on remote server.
+     - Parameter completion: Completes with EventRepresentation or EventErrors Enum.
+     */
+
     func authorize(event: Event, completion: @escaping (Result<EventRepresentation, EventErrors>) -> Void) {
         guard let eventToAuthorize = event.eventAuthRequest else { return }
         guard let bearer = Bearer.shared.token else {
