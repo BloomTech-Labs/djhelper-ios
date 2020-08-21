@@ -14,13 +14,13 @@ import UIKit
 
 class ShiftableViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIGestureRecognizerDelegate {
 
+    // MARK: - Properties
     var currentYShiftForKeyboard: CGFloat = 0
-
     var textFieldBeingEdited: UITextField?
     var textViewBeingEdited: UITextView?
-
     var keyboardDismissTapGestureRecognizer: UITapGestureRecognizer!
 
+    // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,6 +36,7 @@ class ShiftableViewController: UIViewController, UITextFieldDelegate, UITextView
                                                object: nil)
     }
 
+    // MARK: - Methods
     @objc func stopEditingTextInput() {
         if let textField = self.textFieldBeingEdited {
 
@@ -66,7 +67,6 @@ class ShiftableViewController: UIViewController, UITextFieldDelegate, UITextView
     }
 
     @objc func keyboardWillShow(notification: Notification) {
-
         keyboardDismissTapGestureRecognizer.isEnabled = true
 
         var keyboardSize: CGRect = .zero
@@ -96,7 +96,6 @@ class ShiftableViewController: UIViewController, UITextFieldDelegate, UITextView
     }
 
     @objc func yShiftWhenKeyboardAppearsFor(textInput: UIView, keyboardSize: CGRect, nextY: CGFloat) -> CGFloat {
-
         let textFieldOrigin = self.view.convert(textInput.frame, from: textInput.superview!).origin.y
         let textFieldBottomY = textFieldOrigin + textInput.frame.size.height
 
@@ -114,9 +113,7 @@ class ShiftableViewController: UIViewController, UITextFieldDelegate, UITextView
     }
 
     @objc func keyboardWillHide(notification: Notification) {
-
         if self.view.frame.origin.y != 0 {
-
             self.view.frame.origin.y += currentYShiftForKeyboard
         }
 
@@ -124,7 +121,6 @@ class ShiftableViewController: UIViewController, UITextFieldDelegate, UITextView
     }
 
     @objc func setupKeyboardDismissTapGestureRecognizer() {
-
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(stopEditingTextInput))
         tapGestureRecognizer.numberOfTapsRequired = 1
 
