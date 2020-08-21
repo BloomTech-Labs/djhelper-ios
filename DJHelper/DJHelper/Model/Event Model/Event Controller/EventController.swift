@@ -449,6 +449,13 @@ class EventController {
         }
     }
 
+    /**
+     This method captures the eventID from the EventRepsentation that is returned from the server and updates and saves the corresponding Event object in core data.
+    
+     - Parameter event: Event object to be updated with eventID value from EventRepresentation
+     - Parameter eventRep: The EventRepresentation to be used to assign its ID to the event.
+     */
+
     func updateEventID(for event: Event, with eventRep: EventRepresentation) {
         guard let eventID = eventRep.eventID else {
             print("Error on line: \(#line) in function: \(#function)\n")
