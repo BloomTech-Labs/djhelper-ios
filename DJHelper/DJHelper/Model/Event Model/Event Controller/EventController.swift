@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 
+/// Enum to handle any networking errors regarding Event objects
 enum EventErrors: Error {
     case authorizationError(Error)
     case noDataError
@@ -42,6 +43,13 @@ class EventController {
         return event
     }
 
+    // MARK: - UPDATE EVENT METHODS
+    /**
+     This method updates Event object on server and then saves it to core data
+    
+     - Parameter event: Event object to be updated on server and saved to core data
+     - Parameter completion: Completes with void or EventErrors Enum.
+     */
     func saveUpdateEvent(_ event: Event,
                          completion: @escaping (Result<(), EventErrors>) -> Void) {
         guard let eventRep = event.eventAuthorizationRep, let eventId = eventRep.eventID else {
