@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 import UIKit
 
+/// SongError Enum to better handle error that may arise from network calls
 enum SongError: Error {
     case authorizationError(Error)
     case noDataError
@@ -34,7 +35,14 @@ class SongController {
     // based on the inputs and outputs and the various server requests.
 
     // MARK: - Fetch All Songs
-    func fetchAllSongsFromServer(completion: @escaping(Result<[TrackRepresentation], EventErrors>) -> Void) {
+
+    /**
+     This method makes a network call to fetch all Song object from the server and completes with an array of TrackRepresentation objects or SongError Enum.
+
+     - Parameter completion: Completes with an array of TrackRepresentation objects or SongError Enum.
+     */
+
+    func fetchAllSongsFromServer(completion: @escaping(Result<[TrackRepresentation], SongError>) -> Void) {
         let url = baseURL.appendingPathComponent("songs")
         let urlRequest = URLRequest(url: url)
 
@@ -74,7 +82,14 @@ class SongController {
         }
     }
 
-    func fetchSetlistFromServer(for event: Event, completion: @escaping(Result<[Song], EventErrors>) -> Void) {
+    /**
+     This method makes a network call to fetch a setlist for a specific Event object from the server and completes with an array of Song objects or SongError Enum.
+    
+     - Parameter event: To be used to get the ID to append the url to identify the specific Event on the server
+     - Parameter completion: completes with an array of Song objects or SongError Enum.
+     */
+
+    func fetchSetlistFromServer(for event: Event, completion: @escaping(Result<[Song], SongError>) -> Void) {
         let eventURL = baseURL.appendingPathComponent("event")
         let eventIdURL = eventURL.appendingPathComponent("\(event.eventID)")
         let playlistURL = eventIdURL.appendingPathComponent("playlist")
@@ -121,49 +136,6 @@ class SongController {
         }
     }
     
-    // MARK: - Fetch Setlist for Event -- json we get back looks like TrackResponse vs Representation
-//    func fetchSetlistFromServer(for event: Event, completion: @escaping(Result<[TrackRepresentation], EventErrors>) -> Void) {
-//        let eventURL = baseURL.appendingPathComponent("event")
-//        let eventIdURL = eventURL.appendingPathComponent("\(event.eventID)")
-//        let playlistURL = eventIdURL.appendingPathComponent("playlist")
-//        let urlRequest = URLRequest(url: playlistURL)
-//
-//        dataLoader.loadData(from: urlRequest) { possibleData, possibleResponse, possibleError in
-//            if let response = possibleResponse as? HTTPURLResponse {
-//                print("HTTPResponse: \(response.statusCode) in function: \(#function)")
-//            }
-//
-//            if let error = possibleError {
-//                print("""
-//                    Error: \(error.localizedDescription) on line \(#line)
-//                    in function: \(#function)\nTechnical error: \(error)
-//                    """)
-//                completion(.failure(.otherError(error)))
-//                return
-//            }
-//
-//            guard let data = possibleData else {
-//                print("Error on line: \(#line) in function: \(#function)")
-//                completion(.failure(.noDataError))
-//                return
-//            }
-//
-//            let decoder = JSONDecoder()
-//            do {
-//                let songRepresentationArray = try decoder.decode([TrackRepresentation].self,
-//                                                                 from: data)
-//                completion(.success(songRepresentationArray))
-//            } catch {
-//                print("""
-//                    Error on line: \(#line) in function \(#function)
-//                    Readable error: \(error.localizedDescription)\nTechnical error:
-//                    \(error)
-//                    """)
-//                completion(.failure(.decodeError(error)))
-//            }
-//        }
-//    }
-
     // MARK: - Search for Song - doesn't return trackId
     func searchForSong(withSearchTerm search: String, completion: @escaping(Result<[TrackRepresentation], SongError>) -> Void) {
         let url = baseURL.appendingPathComponent("track").appendingPathComponent("\(search)")
@@ -206,6 +178,14 @@ class SongController {
     }
 
     // MARK: - Add Song to Playlist
+
+    /**
+     This method makes a network call to add a specific Song object to a setlist and completes with void or SongError Enum.
+    
+     - Parameter song: To be used to get the SongID to append the url to for the network call
+     - Parameter completion: completes with void or SongError Enum.
+     */
+
     func addSongToPlaylist(song: Song, completion: @escaping (Result<(), SongError>) -> Void) {
 
         guard let bearer = Bearer.shared.token else {
@@ -256,7 +236,16 @@ class SongController {
             completion(.success(()))
         }
     }
+
     // MARK: - Delete Song from Playlist
+
+    /**
+     This method makes a network call to delete a song from a setlist on the server and completes with void or SongError Enum.
+    
+     - Parameter song: To be used to get the ID to append the url to identify the specific song to delete on the server
+     - Parameter completion: completes with void or SongError Enum.
+     */
+
     func deleteSongFromPlaylist(song: Song, completion: @escaping (Result<(), SongError>) -> Void) {
          guard let bearer = Bearer.shared.token else {
              print("Error on line: \(#line) in function: \(#function)\n")
@@ -271,7 +260,7 @@ class SongController {
         
          let authURL = baseURL.appendingPathComponent("auth")
          let trackURL = authURL.appendingPathComponent("track")
-        let playlistURL = trackURL.appendingPathComponent("playlist")
+         let playlistURL = trackURL.appendingPathComponent("playlist")
          let trackIdURL = playlistURL.appendingPathComponent("\(trackResponse.trackId)")
 
          var urlRequest = URLRequest(url: trackIdURL)
@@ -306,12 +295,15 @@ class SongController {
      }
 
     // MARK: - Add Song to Requests
-    // TODO: - Maybe we should return a TrackResponse based on the json we get back
+
+    /**
+     This method makes a network call to add a song to the request list on the server and completes with a TrackResponse object or SongError Enum.
+    
+     - Parameter song: TrackRequest object to be encoded in the httpBody to post to the server
+     - Parameter completion: completes with a TrackResponse object or SongError Enum
+     */
+    
     func addSongToRequest(_ song: TrackRequest, completion: @escaping (Result<TrackResponse, SongError>) -> Void) {
-//        guard let trackRepresntation = song.songRepresentation else {
-//            print("Error on line: \(#line) in function: \(#function)\n")
-//            return
-//        }
 
     //put trackRepresntation in body of http
         let url = baseURL.appendingPathComponent("track")
@@ -368,7 +360,14 @@ class SongController {
     }
 
     // MARK: - Fetch ALL Songs/Tracks from server
-    /// This completes with Song
+
+    /**
+     This method makes a network call to fetch all songs on the request list on the server for a specific event and completes with an array of Song objects or SongError Enum.
+    
+     - Parameter forEventId: EventID to append the url identifiying specific Event to fetch all songs on request list
+     - Parameter completion: completes with an array of Song objects or SongError Enum
+     */
+
     func fetchAllTracksFromRequestList(forEventId: Int, completion: @escaping (Result<[Song], SongError>) -> Void) {
         let eventURL = baseURL.appendingPathComponent("event")
         let eventIdURL = eventURL.appendingPathComponent("\(forEventId)")
@@ -427,6 +426,14 @@ class SongController {
     }
 
     // MARK: - Delete Song from Requests
+
+    /**
+     This method makes a network call to delete a specific song on the request list stored on the server and completes with void or SongError Enum.
+    
+     - Parameter trackId: trackId to append the url identifiying specific track to delete from request list on the server
+     - Parameter completion: completes with void or SongError Enum
+     */
+
     func deleteTrackFromRequests(trackId: Int, completion: @escaping (Result<Bool, SongError>) -> Void) {
 
         guard let bearer = Bearer.shared.token else {
@@ -466,6 +473,14 @@ class SongController {
 }
 
 extension SongController {
+
+    /**
+     This method makes a network call to fetch URL for a song's cover art and completes with an UIImage or SongError Enum.
+    
+     - Parameter url: URL to use to create URLRequest for the network call. Returns data that we can use to initialize an UIImage
+     - Parameter completion: completes with an UIImage or SongError Enum.
+     */
+
     func fetchCoverArt(url: URL, completion: @escaping (Result<UIImage, SongError>) -> Void) {
         let urlRequest = URLRequest(url: url)
 

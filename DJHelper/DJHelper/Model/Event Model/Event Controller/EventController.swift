@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 
+/// Enum to handle any networking errors regarding Event objects
 enum EventErrors: Error {
     case authorizationError(Error)
     case noDataError
@@ -42,16 +43,24 @@ class EventController {
         return event
     }
 
+    // MARK: - UPDATE EVENT METHODS
+    /**
+     This method updates Event object on server and then saves it to core data
+    
+     - Parameter event: Event object to be updated on server and saved to core data
+     - Parameter completion: Completes with void or EventErrors Enum.
+     */
     func saveUpdateEvent(_ event: Event,
                          completion: @escaping (Result<(), EventErrors>) -> Void) {
         guard let eventRep = event.eventAuthorizationRep, let eventId = eventRep.eventID else {
             print("Error on line: \(#line) in function: \(#function)\n")
             return
         }
+
         guard let bearer = Bearer.shared.token else {
             completion(.failure(.couldNotInitializeAnEvent))
             return
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             }
+        }
 
         let authURL = baseURL.appendingPathComponent("auth")
         let eventURL = authURL.appendingPathComponent("event")
@@ -123,6 +132,13 @@ class EventController {
         }
     }
 
+    /**
+     This method updates an Event object and saves it to core data
+    
+     - Parameter event: Event object to be updated and saved to core data
+     - Parameter withEventRep: Representation of an Event returned from the server. Any remote changes will be assigned to an Event object and saved locally.
+     */
+
     func update(event: Event, withEventRep eventRep: EventRepresentation) {
         event.name = eventRep.name
         event.isExplicit = eventRep.isExplicit
@@ -146,6 +162,13 @@ class EventController {
     }
 
     // MARK: - FETCH ALL EVENTS
+
+    /**
+     This method fetches every EventRepresentations from the server and completes with an array of Event objects.
+
+     - Parameter completion: Completes with an array of Event objects or EventErrors Enum.
+     */
+
     func fetchAllEventsFromServer(completion: @escaping(Result<[Event], EventErrors>) -> Void) {
         let url = baseURL.appendingPathComponent("events")
         let urlRequest = URLRequest(url: url)
@@ -187,6 +210,13 @@ class EventController {
     }
 
     // MARK: - Fetch Specific Event from server
+    /**
+     This method makes a network call to fetch a single Event Representation on the server and completes with an Event object.
+    
+     - Parameter withEventID: The ID number of the Event object used to appending the url
+     - Parameter completion: Completes with an Event object correlated with the ID number passed into the url.
+     */
+
     func fetchEvent(withEventID id: Int32, completion: @escaping(Result<Event, EventErrors>) -> Void) {
         let url = baseURL.appendingPathComponent("event")
         let finalURL = url.appendingPathComponent("\(id)")
@@ -235,6 +265,14 @@ class EventController {
     }
 
     // MARK: - FETCH EVENTS FOR HOST
+
+    /**
+     This method makes a network call to fetch all EventRepresentations on the server created by the host
+    
+     - Parameter host: Host object
+     - Parameter completion: Completes with Bool or EventErrors Enum.
+     */
+
     func fetchAllEventsFromServer(for host: Host, completion: @escaping(Result<Bool, EventErrors>) -> Void) {
         let url = baseURL.appendingPathComponent("events")
         let urlRequest = URLRequest(url: url)
@@ -284,6 +322,13 @@ class EventController {
         }
     }
 
+    /**
+     This method updates Event object on server and then saves it to core data
+    
+     - Parameter events: EventRepresentation objects to be updated and saved to core data
+     - Parameter withHost: Host associated with objects 
+     */
+
     func updateEventsFromServer(events eventRespresentations: [EventRepresentation], withHost host: Host) throws {
         let eventsWithHost = eventRespresentations.filter { $0.hostID == host.identifier }
         let eventIdentifiers = eventsWithHost.compactMap { $0.eventID }
@@ -321,6 +366,13 @@ class EventController {
         try CoreDataStack.shared.save(context: moc)
     }
 
+    /**
+     This method updates an Event object with an EventRepresentation object.
+    
+     - Parameter event: Event object to be updated
+     - Parameter representation: EventRepresentation properties to be used to update the Event Object.
+     */
+
     func updateCoreDataEvent(event: Event, representation: EventRepresentation) {
         event.name = representation.name
         event.eventDescription = representation.eventDescription
@@ -330,7 +382,14 @@ class EventController {
     }
 
     // MARK: - AUTHORIZE AN EVENT
-    ///The server returns an object with the event data
+
+    /**
+     This method makes a network call to create and save an Event object on server and completes with EventRepresentation and EventErrors
+    
+     - Parameter event: Event object to be stored on remote server.
+     - Parameter completion: Completes with EventRepresentation or EventErrors Enum.
+     */
+
     func authorize(event: Event, completion: @escaping (Result<EventRepresentation, EventErrors>) -> Void) {
         guard let eventToAuthorize = event.eventAuthRequest else { return }
         guard let bearer = Bearer.shared.token else {
@@ -389,6 +448,13 @@ class EventController {
             }
         }
     }
+
+    /**
+     This method captures the eventID from the EventRepsentation that is returned from the server and updates and saves the corresponding Event object in core data.
+    
+     - Parameter event: Event object to be updated with eventID value from EventRepresentation
+     - Parameter eventRep: The EventRepresentation to be used to assign its ID to the event.
+     */
 
     func updateEventID(for event: Event, with eventRep: EventRepresentation) {
         guard let eventID = eventRep.eventID else {

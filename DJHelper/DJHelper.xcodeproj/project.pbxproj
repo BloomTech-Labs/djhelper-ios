@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B27E6BE24E20041006B4826 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B27E6BD24E20041006B4826 /* Playlist.swift */; };
-		1B27E6C024E2039A006B4826 /* PlaylistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B27E6BF24E2039A006B4826 /* PlaylistController.swift */; };
 		1B323D3A248422210065D94C /* HostRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B323D39248422210065D94C /* HostRepresentation.swift */; };
 		1B3D9BBB2492FC6700E8625C /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D9BBA2492FC6700E8625C /* CustomAlert.swift */; };
 		1B3D9BBD24931BA800E8625C /* EventPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D9BBC24931BA800E8625C /* EventPageViewController.swift */; };
@@ -83,8 +81,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1B27E6BD24E20041006B4826 /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
-		1B27E6BF24E2039A006B4826 /* PlaylistController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistController.swift; sourceTree = "<group>"; };
 		1B323D39248422210065D94C /* HostRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRepresentation.swift; sourceTree = "<group>"; };
 		1B3D9BBA2492FC6700E8625C /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		1B3D9BBC24931BA800E8625C /* EventPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EventPageViewController.swift; path = DJHelper/EventPageViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -172,14 +168,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1B27E6BC24E20013006B4826 /* Playlist Model */ = {
-			isa = PBXGroup;
-			children = (
-				1B27E6BD24E20041006B4826 /* Playlist.swift */,
-			);
-			path = "Playlist Model";
-			sourceTree = "<group>";
-		};
 		1BA4A8B92485B004002A67E2 /* Host Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -338,7 +326,6 @@
 				1BA4A8BD2485B956002A67E2 /* Event Model */,
 				1BA4A8B92485B004002A67E2 /* Host Model */,
 				44352AC524B770A700E449F2 /* Song Model */,
-				1B27E6BC24E20013006B4826 /* Playlist Model */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -436,7 +423,6 @@
 			isa = PBXGroup;
 			children = (
 				44BA393924BF9FAA009E1680 /* Song Controller.swift */,
-				1B27E6BF24E2039A006B4826 /* PlaylistController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -610,7 +596,6 @@
 				4446F79D24763935005ACE10 /* URLSessionExtension.swift in Sources */,
 				44214DF12491952100D63B6A /* ShiftableViewController.swift in Sources */,
 				1BA4A8C82486858D002A67E2 /* HelperExtensions.swift in Sources */,
-				1B27E6C024E2039A006B4826 /* PlaylistController.swift in Sources */,
 				447F53C3247634EE00F706F1 /* CoreDataStack.swift in Sources */,
 				44F48903249BF99900B2646C /* Slide.swift in Sources */,
 				1B323D3A248422210065D94C /* HostRepresentation.swift in Sources */,
@@ -634,7 +619,6 @@
 				1B71119224D2A94D00BF4256 /* HostEventCollectionViewCell.swift in Sources */,
 				4446F799247638D4005ACE10 /* HTTPMethod.swift in Sources */,
 				441CB84F2499CE1E00637CC0 /* GuestLoginViewController.swift in Sources */,
-				1B27E6BE24E20041006B4826 /* Playlist.swift in Sources */,
 				1BA4A8C42485F27A002A67E2 /* EventAuthRequest.swift in Sources */,
 				44A025BD24D25A0500BFB762 /* SongDetailTableViewCell.swift in Sources */,
 				447F537A2475805E00F706F1 /* AppDelegate.swift in Sources */,

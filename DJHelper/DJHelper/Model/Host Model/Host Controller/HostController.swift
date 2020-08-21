@@ -32,9 +32,19 @@ class HostController {
     }
 
     // MARK: - Fetch Host
-    func fetchHostFromServer(with Id: Int32, completion: @escaping (Result<Host, HostErrors>) -> Void) {
-            let url = baseURL.appendingPathComponent("dj")
-        let finalURL = url.appendingPathComponent("\(Id)")
+
+    /**
+     This method makes a network call to fetch a Host object from the server and completes with a Host object or HostErrors Enum
+    
+     - Parameter Id: To be used to append the url to identify the specific Host on the server
+     - Parameter completion: Completes with Host object or HostErrors Enum.
+     */
+
+    func fetchHostFromServer(with Id: Int32,
+                             completion: @escaping (Result<Host, HostErrors>) -> Void) {
+
+        let url = baseURL.appendingPathComponent("dj")
+            let finalURL = url.appendingPathComponent("\(Id)")
             let urlRequest = URLRequest(url: finalURL)
 
             dataLoader.loadData(from: urlRequest) { (data, response, error) in
@@ -80,6 +90,13 @@ class HostController {
 
 
     // MARK: - Fetch All Hosts
+
+    /**
+     This method makes a network call to fetch all Host objects on the server and completes with an array of Host objects or HostErrors Enum
+    
+     - Parameter completion: Completes with an array of Host objects or HostErrors Enum.
+     */
+
     func fetchAllHostsFromServer(completion: @escaping (Result<[Host], HostErrors>) -> Void) {
         let url = baseURL.appendingPathComponent("djs")
         let urlRequest = URLRequest(url: url)
@@ -122,7 +139,13 @@ class HostController {
     }
 
     // MARK: - Register New Host
-    // the server returns the host properties along with the generated ID
+    /**
+     This method makes a network call to register or save a Host object to the server and completes with a HostRegistrationResponse object or HostErrors Enum
+    
+     - Parameter Host: Host to save on the server
+     - Parameter completion: Completes with HostRegistrationResponse object or HostErrors Enum.
+     */
+
     func registerHost(with host: Host, completion: @escaping (Result<HostRegistrationResponse, HostErrors>) -> Void) {
         //take the host and turn in into a hr
         guard let hostRegistration =  host.hostRegistration else { return }
@@ -171,7 +194,14 @@ class HostController {
     }
 
     // MARK: - Log In Existing Host
-    // the server returns the host properties along with the generated bearer token
+
+    /**
+     This method takes the information from the HostLogin object and makes a network call to allow a Host to login and completes with a HostLoginResponse object or HostErrors Enum
+     - Note: the server returns the host properties along with the generated bearer token
+     - Parameter host: HostLogin object to be encoded in the body of the urlRequest.
+     - Parameter completion: Completes with HostLoginResponse object or HostErrors Enum.
+     */
+
     func logIn(with host: HostLogin, completion: @escaping (Result<HostLoginResponse, HostErrors>) -> Void) {
         //take the host and turn in into a host login
         let hostLogin = host
@@ -219,6 +249,14 @@ class HostController {
     }
 
     // MARK: - Update Existing Host
+
+    /**
+     This method makes a network call to update a Host object on the server and saves it to core data if it completes with a Host object.
+    
+     - Parameter host: Host to be updated on the server and saved to core data accordingly.
+     - Parameter completion: Completes with HostUpdate object or HostErrors Enum.
+     */
+
     func updateHost(with host: Host, completion: @escaping (Result<HostUpdate, HostErrors>) -> Void) {
         guard let hostRepresentation = host.hostUpdate else { return }
         guard let bearer = Bearer.shared.token else {
