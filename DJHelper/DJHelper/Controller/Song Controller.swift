@@ -136,49 +136,6 @@ class SongController {
         }
     }
     
-    // MARK: - Fetch Setlist for Event -- json we get back looks like TrackResponse vs Representation
-//    func fetchSetlistFromServer(for event: Event, completion: @escaping(Result<[TrackRepresentation], EventErrors>) -> Void) {
-//        let eventURL = baseURL.appendingPathComponent("event")
-//        let eventIdURL = eventURL.appendingPathComponent("\(event.eventID)")
-//        let playlistURL = eventIdURL.appendingPathComponent("playlist")
-//        let urlRequest = URLRequest(url: playlistURL)
-//
-//        dataLoader.loadData(from: urlRequest) { possibleData, possibleResponse, possibleError in
-//            if let response = possibleResponse as? HTTPURLResponse {
-//                print("HTTPResponse: \(response.statusCode) in function: \(#function)")
-//            }
-//
-//            if let error = possibleError {
-//                print("""
-//                    Error: \(error.localizedDescription) on line \(#line)
-//                    in function: \(#function)\nTechnical error: \(error)
-//                    """)
-//                completion(.failure(.otherError(error)))
-//                return
-//            }
-//
-//            guard let data = possibleData else {
-//                print("Error on line: \(#line) in function: \(#function)")
-//                completion(.failure(.noDataError))
-//                return
-//            }
-//
-//            let decoder = JSONDecoder()
-//            do {
-//                let songRepresentationArray = try decoder.decode([TrackRepresentation].self,
-//                                                                 from: data)
-//                completion(.success(songRepresentationArray))
-//            } catch {
-//                print("""
-//                    Error on line: \(#line) in function \(#function)
-//                    Readable error: \(error.localizedDescription)\nTechnical error:
-//                    \(error)
-//                    """)
-//                completion(.failure(.decodeError(error)))
-//            }
-//        }
-//    }
-
     // MARK: - Search for Song - doesn't return trackId
     func searchForSong(withSearchTerm search: String, completion: @escaping(Result<[TrackRepresentation], SongError>) -> Void) {
         let url = baseURL.appendingPathComponent("track").appendingPathComponent("\(search)")
