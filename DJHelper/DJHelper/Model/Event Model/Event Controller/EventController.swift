@@ -366,6 +366,13 @@ class EventController {
         try CoreDataStack.shared.save(context: moc)
     }
 
+    /**
+     This method updates an Event object with an EventRepresentation object.
+    
+     - Parameter event: Event object to be updated
+     - Parameter representation: EventRepresentation properties to be used to update the Event Object.
+     */
+
     func updateCoreDataEvent(event: Event, representation: EventRepresentation) {
         event.name = representation.name
         event.eventDescription = representation.eventDescription
