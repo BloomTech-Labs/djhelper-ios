@@ -140,6 +140,14 @@ class HostController {
 
     // MARK: - Register New Host
     // the server returns the host properties along with the generated ID
+
+    /**
+     This method makes a network call to register or save a Host object to the server and completes with a HostRegistrationResponse object or HostErrors Enum
+    
+     - Parameter Host: Host to save on the server
+     - Parameter completion: Completes with HostRegistrationResponse object or HostErrors Enum.
+     */
+
     func registerHost(with host: Host, completion: @escaping (Result<HostRegistrationResponse, HostErrors>) -> Void) {
         //take the host and turn in into a hr
         guard let hostRegistration =  host.hostRegistration else { return }
