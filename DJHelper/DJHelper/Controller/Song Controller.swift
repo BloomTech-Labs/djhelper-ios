@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 import UIKit
 
+/// SongError Enum to better handle error that may arise from network calls
 enum SongError: Error {
     case authorizationError(Error)
     case noDataError
@@ -34,7 +35,14 @@ class SongController {
     // based on the inputs and outputs and the various server requests.
 
     // MARK: - Fetch All Songs
-    func fetchAllSongsFromServer(completion: @escaping(Result<[TrackRepresentation], EventErrors>) -> Void) {
+
+    /**
+     This method makes a network call to fetch all Song object from the server and completes with an array of TrackRepresentation objects or SongError Enum.
+
+     - Parameter completion: Completes with an array of TrackRepresentation objects or SongError Enum.
+     */
+
+    func fetchAllSongsFromServer(completion: @escaping(Result<[TrackRepresentation], SongError>) -> Void) {
         let url = baseURL.appendingPathComponent("songs")
         let urlRequest = URLRequest(url: url)
 
