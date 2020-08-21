@@ -168,13 +168,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1B27E6BC24E20013006B4826 /* Playlist Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Playlist Model";
-			sourceTree = "<group>";
-		};
 		1BA4A8B92485B004002A67E2 /* Host Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -333,7 +326,6 @@
 				1BA4A8BD2485B956002A67E2 /* Event Model */,
 				1BA4A8B92485B004002A67E2 /* Host Model */,
 				44352AC524B770A700E449F2 /* Song Model */,
-				1B27E6BC24E20013006B4826 /* Playlist Model */,
 			);
 			path = Model;
 			sourceTree = "<group>";
