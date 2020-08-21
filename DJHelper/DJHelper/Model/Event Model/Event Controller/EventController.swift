@@ -209,6 +209,13 @@ class EventController {
         }
     }
 
+    /**
+     This method makes a network call to fetch a single Event Representation on the server and completes with an Event object.
+    
+     - Parameter withEventID: The ID number of the Event object used to appending the url
+     - Parameter completion: Completes with an Event object correlated with the ID number passed into the url.
+     */
+
     // MARK: - Fetch Specific Event from server
     func fetchEvent(withEventID id: Int32, completion: @escaping(Result<Event, EventErrors>) -> Void) {
         let url = baseURL.appendingPathComponent("event")
