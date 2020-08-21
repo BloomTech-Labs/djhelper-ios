@@ -265,6 +265,14 @@ class EventController {
     }
 
     // MARK: - FETCH EVENTS FOR HOST
+
+    /**
+     This method makes a network call to fetch all EventRepresentations on the server created by the host
+    
+     - Parameter host: Host object
+     - Parameter completion: Completes with Bool or EventErrors Enum.
+     */
+
     func fetchAllEventsFromServer(for host: Host, completion: @escaping(Result<Bool, EventErrors>) -> Void) {
         let url = baseURL.appendingPathComponent("events")
         let urlRequest = URLRequest(url: url)

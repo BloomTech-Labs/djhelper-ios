@@ -46,8 +46,8 @@
             filePath = "DJHelper/Model/Event Model/Event Controller/EventController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "295"
-            endingLineNumber = "295"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
             landmarkName = "fetchAllEventsFromServer(for:completion:)"
             landmarkType = "7">
          </BreakpointContent>
