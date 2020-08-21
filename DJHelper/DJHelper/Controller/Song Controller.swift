@@ -240,7 +240,7 @@ class SongController {
     // MARK: - Delete Song from Playlist
 
     /**
-     This method makes a network call to fetch a setlist for a specific Event object from the server and completes with void or SongError Enum.
+     This method makes a network call to delete a song from a setlist on the server and completes with void or SongError Enum.
     
      - Parameter song: To be used to get the ID to append the url to identify the specific song to delete on the server
      - Parameter completion: completes with void or SongError Enum.
@@ -260,7 +260,7 @@ class SongController {
         
          let authURL = baseURL.appendingPathComponent("auth")
          let trackURL = authURL.appendingPathComponent("track")
-        let playlistURL = trackURL.appendingPathComponent("playlist")
+         let playlistURL = trackURL.appendingPathComponent("playlist")
          let trackIdURL = playlistURL.appendingPathComponent("\(trackResponse.trackId)")
 
          var urlRequest = URLRequest(url: trackIdURL)
@@ -295,12 +295,15 @@ class SongController {
      }
 
     // MARK: - Add Song to Requests
-    // TODO: - Maybe we should return a TrackResponse based on the json we get back
+
+    /**
+     This method makes a network call to add a song to the request list on the server and completes with a TrackResponse object or SongError Enum.
+    
+     - Parameter song: TrackRequest object to be encoded in the httpBody to post to the server
+     - Parameter completion: completes with a TrackResponse object or SongError Enum
+     */
+    
     func addSongToRequest(_ song: TrackRequest, completion: @escaping (Result<TrackResponse, SongError>) -> Void) {
-//        guard let trackRepresntation = song.songRepresentation else {
-//            print("Error on line: \(#line) in function: \(#function)\n")
-//            return
-//        }
 
     //put trackRepresntation in body of http
         let url = baseURL.appendingPathComponent("track")
