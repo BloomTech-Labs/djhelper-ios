@@ -24,7 +24,16 @@ extension Song {
             return nil
         }
 
-        return TrackResponse(trackId: songID, spotifyId: spotifyId, songName: songName, artist: artist, externalURL: externalURL, isExplicit: explicit, preview: preview, image: image, eventId: Int(event?.eventID ?? 0), votes: String(upVotes))
+        return TrackResponse(trackId: songID,
+                             spotifyId: spotifyId,
+                             songName: songName,
+                             artist: artist,
+                             externalURL: externalURL,
+                             isExplicit: explicit,
+                             preview: preview,
+                             image: image,
+                             eventId: Int(event?.eventID ?? 0),
+                             votes: String(upVotes))
     }
 
     var songRepresentation: TrackRepresentation? {
@@ -70,14 +79,14 @@ extension Song {
                                         image: URL?,
                                         songID: Int32 = 0,
                                         context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
-    self.init(context: context)
-    self.artist = artist
+        self.init(context: context)
+        self.artist = artist
         self.explicit = explicit
         self.externalURL = externalURL
-    self.inSetList = inSetList
-    self.songId = songId
-    self.songName = songName
-    self.upVotes = Int32(upVotes)
+        self.inSetList = inSetList
+        self.songId = songId
+        self.songName = songName
+        self.upVotes = Int32(upVotes)
         self.preview = preview
         self.image = image
         self.songID = songID
@@ -90,8 +99,10 @@ extension Song {
         self.init(artist: songRepresentation.artist,
                   explicit: songRepresentation.explicit,
                   externalURL: songRepresentation.externalURL,
-                  songId: songRepresentation.songId,  // FIXME
-            songName: songRepresentation.songName, preview: songRepresentation.preview, image: songRepresentation.image)
+                  songId: songRepresentation.songId,
+                  songName: songRepresentation.songName,
+                  preview: songRepresentation.preview,
+                  image: songRepresentation.image)
     }
 
 }

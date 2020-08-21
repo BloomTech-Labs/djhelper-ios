@@ -29,7 +29,7 @@ struct TrackRequest: Codable {
     var preview: String
     var image: URL
     var eventId: Int32
-    
+
     enum CodingKeys: String, CodingKey {
         case spotifyId = "spotify_id"
         case songName = "name"
