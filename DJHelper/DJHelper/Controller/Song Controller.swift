@@ -236,7 +236,16 @@ class SongController {
             completion(.success(()))
         }
     }
+
     // MARK: - Delete Song from Playlist
+
+    /**
+     This method makes a network call to fetch a setlist for a specific Event object from the server and completes with void or SongError Enum.
+    
+     - Parameter song: To be used to get the ID to append the url to identify the specific song to delete on the server
+     - Parameter completion: completes with void or SongError Enum.
+     */
+
     func deleteSongFromPlaylist(song: Song, completion: @escaping (Result<(), SongError>) -> Void) {
          guard let bearer = Bearer.shared.token else {
              print("Error on line: \(#line) in function: \(#function)\n")
