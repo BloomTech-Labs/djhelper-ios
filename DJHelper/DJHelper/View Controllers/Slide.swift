@@ -8,6 +8,7 @@
 
 import UIKit
 
+// File for the corresponding Slide.xib
 class Slide: UIView {
 
     @IBOutlet weak var titleLabel: UILabel!
