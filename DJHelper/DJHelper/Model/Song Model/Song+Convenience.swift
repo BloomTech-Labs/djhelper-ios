@@ -24,7 +24,16 @@ extension Song {
             return nil
         }
 
-        return TrackResponse(trackId: songID, spotifyId: spotifyId, songName: songName, artist: artist, externalURL: externalURL, isExplicit: explicit, preview: preview, image: image, eventId: Int(event?.eventID ?? 0), votes: String(upVotes))
+        return TrackResponse(trackId: songID,
+                             spotifyId: spotifyId,
+                             songName: songName,
+                             artist: artist,
+                             externalURL: externalURL,
+                             isExplicit: explicit,
+                             preview: preview,
+                             image: image,
+                             eventId: Int(event?.eventID ?? 0),
+                             votes: String(upVotes))
     }
 
     var songRepresentation: TrackRepresentation? {
@@ -36,15 +45,15 @@ extension Song {
                                   songId: songId ?? "",
                                   songName: songName)
     }
-//convert song into a trackRequest to send to server - this happens when the user taps the add button in the cells
+
+    //convert song into a trackRequest to send to backend - this happens when the user taps the add button in the cells
     var songToTrackRequest: TrackRequest? {
         guard let songId = songId,
         let artist = artist,
         let songName = songName,
         let externalURL = externalURL,
         let preview = preview,
-        let image = image//,
-//        let eventId = event?.eventID   changed this line
+        let image = image
         else {
             print("Error on line: \(#line) in function: \(#function)\n")
             return nil
@@ -56,7 +65,7 @@ extension Song {
                             isExplicit: explicit,
                             preview: preview,
                             image: image,
-                            eventId: event?.eventID ?? 0) // changed this line
+                            eventId: event?.eventID ?? 0) // it will originally default to 0 but we add the eventID later
     }
 
     @discardableResult convenience init(artist: String,
@@ -70,14 +79,14 @@ extension Song {
                                         image: URL?,
                                         songID: Int32 = 0,
                                         context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
-    self.init(context: context)
-    self.artist = artist
+        self.init(context: context)
+        self.artist = artist
         self.explicit = explicit
         self.externalURL = externalURL
-    self.inSetList = inSetList
-    self.songId = songId
-    self.songName = songName
-    self.upVotes = Int32(upVotes)
+        self.inSetList = inSetList
+        self.songId = songId
+        self.songName = songName
+        self.upVotes = Int32(upVotes)
         self.preview = preview
         self.image = image
         self.songID = songID
@@ -90,8 +99,10 @@ extension Song {
         self.init(artist: songRepresentation.artist,
                   explicit: songRepresentation.explicit,
                   externalURL: songRepresentation.externalURL,
-                  songId: songRepresentation.songId,  // FIXME
-            songName: songRepresentation.songName, preview: songRepresentation.preview, image: songRepresentation.image)
+                  songId: songRepresentation.songId,
+                  songName: songRepresentation.songName,
+                  preview: songRepresentation.preview,
+                  image: songRepresentation.image)
     }
 
 }

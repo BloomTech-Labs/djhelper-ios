@@ -12,7 +12,7 @@ import CoreData
 extension Host {
 
     // MARK: - CONVENIENCE INITIALIZERS
-    convenience init (name: String? = "temp",
+    convenience init (name: String? = "",
                       username: String,
                       email: String,
                       password: String,
@@ -54,12 +54,14 @@ extension Host {
                   website: URL(string: hostRepresnetation.website ?? ""))
     }
 
+    // Used for the HostLoginVC to log in an existing host
     var hostLogin: HostLogin? {
         guard let username = self.username,
             let password = self.password else { return nil }
         return HostLogin(username: username, password: password)
     }
 
+    // Used for the HostRegistrationVC to register a new host
     var hostRegistration: HostRegistration? {
         guard let name = self.name,
             let username = self.username,
@@ -69,6 +71,7 @@ extension Host {
         return HostRegistration(name: name, username: username, email: email, password: password)
     }
 
+    // Used for the HostProfileVC to update the host profile
     var hostUpdate: HostUpdate? {
         guard let name = self.name,
             let username = self.username,

@@ -7,8 +7,9 @@
 //
 
 import Foundation
-//Posting a track to request
-/*
+
+// Used for posting a track to request and fetching set list.
+/*   Example pasted below:
  {
    "spotify_id": "4v7SAP4KD96BFLWiCd1vF0",
    "name": "Madonna",
@@ -29,7 +30,7 @@ struct TrackRequest: Codable {
     var preview: String
     var image: URL
     var eventId: Int32
-    
+
     enum CodingKeys: String, CodingKey {
         case spotifyId = "spotify_id"
         case songName = "name"

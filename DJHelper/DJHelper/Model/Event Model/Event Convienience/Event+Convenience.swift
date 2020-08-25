@@ -33,14 +33,10 @@ extension Event {
         }
     }
 
-    //EventRepresentation -> Event
+    // EventRepresentation -> Event
     convenience init?(eventRepresentation: EventRepresentation,
                       context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         guard let eventDateFromString = eventRepresentation.eventDate.dateFromString() else { return nil }
-//        ,
-//            let imageURL = eventRepresentation.imageURL,
-//            let notes = eventRepresentation.notes else { return nil }
-//            let eventID = eventRepresentation.eventID else { return nil }
 
         self.init(name: eventRepresentation.name,
                   isExplicit: eventRepresentation.isExplicit,
@@ -51,10 +47,9 @@ extension Event {
                   eventID: eventRepresentation.eventID)
     }
 
-    //Event -> EventRepresentation
+    // Event -> EventRepresentation
     var eventAuthorizationRep: EventRepresentation? {
         guard let name = self.name,
-//            let description = self.eventDescription,
             let eventDate = self.eventDate else { return nil }
 
         return EventRepresentation(name: name,
@@ -66,10 +61,9 @@ extension Event {
                                    eventID: self.eventID)
     }
 
-    //Event -> EventAuthRequest
+    // Event -> EventAuthRequest
     var eventAuthRequest: EventAuthRequest? {
         guard let name = self.name,
-//             let description = self.eventDescription,
              let eventDate = self.eventDate else { return nil }
 
         return EventAuthRequest(name: name,

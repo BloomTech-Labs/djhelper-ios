@@ -8,6 +8,9 @@
 
 import UIKit
 
+// In several places, we used this custom alert instead of the standard UIAlertController.
+// To be consistent we probably should have used this throughout.
+// It is fairly plain now, but the design can be modified to your preference.
 class CustomAlert {
 
     struct Constants {
@@ -102,9 +105,7 @@ class CustomAlert {
         }
 
         UIView.animate(withDuration: 0.25, animations: {
-
             self.alertView.frame = CGRect(x: 40, y: targetView.frame.size.height, width: targetView.frame.size.width - 80, height: 300)
-
         }, completion: { done in
             if done {
                 //another animation in the original animation closure

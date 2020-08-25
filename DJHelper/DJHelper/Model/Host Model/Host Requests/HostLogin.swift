@@ -8,6 +8,7 @@
 
 import Foundation
 
+    // Used for the DJLoginVC to register a new host (sent to backend)
 struct HostLogin: Codable {
     let username: String
     let password: String

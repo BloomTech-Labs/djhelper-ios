@@ -8,18 +8,18 @@
 
 import Foundation
 
+// The ConcurrentOperation subclass was taken from an iOS project dealing with concurrency.
+// It is a subclass of Operation that is generic in providing its own subclass the means to
+// execute and stop functions in Operation Blocks.
 class ConcurrentOperation: Operation {
 
     // MARK: Types
-
     enum State: String {
         case isReady, isExecuting, isFinished
     }
 
     // MARK: Properties
-
     private var _state = State.isReady
-
     private let stateQueue = DispatchQueue(label: "com.LambdaSchoolLabs.DJHelper.ConcurrentOperationStateQueue")
     var state: State {
         get {
@@ -44,7 +44,6 @@ class ConcurrentOperation: Operation {
     }
 
     // MARK: NSOperation
-
     override dynamic var isReady: Bool {
         return super.isReady && state == .isReady
     }
@@ -60,10 +59,10 @@ class ConcurrentOperation: Operation {
     override var isAsynchronous: Bool {
         return true
     }
-
 }
 
 // MARK: - FetchPhotoOperation Subclass
+// This is the more specific subclass that initiates a URLSessionDataTask to retrieve image data
 class FetchMediaOperation: ConcurrentOperation {
 
     // MARK: Properties

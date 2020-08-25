@@ -30,10 +30,6 @@ class SongController {
         self.dataLoader = dataLoader
     }
 
-    // NOTE: These methods will need to change based on the backend solution.
-    // We will also very likely need to create additional representation models for songs
-    // based on the inputs and outputs and the various server requests.
-
     // MARK: - Fetch All Songs
 
     /**
@@ -226,13 +222,6 @@ class SongController {
                 print("Error: \(error.localizedDescription) on line \(#line) in function: \(#function)\n Technical error: \(error)")
                 completion(.failure(.otherError(error)))
             }
-
-//            guard let data = data else {
-//                print("Error on line: \(#line) in function: \(#function)")
-//                completion(.failure(.noDataError))
-//                return
-//            }
-//            print(" Data we get back from posting song to setlist\(String(data: data, encoding: .utf8))")
             completion(.success(()))
         }
     }
@@ -262,7 +251,6 @@ class SongController {
          let trackURL = authURL.appendingPathComponent("track")
          let playlistURL = trackURL.appendingPathComponent("playlist")
          let trackIdURL = playlistURL.appendingPathComponent("\(trackResponse.trackId)")
-
          var urlRequest = URLRequest(url: trackIdURL)
          urlRequest.httpMethod = HTTPMethod.delete.rawValue
          urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")

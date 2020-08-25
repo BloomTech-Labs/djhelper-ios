@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Used in searching for songs
 struct TrackRepresentation: Codable {
 
     enum CodingKeys: String, CodingKey {
