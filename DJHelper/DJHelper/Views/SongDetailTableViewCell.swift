@@ -8,6 +8,15 @@
 
 import UIKit
 
+/*
+ The SongDetailTableViewCell has several possible states depending on the user
+ 1. Guest
+ 2. Host
+ And depending on the "state" the user is in
+ 1. Searching for a song (.searched)
+ 2. Viewing the request list (.requested)
+ 3. Viewing the set list (.setListed)
+ */
 class SongDetailTableViewCell: UITableViewCell {
 
     // MARK: - Properties
@@ -41,6 +50,9 @@ class SongDetailTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
+        // the checkmark icon is set to not selected by default;
+        // the code then checks the boolean in the model to see if it should be selected and displays it accordingly.
+        // this was done in order to avoid incorrect states in the checkmark icon state (selected when it shouldn't be)
         addSongButton.isSelected = false
     }
 
@@ -50,12 +62,16 @@ class SongDetailTableViewCell: UITableViewCell {
         guard let song = song,
             let requestedSongConstant: TrackRequest = song.songToTrackRequest  else { return }
         trackRequestRepresentation = requestedSongConstant
+
+        // this line is where we set the eventID for the request sent to the server
         trackRequestRepresentation!.eventId = eventID
-        print("trackRequestRepresentation: \(trackRequestRepresentation) on line: \(#line)")
+
         if addSongButton.isSelected {
             cancelSongRequest(trackRequestRepresentation!)
         } else {
-            //this is where you check to see if it is guest or not to add to set list or requestList
+            // if the user is a guest, then simply add song to to request list
+            // if the user is a host, then either add song to request list (if state equals .searched)
+            // or add the song to the play list (if the state is not .searched)
             if isGuest == true {
                 guestAddsSongToRequestList(trackRequestRepresentation!)
             } else {
@@ -68,23 +84,15 @@ class SongDetailTableViewCell: UITableViewCell {
             }
         }
         addSongButton.isSelected.toggle()
-        self.song?.inSetList.toggle()
-
-    }
-
-    @IBAction func upvoteSong(_ sender: UIButton) {
-        print("upvote song button pressed")
-        guard let song = song else { return }
-        if upvoteSongButton.isSelected {
-            addUpvoteSong(song)
-        } else {
-            // present an alert verifying intention to cancel upvote
-            cancelUpvoteSong(song)
-        }
-        upvoteSongButton.isSelected.toggle()
+        self.song?.inSetList.toggle()  // the "inSetList" property was repurposed to reflect the intended state of the checkmark icon. It is not for the setList.
     }
 
     // MARK: - Methods
+    /**
+     Calls the addSongToRequest() method in SongController with the cell's current song
+
+     - Parameter song: The cell's song
+     */
     func guestAddsSongToRequestList(_ song: TrackRequest) {
         print("guest added song to request list")
         guard let songController = songController else { return }
@@ -109,11 +117,15 @@ class SongDetailTableViewCell: UITableViewCell {
             }
     }
 
+    /**
+     Calls the addSongToPlaylist() method in SongController with the cell's current song
+
+     - Parameter song: The cell's current song
+     */
     func hostAddsSongToPlaylist(_ song: Song) {
         songController?.addSongToPlaylist(song: song, completion: { (results) in
             switch results {
             case let .success((success)):
-
                 print("Host successfully added requested song to playlist: \(success)")
             case let .failure(error):
                 print("""
@@ -124,37 +136,26 @@ class SongDetailTableViewCell: UITableViewCell {
         })
     }
 
-    func cancelSongRequest(_ song: TrackRequest) {
-        // Insert network call here to delete the existing request
-    }
-
-    func addUpvoteSong(_ song: Song) {
-        // Insert network call here to upvote a song
-    }
-
-    func cancelUpvoteSong(_ song: Song) {
-        // Insert network call here to cancel the upvote request
-    }
-
     // MARK: - Update Views
     func updateViews() {
-        guard let song = song,
-        let songController = songController else { return }
-        // for the dj view the dj should see the plus button in the cell and consequently adds that song to the setlist
-
+        guard let song = song else { return }
         songLabel.text = song.songName
         artistLabel.text = song.artist
+
+        // The eventID property will be 0 until the song is requested
         if trackRequestRepresentation?.eventId == 0 {
             addSongButton.isSelected = false
         }
 
-        // Setting the status of the cell's button after the cell is reused by the table view
+        // Setting the status of the cell's button after the cell is reused by the table view. The inSetList property keeps track of the state.
         if song.inSetList {
             addSongButton.isSelected = true
         } else {
             addSongButton.isSelected = false
         }
 
+        // The switch looks at the three states and then whether the current user is a guest or host.
+        // This decides the method to be run that will set the appropriate UI
         switch currentSongState {
         case .requested:
             if isGuest == true {
@@ -203,9 +204,9 @@ class SongDetailTableViewCell: UITableViewCell {
 
     /// Guest should only be able to see the song on the setlist and it's voteCount
     func updateGuestSetlistViews() {
-    voteCountLabel.isHidden = false
-    upvoteSongButton.isHidden = true
-    addSongButton.isHidden = true
+        voteCountLabel.isHidden = false
+        upvoteSongButton.isHidden = true
+        addSongButton.isHidden = true
     }
 
     /// Host should be able to see votes of song on setlist and remove it from list
@@ -229,4 +230,30 @@ class SongDetailTableViewCell: UITableViewCell {
         upvoteSongButton.isHidden = true
         voteCountLabel.isHidden = true
     }
+
+    // MARK: - Unimplemented Methods
+    @IBAction func upvoteSong(_ sender: UIButton) {
+        print("upvote song button pressed")
+        guard let song = song else { return }
+        if upvoteSongButton.isSelected {
+            addUpvoteSong(song)
+        } else {
+            // present an alert verifying intention to cancel upvote
+            cancelUpvoteSong(song)
+        }
+        upvoteSongButton.isSelected.toggle()
+    }
+
+    func cancelSongRequest(_ song: TrackRequest) {
+        // Insert network call here to delete the existing request
+    }
+
+    func addUpvoteSong(_ song: Song) {
+        // Insert network call here to upvote a song
+    }
+
+    func cancelUpvoteSong(_ song: Song) {
+        // Insert network call here to cancel the upvote request
+    }
 }
+

@@ -8,6 +8,11 @@
 
 import UIKit
 
+// Collection view cell used in the three collection views:
+//   - Upcoming Events
+//   - Hosting Events
+//   - Past Events
+// It displays an image associated with event, event date, and event name
 class HostEventCollectionViewCell: UICollectionViewCell {
     var event: Event? {
         didSet {
@@ -29,6 +34,6 @@ class HostEventCollectionViewCell: UICollectionViewCell {
 
         dateLabel.text = passedInEvent.eventDate?.stringFromDate()
         eventNameLabel.text = passedInEvent.name
-        imageView.image = #imageLiteral(resourceName: "musicSymbol")
+        imageView.image = #imageLiteral(resourceName: "musicSymbol")  // the backend does not have resources to store images; we just used a stock image
     }
 }
