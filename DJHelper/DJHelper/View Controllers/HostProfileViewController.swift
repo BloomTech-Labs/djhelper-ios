@@ -34,12 +34,14 @@ class HostProfileViewController: ShiftableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // the text fields are delegates of the ShiftableViewController to make sure they are not obscured by the keyboard when selected.
         profilePicTextField.delegate = self
         bioTextView.delegate = self
         updateViews()
     }
 
     // MARK: - Actions
+    // set the currentHost's properties to the values in the corresponding text fields.
     @IBAction func saveChanges(_ sender: UIBarButtonItem) {
 
         guard let host = currentHost,
@@ -85,8 +87,6 @@ class HostProfileViewController: ShiftableViewController {
                 return
             }
         }
-        // successful result should present alert controller
-        // failed result should also present alert controller
     }
 
     // MARK: - Private Methods
@@ -104,15 +104,15 @@ class HostProfileViewController: ShiftableViewController {
 
         if isGuest {
             updateViewsForGuest()
-//            saveButton.tintColor = UIColor.clear
-//            pageTitle.title = "\(currentHost?.name ?? "DJ")'s Profile"
         } else {
             pageTitle.title = "Update Profile"
         }
     }
 
+    /**
+     Disables all text fields if a guest is viewing the page and hides the saveButton.
+     */
     private func updateViewsForGuest() {
-        print("guest view should not be able to edit textfields")
             saveButton.tintColor = UIColor.clear
             pageTitle.title = "\(currentHost?.name ?? "DJ")'s Profile"
             usernameTextField.isEnabled = false
