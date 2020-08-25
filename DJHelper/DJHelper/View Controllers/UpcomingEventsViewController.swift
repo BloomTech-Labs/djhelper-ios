@@ -8,6 +8,8 @@
 
 import UIKit
 
+// Takes the upcomingEvents array passed from HostEventViewController and populates the collection view.
+
 class UpcomingEventsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     var currentHost: Host?
@@ -23,8 +25,6 @@ class UpcomingEventsViewController: UIViewController, UICollectionViewDelegate, 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -41,6 +41,7 @@ class UpcomingEventsViewController: UIViewController, UICollectionViewDelegate, 
         return cell
     }
 
+    // If a cell is tapped, it instantiates a new eventDetailVC with the event details.
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let eventDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "EventDetailVC") as? EventPlaylistViewController,
         let upcomingEvents = upcomingEvents else { return }

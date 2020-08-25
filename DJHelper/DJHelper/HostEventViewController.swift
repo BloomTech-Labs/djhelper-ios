@@ -9,11 +9,7 @@
 import UIKit
 import CoreData
 
-class HostEventViewController: UIViewController, newEventCreatedDelegate {
-    func loadNewEvent() {
-        fetchEventsFromServer()
-    }
-
+class HostEventViewController: UIViewController {
 
     // MARK: - Instance Variables
     var currentHost: Host?
@@ -23,7 +19,7 @@ class HostEventViewController: UIViewController, newEventCreatedDelegate {
     let todaysDate = Date().stringFromDate()
     var eventsHappeningNow: [Event]? {
         didSet {
-            happeningNowImageView.image = #imageLiteral(resourceName: "event-default")
+            happeningNowImageView.image = #imageLiteral(resourceName: "event-default")  // The backend does not have the resources to store images, so we have used a stock image literal
             guard let currentEvents = eventsHappeningNow,
                 let currentEvent = currentEvents.first else {
                     happeningNowDateLabel.text = "No events happening right now"
@@ -57,7 +53,10 @@ class HostEventViewController: UIViewController, newEventCreatedDelegate {
     // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
         fetchEventsFromServer()
+
+        // Pass currentHost, hostController, and eventController to the other tabbed view controllers
         let barViewControllers = self.tabBarController?.viewControllers
         guard let profileVC = barViewControllers?[1] as? HostProfileViewController else { return }
         profileVC.currentHost = self.currentHost
@@ -73,6 +72,8 @@ class HostEventViewController: UIViewController, newEventCreatedDelegate {
         happeningNowDateLabel.text = "No events happening right now"
     }
 
+    // A UIButton is on top of the happeningNow view
+    // when the button is tapped, the eventDetailVC is instantiated
     @IBAction func happeningNowButton(_ sender: UIButton) {
         guard let currentEvents = eventsHappeningNow,
             let currentEvent = currentEvents.first else { return }
@@ -89,7 +90,9 @@ class HostEventViewController: UIViewController, newEventCreatedDelegate {
     }
 
     // MARK: - Private Methods
-    ///We should be able to fetch from core data but I'm fetching from the server for testing.
+    /**
+     Calls fetchAllEventsFromServer(for:) method in EventController, which will separate events based on current, past, hosted, and upcoming.
+     */
     func fetchEventsFromServer() {
         guard let host = currentHost, let eventController = eventController else {
             print("Error on line: \(#line) in function: \(#function)\n")
@@ -126,6 +129,11 @@ class HostEventViewController: UIViewController, newEventCreatedDelegate {
         return events ?? []
     }
 
+    /**
+     Separate the array of Events into eventsHappeningNow, pastEvents, upcomingEvents, and allEvents. Compares eventDate with the current system date.
+
+     - Parameter events: An array, of type Event, to be sorted.
+     */
     private func sortEvents(events: [Event]) {
         // This says that the event date is less than right now but also greater than 5 hours ago
         eventsHappeningNow = events.filter { $0.eventDate! < Date() && $0.eventDate! > Date().addingTimeInterval(-18000) }
@@ -147,6 +155,9 @@ class HostEventViewController: UIViewController, newEventCreatedDelegate {
                 allEvents.append(event)
             }
         }
+
+        // Presently, all events listed are hosting events
+        // If future releases allow the host to add events they are not hosting, then this will need to be changed
         hostingEventsVC.hostingEvents = self.allEvents
     }
 
@@ -175,5 +186,11 @@ class HostEventViewController: UIViewController, newEventCreatedDelegate {
             destinationVC.eventController = self.eventController
             destinationVC.hostController = self.hostController
         }
+    }
+}
+
+extension HostEventViewController: newEventCreatedDelegate {
+    func loadNewEvent() {
+        fetchEventsFromServer()
     }
 }

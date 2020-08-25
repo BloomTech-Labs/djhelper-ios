@@ -67,13 +67,10 @@ class GuestLoginViewController: ShiftableViewController {
     }
 
     // MARK: - Actions
-
-    // perform fetchAllEvents and do a filter for the
-    // event number in the text field
-    // if present, make that event the current event
-    // and make the associated host the current host
-    // and set a boolean "guest" property to true
-    // if not present, present an error alert
+    /**
+     Use the hostID associated with the passed-in event to fetch all events for that host from the server.
+     If successful, segues to the eventPlaylistViewController
+     */
     func setHost() {
         guard let event = event else {
             print("Error on line: \(#line) in function: \(#function)\n")
@@ -98,28 +95,29 @@ class GuestLoginViewController: ShiftableViewController {
         })
     }
 
+    // Take the eventID in the text field and called the fetchEvent(withEventID:) method in EventController. If successful, set the view controller's event property, which in turn calls the setHost() method.
     @IBAction func viewEvents(_ sender: UIButton) {
         print("view event button pressed.")
         // check to see if there is something in the textbox
         guard let eventCode = eventCodeTextField.text,
             !eventCode.isEmpty else {
-                self.view.backgroundColor = .red
+                self.view.backgroundColor = .red  // for debugging
                 return
         }
 
         guard let eventId = Int(eventCode) else {
-            self.view.backgroundColor = .red
+            self.view.backgroundColor = .red  // for debugging
             let inputAlert = CustomAlert()
             inputAlert.showAlert(with: "Invalid Entry",
                                  message: "The event code must be a whole number only. Please check the input and try again.",
                                  on: self)
-            self.view.backgroundColor = .yellow
+            self.view.backgroundColor = .yellow  // for debugging
             return
         }
 
         guard let eventController = eventController else {
             print("Error on line: \(#line) in function: \(#function)\n")
-            self.view.backgroundColor = .magenta
+            self.view.backgroundColor = .magenta  // for debugging
             return
         }
 

@@ -55,8 +55,11 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
 
         searchBar.delegate = self
         tableView.keyboardDismissMode = .onDrag
+
+        // code for pull-to-refresh
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshSongData(_:)), for: .valueChanged)
+
         fetchRequestList()
         updateViews()
         updateSongList()
@@ -64,12 +67,15 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
         let tapToDismiss = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tapToDismiss)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
 
+    /**
+     Calls the fetchAllTracksFromRequestList(forEventID:) method from SongController. Displays current list of request songs if successful.
+     */
     private func fetchRequestList() {
         guard let event = event else { return }
         //Guest view: Should return a Song model for upvoting
@@ -90,11 +96,11 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
     @objc func dismissAlert() {
         myAlert.dismissAlert()
     }
-    
+
     // MARK: - Actions
     @IBAction func requestButtonSelected(_ sender: UIButton) {
         // when a guest is viewing, this is the request button
-        // when a host/DJ is viewing, this is the setlist button
+        // when a host/DJ is viewing, this is the add-to-set-list button
         print("request button pressed as guest: \(isGuest)")
         if isGuest {
             currentSongState = .requested
@@ -110,7 +116,6 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
     @IBAction func setlistButtonSelected(_ sender: UIButton) {
         // when a guest is viewing, this is the setlist button
         // when a host/DJ is viewing, this is the request button
-        print("setlist button pressed as guest: \(isGuest)")
         if isGuest {
             currentSongState = .setListed
             fetchSetlist()
@@ -122,6 +127,7 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
         }
     }
 
+    // Instantiate a HostProfileViewController that shows details of the current Host.
     @IBAction func viewHostDetail(_ sender: UIButton) {
         guard let currentHost = currentHost else { return }
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
@@ -129,9 +135,9 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
         hostProfileVC.currentHost = currentHost
         hostProfileVC.isGuest = true
         present(hostProfileVC, animated: true, completion: nil)
-        //        self.navigationController?.present(hostProfileVC, animated: true, completion: nil)
     }
 
+    // If shareEventButton is tapped, create and instance of UIActivityViewController and pass the message and the URL with the current eventID
     @IBAction func shareEventButtonPressed(_ sender: UIBarButtonItem) {
         guard let passedInEvent = event, let eventDate = passedInEvent.eventDate else {
             print("No event passed to the EventPlaylistVC.\nError on line: \(#line) in function: \(#function)\n")
@@ -147,20 +153,22 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
         let message = "Hey! Please check out this new event I created!"
         let tempUrlToPass = URL(string: "djscheme://www.djhelper.com/guestLogin?eventId=\(passedInEvent.eventID)")!
         let objectsToShare: [Any] = [message, tempUrlToPass]
-        
+
         let activityController = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
         present(activityController, animated: true, completion: nil)
     }
-    
+
     // MARK: - Methods
+    // Method called in the pull-to-refresh code.
     @objc func refreshSongData(_ sender: Any) {
         updateSongList()
     }
 
+    /**
+     Completes a Core Data fetch of songs associated with the current eventID.
+     */
     func updateSongList() {
-        // call to the server for songs in event playlist or requested songs
-        // set the returned results to some variable
-        // filter that variable based on inSetList bool
+        // I am not sure the results of this fetch request are actually being used.
         let fetchRequest: NSFetchRequest<Song> = Song.fetchRequest()
         let predicate = NSPredicate(format: "event.eventID == %i", self.event!.eventID)
         fetchRequest.predicate = predicate
@@ -193,7 +201,7 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
         ])
         hostNameButton.setAttributedTitle(buttonTitle, for: .normal)
 
-        // udpateViews() should also swap the location of the
+        // Per the UX design, udpateViews() should also swap the location of the
         // Setlist and Requests buttons based on the value of isGuest
         let requestButtonTitle = NSMutableAttributedString(string: "Requests", attributes: [
             NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 18)!,
@@ -230,6 +238,9 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
         tableView.reloadData()
     }
 
+    /**
+     Calls the fetchSetlistFromServer(for:) method from SongController. Displays current list of songs in the set list if successful.
+     */
     func fetchSetlist() {
         guard let event = event else {
             print("Error on line: \(#line) in function: \(#function)\n")
@@ -255,6 +266,11 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
     }
 
     // MARK: - Search for Song
+    // The following method is used by the UISearchBarDelegate
+    // When the search bar is active and Return is tapped, the contents of the search
+    // bar are used as the search term for a network call.
+    // The search term is passed to the searchForSong(withSearchTerm:) method in SongController
+    // If successful, the JSON is converted into an array of Song and displayed in the table view.
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let event = event,
             let searchTerm = searchBar.text,
@@ -286,12 +302,17 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
     }
 
     // MARK: - Load Cover Art Image
-    // loadImage uses block operations to fetch cover art images on a background queue
-    // and then stores the data in a cache for more responsive scrolling with large numbers of images
-    func loadImage(for songCell: SongDetailTableViewCell, forItemAt indexPath: IndexPath) {
+    /**
+     Uses block operations to fetch cover art images on a background queue and then store the data in a cache for more responsive scrolling with a large number of images
 
+     - Parameter songCell: the current SongDetailTableViewCell
+     - Parameter indexPath: the index path of the current cell
+     */
+    func loadImage(for songCell: SongDetailTableViewCell, forItemAt indexPath: IndexPath) {
+        // create a storage location for the current song
         var currentSong = Song()
 
+        // get the current song based on its index path and the currentSongState
         switch currentSongState {
         case .requested:
             currentSong = requestedSongs[indexPath.row]
@@ -301,6 +322,7 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
             currentSong = searchResults[indexPath.row]
         }
 
+        // if the song is already in cache, then used the cached data to set the cover art UIImage and reload the cell.
         guard let songId = currentSong.songId else { return }
         if let coverArtData = cache.value(for: songId),
             let image = UIImage(data: coverArtData) {
@@ -309,9 +331,11 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
             return
         }
 
+        // if the song is not in cache, set up a block operation using the custom Operation subclass to fetch the image data on a background queue.
         let fetchOp = FetchMediaOperation(song: currentSong, songController: songController)
         let cacheOp = BlockOperation {
             if let data = fetchOp.mediaData {
+                // when data is returned, put it in the cache for that songId
                 self.cache.cache(value: data, for: songId)
                 DispatchQueue.main.async {
                     self.tableView.reloadRows(at: [indexPath], with: .automatic)
@@ -328,6 +352,7 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
                 return
             }
 
+            // if the cell is still visible then set its imageView with the data returned
             if let data = fetchOp.mediaData {
                 songCell.setImage(UIImage(data: data))
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
@@ -345,12 +370,24 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
 
     }
 
+    /**
+     Creates a custom date format for the event's date label.
+
+     - Parameter date: The event's date
+     - Returns: A string with a custom date format for the UI
+     */
     func longDateToString(with date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "EEE, MMM d, yyyy"
         return formatter.string(from: date)
     }
 
+    /**
+     Creates a custom time format for the event's time label.
+
+     - Parameter date: The event's date
+     - Returns: A string with a custom time format for the UI
+     */
     func timeToString(with date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "h:mm a"
@@ -360,16 +397,12 @@ class EventPlaylistViewController: ShiftableViewController, UISearchBarDelegate 
 
 // MARK: - Table View Data Source
 extension EventPlaylistViewController: UITableViewDataSource {
-    // perform GET to retrieve all Song entries for the Event
-    // when in "set list" mode, filter for songs with inSetList set to true;
-    // when in "requests" mode, inSetList is false.
-    // currently, how a guest makes a request is not in the UX design
-    // presumably, a request would POST a Song to the server
-    // an upvote should PUT the upvote data to the server for the specific Song
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
+    // use the appropriate Song array based on the currentSongState
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch currentSongState {
         case .requested:
@@ -382,37 +415,34 @@ extension EventPlaylistViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as? SongDetailTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as? SongDetailTableViewCell else {
+            return UITableViewCell()
+
+        }
+
+        cell.songController = songController
+        cell.eventID = event?.eventID ?? 0
+        cell.isGuest = self.isGuest
+        loadImage(for: cell, forItemAt: indexPath)
 
         switch currentSongState {
         case .requested:
-            let song = requestedSongs[indexPath.row]
             cell.currentSongState = .requested
-            cell.songController = songController
-            cell.eventID = event?.eventID ?? 0
-            cell.isGuest = self.isGuest
+            let song = requestedSongs[indexPath.row]
             cell.song = song
-            loadImage(for: cell, forItemAt: indexPath)
         case .setListed:
             let song = setListedSongs[indexPath.row]
             cell.currentSongState = .setListed
-            cell.songController = songController
-            cell.eventID = event?.eventID ?? 0
-            cell.isGuest = self.isGuest
             cell.song = song
-            loadImage(for: cell, forItemAt: indexPath)
         case .searched:
             let song = searchResults[indexPath.row]
             cell.currentSongState = .searched
-            cell.songController = songController
-            cell.eventID = event?.eventID ?? 0
-            cell.isGuest = self.isGuest
             cell.song = song
-            loadImage(for: cell, forItemAt: indexPath)
         }
         return cell
     }
 
+    // swipe to delete
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if isGuest == false {
             if editingStyle == .delete {
@@ -431,6 +461,11 @@ extension EventPlaylistViewController: UITableViewDataSource {
         }
     }
 
+    /**
+     Calls deleteTrackFromRequests(trackId:) method from SongController. If successful, the song is deleted and table view reloaded.
+
+     - Parameter song: the current cell's song
+     */
     func deleteTrackFromRequestList(song: Song) {
         songController.deleteTrackFromRequests(trackId: Int(song.songID)) { (results) in
             switch results {
@@ -451,6 +486,11 @@ extension EventPlaylistViewController: UITableViewDataSource {
         }
     }
 
+    /**
+     Calls deleteTrackFromSetlist(trackId:) method from SongController. If successful, the song is deleted and table view reloaded.
+
+     - Parameter song: the current cell's song
+     */
     func deleteSongFromSetlist(song: Song) {
         songController.deleteSongFromPlaylist(song: song) { (results) in
             switch results {

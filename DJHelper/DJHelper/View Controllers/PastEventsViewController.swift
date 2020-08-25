@@ -8,6 +8,8 @@
 
 import UIKit
 
+// Takes the pastEvents array passed from HostEventViewController and populates the collection view.
+
 class PastEventsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     var currentHost: Host?
@@ -23,8 +25,6 @@ class PastEventsViewController: UIViewController, UICollectionViewDelegate, UICo
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -33,7 +33,9 @@ class PastEventsViewController: UIViewController, UICollectionViewDelegate, UICo
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let pastEvents = pastEvents,
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventCell", for: indexPath) as? HostEventCollectionViewCell else { return UICollectionViewCell() }
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "eventCell", for: indexPath) as? HostEventCollectionViewCell else {
+                return UICollectionViewCell()
+        }
 
         let event = pastEvents[indexPath.item]
         cell.event = event
@@ -41,6 +43,7 @@ class PastEventsViewController: UIViewController, UICollectionViewDelegate, UICo
         return cell
     }
 
+    // If a cell is tapped, it instantiates a new eventDetailVC with the event details.
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let eventDetailVC = self.storyboard?.instantiateViewController(withIdentifier: "EventDetailVC") as? EventPlaylistViewController,
             let pastEvents = pastEvents else { return }
