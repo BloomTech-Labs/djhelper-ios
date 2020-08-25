@@ -8,6 +8,7 @@
 
 import Foundation
 
+    // Used for the HostProfileVC to register a new host (sent to backend)
 struct HostUpdate: Codable {
     let name: String
     let username: String

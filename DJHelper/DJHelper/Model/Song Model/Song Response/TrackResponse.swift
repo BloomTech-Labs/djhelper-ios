@@ -8,8 +8,8 @@
 
 import Foundation
 
-// Struct is for when the dj wants to see which songs/tracks guests have requested.
-/*
+// Struct is for when the dj wants to see which songs/tracks guests have requested and to add a request to the playlist and delete song from playlist
+/*  Example pasted below:
  {
    "id": 3,
    "spotify_id": "4v7SAP4KD96BFLWiCd1vF0",
@@ -56,7 +56,7 @@ struct TrackResponse: Codable {
          preview: String,
          image: URL,
          eventId: Int,
-         votes: String? = "0") {
+         votes: String? = "0") { // We do not have logic for upvoting yet, so it defaults to 0
 
         self.trackId = trackId
         self.spotifyId = spotifyId

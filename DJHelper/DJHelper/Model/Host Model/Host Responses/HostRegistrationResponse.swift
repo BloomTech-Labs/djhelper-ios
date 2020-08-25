@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Response received from backend when successfully registering a new host
 struct HostRegistrationResponse: Codable {
     var name: String
     var username: String

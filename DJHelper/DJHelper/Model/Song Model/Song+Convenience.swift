@@ -45,15 +45,15 @@ extension Song {
                                   songId: songId ?? "",
                                   songName: songName)
     }
-//convert song into a trackRequest to send to server - this happens when the user taps the add button in the cells
+
+    //convert song into a trackRequest to send to backend - this happens when the user taps the add button in the cells
     var songToTrackRequest: TrackRequest? {
         guard let songId = songId,
         let artist = artist,
         let songName = songName,
         let externalURL = externalURL,
         let preview = preview,
-        let image = image//,
-//        let eventId = event?.eventID   changed this line
+        let image = image
         else {
             print("Error on line: \(#line) in function: \(#function)\n")
             return nil
@@ -65,7 +65,7 @@ extension Song {
                             isExplicit: explicit,
                             preview: preview,
                             image: image,
-                            eventId: event?.eventID ?? 0) // changed this line
+                            eventId: event?.eventID ?? 0) // it will originally default to 0 but we add the eventID later
     }
 
     @discardableResult convenience init(artist: String,
