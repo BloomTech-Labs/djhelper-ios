@@ -116,7 +116,13 @@ class SongController {
                 let trackResponses = try decoder.decode([TrackResponse].self, from: data)
                 var songs = [Song]()
                 for track in trackResponses {
-                    let newSong = Song(artist: track.artist, externalURL: track.externalURL, songId: track.spotifyId, songName: track.songName, preview: track.preview, image: track.image, songID: track.trackId)
+                    let newSong = Song(artist: track.artist,
+                                       externalURL: track.externalURL,
+                                       songId: track.spotifyId,
+                                       songName: track.songName,
+                                       preview: track.preview,
+                                       image: track.image,
+                                       songID: track.trackId)
                     songs.append(newSong)
                 }
                 print("print songs in setlist: \(songs.count) on line: \(#line)")
@@ -131,7 +137,7 @@ class SongController {
             }
         }
     }
-    
+
     // MARK: - Search for Song - doesn't return trackId
     func searchForSong(withSearchTerm search: String, completion: @escaping(Result<[TrackRepresentation], SongError>) -> Void) {
         let url = baseURL.appendingPathComponent("track").appendingPathComponent("\(search)")
@@ -246,7 +252,7 @@ class SongController {
             print("Error on line: \(#line) in function: \(#function)\n")
             return
         }
-        
+
          let authURL = baseURL.appendingPathComponent("auth")
          let trackURL = authURL.appendingPathComponent("track")
          let playlistURL = trackURL.appendingPathComponent("playlist")
@@ -290,7 +296,6 @@ class SongController {
      - Parameter song: TrackRequest object to be encoded in the httpBody to post to the server
      - Parameter completion: completes with a TrackResponse object or SongError Enum
      */
-    
     func addSongToRequest(_ song: TrackRequest, completion: @escaping (Result<TrackResponse, SongError>) -> Void) {
 
     //put trackRepresntation in body of http

@@ -16,7 +16,6 @@ import UIKit
 class HostEventCollectionViewCell: UICollectionViewCell {
     var event: Event? {
         didSet {
-            print("event passed to collection cell")
             updateViews()
         }
     }

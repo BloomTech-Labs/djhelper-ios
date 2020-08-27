@@ -50,7 +50,6 @@
 		447F53862475805E00F706F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 447F53842475805E00F706F1 /* LaunchScreen.storyboard */; };
 		447F53C12476315200F706F1 /* DJHelper.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 447F53BF2476315200F706F1 /* DJHelper.xcdatamodeld */; };
 		447F53C3247634EE00F706F1 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F53C2247634EE00F706F1 /* CoreDataStack.swift */; };
-		449380522485A15D004C96F7 /* HostEventsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449380512485A15D004C96F7 /* HostEventsTableViewController.swift */; };
 		449380682486F255004C96F7 /* DJHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449380672486F255004C96F7 /* DJHelperTests.swift */; };
 		4495D39C24DB5BFA0036DA4E /* UpcomingEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4495D39B24DB5BFA0036DA4E /* UpcomingEventsViewController.swift */; };
 		44A025BD24D25A0500BFB762 /* SongDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A025BC24D25A0500BFB762 /* SongDetailTableViewCell.swift */; };
@@ -125,7 +124,6 @@
 		447F53872475805E00F706F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		447F53C02476315200F706F1 /* DJHelper.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DJHelper.xcdatamodel; sourceTree = "<group>"; };
 		447F53C2247634EE00F706F1 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
-		449380512485A15D004C96F7 /* HostEventsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostEventsTableViewController.swift; sourceTree = "<group>"; };
 		449380652486F255004C96F7 /* DJHelperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DJHelperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		449380672486F255004C96F7 /* DJHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJHelperTests.swift; sourceTree = "<group>"; };
 		449380692486F255004C96F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -339,7 +337,6 @@
 				44F488FF249BF4E800B2646C /* Slide.xib */,
 				4446F8242480CD32005ACE10 /* DJLoginViewController.swift */,
 				4446F8262480D792005ACE10 /* DJRegisterViewController.swift */,
-				449380512485A15D004C96F7 /* HostEventsTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -597,7 +594,6 @@
 				1BA4A8B8248586B9002A67E2 /* EventRepresentation.swift in Sources */,
 				1BDBE28624850CF3006DE77E /* HostRegistrationResponse.swift in Sources */,
 				4446F7D8247DC67E005ACE10 /* HostController.swift in Sources */,
-				449380522485A15D004C96F7 /* HostEventsTableViewController.swift in Sources */,
 				4446F7D4247DC3BB005ACE10 /* Event+Convenience.swift in Sources */,
 				1BA4A8B4248577B1002A67E2 /* HostLogin.swift in Sources */,
 				4446F8252480CD32005ACE10 /* DJLoginViewController.swift in Sources */,
