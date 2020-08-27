@@ -7,27 +7,150 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B323D3A248422210065D94C /* HostRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B323D39248422210065D94C /* HostRepresentation.swift */; };
+		1B3D9BBB2492FC6700E8625C /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D9BBA2492FC6700E8625C /* CustomAlert.swift */; };
+		1B71119024D2A6E400BF4256 /* HostEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B71118F24D2A6E400BF4256 /* HostEventViewController.swift */; };
+		1B71119224D2A94D00BF4256 /* HostEventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B71119124D2A94D00BF4256 /* HostEventCollectionViewCell.swift */; };
+		1BA4A8B4248577B1002A67E2 /* HostLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA4A8B3248577B1002A67E2 /* HostLogin.swift */; };
+		1BA4A8B6248577F4002A67E2 /* HostLoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA4A8B5248577F4002A67E2 /* HostLoginResponse.swift */; };
+		1BA4A8B8248586B9002A67E2 /* EventRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA4A8B7248586B9002A67E2 /* EventRepresentation.swift */; };
+		1BA4A8C22485C152002A67E2 /* EventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA4A8C12485C152002A67E2 /* EventController.swift */; };
+		1BA4A8C42485F27A002A67E2 /* EventAuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA4A8C32485F27A002A67E2 /* EventAuthRequest.swift */; };
+		1BA4A8C82486858D002A67E2 /* HelperExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA4A8C72486858D002A67E2 /* HelperExtensions.swift */; };
+		1BC33A6B24E383B000734519 /* TrackResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BC33A6A24E383B000734519 /* TrackResponse.swift */; };
+		1BDBE284248508FC006DE77E /* HostRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDBE283248508FC006DE77E /* HostRegistration.swift */; };
+		1BDBE28624850CF3006DE77E /* HostRegistrationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDBE28524850CF3006DE77E /* HostRegistrationResponse.swift */; };
+		1BF6A47124E32EAD00519E82 /* TrackRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF6A47024E32EAD00519E82 /* TrackRequest.swift */; };
+		441CB84D2498500D00637CC0 /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441CB84C2498500D00637CC0 /* EventTests.swift */; };
+		441CB84F2499CE1E00637CC0 /* GuestLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 441CB84E2499CE1E00637CC0 /* GuestLoginViewController.swift */; };
+		44214DE5248D6FF500D63B6A /* DJHelperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DE3248D676600D63B6A /* DJHelperUITests.swift */; };
+		44214DE9248F2C6300D63B6A /* HostProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DE8248F2C6300D63B6A /* HostProfileViewController.swift */; };
+		44214DEB248F2CA000D63B6A /* EventPlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DEA248F2CA000D63B6A /* EventPlaylistViewController.swift */; };
+		44214DEF249125BF00D63B6A /* HostUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DEE249125BF00D63B6A /* HostUpdate.swift */; };
+		44214DF12491952100D63B6A /* ShiftableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DF02491952100D63B6A /* ShiftableViewController.swift */; };
+		44352AC724B7C4E300E449F2 /* Song+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44352AC624B7C4E300E449F2 /* Song+Convenience.swift */; };
+		44352AC924B7C68B00E449F2 /* TrackRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44352AC824B7C68B00E449F2 /* TrackRepresentation.swift */; };
+		4446F799247638D4005ACE10 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F798247638D4005ACE10 /* HTTPMethod.swift */; };
+		4446F79B247638F9005ACE10 /* NetworkDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F79A247638F9005ACE10 /* NetworkDataLoader.swift */; };
+		4446F79D24763935005ACE10 /* URLSessionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F79C24763935005ACE10 /* URLSessionExtension.swift */; };
+		4446F7D4247DC3BB005ACE10 /* Event+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F7D3247DC3BB005ACE10 /* Event+Convenience.swift */; };
+		4446F7D6247DC51F005ACE10 /* Host+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F7D5247DC51F005ACE10 /* Host+Convenience.swift */; };
+		4446F7D8247DC67E005ACE10 /* HostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F7D7247DC67E005ACE10 /* HostController.swift */; };
+		4446F7DA247DCAD8005ACE10 /* Bearer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F7D9247DCAD8005ACE10 /* Bearer.swift */; };
+		4446F8252480CD32005ACE10 /* DJLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F8242480CD32005ACE10 /* DJLoginViewController.swift */; };
+		4446F8272480D792005ACE10 /* DJRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4446F8262480D792005ACE10 /* DJRegisterViewController.swift */; };
+		446F55A224DB9D860030F66F /* HostingEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F55A124DB9D860030F66F /* HostingEventsViewController.swift */; };
+		446F55A424DB9D930030F66F /* PastEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F55A324DB9D930030F66F /* PastEventsViewController.swift */; };
+		446F55A624EB31830030F66F /* ConcurrentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F55A524EB31830030F66F /* ConcurrentOperation.swift */; };
+		446F55A824EB33840030F66F /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446F55A724EB33840030F66F /* Cache.swift */; };
 		447F537A2475805E00F706F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F53792475805E00F706F1 /* AppDelegate.swift */; };
 		447F537C2475805E00F706F1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F537B2475805E00F706F1 /* SceneDelegate.swift */; };
-		447F537E2475805E00F706F1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F537D2475805E00F706F1 /* ViewController.swift */; };
 		447F53812475805E00F706F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 447F537F2475805E00F706F1 /* Main.storyboard */; };
 		447F53832475805E00F706F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 447F53822475805E00F706F1 /* Assets.xcassets */; };
 		447F53862475805E00F706F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 447F53842475805E00F706F1 /* LaunchScreen.storyboard */; };
+		447F53C12476315200F706F1 /* DJHelper.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 447F53BF2476315200F706F1 /* DJHelper.xcdatamodeld */; };
+		447F53C3247634EE00F706F1 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447F53C2247634EE00F706F1 /* CoreDataStack.swift */; };
+		449380682486F255004C96F7 /* DJHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449380672486F255004C96F7 /* DJHelperTests.swift */; };
+		4495D39C24DB5BFA0036DA4E /* UpcomingEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4495D39B24DB5BFA0036DA4E /* UpcomingEventsViewController.swift */; };
+		44A025BD24D25A0500BFB762 /* SongDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A025BC24D25A0500BFB762 /* SongDetailTableViewCell.swift */; };
+		44BA393A24BF9FAA009E1680 /* Song Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA393924BF9FAA009E1680 /* Song Controller.swift */; };
+		44F48900249BF4E800B2646C /* NewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F488FE249BF4E800B2646C /* NewEventViewController.swift */; };
+		44F48901249BF4E800B2646C /* Slide.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44F488FF249BF4E800B2646C /* Slide.xib */; };
+		44F48903249BF99900B2646C /* Slide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F48902249BF99900B2646C /* Slide.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		44214DDD248D673800D63B6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 447F536E2475805D00F706F1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 447F53752475805D00F706F1;
+			remoteInfo = DJHelper;
+		};
+		4493806A2486F255004C96F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 447F536E2475805D00F706F1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 447F53752475805D00F706F1;
+			remoteInfo = DJHelper;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		1B323D39248422210065D94C /* HostRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRepresentation.swift; sourceTree = "<group>"; };
+		1B3D9BBA2492FC6700E8625C /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
+		1B71118F24D2A6E400BF4256 /* HostEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HostEventViewController.swift; path = DJHelper/HostEventViewController.swift; sourceTree = SOURCE_ROOT; };
+		1B71119124D2A94D00BF4256 /* HostEventCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HostEventCollectionViewCell.swift; path = DJHelper/HostEventCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		1BA4A8B3248577B1002A67E2 /* HostLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostLogin.swift; sourceTree = "<group>"; };
+		1BA4A8B5248577F4002A67E2 /* HostLoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostLoginResponse.swift; sourceTree = "<group>"; };
+		1BA4A8B7248586B9002A67E2 /* EventRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRepresentation.swift; sourceTree = "<group>"; };
+		1BA4A8C12485C152002A67E2 /* EventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventController.swift; sourceTree = "<group>"; };
+		1BA4A8C32485F27A002A67E2 /* EventAuthRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAuthRequest.swift; sourceTree = "<group>"; };
+		1BA4A8C72486858D002A67E2 /* HelperExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperExtensions.swift; sourceTree = "<group>"; };
+		1BC33A6A24E383B000734519 /* TrackResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackResponse.swift; sourceTree = "<group>"; };
+		1BDBE283248508FC006DE77E /* HostRegistration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRegistration.swift; sourceTree = "<group>"; };
+		1BDBE28524850CF3006DE77E /* HostRegistrationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostRegistrationResponse.swift; sourceTree = "<group>"; };
+		1BF6A47024E32EAD00519E82 /* TrackRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRequest.swift; sourceTree = "<group>"; };
+		441CB84C2498500D00637CC0 /* EventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
+		441CB84E2499CE1E00637CC0 /* GuestLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestLoginViewController.swift; sourceTree = "<group>"; };
+		44214DD8248D673800D63B6A /* DJHelperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DJHelperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		44214DE3248D676600D63B6A /* DJHelperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DJHelperUITests.swift; path = "../../Development/Labs/djhelper-ios/DJHelper/DJHelperUITests/DJHelperUITests.swift"; sourceTree = "<group>"; };
+		44214DE4248D676600D63B6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "../../Development/Labs/djhelper-ios/DJHelper/DJHelperUITests/Info.plist"; sourceTree = "<group>"; };
+		44214DE8248F2C6300D63B6A /* HostProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostProfileViewController.swift; sourceTree = "<group>"; };
+		44214DEA248F2CA000D63B6A /* EventPlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPlaylistViewController.swift; sourceTree = "<group>"; };
+		44214DEE249125BF00D63B6A /* HostUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostUpdate.swift; sourceTree = "<group>"; };
+		44214DF02491952100D63B6A /* ShiftableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShiftableViewController.swift; path = DJHelper/Helpers/ShiftableViewController.swift; sourceTree = SOURCE_ROOT; };
+		44352AC624B7C4E300E449F2 /* Song+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Song+Convenience.swift"; sourceTree = "<group>"; };
+		44352AC824B7C68B00E449F2 /* TrackRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackRepresentation.swift; sourceTree = "<group>"; };
+		4446F798247638D4005ACE10 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		4446F79A247638F9005ACE10 /* NetworkDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataLoader.swift; sourceTree = "<group>"; };
+		4446F79C24763935005ACE10 /* URLSessionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionExtension.swift; sourceTree = "<group>"; };
+		4446F7D3247DC3BB005ACE10 /* Event+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+Convenience.swift"; sourceTree = "<group>"; };
+		4446F7D5247DC51F005ACE10 /* Host+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Host+Convenience.swift"; sourceTree = "<group>"; };
+		4446F7D7247DC67E005ACE10 /* HostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostController.swift; sourceTree = "<group>"; };
+		4446F7D9247DCAD8005ACE10 /* Bearer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bearer.swift; sourceTree = "<group>"; };
+		4446F8242480CD32005ACE10 /* DJLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJLoginViewController.swift; sourceTree = "<group>"; };
+		4446F8262480D792005ACE10 /* DJRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJRegisterViewController.swift; sourceTree = "<group>"; };
+		446F55A124DB9D860030F66F /* HostingEventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingEventsViewController.swift; sourceTree = "<group>"; };
+		446F55A324DB9D930030F66F /* PastEventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastEventsViewController.swift; sourceTree = "<group>"; };
+		446F55A524EB31830030F66F /* ConcurrentOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentOperation.swift; sourceTree = "<group>"; };
+		446F55A724EB33840030F66F /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		447F53762475805D00F706F1 /* DJHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DJHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		447F53792475805E00F706F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		447F537B2475805E00F706F1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		447F537D2475805E00F706F1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		447F53802475805E00F706F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		447F53822475805E00F706F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		447F53852475805E00F706F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		447F53872475805E00F706F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		447F53C02476315200F706F1 /* DJHelper.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DJHelper.xcdatamodel; sourceTree = "<group>"; };
+		447F53C2247634EE00F706F1 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		449380652486F255004C96F7 /* DJHelperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DJHelperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		449380672486F255004C96F7 /* DJHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DJHelperTests.swift; sourceTree = "<group>"; };
+		449380692486F255004C96F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4495D39B24DB5BFA0036DA4E /* UpcomingEventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingEventsViewController.swift; sourceTree = "<group>"; };
+		44A025BC24D25A0500BFB762 /* SongDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SongDetailTableViewCell.swift; path = DJHelper/Views/SongDetailTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		44BA393924BF9FAA009E1680 /* Song Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Song Controller.swift"; sourceTree = "<group>"; };
+		44F488FE249BF4E800B2646C /* NewEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEventViewController.swift; sourceTree = "<group>"; };
+		44F488FF249BF4E800B2646C /* Slide.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Slide.xib; sourceTree = "<group>"; };
+		44F48902249BF99900B2646C /* Slide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slide.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		44214DD5248D673800D63B6A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		447F53732475805D00F706F1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		449380622486F255004C96F7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -37,10 +160,205 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1BA4A8B92485B004002A67E2 /* Host Model */ = {
+			isa = PBXGroup;
+			children = (
+				1BA4A8BC2485B1E3002A67E2 /* Host Convenience */,
+				1BA4A8BB2485B1D7002A67E2 /* Host Controller */,
+				1BA4A8C5248681E9002A67E2 /* Host Requests */,
+				1BA4A8BA2485B190002A67E2 /* Host Responses */,
+			);
+			path = "Host Model";
+			sourceTree = "<group>";
+		};
+		1BA4A8BA2485B190002A67E2 /* Host Responses */ = {
+			isa = PBXGroup;
+			children = (
+				1B323D39248422210065D94C /* HostRepresentation.swift */,
+				1BDBE28524850CF3006DE77E /* HostRegistrationResponse.swift */,
+				1BA4A8B5248577F4002A67E2 /* HostLoginResponse.swift */,
+			);
+			path = "Host Responses";
+			sourceTree = "<group>";
+		};
+		1BA4A8BB2485B1D7002A67E2 /* Host Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4446F7D7247DC67E005ACE10 /* HostController.swift */,
+			);
+			path = "Host Controller";
+			sourceTree = "<group>";
+		};
+		1BA4A8BC2485B1E3002A67E2 /* Host Convenience */ = {
+			isa = PBXGroup;
+			children = (
+				4446F7D5247DC51F005ACE10 /* Host+Convenience.swift */,
+			);
+			path = "Host Convenience";
+			sourceTree = "<group>";
+		};
+		1BA4A8BD2485B956002A67E2 /* Event Model */ = {
+			isa = PBXGroup;
+			children = (
+				1BA4A8BE2485B960002A67E2 /* Event Convienience */,
+				1BA4A8C02485B9A4002A67E2 /* Event Controller */,
+				1BA4A8C6248681FF002A67E2 /* Event Requests */,
+				1BA4A8BF2485B987002A67E2 /* Event Responses */,
+			);
+			path = "Event Model";
+			sourceTree = "<group>";
+		};
+		1BA4A8BE2485B960002A67E2 /* Event Convienience */ = {
+			isa = PBXGroup;
+			children = (
+				4446F7D3247DC3BB005ACE10 /* Event+Convenience.swift */,
+			);
+			path = "Event Convienience";
+			sourceTree = "<group>";
+		};
+		1BA4A8BF2485B987002A67E2 /* Event Responses */ = {
+			isa = PBXGroup;
+			children = (
+				1BA4A8B7248586B9002A67E2 /* EventRepresentation.swift */,
+			);
+			path = "Event Responses";
+			sourceTree = "<group>";
+		};
+		1BA4A8C02485B9A4002A67E2 /* Event Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1BA4A8C12485C152002A67E2 /* EventController.swift */,
+			);
+			path = "Event Controller";
+			sourceTree = "<group>";
+		};
+		1BA4A8C5248681E9002A67E2 /* Host Requests */ = {
+			isa = PBXGroup;
+			children = (
+				1BDBE283248508FC006DE77E /* HostRegistration.swift */,
+				1BA4A8B3248577B1002A67E2 /* HostLogin.swift */,
+				44214DEE249125BF00D63B6A /* HostUpdate.swift */,
+			);
+			path = "Host Requests";
+			sourceTree = "<group>";
+		};
+		1BA4A8C6248681FF002A67E2 /* Event Requests */ = {
+			isa = PBXGroup;
+			children = (
+				1BA4A8C32485F27A002A67E2 /* EventAuthRequest.swift */,
+			);
+			path = "Event Requests";
+			sourceTree = "<group>";
+		};
+		1BF6A46F24E32E8900519E82 /* Song Response */ = {
+			isa = PBXGroup;
+			children = (
+				1BC33A6A24E383B000734519 /* TrackResponse.swift */,
+			);
+			path = "Song Response";
+			sourceTree = "<group>";
+		};
+		1BF6A47224E346AD00519E82 /* Song Request */ = {
+			isa = PBXGroup;
+			children = (
+				44352AC824B7C68B00E449F2 /* TrackRepresentation.swift */,
+				1BF6A47024E32EAD00519E82 /* TrackRequest.swift */,
+			);
+			path = "Song Request";
+			sourceTree = "<group>";
+		};
+		44214DE2248D676600D63B6A /* DJHelperUITests */ = {
+			isa = PBXGroup;
+			children = (
+				44214DE3248D676600D63B6A /* DJHelperUITests.swift */,
+				44214DE4248D676600D63B6A /* Info.plist */,
+			);
+			name = DJHelperUITests;
+			path = ../../../../Desktop/DJHelperUITests;
+			sourceTree = "<group>";
+		};
+		44214DF22491953C00D63B6A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				1BA4A8C72486858D002A67E2 /* HelperExtensions.swift */,
+				44214DF02491952100D63B6A /* ShiftableViewController.swift */,
+				1B3D9BBA2492FC6700E8625C /* CustomAlert.swift */,
+				446F55A524EB31830030F66F /* ConcurrentOperation.swift */,
+				446F55A724EB33840030F66F /* Cache.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		44352AC524B770A700E449F2 /* Song Model */ = {
+			isa = PBXGroup;
+			children = (
+				44352AC624B7C4E300E449F2 /* Song+Convenience.swift */,
+				1BF6A46F24E32E8900519E82 /* Song Response */,
+				1BF6A47224E346AD00519E82 /* Song Request */,
+			);
+			path = "Song Model";
+			sourceTree = "<group>";
+		};
+		4446F79E24763959005ACE10 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				4446F798247638D4005ACE10 /* HTTPMethod.swift */,
+				4446F79A247638F9005ACE10 /* NetworkDataLoader.swift */,
+				4446F79C24763935005ACE10 /* URLSessionExtension.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		4446F79F24763969005ACE10 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				447F53BF2476315200F706F1 /* DJHelper.xcdatamodeld */,
+				447F53C2247634EE00F706F1 /* CoreDataStack.swift */,
+				4446F7D9247DCAD8005ACE10 /* Bearer.swift */,
+				1BA4A8BD2485B956002A67E2 /* Event Model */,
+				1BA4A8B92485B004002A67E2 /* Host Model */,
+				44352AC524B770A700E449F2 /* Song Model */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4446F7A02476397B005ACE10 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1B71118F24D2A6E400BF4256 /* HostEventViewController.swift */,
+				4495D39B24DB5BFA0036DA4E /* UpcomingEventsViewController.swift */,
+				446F55A124DB9D860030F66F /* HostingEventsViewController.swift */,
+				446F55A324DB9D930030F66F /* PastEventsViewController.swift */,
+				441CB84E2499CE1E00637CC0 /* GuestLoginViewController.swift */,
+				44214DEA248F2CA000D63B6A /* EventPlaylistViewController.swift */,
+				44214DE8248F2C6300D63B6A /* HostProfileViewController.swift */,
+				44F488FE249BF4E800B2646C /* NewEventViewController.swift */,
+				44F48902249BF99900B2646C /* Slide.swift */,
+				44F488FF249BF4E800B2646C /* Slide.xib */,
+				4446F8242480CD32005ACE10 /* DJLoginViewController.swift */,
+				4446F8262480D792005ACE10 /* DJRegisterViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		4446F7A124763A80005ACE10 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				447F53842475805E00F706F1 /* LaunchScreen.storyboard */,
+				447F53822475805E00F706F1 /* Assets.xcassets */,
+				447F537B2475805E00F706F1 /* SceneDelegate.swift */,
+				447F53792475805E00F706F1 /* AppDelegate.swift */,
+				447F53872475805E00F706F1 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		447F536D2475805D00F706F1 = {
 			isa = PBXGroup;
 			children = (
 				447F53782475805D00F706F1 /* DJHelper */,
+				449380662486F255004C96F7 /* DJHelperTests */,
+				44214DE2248D676600D63B6A /* DJHelperUITests */,
 				447F53772475805D00F706F1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,6 +367,8 @@
 			isa = PBXGroup;
 			children = (
 				447F53762475805D00F706F1 /* DJHelper.app */,
+				449380652486F255004C96F7 /* DJHelperTests.xctest */,
+				44214DD8248D673800D63B6A /* DJHelperUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -56,20 +376,66 @@
 		447F53782475805D00F706F1 /* DJHelper */ = {
 			isa = PBXGroup;
 			children = (
-				447F53792475805E00F706F1 /* AppDelegate.swift */,
-				447F537B2475805E00F706F1 /* SceneDelegate.swift */,
-				447F537D2475805E00F706F1 /* ViewController.swift */,
+				4446F79F24763969005ACE10 /* Model */,
+				44BA393824BF9F93009E1680 /* Controller */,
+				4446F79E24763959005ACE10 /* Networking */,
+				44A025BE24D25A1A00BFB762 /* Views */,
+				4446F7A02476397B005ACE10 /* View Controllers */,
+				44214DF22491953C00D63B6A /* Helpers */,
 				447F537F2475805E00F706F1 /* Main.storyboard */,
-				447F53822475805E00F706F1 /* Assets.xcassets */,
-				447F53842475805E00F706F1 /* LaunchScreen.storyboard */,
-				447F53872475805E00F706F1 /* Info.plist */,
+				4446F7A124763A80005ACE10 /* Resources */,
 			);
 			path = DJHelper;
+			sourceTree = "<group>";
+		};
+		449380662486F255004C96F7 /* DJHelperTests */ = {
+			isa = PBXGroup;
+			children = (
+				449380672486F255004C96F7 /* DJHelperTests.swift */,
+				441CB84C2498500D00637CC0 /* EventTests.swift */,
+				449380692486F255004C96F7 /* Info.plist */,
+			);
+			path = DJHelperTests;
+			sourceTree = "<group>";
+		};
+		44A025BE24D25A1A00BFB762 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1B71119124D2A94D00BF4256 /* HostEventCollectionViewCell.swift */,
+				44A025BC24D25A0500BFB762 /* SongDetailTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		44BA393824BF9F93009E1680 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				44BA393924BF9FAA009E1680 /* Song Controller.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		44214DD7248D673800D63B6A /* DJHelperUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 44214DE1248D673800D63B6A /* Build configuration list for PBXNativeTarget "DJHelperUITests" */;
+			buildPhases = (
+				44214DD4248D673800D63B6A /* Sources */,
+				44214DD5248D673800D63B6A /* Frameworks */,
+				44214DD6248D673800D63B6A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				44214DDE248D673800D63B6A /* PBXTargetDependency */,
+			);
+			name = DJHelperUITests;
+			productName = DJHelperUITests;
+			productReference = 44214DD8248D673800D63B6A /* DJHelperUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		447F53752475805D00F706F1 /* DJHelper */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 447F538A2475805E00F706F1 /* Build configuration list for PBXNativeTarget "DJHelper" */;
@@ -77,6 +443,7 @@
 				447F53722475805D00F706F1 /* Sources */,
 				447F53732475805D00F706F1 /* Frameworks */,
 				447F53742475805D00F706F1 /* Resources */,
+				447F53B724762DEC00F706F1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -87,18 +454,44 @@
 			productReference = 447F53762475805D00F706F1 /* DJHelper.app */;
 			productType = "com.apple.product-type.application";
 		};
+		449380642486F255004C96F7 /* DJHelperTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4493806E2486F255004C96F7 /* Build configuration list for PBXNativeTarget "DJHelperTests" */;
+			buildPhases = (
+				449380612486F255004C96F7 /* Sources */,
+				449380622486F255004C96F7 /* Frameworks */,
+				449380632486F255004C96F7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4493806B2486F255004C96F7 /* PBXTargetDependency */,
+			);
+			name = DJHelperTests;
+			productName = DJHelperTests;
+			productReference = 449380652486F255004C96F7 /* DJHelperTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		447F536E2475805D00F706F1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1140;
+				LastSwiftUpdateCheck = 1150;
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = craigswanson;
 				TargetAttributes = {
+					44214DD7248D673800D63B6A = {
+						CreatedOnToolsVersion = 11.5;
+						TestTargetID = 447F53752475805D00F706F1;
+					};
 					447F53752475805D00F706F1 = {
 						CreatedOnToolsVersion = 11.4.1;
+					};
+					449380642486F255004C96F7 = {
+						CreatedOnToolsVersion = 11.5;
+						TestTargetID = 447F53752475805D00F706F1;
 					};
 				};
 			};
@@ -116,35 +509,142 @@
 			projectRoot = "";
 			targets = (
 				447F53752475805D00F706F1 /* DJHelper */,
+				449380642486F255004C96F7 /* DJHelperTests */,
+				44214DD7248D673800D63B6A /* DJHelperUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		44214DD6248D673800D63B6A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		447F53742475805D00F706F1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				447F53862475805E00F706F1 /* LaunchScreen.storyboard in Resources */,
 				447F53832475805E00F706F1 /* Assets.xcassets in Resources */,
+				44F48901249BF4E800B2646C /* Slide.xib in Resources */,
 				447F53812475805E00F706F1 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		449380632486F255004C96F7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		447F53B724762DEC00F706F1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		44214DD4248D673800D63B6A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				44214DE5248D6FF500D63B6A /* DJHelperUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		447F53722475805D00F706F1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				447F537E2475805E00F706F1 /* ViewController.swift in Sources */,
+				44352AC924B7C68B00E449F2 /* TrackRepresentation.swift in Sources */,
+				446F55A424DB9D930030F66F /* PastEventsViewController.swift in Sources */,
+				1BC33A6B24E383B000734519 /* TrackResponse.swift in Sources */,
+				4495D39C24DB5BFA0036DA4E /* UpcomingEventsViewController.swift in Sources */,
+				44BA393A24BF9FAA009E1680 /* Song Controller.swift in Sources */,
+				4446F79D24763935005ACE10 /* URLSessionExtension.swift in Sources */,
+				44214DF12491952100D63B6A /* ShiftableViewController.swift in Sources */,
+				1BA4A8C82486858D002A67E2 /* HelperExtensions.swift in Sources */,
+				447F53C3247634EE00F706F1 /* CoreDataStack.swift in Sources */,
+				44F48903249BF99900B2646C /* Slide.swift in Sources */,
+				1B323D3A248422210065D94C /* HostRepresentation.swift in Sources */,
+				44F48900249BF4E800B2646C /* NewEventViewController.swift in Sources */,
+				44214DE9248F2C6300D63B6A /* HostProfileViewController.swift in Sources */,
+				1BA4A8B6248577F4002A67E2 /* HostLoginResponse.swift in Sources */,
+				446F55A224DB9D860030F66F /* HostingEventsViewController.swift in Sources */,
+				1BA4A8B8248586B9002A67E2 /* EventRepresentation.swift in Sources */,
+				1BDBE28624850CF3006DE77E /* HostRegistrationResponse.swift in Sources */,
+				4446F7D8247DC67E005ACE10 /* HostController.swift in Sources */,
+				4446F7D4247DC3BB005ACE10 /* Event+Convenience.swift in Sources */,
+				1BA4A8B4248577B1002A67E2 /* HostLogin.swift in Sources */,
+				4446F8252480CD32005ACE10 /* DJLoginViewController.swift in Sources */,
+				1BF6A47124E32EAD00519E82 /* TrackRequest.swift in Sources */,
+				1BA4A8C22485C152002A67E2 /* EventController.swift in Sources */,
+				1B71119024D2A6E400BF4256 /* HostEventViewController.swift in Sources */,
+				446F55A824EB33840030F66F /* Cache.swift in Sources */,
+				1B71119224D2A94D00BF4256 /* HostEventCollectionViewCell.swift in Sources */,
+				4446F799247638D4005ACE10 /* HTTPMethod.swift in Sources */,
+				441CB84F2499CE1E00637CC0 /* GuestLoginViewController.swift in Sources */,
+				1BA4A8C42485F27A002A67E2 /* EventAuthRequest.swift in Sources */,
+				44A025BD24D25A0500BFB762 /* SongDetailTableViewCell.swift in Sources */,
 				447F537A2475805E00F706F1 /* AppDelegate.swift in Sources */,
+				44214DEF249125BF00D63B6A /* HostUpdate.swift in Sources */,
 				447F537C2475805E00F706F1 /* SceneDelegate.swift in Sources */,
+				44214DEB248F2CA000D63B6A /* EventPlaylistViewController.swift in Sources */,
+				1B3D9BBB2492FC6700E8625C /* CustomAlert.swift in Sources */,
+				446F55A624EB31830030F66F /* ConcurrentOperation.swift in Sources */,
+				1BDBE284248508FC006DE77E /* HostRegistration.swift in Sources */,
+				4446F7DA247DCAD8005ACE10 /* Bearer.swift in Sources */,
+				4446F7D6247DC51F005ACE10 /* Host+Convenience.swift in Sources */,
+				44352AC724B7C4E300E449F2 /* Song+Convenience.swift in Sources */,
+				4446F8272480D792005ACE10 /* DJRegisterViewController.swift in Sources */,
+				4446F79B247638F9005ACE10 /* NetworkDataLoader.swift in Sources */,
+				447F53C12476315200F706F1 /* DJHelper.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		449380612486F255004C96F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				441CB84D2498500D00637CC0 /* EventTests.swift in Sources */,
+				449380682486F255004C96F7 /* DJHelperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		44214DDE248D673800D63B6A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 447F53752475805D00F706F1 /* DJHelper */;
+			targetProxy = 44214DDD248D673800D63B6A /* PBXContainerItemProxy */;
+		};
+		4493806B2486F255004C96F7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 447F53752475805D00F706F1 /* DJHelper */;
+			targetProxy = 4493806A2486F255004C96F7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		447F537F2475805E00F706F1 /* Main.storyboard */ = {
@@ -166,6 +666,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		44214DDF248D673800D63B6A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2MZREBG7BM;
+				INFOPLIST_FILE = DJHelperUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.craigswanson.DJHelperUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = DJHelper;
+			};
+			name = Debug;
+		};
+		44214DE0248D673800D63B6A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2MZREBG7BM;
+				INFOPLIST_FILE = DJHelperUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.craigswanson.DJHelperUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = DJHelper;
+			};
+			name = Release;
+		};
 		447F53882475805E00F706F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -316,9 +856,60 @@
 			};
 			name = Release;
 		};
+		4493806C2486F255004C96F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2MZREBG7BM;
+				INFOPLIST_FILE = DJHelperTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.craigswanson.DJHelperTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DJHelper.app/DJHelper";
+			};
+			name = Debug;
+		};
+		4493806D2486F255004C96F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2MZREBG7BM;
+				INFOPLIST_FILE = DJHelperTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.craigswanson.DJHelperTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DJHelper.app/DJHelper";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		44214DE1248D673800D63B6A /* Build configuration list for PBXNativeTarget "DJHelperUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				44214DDF248D673800D63B6A /* Debug */,
+				44214DE0248D673800D63B6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		447F53712475805D00F706F1 /* Build configuration list for PBXProject "DJHelper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -337,7 +928,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		4493806E2486F255004C96F7 /* Build configuration list for PBXNativeTarget "DJHelperTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4493806C2486F255004C96F7 /* Debug */,
+				4493806D2486F255004C96F7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		447F53BF2476315200F706F1 /* DJHelper.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				447F53C02476315200F706F1 /* DJHelper.xcdatamodel */,
+			);
+			currentVersion = 447F53C02476315200F706F1 /* DJHelper.xcdatamodel */;
+			path = DJHelper.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 447F536E2475805D00F706F1 /* Project object */;
 }
